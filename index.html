@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WillingTree - Final Mobile App Wireframes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #f0f0f0;
+            padding: 20px;
+        }
+
+        .wireframe-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .tagline {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+
+        .nomenclature {
+            background: #E8F5E9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .nomenclature h3 {
+            color: #2E7D32;
+            margin-bottom: 10px;
+        }
+
+        .flow-section {
+            margin-bottom: 60px;
+        }
+
+        .flow-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #444;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        .screens {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding-bottom: 20px;
+        }
+
+        .screen {
+            flex-shrink: 0;
+            width: 320px;
+            height: 640px;
+            background: white;
+            border-radius: 20px;
+            border: 2px solid #333;
+            position: relative;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .screen-header {
+            height: 80px;
+            background: #4CAF50;
+            border-radius: 18px 18px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 18px;
+            position: relative;
+        }
+
+        .back-button {
+            position: absolute;
+            left: 15px;
+            font-size: 24px;
+        }
+
+        .screen-content {
+            padding: 20px;
+            height: calc(100% - 140px);
+            overflow-y: auto;
+        }
+
+        .bottom-nav {
+            height: 60px;
+            border-top: 1px solid #ddd;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: white;
+            border-radius: 0 0 18px 18px;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 10px;
+            color: #666;
+        }
+
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            background: #ddd;
+            border-radius: 4px;
+            margin-bottom: 4px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .button {
+            width: 100%;
+            padding: 14px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .button.secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .button.danger {
+            background: #ff4444;
+            color: white;
+        }
+
+        .button.bonus {
+            background: #9C27B0;
+            color: white;
+        }
+
+        .pairing-card {
+            background: #f8f8f8;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #e0e0e0;
+            position: relative;
+        }
+
+        .pairing-names {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .want-item, .willing-item {
+            padding: 12px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .priority-badge {
+            background: #FFD700;
+            color: #333;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #4CAF50;
+            border-radius: 4px;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: #f8f8f8;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        .time-slot {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .time-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #4CAF50;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+
+        .journal-prompt {
+            background: #FFF9E6;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #FFD700;
+            margin-bottom: 15px;
+        }
+
+        .flow-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ddd;
+        }
+
+        .dot.active {
+            background: #4CAF50;
+        }
+
+        .menu-dots {
+            position: absolute;
+            right: 10px;
+            top: 15px;
+            font-size: 20px;
+            color: #666;
+            cursor: pointer;
+        }
+
+        .warning-box {
+            background: #FFF3E0;
+            border: 1px solid #FFB74D;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .record-button {
+            background: #FF5722;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px auto;
+            font-size: 24px;
+            border: 3px solid #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .trophy-banner {
+            background: linear-gradient(135deg, #FFD700, #FFA000);
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .bonus-recognition {
+            background: linear-gradient(135deg, #E1BEE7, #CE93D8);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        .leaf-icon {
+            display: inline-block;
+            color: #4CAF50;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wireframe-container">
+        <h1>WillingTree App - Final Production Wireframes</h1>
+        <p class="tagline">Evolve core relationships with the trust/safety that emerges when practicing want/willing/won't</p>
+
+        <div class="nomenclature">
+            <h3>🌳 WillingTree Structure</h3>
+            <p><strong>The Big Limb:</strong> Your Wants/Needs List (what you'd love from your partner)</p>
+            <p><strong>Branches:</strong> Your Willing List (what you're willing to work on from their Big Limb)</p>
+            <p><strong>Leaves:</strong> Recognitions of efforts (guesses and bonus recognitions) 🍃</p>
+        </div>
+
+        <!-- 1. Onboarding Flow -->
+        <div class="flow-section">
+            <h2 class="flow-title">1. Onboarding Flow</h2>
+            <div class="screens">
+                <!-- Welcome Screen -->
+                <div class="screen">
+                    <div class="screen-header">
+                        WillingTree
+                    </div>
+                    <div class="screen-content">
+                        <div style="text-align: center; margin-top: 40px;">
+                            <div style="width: 100px; height: 100px; background: #4CAF50; border-radius: 50%; margin: 0 auto 30px; display: flex; align-items: center; justify-content: center; font-size: 48px;">🌳</div>
+                            <h2 style="margin-bottom: 20px;">Welcome to WillingTree</h2>
+                            <p style="color: #666; margin-bottom: 10px; font-size: 14px; padding: 0 20px;">Evolve core relationships with the trust/safety that emerges when practicing</p>
+                            <p style="color: #4CAF50; font-weight: 600; margin-bottom: 30px;">Want • Willing • Won't</p>
+                            <button class="button">Sign Up</button>
+                            <button class="button secondary">Log In</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phone/Google Sign Up -->
+                <div class="screen">
+                    <div class="screen-header">
+                        <span class="back-button">←</span>
+                        Sign Up
+                    </div>
+                    <div class="screen-content">
+                        <h3 style="margin-bottom: 20px;">Create Your Account</h3>
+                        <input type="text" class="input-field" placeholder="Phone Number">
+                        <div style="text-align: center; margin: 20px 0; color: #666;">OR</div>
+                        <button class="button secondary" style="display: flex; align-items: center; justify-content: center;">
+                            <span style="margin-right: 10px;">G</span> Continue with Google
+                        </button>
+                        <button class="button" style="margin-top: 30px;">Next</button>
+                    </div>
+                </div>
+
+                <!-- 6-Digit Verification -->
+                <div class="screen">
+                    <div class="screen-header">
+                        <span class="back-button">←</span>
+                        Verify
+                    </div>
+                    <div class="screen-content">
+                        <h3 style="margin-bottom: 10px;">Enter Verification Code</h3>
+                        <p style="color: #666; margin-bottom: 30px;">We sent a 6-digit code to your phone</p>
+                        <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 30px;">
+                            <input type="text" style="width: 40px; height: 50px; text-align: center; border: 2px solid #ddd; border-radius: 8px; font-size: 24px;">
+                            <input type="text" style="width: 40px; height: 50px; text-align: center; border: 2px solid #ddd; border-radius: 8px; font-size: 24px;">
+                            <input type="text" style="width: 40px; height: 50px; text-align: center; border: 2px solid #ddd; border-radius: 8px; font-size: 24px;">
+                            <input type="text" style="width: 40px; height: 50px; text-align: center; border: 2px solid #ddd; border-radius: 8px; font-size: 24px;">
+                            <input type="text" style="width: 40px; height: 50px; text-align: center; border: 2px solid #ddd; border-radius: 8px; font-size: 24px;">
+                            <input type="text" style="width: 40px; height: 50px; text-align: center; border: 2px solid #ddd; border-radius: 8px; font-size: 24px;">
+                        </div>
+                        <button class="button">Verify</button>
+                        <p style="text-align: center; margin-top: 20px; color: #4CAF50;">Resend Code</p>
+                    </div>
+                </div>
+
+                <!-- Profile Setup -->
+                <div class="screen">
+                    <div class="screen-header">
+                        Profile Setup
+                    </div>
+                    <div class="screen-content">
+                        <h3 style="margin-bottom: 20px;">Complete Your Profile</h3>
+                        <input type="text" class="input-field" placeholder="Display Name">
+                        <input type="number" class="input-field" placeholder="Age">
+                        <select class="input-field">
+                            <option>Select Gender</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Non-binary</option>
+                            <option>Prefer not to say</option>
+                        </select>
+                        <button class="button">Complete Setup</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Pairing Flow with Tree Management -->
+        <div class="flow-section">
+            <h2 class="flow-title">2. Pairing Flow (Creating WillingTree)</h2>
+            <div class="screens">
+                <!-- Home/Dashboard -->
+                <div class="screen">
+                    <div class="screen-header">
+                        My WillingTrees
+                    </div>
+                    <div class="screen-content">
+                        <div class="pairing-card">
+                            <span class="menu-dots">⋮</span>
+                            <div class="pairing-names">You & Sarah</div>
+                            <div style="color: #666; font-size: 14px;">Week 3 • 42 points • <span class="leaf-icon">🍃</span>15 leaves</div>
+                        </div>
+                        <div class="pairing-card">
+                            <span class="menu-dots">⋮</span>
+                            <div class="pairing-names">You & Mike</div>
+                            <div style="color: #666; font-size: 14px;">Week 1 • 15 points • <span class="leaf-icon">🍃</span>5 leaves</div>
+                        </div>
+                        <div style="border: 2px dashed #ddd; border-radius: 12px; padding: 20px; text-align: center; color: #666;">
+                            <div style="font-size: 36px; margin-bottom: 10px;">+</div>
+                            <div>New pairing to add another WillingTree</div>
+                            <div style="font-size: 12px; margin-top: 5px;">(1 of 3 slots available)</div>
+                        </div>
+                    </div>
+                    <div class="bottom-nav">
+                        <div class="nav-item">
+                            <div class="nav-icon"></div>
+                            Home
+                        </div>
+                        <div class="nav-item">
+                            <div class="nav-icon"></div>
+                            Trees
+                        </div>
+                        <div class="nav-item">
+                            <div class="nav-icon"></div>
+                            Schedule
+                        </div>
+                        <div class="nav-item">
+                            <div class="nav-icon"></div>
+                            Profile
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tree Management Menu -->
+                <div class="screen">
+                    <div class="screen-header">
+                        <span class="back-button">←</span>
+                        Manage WillingTree
+                    </div>
+                    <div class="screen-content">
+                        <h3 style="margin-bottom: 5px;">You & Sarah</h3>
+                        <p style="color: #666; font-size: 14px; margin-bottom: 20px;">Active for 3 weeks • 15 leaves grown</p>
+
+                        <button class="button secondary">Pause Tree (Take a Break)</button>
+                        <button class="button secondary">Graduate Tree (Complete)</button>
+
+                        <div class="warning-box" style="margin-top: 20px;">
+                            <p style="font-weight: 600; margin-bottom: 5px;">⚠️ Permanent Actions</p>
+                            <p style="font-size: 14px; color: #666; margin-bottom: 10px;">Ending a tree frees up a slot for new connections</p>
+                            <button class="button danger">End Tree & Archive</button>
+                        </div>
+
+                        <div style="margin-top: 30px; padding: 15px; background: #E8F5E9; border-radius: 8px;">
+                            <p style="font-size: 14px; color: #2E7D32;">💡 Trees can be paused temporarily, graduated when goals are met, or ended to make room for new growth.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accept Pairing -->
+                <div class="screen">
+                    <div class="screen-header">
+                        Pairing Request
+                    </div>
+                    <div class="screen-content">
+                        <div style="text-align: center; margin-top: 30px;">
+                            <div style="width: 80px; height: 80px; background: #4CAF50; border-radius: 50%; margin: 0 auto 20px;"></div>
+                            <h3 style="margin-bottom: 10px;">John wants to pair with you</h3>
+                            <p style="color: #666; margin-bottom: 30px;">Create a WillingTree together to evolve your relationship</p>
+                            <button class="button">Accept & Create WillingTree</button>
+                            <button class="button secondary">Decline</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Building The Big Limb -->
+        <div class="flow-section">
+            <h2 class="flow-title">3. Building Your Big Limb (Wants/Needs) + Scheduling</h2>
+            <div class="screens">
+                <!-- Create Big Limb -->
+                <div class="screen">
+                    <div class="screen-header">
+                        <span class="back-button">←</span>
+                        You & Sarah - Your Big Limb
+                    </div>
+                    <div class="screen-content">
+                        <h3 style="margin-bottom: 5px;">What would you want, need, or love from Sarah?</h3>
+                        <p style="color: #666; font-size: 14px; margin-bottom: 15px;">Building your Big Limb (8 of 12 items)</p>
+
+                        <div class="want-item">
+                            <span>More verbal appreciation</span>
+                            <span class="priority-badge">TOP 1</span>
+                        </div>
+                        <div class="want-item">
+                            <span>Help with household chores</span>
+                            <span class="priority-badge">TOP 2</span>
+                        </div>
+                        <div class="want-item">
+                            <span>Weekly date nights</span>
+                        </div>
+                        <div class="want-item">
+                            <span>Morning coffee together</span>
+                        </div>
+                        <input type="text" class="input-field" placeholder="Add to your Big Limb...">
+
+                        <button class="button secondary" style="margin-top: 10px;">
+                            + Fill from Popular List (4 needed)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Schedule Preferences -->
+                <div class="screen">
+                    <div class="screen-header">
+                        <span class="back-button">←</span>
+                        Set Your Availability
+                    </div>
+                    <div class="screen-content">
+                        <h3 style="margin-bottom: 5px;">When can you grow leaves?</h3>
+                        <p style="color: #666; font-size: 14px; margin-bottom: 15px;">Select 3 times for your weekly leaf growing session (scoring)</p>
+
+                        <div class="time-slot">
+                            <div class="time-checkbox" style="background: #4CAF50;"></div>
+                            <div>
+                                <div style="font-weight: 600;">Friday 7:00 PM</div>
+                                <div style="font-size: 14px; color: #666;">Dec 15</div>
+                            </div>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time-checkbox" style="background: #4CAF50;"></div>
+                            <div>
+                                <div style="font-weight: 600;">Saturday 2:00 PM</div>
+                                <div style="font-size: 14px; color: #666;">Dec 16</div>
+                            </div>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time-checkbox" style="background: #4CAF50;"></div>
+                            <div>
+                                <div style="font-weight: 600;">Sunday 6:00 PM</div>
+                                <div style="font-size: 14px; color: #666;">Dec 17</div>
+                            </div>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time-checkbox"></div>
+                            <div>
+                                <div style="font-weight: 600;">Monday 8:00 PM</div>
+                                <div style="font-size: 14px; color: #666;">Dec 18</div>
+                            </div>
+                        </div>
+
+                        <button class="button">Submit with Big Limb</button>
+                    </div>
+                </div>
+
+                <!-- Popular Suggestions -->
+                <div class="screen">
+                    <div class="screen-header">
+                        <span class="back-button">←</span>
+                        Popular for Your Big Limb
+                    </div>
+                    <div class="screen-content">
+                        <p style="color: #666; margin-bottom: 15px;">Top 20 for your age/gender to add to Big Limb:</p>
+
+                        <div class="want-item">
+                            <span>More quality time together</span>
+                            <div class="checkbox" style="background: #4CAF50;"></div>
+                        </div>
+                        <div class="want-item">
+                            <span>Better communication</span>
+                            <div class="checkbox" style="background: #4CAF50;"></div>
+                        </div>
+                        <div class="want-item">
+                            <span>Share household responsibilities</span>
+                            <div class="checkbox" style="background: #4CAF50;"></div>
+                        </div>
+                        <div class="want-item">
+                            <span>Physical affection</span>
+                            <div class="checkbox" style="background: #4CAF50;"></div>
+                        </div>
+                        <div class="want-item">
+                            <span>Support personal goals</span>
+                            <div class="checkbox"></div>
+                        </div>
+
+                        <button class="button">Add Selected (4) to Complete Big Limb</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Growing Branches (Willing Selection) -->
+        <div class="flow-section">
+            <h2 class="flow-title">4. Growing Branches from Partner's Big Limb</h2>
+            <div class="screens">
+                <!-- View Partner's Big Limb -->
+                <div class="screen">
+                    <div class="screen-header">
+                        <span class="back-button">←</span>
+                        Sarah's Big Limb
+                    </div>
+                    <div class="screen-content">
+                        <h3 style="margin-bottom: 5px;">Sarah wants, needs, or would love:</h3>
+                        <p style="color: #666; font-size: 14px; margin-bottom: 15px;">Select 3-5 to grow as your branches (12 items total)</p>
+
+                        <div class="willing-item">
+                            <span>1. Plan weekend activities</span>
+                            <div class="checkbox"></div>
+                        </div>
+                        <div class="willing-item">
+                            <span>2. Cook dinner together</span>
+                            <div class="checkbox" style="background: #4CAF50;"></div>
+                        </div>
+                        <div class="willing-item">
+                            <span>3. Phone-free evenings</span>
+                            <div class="checkbox" style="background: #4CAF50;"></div>
+                        </div>
+                        <div class="willing-item">
+                            <span>4. Express feelings more</span>
+                            <div class="checkbox"></div>
+                        </div>
+                        <div class="willing-item">
+                            <span>5. Morning workout together</span>
+                            <div class="checkbox" style="background: #4CAF50;"></div>
+                        </div>
+                        <div style="color: #999; text-align: center; padding: 10px;">... 7 more items from Big Limb ...</div>
+
+                        <div style="position: fixed; bottom: 80px; left: 20px; right: 20px; background: white; padding: 10px; border-top: 1px solid #ddd;">
+                            <button class="button">Continue (3 branches selected)</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prioritize Your Branches -->
+                <div class="screen">
+                    <div class="screen-header">
+                        <span class="back-button">←</span>
+                        Prioritize Your Branches
+                    </div>
+                    <div class="screen-content">
+                        <h3 style="margin-bottom: 5px;">Order Your Branch Intentions</h3>
+                        <p style="color: #666; font-size: 14px; margin-bottom: 15px;">Drag to reorder (1 = primary branch focus)</p>
+
+                        <div class="willing-item" style="background: #f0f9f1;">
+                            <span style="font-weight: bold;">1</span>
+                            <span>Phone-free evenings</span>
+                            <span>⋮⋮</span>
+                        </div>
+                        <div class="willing-item">
+                            <span style="font-weight: bold;">2</span>
+                            <span>Cook dinner together</span>
+                            <span>⋮⋮</span>
+                        </div>
+                        <div class="willing-item">
+                            <span style="font-weight: bold;">3</span>
+                            <span>Morning workout together</span>
+                            <span>⋮⋮</span>
+                        </div>
+
+                        <button class="button">Lock In My Branches</button>
+                    </div>
+                </div>
+
+                <!-- Schedule Confirmation -->
+                <div class="screen">
+                    <div class="screen-header">
+                        <span class="back-button">←</span>
+                        Confirm Leaf Growing Session
+                    </div>
+                    <div class="screen-content">
+                        <h3 style="margin-bottom: 5px;">Match Found!</h3>
+                        <p style="color: #666; font-size: 14px; margin-bottom: 20px;">You and Sarah are both available:</p>
+
+                        <div style="background: #E8F5E9; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 20px;">
+                            <div style="font-size: 20px; font-weight: 600; margin-bottom: 5px;">Saturday, Dec 16</div>
+                            <div style="font-size: 18px; color: #4CAF50;">2:00 PM</div>
+                            <div style="font-size: 14px; color: #666; margin-top: 10px;">🍃 Leaf Growing Session</div>
+                        </div>
+
+                        <button class="button">Confirm Session</button>
+                        <button class="button secondary">Request Different Time</button>
+
+                        <div style="margin-top: 20px; padding: 15px; background: #FFF9E6; border-radius: 8px;">
+                            <p style="font-size: 14px; color: #666;">📅 This leaf growing session will be added to both calendars</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Leaf Growing (Scoring & Recognition) -->
+        <div class="flow-section">
+            <h2 class="flow-title">5. Growing Leaves (Recognition & Scoring)</h2>
+            <div class="screens">
+                <!-- Schedule Status -->
+                <div class="screen">
+                    <div class="screen-header">
+                        This Week's Leaf Growing
+                    </div>
+                    <div class="screen-content">
+                        <h3 style="margin-bottom: 15px;">Upcoming Sessions</h3>
+
+                        <div class="pairing-card">
+                            <div class="pairing-names">You & Sarah</div>
+                            <div style="color: #4CAF50; font-weight: 600;">✓ Saturday 2:00 PM</div>
+                            <div style="font-size: 12px; color: #666; margin-top: 5px;">Ready to grow leaves 🍃</div>
+                        </div>
+
+                        <div class="pairing-card">
+                            <div class="pairing-names">You & Mike</div>
+                            <div style="color: #FF9800; font-weight: 600;">⚠️ Time needed</div>
+                            <button class="button secondary" style="margin-top: 10px; padding: 8px;">Coordinate Time</button>
+                        </div>
+
+                        <div class="pairing-card">
+                            <div class="pairing-names">You & Alex</div>
+                            <div style="color: #4CAF50; font-weight: 600;">✓ Sunday 6:00 PM</div>
+                            <div style="font-size: 12px; color: #666; margin-top: 5px;">Ready to grow leaves 🍃</div>
+                        </div>
+
+                        <div style="margin-top: 30px; padding: 15px; background: #FFF3E0; border-radius: 8px;">
+                            <p style="font-size: 14px; color: #F57C00;">💡 Regular leaf growing strengthens your WillingTree!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Growing Leaves (Guessing from Your Big Limb) -->
+                <div class="screen">
+                    <div class="screen-header">
+                        Growing Leaves - You & Sarah
+                    </div>
+                    <div class="screen-content">
+                        <h3 style="margin-bottom: 5px;">Recognize Sarah's branches</h3>
+                        <p style="color: #666; font-size: 14px; margin-bottom: 15px;">2 guesses to find her 3 efforts from YOUR Big Limb</p>
+
+                        <div style="background: #E3F2FD; padding: 10px; border-radius: 8px; margin-bottom: 15px;">
+                            <p style="font-size: 14px; color: #1976D2;">🍃 Guesses remaining: 2</p>
+                        </div>
+
+                        <div class="want-item">
+                            <span>More verbal appreciation</span>
+                            <div class="checkbox"></div>
+                        </div>
+                        <div class="want-item">
+                            <span>Help with household chores</span>
+                            <div class="checkbox" style="background: #4CAF50;"></div>
+                        </div>
+                        <div class="want-item">
+                            <span>Weekly date nights</span>
+                            <div class="checkbox"></div>
+                        </div>
+                        <div class="want-item">
+                            <span>Morning coffee together</span>
+                            <div class="checkbox" style="background: #4CAF50;"></div>
+                        </div>
+                        <div class="want-item">
+                            <span>Exercise together</span>
+                            <div class="checkbox"></div>
+                        </div>
+
+                        <button class="button">Submit First Guess (2 selected)</button>
+                        <button class="button bonus" style="margin-top: 5px;">+ Add Bonus Recognition</button>
+                    </div>
+                </div>
+
+                <!-- Bonus Recognition Screen -->
+                <div class="screen">
+                    <div class="screen-header">
+                        <span class="back-button">←</span>
+                        Bonus Recognition
+                    </div>
+                    <div class="screen-content">
+                        <h3 style="margin-bottom: 5px;">Unexpected Acts of Service</h3>
+                        <p style="color: #666; font-size: 14px; margin-bottom: 20px;">Recognize something wonderful that wasn't on your Big Limb</p>
+
+                        <div class="bonus-recognition">
+                            <p style="font-weight: 600; margin-bottom: 10px; color: white;">🌟 Bonus Leaf Recognition</p>
+                            <p style="font-size: 14px; color: white;">Sarah did something special that wasn't on your list but you loved!</p>
+                        </div>
+
+                        <textarea style="width: 100%; height: 100px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 15px;" placeholder="Example: Sarah cleaned the dirty fridge shelf without being asked..."></textarea>
+
+                        <div style="background: #F3E5F5; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                            <p style="font-size: 14px; color: #7B1FA2;">💜 Bonus recognitions earn 1 point each for your team total!</p>
+                        </div>
+
+                        <button class="button bonus">Add Bonus Leaf</button>
+                        <button class="button secondary">Skip</button>
+                    </div>
+                </div>
+
+                <!-- Recording Option -->
+                <div class="screen">
+                    <div class="screen-header">
+                        <span class="back-button">←</span>
+                        Record Your Session
+                    </div>
+                    <div class="screen-content">
+                        <h3 style="margin-bottom: 5px;">Document Your Growth</h3>
+                        <p style="color: #666; font-size: 14px; margin-bottom: 20px;">Record your leaf growing session</p>
+
+                        <div class="record-button">🎙️</div>
+
+                        <p style="text-align: center; color: #666; margin-bottom: 30px;">Tap to start recording</p>
+
+                        <div class="warning-box">
+                            <p style="font-weight: 600; margin-bottom: 10px;">🔔 Discussion Prompts Available</p>
+                            <p style="font-size: 14px; color: #666; margin-bottom: 10px;">Sarah's branch efforts on your top priority haven't grown leaves for 3 weeks.</p>
+                            <button class="button secondary">View Safe Discussion Guide</button>
+                        </div>
+
+                        <div style="margin-top: 20px; padding: 15px; background: #F3E5F5; border-radius: 8px;">
+                            <p style="font-size: 14px; color: #7B1FA2;">Recording helps identify how branches grow into recognized leaves</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Leaf Growing Results -->
+                <div class="screen">
+                    <div class="screen-header">
+                        Week 3 Leaf Count
+                    </div>
+                    <div class="screen-content">
+                        <h3 style="text-align: center; margin-bottom: 20px;">You & Sarah</h3>
+
+                        <div style="text-align: center; margin-bottom: 20px;">
+                            <div style="font-size: 48px;">🍃🍃🍃🍃🍃</div>
+                            <p style="color: #4CAF50; font-weight: 600;">5 new leaves this week!</p>
+                        </div>
+
+                        <div class="stats-container">
+                            <div class="stat-card">
+                                <div class="stat-value">18</div>
+                                <div class="stat-label">Your Points</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">22</div>
+                                <div class="stat-label">Sarah's Points</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">3</div>
+                                <div class="stat-label">Week Streak</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">85</div>
+                                <div class="stat-label">Total Leaves</div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 20px; padding: 15px; background: #FFF9E6; border-radius: 8px;">
+                            <div style="font-weight: 600; margin-bottom: 5px;">🎯 Top Priority Leaf!</div>
+                            <div style="font-size: 14px; color: #666;">Sarah's branch grew a leaf on your top priority (3x points)</div>
+                        </div>
+
+                        <div style="margin-top: 15px; padding: 15px; background: #E1BEE7; border-radius: 8px;">
+                            <div style="font-weight: 600; margin-bottom: 5px;">🌟 Bonus Leaf!</div>
+                            <div style="font-size: 14px; color: #666;">You recognized: "Cleaned fridge shelf" (+1 each)</div>
+                        </div>
+
+                        <button class="button">View Journal Prompts</button>
+                        <button class="button secondary">Start Next Week</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Dashboard with Tree/Leaf Metaphors -->
+        <div class="flow-section">
+            <h2 class="flow-title">6. Tree Growth Dashboard & Community Forest</h2>
+            <div class="screens">
+                <!-- Main Dashboard -->
+                <div class="screen">
+                    <div class="screen-header">
+                        Your WillingTree Forest
+                    </div>
+                    <div class="screen-content">
+                        <h3 style="margin-bottom: 15px;">Your Growth</h3>
+
+                        <div class="stats-container">
+                            <div class="stat-card">
+                                <div class="stat-value">3</div>
+                                <div class="stat-label">Active Trees</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">142</div>
+                                <div class="stat-label">Total Leaves</div>
+                            </div>
+                        </div>
+
+                        <h4 style="margin-top: 20px; margin-bottom: 10px;">Growth Streaks 🔥</h4>
+                        <div style="background: #f8f8f8; padding: 12px; border-radius: 8px; margin-bottom: 10px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <div style="font-weight: 600;">Weekly Leaf Growing</div>
+                                    <div style="font-size: 14px; color: #666;">Consistent sessions</div>
+                                </div>
+                                <div style="font-size: 20px; font-weight: bold; color: #FF6B6B;">5 weeks</div>
+                            </div>
+                        </div>
+
+                        <div style="background: #f8f8f8; padding: 12px; border-radius: 8px; margin-bottom: 10px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <div style="font-weight: 600;">Big Limb Success</div>
+                                    <div style="font-size: 14px; color: #666;">Top priorities with Sarah</div>
+                                </div>
+                                <div style="font-size: 20px; font-weight: bold; color: #FFD700;">3 weeks</div>
+                            </div>
+                        </div>
+
+                        <div style="background: #f8f8f8; padding: 12px; border-radius: 8px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <div style="font-weight: 600;">Branch Recognition</div>
+                                    <div style="font-size: 14px; color: #666;">Correct leaf guesses</div>
+                                </div>
+                                <div style="font-size: 20px; font-weight: bold; color: #4CAF50;">2 weeks</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bottom-nav">
+                        <div class="nav-item">
+                            <div class="nav-icon"></div>
+                            Home
+                        </div>
+                        <div class="nav-item">
+                            <div class="nav-icon"></div>
+                            Trees
+                        </div>
+                        <div class="nav-item">
+                            <div class="nav-icon"></div>
+                            Schedule
+                        </div>
+                        <div class="nav-item">
+                            <div class="nav-icon"></div>
+                            Profile
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Community Forest (Top Trees) -->
+                <div class="screen">
+                    <div class="screen-header">
+                        Community Forest
+                    </div>
+                    <div class="screen-content">
+                        <div class="trophy-banner">
+                            <div style="font-size: 48px; margin-bottom: 10px;">🏆🌳</div>
+                            <h3 style="margin-bottom: 5px;">Tree of the Week</h3>
+                            <div style="font-size: 20px; font-weight: bold;">Alex & Jordan</div>
+                            <div style="font-size: 14px; margin-top: 5px;">198 leaves • 12 week streak</div>
+                        </div>
+
+                        <h4 style="margin-top: 20px; margin-bottom: 15px;">Tallest Trees in the Forest</h4>
+
+                        <div class="pairing-card">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <div style="font-weight: 600;">1. Alex & Jordan</div>
+                                    <div style="font-size: 14px; color: #666;">🍃 198 leaves • 12 weeks</div>
+                                </div>
+                                <div style="font-size: 24px;">🥇</div>
+                            </div>
+                        </div>
+
+                        <div class="pairing-card">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <div style="font-weight: 600;">2. Sam & Morgan</div>
+                                    <div style="font-size: 14px; color: #666;">🍃 175 leaves • 10 weeks</div>
+                                </div>
+                                <div style="font-size: 24px;">🥈</div>
+                            </div>
+                        </div>
+
+                        <div class="pairing-card">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <div style="font-weight: 600;">3. Chris & Pat</div>
+                                    <div style="font-size: 14px; color: #666;">🍃 162 leaves • 8 weeks</div>
+                                </div>
+                                <div style="font-size: 24px;">🥉</div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 20px; padding: 15px; background: #E8F5E9; border-radius: 8px;">
+                            <p style="font-size: 14px; color: #2E7D32;">🌱 Your tallest tree (You & Sarah) ranks #12 in the forest!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Journal with Tree Metaphors -->
+                <div class="screen">
+                    <div class="screen-header">
+                        <span class="back-button">←</span>
+                        Growth Journal
+                    </div>
+                    <div class="screen-content">
+                        <div class="journal-prompt">
+                            <div style="font-weight: 600; margin-bottom: 8px;">On Growing Branches</div>
+                            <div style="font-size: 14px; color: #666;">How did choosing which branches to grow from Sarah's Big Limb feel this week?</div>
+                        </div>
+
+                        <textarea style="width: 100%; height: 80px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 15px;" placeholder="Your thoughts..."></textarea>
+
+                        <div class="journal-prompt">
+                            <div style="font-weight: 600; margin-bottom: 8px;">On Leaves Growing</div>
+                            <div style="font-size: 14px; color: #666;">What leaves (recognitions) surprised you most? Include any bonus leaves!</div>
+                        </div>
+
+                        <textarea style="width: 100%; height: 80px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 15px;" placeholder="Your thoughts..."></textarea>
+
+                        <div class="journal-prompt">
+                            <div style="font-weight: 600; margin-bottom: 8px;">On Tree Health (Won't)</div>
+                            <div style="font-size: 14px; color: #666;">Are any branches not growing well? What belongs in your "Won't" category?</div>
+                        </div>
+
+                        <textarea style="width: 100%; height: 80px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 15px;" placeholder="Your thoughts..."></textarea>
+
+                        <button class="button">Save Growth Reflections</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
