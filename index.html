@@ -68,8 +68,9 @@
             padding-bottom: 20px;
         }
 
+
+
         .screen {
-            flex-shrink: 0;
             width: 320px;
             height: 640px;
             background: white;
@@ -77,19 +78,60 @@
             border: 2px solid #333;
             position: relative;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            flex-shrink: 0;
+        }
+
+        .screen.gameplay-explanation {
+            border: 3px solid #FFD700;
         }
 
         .screen-header {
-            height: 80px;
+            height: 70px;
             background: #4CAF50;
             border-radius: 18px 18px 0 0;
+            padding: 8px 15px;
+            color: white;
+            position: relative;
+        }
+
+        .screen-header.premium {
+            background: linear-gradient(135deg, #4CAF50, #6B4C3A);
+        }
+
+        .header-title {
+            text-align: center;
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .nav-icon {
+            width: 22px;
+            height: 22px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 4px;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-weight: 600;
-            font-size: 18px;
-            position: relative;
+            font-size: 14px;
+        }
+
+        .nav-arrows {
+            display: flex;
+            gap: 5px;
         }
 
         .back-button {
@@ -100,8 +142,56 @@
 
         .screen-content {
             padding: 20px;
-            height: calc(100% - 140px);
+            height: calc(100% - 190px);
             overflow-y: auto;
+        }
+
+        .bottom-banner {
+            height: 60px;
+            padding: 8px 15px;
+            border-top: 1px solid #ddd;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: #F8F9FA;
+            border-radius: 0 0 18px 18px;
+            font-size: 12px;
+            color: #666;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .bottom-banner.premium {
+            background: linear-gradient(135deg, #F8F9FA, #F0E8DD);
+        }
+
+        .credits-display {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .credit-badge {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .sun-credits {
+            background: #FFF3E0;
+            color: #F57C00;
+        }
+
+        .water-credits {
+            background: #E3F2FD;
+            color: #1976D2;
         }
 
         .bottom-nav {
@@ -123,14 +213,6 @@
             align-items: center;
             font-size: 10px;
             color: #666;
-        }
-
-        .nav-icon {
-            width: 24px;
-            height: 24px;
-            background: #ddd;
-            border-radius: 4px;
-            margin-bottom: 4px;
         }
 
         .input-field {
@@ -334,6 +416,96 @@
             color: #4CAF50;
             margin-right: 5px;
         }
+
+        .personality-option {
+            display: inline-block;
+            text-align: center;
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            margin: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .personality-option:hover {
+            border-color: #4CAF50;
+            background: #f0f9f1;
+        }
+
+        .personality-option.selected {
+            border-color: #4CAF50;
+            background: #E8F5E9;
+        }
+
+        .personality-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .observation-entry {
+            background: #FFF9E6;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        .gift-item {
+            background: linear-gradient(135deg, #FFE0B2, #FFCC80);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            color: #E65100;
+            font-weight: 500;
+        }
+
+        .visibility-notice {
+            background: #E3F2FD;
+            border: 2px solid #64B5F6;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .demand-card {
+            background: linear-gradient(135deg, #F3E5F5, #E1BEE7);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #9C27B0;
+        }
+
+        .invitation-code {
+            background: #FFF9E6;
+            border: 2px dashed #FFD700;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #F57C00;
+        }
+
+        .streak-indicator {
+            background: linear-gradient(135deg, #FFEBEE, #FFCDD2);
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        .paywall-badge {
+            background: #6B4C3A;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
     </style>
 </head>
 <body>
@@ -342,20 +514,34 @@
         <p class="tagline">Evolve core relationships with the trust/safety that emerges when practicing want/willing/won't</p>
 
         <div class="nomenclature">
-            <h3>🌳 WillingTree Structure</h3>
-            <p><strong>The Big Limb:</strong> Your Wants/Needs List (what you'd love from your partner)</p>
-            <p><strong>Branches:</strong> Your Willing List (what you're willing to work on from their Big Limb)</p>
-            <p><strong>Leaves:</strong> Recognitions of efforts (guesses and bonus recognitions) 🍃</p>
+            <h3>🌳 WillingTree Credit System</h3>
+            <p><strong>☀️ Sun Credits:</strong> Earned by appreciating & recognizing your partner's efforts</p>
+            <p><strong>💧 Water Credits:</strong> Earned when your partner recognizes what you've done</p>
+            <p><strong>Big Branch:</strong> Your Wants/Needs List | <strong>Small Branches:</strong> Your Willing List</p>
+            <p><strong>Leaves:</strong> Done/Seen recognitions | <strong>Fruits/Flowers:</strong> Rewards bought with credits</p>
+            <p style="color: #666; font-size: 14px; margin-top: 10px;">✨ Credits rollover for 4 weeks | Streaks double water credit returns | Demands cost 50 water credits</p>
         </div>
 
         <!-- 1. Onboarding Flow -->
         <div class="flow-section">
             <h2 class="flow-title">1. Onboarding Flow</h2>
             <div class="screens">
-                <!-- Welcome Screen -->
+                <!-- Welcome Screen - Frame 1A -->
                 <div class="screen">
+                    <div style="position: absolute; top: 10px; left: 10px; font-weight: bold; font-size: 16px; color: #666; z-index: 10;">1A</div>
                     <div class="screen-header">
-                        WillingTree
+                        <div class="header-title">WillingTree</div>
+                        <div class="header-nav">
+                            <div class="nav-arrows">
+                                <div class="nav-icon">←</div>
+                                <div class="nav-icon">→</div>
+                            </div>
+                            <div class="nav-icons">
+                                <div class="nav-icon">🏠</div>
+                                <div class="nav-icon">📋</div>
+                                <div class="nav-icon">⚙️</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="screen-content">
                         <div style="text-align: center; margin-top: 40px;">
@@ -369,28 +555,126 @@
                     </div>
                 </div>
 
-                <!-- Phone/Google Sign Up -->
+                <!-- Personality Selection - Frame 1B -->
                 <div class="screen">
+                    <div style="position: absolute; top: 10px; left: 10px; font-weight: bold; font-size: 16px; color: #666; z-index: 10;">1B</div>
                     <div class="screen-header">
-                        <span class="back-button">←</span>
-                        Sign Up
-                    </div>
-                    <div class="screen-content">
-                        <h3 style="margin-bottom: 20px;">Create Your Account</h3>
-                        <input type="text" class="input-field" placeholder="Phone Number">
-                        <div style="text-align: center; margin: 20px 0; color: #666;">OR</div>
-                        <button class="button secondary" style="display: flex; align-items: center; justify-content: center;">
-                            <span style="margin-right: 10px;">G</span> Continue with Google
-                        </button>
-                        <button class="button" style="margin-top: 30px;">Next</button>
+                            <div class="header-title">Partner Style</div>
+                            <div class="header-nav">
+                                <div class="nav-arrows">
+                                    <div class="nav-icon">←</div>
+                                    <div class="nav-icon">→</div>
+                                </div>
+                                <div class="nav-icons">
+                                    <div class="nav-icon">🏠</div>
+                                    <div class="nav-icon">📋</div>
+                                    <div class="nav-icon">⚙️</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="screen-content">
+                            <h3 style="margin-bottom: 10px;">How do you partner?</h3>
+                            <p style="color: #666; font-size: 14px; margin-bottom: 20px;">What are some wants/needs that would make your life a little better if he/she can?</p>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
+                                <div class="personality-option" style="width: 120px; height: 120px; padding: 15px;">
+                                    <div class="personality-icon" style="font-size: 36px;">🪨</div>
+                                    <div style="font-weight: 600; font-size: 14px;">Stone</div>
+                                    <div style="font-size: 11px; color: #666; margin-top: 3px;">Steady</div>
+                                </div>
+                                <div class="personality-option" style="width: 120px; height: 120px; padding: 15px;">
+                                    <div class="personality-icon" style="font-size: 36px;">🌱</div>
+                                    <div style="font-weight: 600; font-size: 14px;">Soil</div>
+                                    <div style="font-size: 11px; color: #666; margin-top: 3px;">Nurturing</div>
+                                </div>
+                                <div class="personality-option" style="width: 120px; height: 120px; padding: 15px;">
+                                    <div class="personality-icon" style="font-size: 36px;">🚿</div>
+                                    <div style="font-weight: 600; font-size: 14px;">Shovel</div>
+                                    <div style="font-size: 11px; color: #666; margin-top: 3px;">Action</div>
+                                </div>
+                                <div class="personality-option" style="width: 120px; height: 120px; padding: 15px;">
+                                    <div class="personality-icon" style="font-size: 36px;">🌳|</div>
+                                    <div style="font-weight: 600; font-size: 14px;">Stakes</div>
+                                    <div style="font-size: 11px; color: #666; margin-top: 3px;">Guiding</div>
+                                </div>
+                            </div>
+
+                            <div style="border-top: 1px solid #ddd; margin: 20px 0; padding-top: 15px;">
+                                <input type="text" class="input-field" placeholder="Phone Number">
+                                <div style="text-align: center; margin: 10px 0; color: #666;">OR</div>
+                                <button class="button secondary" style="display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+                                    <span style="margin-right: 10px;">G</span> Continue with Google
+                                </button>
+                                <button class="button secondary" style="display: flex; align-items: center; justify-content: center;">
+                                    <span style="margin-right: 10px;">🍎</span> Continue with Apple
+                                </button>
+                            </div>
+
+                            <button class="button">Next</button>
+                        </div>
+                    <div class="bottom-banner">
+                        <p style="text-align: center;">🌱 Understanding your partnership style helps create better matches and earns your first 5 sun credits!</p>
                     </div>
                 </div>
 
-                <!-- 6-Digit Verification -->
+                <!-- Invitation Code - Frame 1C -->
                 <div class="screen">
+                    <div style="position: absolute; top: 10px; left: 10px; font-weight: bold; font-size: 16px; color: #666; z-index: 10;">1C</div>
                     <div class="screen-header">
-                        <span class="back-button">←</span>
-                        Verify
+                        <div class="header-title">Pair with Partner</div>
+                        <div class="header-nav">
+                            <div class="nav-arrows">
+                                <div class="nav-icon">←</div>
+                                <div class="nav-icon">→</div>
+                            </div>
+                            <div class="nav-icons">
+                                <div class="nav-icon">🏠</div>
+                                <div class="nav-icon">📋</div>
+                                <div class="nav-icon">⚙️</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screen-content">
+                        <h3 style="margin-bottom: 10px;">Connect Your Trees</h3>
+                        <p style="color: #666; font-size: 14px; margin-bottom: 20px;">Share this code with your partner to create your WillingTree together</p>
+
+                        <div class="invitation-code">
+                            TREE-4829
+                        </div>
+
+                        <p style="text-align: center; color: #666; margin: 20px 0;">OR enter your partner's code:</p>
+
+                        <input type="text" class="input-field" placeholder="Enter partner's code">
+                        <input type="text" class="input-field" placeholder="Your name">
+                        <input type="text" class="input-field" placeholder="Your phone number">
+
+                        <button class="button">Match & Continue</button>
+                    </div>
+                    <div class="bottom-banner">
+                        <div class="credits-display">
+                            <div class="credit-badge sun-credits">☀️ 10</div>
+                            <div class="credit-badge water-credits">💧 10</div>
+                        </div>
+                        <p style="text-align: center; margin: 0; font-size: 12px;">Starting credits when matched!</p>
+                    </div>
+                </div>
+
+                <!-- 6-Digit Verification - Frame 1D -->
+                <div class="screen">
+                    <div style="position: absolute; top: 10px; left: 10px; font-weight: bold; font-size: 16px; color: #666; z-index: 10;">1D</div>
+                    <div class="screen-header">
+                        <div class="header-title">Verify</div>
+                        <div class="header-nav">
+                            <div class="nav-arrows">
+                                <div class="nav-icon">←</div>
+                                <div class="nav-icon">→</div>
+                            </div>
+                            <div class="nav-icons">
+                                <div class="nav-icon">🏠</div>
+                                <div class="nav-icon">📋</div>
+                                <div class="nav-icon">⚙️</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="screen-content">
                         <h3 style="margin-bottom: 10px;">Enter Verification Code</h3>
@@ -408,10 +692,22 @@
                     </div>
                 </div>
 
-                <!-- Profile Setup -->
+                <!-- Profile Setup - Frame 1E -->
                 <div class="screen">
+                    <div style="position: absolute; top: 10px; left: 10px; font-weight: bold; font-size: 16px; color: #666; z-index: 10;">1E</div>
                     <div class="screen-header">
-                        Profile Setup
+                        <div class="header-title">Profile Setup</div>
+                        <div class="header-nav">
+                            <div class="nav-arrows">
+                                <div class="nav-icon">←</div>
+                                <div class="nav-icon">→</div>
+                            </div>
+                            <div class="nav-icons">
+                                <div class="nav-icon">🏠</div>
+                                <div class="nav-icon">📋</div>
+                                <div class="nav-icon">⚙️</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="screen-content">
                         <h3 style="margin-bottom: 20px;">Complete Your Profile</h3>
@@ -427,6 +723,7 @@
                         <button class="button">Complete Setup</button>
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -434,21 +731,33 @@
         <div class="flow-section">
             <h2 class="flow-title">2. Pairing Flow (Creating WillingTree)</h2>
             <div class="screens">
-                <!-- Home/Dashboard -->
+                <!-- Home/Dashboard - Frame 2A -->
                 <div class="screen">
+                    <div style="position: absolute; top: 10px; left: 10px; font-weight: bold; font-size: 16px; color: #666; z-index: 10;">2A</div>
                     <div class="screen-header">
-                        My WillingTrees
+                        <div class="header-title">My WillingTrees</div>
+                        <div class="header-nav">
+                            <div class="nav-arrows">
+                                <div class="nav-icon">←</div>
+                                <div class="nav-icon">→</div>
+                            </div>
+                            <div class="nav-icons">
+                                <div class="nav-icon">🏠</div>
+                                <div class="nav-icon">📋</div>
+                                <div class="nav-icon">⚙️</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="screen-content">
                         <div class="pairing-card">
                             <span class="menu-dots">⋮</span>
                             <div class="pairing-names">You & Sarah</div>
-                            <div style="color: #666; font-size: 14px;">Week 3 • 42 points • <span class="leaf-icon">🍃</span>15 leaves</div>
+                            <div style="color: #666; font-size: 14px;">Week 3 • <span style="color: #F57C00;">☀️ 42</span> • <span style="color: #1976D2;">💧 38</span> • <span class="leaf-icon">🍃</span>15 leaves</div>
                         </div>
                         <div class="pairing-card">
                             <span class="menu-dots">⋮</span>
                             <div class="pairing-names">You & Mike</div>
-                            <div style="color: #666; font-size: 14px;">Week 1 • 15 points • <span class="leaf-icon">🍃</span>5 leaves</div>
+                            <div style="color: #666; font-size: 14px;">Week 1 • <span style="color: #F57C00;">☀️ 15</span> • <span style="color: #1976D2;">💧 12</span> • <span class="leaf-icon">🍃</span>5 leaves</div>
                         </div>
                         <div style="border: 2px dashed #ddd; border-radius: 12px; padding: 20px; text-align: center; color: #666;">
                             <div style="font-size: 36px; margin-bottom: 10px;">+</div>
@@ -476,11 +785,22 @@
                     </div>
                 </div>
 
-                <!-- Tree Management Menu -->
+                <!-- Tree Management Menu - Frame 2B -->
                 <div class="screen">
+                    <div style="position: absolute; top: 10px; left: 10px; font-weight: bold; font-size: 16px; color: #666; z-index: 10;">2B</div>
                     <div class="screen-header">
-                        <span class="back-button">←</span>
-                        Manage WillingTree
+                        <div class="header-title">Manage WillingTree</div>
+                        <div class="header-nav">
+                            <div class="nav-arrows">
+                                <div class="nav-icon">←</div>
+                                <div class="nav-icon">→</div>
+                            </div>
+                            <div class="nav-icons">
+                                <div class="nav-icon">🏠</div>
+                                <div class="nav-icon">📋</div>
+                                <div class="nav-icon">⚙️</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="screen-content">
                         <h3 style="margin-bottom: 5px;">You & Sarah</h3>
@@ -501,10 +821,22 @@
                     </div>
                 </div>
 
-                <!-- Accept Pairing -->
+                <!-- Accept Pairing - Frame 2C -->
                 <div class="screen">
+                    <div style="position: absolute; top: 10px; left: 10px; font-weight: bold; font-size: 16px; color: #666; z-index: 10;">2C</div>
                     <div class="screen-header">
-                        Pairing Request
+                        <div class="header-title">Pairing Request</div>
+                        <div class="header-nav">
+                            <div class="nav-arrows">
+                                <div class="nav-icon">←</div>
+                                <div class="nav-icon">→</div>
+                            </div>
+                            <div class="nav-icons">
+                                <div class="nav-icon">🏠</div>
+                                <div class="nav-icon">📋</div>
+                                <div class="nav-icon">⚙️</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="screen-content">
                         <div style="text-align: center; margin-top: 30px;">
@@ -519,134 +851,280 @@
             </div>
         </div>
 
-        <!-- 3. Building The Big Limb -->
+        <!-- 3. Warm-up Section: Daily Observations -->
         <div class="flow-section">
-            <h2 class="flow-title">3. Building Your Big Limb (Wants/Needs) + Scheduling</h2>
+            <h2 class="flow-title">3. Daily Warm-up & Weekly Gifts</h2>
             <div class="screens">
-                <!-- Create Big Limb -->
+<!-- 3A - Daily Appreciation Prompt -->
                 <div class="screen">
+                    <div style="position: absolute; top: 10px; left: 10px; font-weight: bold; font-size: 16px; color: #666; z-index: 10;">3A</div>
                     <div class="screen-header">
-                        <span class="back-button">←</span>
-                        You & Sarah - Your Big Limb
+                        <div class="header-title">Daily Appreciation</div>
+                        <div class="header-nav">
+                            <div class="nav-arrows">
+                                <div class="nav-icon">←</div>
+                                <div class="nav-icon">→</div>
+                            </div>
+                            <div class="nav-icons">
+                                <div class="nav-icon">🏠</div>
+                                <div class="nav-icon">📋</div>
+                                <div class="nav-icon">⚙️</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="screen-content">
-                        <h3 style="margin-bottom: 5px;">What would you want, need, or love from Sarah?</h3>
-                        <p style="color: #666; font-size: 14px; margin-bottom: 15px;">Building your Big Limb (8 of 12 items)</p>
+                        <h3 style="margin-bottom: 10px;">What did you notice today?</h3>
+                        <p style="color: #666; font-size: 14px; margin-bottom: 20px;">Share the best thing you saw Sarah do today</p>
+
+                        <div class="observation-entry">
+                            <label style="font-weight: 600; display: block; margin-bottom: 10px;">🌟 Best thing I noticed:</label>
+                            <textarea style="width: 100%; height: 80px; padding: 10px; border: 1px solid #FFD700; border-radius: 8px;" placeholder="I saw you..."></textarea>
+                        </div>
+
+                        <div class="observation-entry">
+                            <label style="font-weight: 600; display: block; margin-bottom: 10px;">✨ Close second:</label>
+                            <textarea style="width: 100%; height: 80px; padding: 10px; border: 1px solid #FFD700; border-radius: 8px;" placeholder="I also noticed when you..."></textarea>
+                        </div>
+
+                        <div class="streak-indicator">
+                            <p style="font-weight: 600; color: #D32F2F;">🔥 3-day streak!</p>
+                            <p style="font-size: 12px;">2 more days to double water credits earned</p>
+                        </div>
+
+                        <button class="button">Submit Observation</button>
+                    </div>
+                    <div class="bottom-banner">
+                        <div class="credits-display">
+                            <div class="credit-badge sun-credits">☀️ +2</div>
+                            <p style="font-size: 12px;">You earn sun credits for appreciating</p>
+                        </div>
+                        <p style="text-align: center; margin: 0; font-size: 11px;">Prompt to be texted daily at 7pm</p>
+                    </div>
+                </div>
+
+                <!-- 3B - Weekly Gift Presentation -->
+                <div class="screen">
+                    <div style="position: absolute; top: 10px; left: 10px; font-weight: bold; font-size: 16px; color: #666; z-index: 10;">3B</div>
+                    <div class="screen-header">
+                        <div class="header-title">Your Weekly Gift 🎁</div>
+                        <div class="header-nav">
+                            <div class="nav-arrows">
+                                <div class="nav-icon">←</div>
+                                <div class="nav-icon">→</div>
+                            </div>
+                            <div class="nav-icons">
+                                <div class="nav-icon">🏠</div>
+                                <div class="nav-icon">📋</div>
+                                <div class="nav-icon">⚙️</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screen-content">
+                        <h3 style="margin-bottom: 10px;">Sarah saw you...</h3>
+                        <p style="color: #666; font-size: 14px; margin-bottom: 20px;">All the wonderful things noticed this week</p>
+
+                        <div class="gift-item">"I saw you wake up early to make breakfast for us"</div>
+                        <div class="gift-item">"I saw you listen patiently when I was stressed"</div>
+                        <div class="gift-item">"I saw you clean the kitchen without being asked"</div>
+                        <div class="gift-item">"I saw you support my work presentation prep"</div>
+                        <div class="gift-item">"I saw you make time for us despite being busy"</div>
+
+                        <div style="text-align: center; margin: 20px 0;">
+                            <div style="font-size: 48px;">🌸</div>
+                            <p style="color: #E91E63; font-weight: 600;">You earned a flower fruit!</p>
+                            <p style="color: #666; font-size: 14px;">5 observations = 1 flower</p>
+                        </div>
+
+                        <button class="button">View Partner's Observations</button>
+                    </div>
+                    <div class="bottom-banner">
+                        <div class="credits-display">
+                            <div class="credit-badge water-credits">💧 +10</div>
+                            <p style="font-size: 12px;">Water credits for being recognized</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3C - Build Your Big Branch -->
+                <div class="screen">
+                    <div style="position: absolute; top: 10px; left: 10px; font-weight: bold; font-size: 16px; color: #666; z-index: 10;">3C</div>
+                    <div class="screen-header">
+                        <div class="header-title">Build Your Big Branch</div>
+                        <div class="header-nav">
+                            <div class="nav-arrows">
+                                <div class="nav-icon">←</div>
+                                <div class="nav-icon">→</div>
+                            </div>
+                            <div class="nav-icons">
+                                <div class="nav-icon">🏠</div>
+                                <div class="nav-icon">📋</div>
+                                <div class="nav-icon">⚙️</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screen-content">
+                        <h3 style="margin-bottom: 10px;">Popular Wants/Needs</h3>
+                        <p style="color: #666; font-size: 14px; margin-bottom: 20px;">Start with these common Big Branch items (can change 3/week)</p>
 
                         <div class="want-item">
-                            <span>More verbal appreciation</span>
-                            <span class="priority-badge">TOP 1</span>
+                            <span>Morning coffee together</span>
+                            <div class="checkbox" style="background: #4CAF50;"></div>
                         </div>
                         <div class="want-item">
                             <span>Help with household chores</span>
-                            <span class="priority-badge">TOP 2</span>
+                            <div class="checkbox" style="background: #4CAF50;"></div>
                         </div>
                         <div class="want-item">
                             <span>Weekly date nights</span>
+                            <div class="checkbox"></div>
                         </div>
                         <div class="want-item">
-                            <span>Morning coffee together</span>
-                        </div>
-                        <input type="text" class="input-field" placeholder="Add to your Big Limb...">
-
-                        <button class="button secondary" style="margin-top: 10px;">
-                            + Fill from Popular List (4 needed)
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Schedule Preferences -->
-                <div class="screen">
-                    <div class="screen-header">
-                        <span class="back-button">←</span>
-                        Set Your Availability
-                    </div>
-                    <div class="screen-content">
-                        <h3 style="margin-bottom: 5px;">When can you grow leaves?</h3>
-                        <p style="color: #666; font-size: 14px; margin-bottom: 15px;">Select 3 times for your weekly leaf growing session (scoring)</p>
-
-                        <div class="time-slot">
-                            <div class="time-checkbox" style="background: #4CAF50;"></div>
-                            <div>
-                                <div style="font-weight: 600;">Friday 7:00 PM</div>
-                                <div style="font-size: 14px; color: #666;">Dec 15</div>
-                            </div>
-                        </div>
-                        <div class="time-slot">
-                            <div class="time-checkbox" style="background: #4CAF50;"></div>
-                            <div>
-                                <div style="font-weight: 600;">Saturday 2:00 PM</div>
-                                <div style="font-size: 14px; color: #666;">Dec 16</div>
-                            </div>
-                        </div>
-                        <div class="time-slot">
-                            <div class="time-checkbox" style="background: #4CAF50;"></div>
-                            <div>
-                                <div style="font-weight: 600;">Sunday 6:00 PM</div>
-                                <div style="font-size: 14px; color: #666;">Dec 17</div>
-                            </div>
-                        </div>
-                        <div class="time-slot">
-                            <div class="time-checkbox"></div>
-                            <div>
-                                <div style="font-weight: 600;">Monday 8:00 PM</div>
-                                <div style="font-size: 14px; color: #666;">Dec 18</div>
-                            </div>
-                        </div>
-
-                        <button class="button">Submit with Big Limb</button>
-                    </div>
-                </div>
-
-                <!-- Popular Suggestions -->
-                <div class="screen">
-                    <div class="screen-header">
-                        <span class="back-button">←</span>
-                        Popular for Your Big Limb
-                    </div>
-                    <div class="screen-content">
-                        <p style="color: #666; margin-bottom: 15px;">Top 20 for your age/gender to add to Big Limb:</p>
-
-                        <div class="want-item">
-                            <span>More quality time together</span>
-                            <div class="checkbox" style="background: #4CAF50;"></div>
+                            <span>More verbal appreciation</span>
+                            <div class="checkbox"></div>
                         </div>
                         <div class="want-item">
-                            <span>Better communication</span>
-                            <div class="checkbox" style="background: #4CAF50;"></div>
-                        </div>
-                        <div class="want-item">
-                            <span>Share household responsibilities</span>
-                            <div class="checkbox" style="background: #4CAF50;"></div>
-                        </div>
-                        <div class="want-item">
-                            <span>Physical affection</span>
-                            <div class="checkbox" style="background: #4CAF50;"></div>
-                        </div>
-                        <div class="want-item">
-                            <span>Support personal goals</span>
+                            <span>Quality time without phones</span>
                             <div class="checkbox"></div>
                         </div>
 
-                        <button class="button">Add Selected (4) to Complete Big Limb</button>
+                        <button class="button">Create Big Branch</button>
+                    </div>
+                    <div class="bottom-banner">
+                        <p style="text-align: center;">🔄 Changes cost 3 sun credits each (up to 3 changes per week)</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 4. Growing Branches (Willing Selection) -->
+        <!-- 4. Growing Branches -->
         <div class="flow-section">
-            <h2 class="flow-title">4. Growing Branches from Partner's Big Limb</h2>
+            <h2 class="flow-title">4. Growing Branches</h2>
             <div class="screens">
-                <!-- View Partner's Big Limb -->
+                <!-- 4A - Building the Big Branch -->
                 <div class="screen">
+                    <div style="position: absolute; top: 10px; left: 10px; font-weight: bold; font-size: 16px; color: #666; z-index: 10;">4A</div>
                     <div class="screen-header">
-                        <span class="back-button">←</span>
-                        Sarah's Big Limb
+                        <div class="header-title">Building the Big Branch</div>
+                        <div class="header-nav">
+                            <div class="nav-arrows">
+                                <div class="nav-icon">←</div>
+                                <div class="nav-icon">→</div>
+                            </div>
+                            <div class="nav-icons">
+                                <div class="nav-icon">🏠</div>
+                                <div class="nav-icon">📋</div>
+                                <div class="nav-icon">⚙️</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="screen-content">
-                        <h3 style="margin-bottom: 5px;">Sarah wants, needs, or would love:</h3>
-                        <p style="color: #666; font-size: 14px; margin-bottom: 15px;">Select 3-5 to grow as your branches (12 items total)</p>
+                        <h3 style="margin-bottom: 5px;">Distribute 18 points across your wants/needs</h3>
+                        <p style="color: #666; font-size: 14px; margin-bottom: 15px;">Higher points = higher priority for your partner</p>
+                        <p style="color: #4CAF50; font-size: 12px; margin-bottom: 15px;">18 points total to allocate</p>
+
+                        <div class="want-item" style="display: flex; justify-content: space-between; align-items: center;">
+                            <span>More verbal appreciation</span>
+                            <input type="number" min="0" max="18" value="5" style="width: 50px; text-align: center; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                        <div class="want-item" style="display: flex; justify-content: space-between; align-items: center;">
+                            <span>Help with household chores</span>
+                            <input type="number" min="0" max="18" value="4" style="width: 50px; text-align: center; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                        <div class="want-item" style="display: flex; justify-content: space-between; align-items: center;">
+                            <span>Weekly date nights</span>
+                            <input type="number" min="0" max="18" value="3" style="width: 50px; text-align: center; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                        <div class="want-item" style="display: flex; justify-content: space-between; align-items: center;">
+                            <span>Morning coffee together</span>
+                            <input type="number" min="0" max="18" value="3" style="width: 50px; text-align: center; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                        <div class="want-item" style="display: flex; justify-content: space-between; align-items: center;">
+                            <span>Quality time without phones</span>
+                            <input type="number" min="0" max="18" value="3" style="width: 50px; text-align: center; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+
+                        <div style="margin-top: 20px; padding: 10px; background: #E8F5E9; border-radius: 8px;">
+                            <p style="font-weight: 600;">Points remaining: <span style="color: #4CAF50;">0</span> of 18</p>
+                        </div>
+
+                        <button class="button" style="margin-top: 10px;">Submit Big Branch with Points</button>
+                    </div>
+                </div>
+
+                <!-- 4B - Growing Small Branches -->
+                <div class="screen">
+                    <div style="position: absolute; top: 10px; left: 10px; font-weight: bold; font-size: 16px; color: #666; z-index: 10;">4B</div>
+                    <div class="screen-header">
+                        <div class="header-title">Your Small Branches</div>
+                        <div class="header-nav">
+                            <div class="nav-arrows">
+                                <div class="nav-icon">←</div>
+                                <div class="nav-icon">→</div>
+                            </div>
+                            <div class="nav-icons">
+                                <div class="nav-icon">🏠</div>
+                                <div class="nav-icon">📋</div>
+                                <div class="nav-icon">⚙️</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screen-content">
+                        <h3 style="margin-bottom: 5px;">Focus your intention on 2 items</h3>
+                        <p style="color: #666; font-size: 14px; margin-bottom: 15px;">From Sarah's Big Branch, what will you focus on this week?</p>
+
+                        <div class="want-item" style="background: #E8F5E9; padding: 15px; border: 2px solid #4CAF50;">
+                            <span style="font-weight: 600;">Morning coffee together</span>
+                            <p style="font-size: 12px; color: #666; margin-top: 5px;">I intend to wake up early and prepare coffee for us</p>
+                        </div>
+
+                        <div class="want-item" style="background: #E8F5E9; padding: 15px; border: 2px solid #4CAF50;">
+                            <span style="font-weight: 600;">More verbal appreciation</span>
+                            <p style="font-size: 12px; color: #666; margin-top: 5px;">I intend to express gratitude daily</p>
+                        </div>
+
+                        <div style="margin-top: 20px; padding: 15px; background: #FFF9E6; border-radius: 8px;">
+                            <p style="font-weight: 600; color: #F57C00;">💡 Tip: Choose items you can genuinely commit to</p>
+                            <p style="font-size: 12px; color: #666; margin-top: 5px;">Your partner will guess which ones you chose</p>
+                        </div>
+
+                        <button class="button">Lock in my Small Branches</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Guessing Game & Recognition -->
+        <div class="flow-section">
+            <h2 class="flow-title">5. Guessing Game & Recognition</h2>
+            <div class="screens">
+                <!-- View Partner's Big Branch - Frame 5A -->
+                <div class="screen">
+                    <div style="position: absolute; top: 10px; left: 10px; font-weight: bold; font-size: 16px; color: #666; z-index: 10;">5A</div>
+                    <div class="screen-header">
+                        <div class="header-title">Sarah's Big Branch</div>
+                        <div class="header-nav">
+                            <div class="nav-arrows">
+                                <div class="nav-icon">←</div>
+                                <div class="nav-icon">→</div>
+                            </div>
+                            <div class="nav-icons">
+                                <div class="nav-icon">🏠</div>
+                                <div class="nav-icon">📋</div>
+                                <div class="nav-icon">⚙️</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screen-content">
+                        <h3 style="margin-bottom: 5px;">Form Your Small Branches</h3>
+                        <p style="color: #666; font-size: 14px; margin-bottom: 15px;">1 assigned task + select 1 from 6 random items</p>
+
+                        <div class="demand-card">
+                            <p style="font-weight: 600; color: #7B1FA2; margin-bottom: 5px;">⭐ BIG WISH: Weekly date nights</p>
+                            <p style="font-size: 13px; color: #666;">Sarah purchased this as a Big Wish (50 water credits)</p>
+                            <p style="font-size: 12px; color: #9C27B0;">Required for 3 weeks</p>
+                        </div>
+
+                        <p style="color: #666; font-size: 14px; margin: 15px 0;">Choose 1 additional Small Branch from these 6:</p>
 
                         <div class="willing-item">
                             <span>1. Plan weekend activities</span>
@@ -668,23 +1146,32 @@
                             <span>5. Morning workout together</span>
                             <div class="checkbox" style="background: #4CAF50;"></div>
                         </div>
-                        <div style="color: #999; text-align: center; padding: 10px;">... 7 more items from Big Limb ...</div>
+                        <div style="color: #999; text-align: center; padding: 10px;">... 7 more items from Big Branch ...</div>
 
-                        <div style="position: fixed; bottom: 80px; left: 20px; right: 20px; background: white; padding: 10px; border-top: 1px solid #ddd;">
-                            <button class="button">Continue (3 branches selected)</button>
-                        </div>
+                        <button class="button" style="margin-top: 20px;">Continue (Small Branches selected)</button>
                     </div>
                 </div>
 
-                <!-- Prioritize Your Branches -->
+                <!-- Prioritize Your Small Branches - Frame 5B -->
                 <div class="screen">
+                    <div style="position: absolute; top: 10px; left: 10px; font-weight: bold; font-size: 16px; color: #666; z-index: 10;">5B</div>
                     <div class="screen-header">
-                        <span class="back-button">←</span>
-                        Prioritize Your Branches
+                        <div class="header-title">Your Small Branches</div>
+                        <div class="header-nav">
+                            <div class="nav-arrows">
+                                <div class="nav-icon">←</div>
+                                <div class="nav-icon">→</div>
+                            </div>
+                            <div class="nav-icons">
+                                <div class="nav-icon">🏠</div>
+                                <div class="nav-icon">📋</div>
+                                <div class="nav-icon">⚙️</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="screen-content">
-                        <h3 style="margin-bottom: 5px;">Order Your Branch Intentions</h3>
-                        <p style="color: #666; font-size: 14px; margin-bottom: 15px;">Drag to reorder (1 = primary branch focus)</p>
+                        <h3 style="margin-bottom: 5px;">Your Small Branches This Week</h3>
+                        <p style="color: #666; font-size: 14px; margin-bottom: 15px;">Your commitment to work on these</p>
 
                         <div class="willing-item" style="background: #f0f9f1;">
                             <span style="font-weight: bold;">1</span>
@@ -702,45 +1189,223 @@
                             <span>⋮⋮</span>
                         </div>
 
-                        <button class="button">Lock In My Branches</button>
+                        <button class="button">Lock In My Small Branches</button>
                     </div>
                 </div>
 
-                <!-- Schedule Confirmation -->
+                <!-- Guessing Game - Frame 5C -->
                 <div class="screen">
+                    <div style="position: absolute; top: 10px; left: 10px; font-weight: bold; font-size: 16px; color: #666; z-index: 10;">5C</div>
                     <div class="screen-header">
-                        <span class="back-button">←</span>
-                        Confirm Leaf Growing Session
+                        <div class="header-title">Guessing Game</div>
+                        <div class="header-nav">
+                            <div class="nav-arrows">
+                                <div class="nav-icon">←</div>
+                                <div class="nav-icon">→</div>
+                            </div>
+                            <div class="nav-icons">
+                                <div class="nav-icon">🏠</div>
+                                <div class="nav-icon">📋</div>
+                                <div class="nav-icon">⚙️</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="screen-content">
-                        <h3 style="margin-bottom: 5px;">Match Found!</h3>
-                        <p style="color: #666; font-size: 14px; margin-bottom: 20px;">You and Sarah are both available:</p>
+                        <h3 style="margin-bottom: 5px;">What Small Branches was Sarah working on?</h3>
+                        <p style="color: #666; font-size: 14px; margin-bottom: 15px;">Guess from your Big Branch (2 attempts)</p>
 
-                        <div style="background: #E8F5E9; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 20px;">
-                            <div style="font-size: 20px; font-weight: 600; margin-bottom: 5px;">Saturday, Dec 16</div>
-                            <div style="font-size: 18px; color: #4CAF50;">2:00 PM</div>
-                            <div style="font-size: 14px; color: #666; margin-top: 10px;">🍃 Leaf Growing Session</div>
+                        <div class="demand-card">
+                            <p style="font-weight: 600; color: #7B1FA2; margin-bottom: 5px;">⭐ BIG WISH: Weekly date nights</p>
+                            <p style="font-size: 13px; color: #666;">You purchased this as a Big Wish (50 water credits)</p>
                         </div>
 
-                        <button class="button">Confirm Session</button>
-                        <button class="button secondary">Request Different Time</button>
-
-                        <div style="margin-top: 20px; padding: 15px; background: #FFF9E6; border-radius: 8px;">
-                            <p style="font-size: 14px; color: #666;">📅 This leaf growing session will be added to both calendars</p>
+                        <div class="want-item">
+                            <span>More verbal appreciation</span>
+                            <div class="checkbox"></div>
                         </div>
+                        <div class="want-item">
+                            <span>Help with household chores</span>
+                            <div class="checkbox" style="background: #4CAF50;"></div>
+                        </div>
+                        <div class="want-item">
+                            <span>Morning coffee together</span>
+                            <div class="checkbox" style="background: #4CAF50;"></div>
+                        </div>
+
+                        <button class="button">Submit Guesses</button>
+                    </div>
+                    <div class="bottom-banner">
+                        <p style="text-align: center;">🎯 Correct guesses earn sun credits for you & water credits for Sarah</p>
+                    </div>
+                </div>
+
+                <!-- Credit Update - Frame 5D -->
+                <div class="screen">
+                    <div style="position: absolute; top: 10px; left: 10px; font-weight: bold; font-size: 16px; color: #666; z-index: 10;">5D</div>
+                    <div class="screen-header">
+                        <div class="header-title">Credits Earned!</div>
+                        <div class="header-nav">
+                            <div class="nav-arrows">
+                                <div class="nav-icon">←</div>
+                                <div class="nav-icon">→</div>
+                            </div>
+                            <div class="nav-icons">
+                                <div class="nav-icon">🏠</div>
+                                <div class="nav-icon">📋</div>
+                                <div class="nav-icon">⚙️</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screen-content">
+                        <h3 style="margin-bottom: 20px; text-align: center;">This Week's Results</h3>
+
+                        <div style="background: #FFF9E6; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
+                            <h4 style="margin-bottom: 15px;">Credits Earned:</h4>
+                            <div style="display: flex; justify-content: space-around;">
+                                <div>
+                                    <div class="credit-badge sun-credits" style="font-size: 24px;">☀️ +15</div>
+                                    <p style="font-size: 11px; text-align: center; margin: 0;">Your sun credits</p>
+                                </div>
+                                <div>
+                                    <div class="credit-badge water-credits" style="font-size: 24px;">💧 +12</div>
+                                    <p style="font-size: 11px; text-align: center; margin: 0;">Your water credits</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="background: #E3F2FD; padding: 15px; border-radius: 12px; margin-bottom: 20px;">
+                            <h4 style="margin-bottom: 10px;">Current Balances:</h4>
+                            <div style="display: flex; justify-content: space-around;">
+                                <div>
+                                    <p style="font-weight: 600; color: #F57C00;">☀️ Total: 67</p>
+                                </div>
+                                <div>
+                                    <p style="font-weight: 600; color: #1976D2;">💧 Total: 85</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="button">View All Lists</button>
+                    </div>
+                    <div class="bottom-banner">
+                        <p style="text-align: center;">💰 Credits rollover for up to 4 weeks</p>
+                    </div>
+                </div>
+
+                <!-- Weekly Visibility Window - Frame 5E -->
+                <div class="screen">
+                    <div style="position: absolute; top: 10px; left: 10px; font-weight: bold; font-size: 16px; color: #666; z-index: 10;">5E</div>
+                    <div class="screen-header">
+                        <div class="header-title">Sunday Visibility Window</div>
+                        <div class="header-nav">
+                            <div class="nav-arrows">
+                                <div class="nav-icon">←</div>
+                                <div class="nav-icon">→</div>
+                            </div>
+                            <div class="nav-icons">
+                                <div class="nav-icon">🏠</div>
+                                <div class="nav-icon">📋</div>
+                                <div class="nav-icon">⚙️</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screen-content">
+                        <h3 style="margin-bottom: 10px;">All Lists Now Visible</h3>
+                        <div class="visibility-notice">
+                            <p style="font-weight: 600; color: #1565C0; font-size: 24px;">2:47 PM - 3:47 PM</p>
+                            <p style="font-size: 14px; color: #666; margin-top: 10px;">Sunday visibility window is open!</p>
+                        </div>
+
+                        <div style="margin-top: 20px;">
+                            <h4 style="margin-bottom: 15px;">View Lists:</h4>
+                            <button class="button secondary" style="margin-bottom: 10px; width: 100%;">My Big Branch</button>
+                            <button class="button secondary" style="margin-bottom: 10px; width: 100%;">My Small Branches (Last Week)</button>
+                            <button class="button secondary" style="margin-bottom: 10px; width: 100%;">My Leaves</button>
+                            <button class="button secondary" style="margin-bottom: 10px; width: 100%;">Sarah's Big Branch</button>
+                            <button class="button secondary" style="margin-bottom: 10px; width: 100%;">Sarah's Small Branches (Last Week)</button>
+                            <button class="button secondary" style="margin-bottom: 10px; width: 100%;">Sarah's Leaves</button>
+                            <button class="button bonus" style="width: 100%;">⭐ Current Big Wishes</button>
+                        </div>
+                    </div>
+                    <div class="bottom-banner">
+                        <p style="text-align: center;">⏰ Window closes in 47 minutes</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 5. Leaf Growing (Scoring & Recognition) -->
+        <!-- 6. Leaf Growing (Scoring & Recognition) - PREMIUM -->
         <div class="flow-section">
-            <h2 class="flow-title">5. Growing Leaves (Recognition & Scoring)</h2>
+            <h2 class="flow-title">6. Growing Leaves (Recognition & Scoring) - PREMIUM</h2>
             <div class="screens">
-                <!-- Schedule Status -->
+                <!-- Big Wishes Volunteer - Frame 6A - PREMIUM -->
                 <div class="screen">
-                    <div class="screen-header">
-                        This Week's Leaf Growing
+                    <div style="position: absolute; top: 10px; left: 10px; font-weight: bold; font-size: 16px; color: #666; z-index: 10;">6A</div>
+                    <div class="screen-header premium">
+                        <div class="header-title">Big Wishes Exchange <span class="paywall-badge">PRO</span></div>
+                        <div class="header-nav">
+                            <div class="nav-arrows">
+                                <div class="nav-icon">←</div>
+                                <div class="nav-icon">→</div>
+                            </div>
+                            <div class="nav-icons">
+                                <div class="nav-icon">🏠</div>
+                                <div class="nav-icon">📋</div>
+                                <div class="nav-icon">⚙️</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screen-content">
+                        <h3 style="margin-bottom: 10px;">Volunteer 2 Huge Things</h3>
+                        <p style="color: #666; font-size: 14px; margin-bottom: 20px;">What would your partner LOVE that you're willing to do? (50 credits each)</p>
+
+                        <div class="demand-card" style="background: linear-gradient(135deg, #FFE0B2, #FFCC80);">
+                            <p style="font-weight: 600; color: #E65100; margin-bottom: 5px;">💝 Your Offer #1:</p>
+                            <input type="text" class="input-field" placeholder="Plan surprise weekend getaway" style="margin-bottom: 10px;">
+                            <p style="font-size: 12px; color: #666;">Worth 50 water credits to you if Sarah claims it</p>
+                        </div>
+
+                        <div class="demand-card" style="background: linear-gradient(135deg, #FFE0B2, #FFCC80);">
+                            <p style="font-weight: 600; color: #E65100; margin-bottom: 5px;">💝 Your Offer #2:</p>
+                            <input type="text" class="input-field" placeholder="Take over morning routine with kids for a month" style="margin-bottom: 10px;">
+                            <p style="font-size: 12px; color: #666;">Worth 50 water credits to you if Sarah claims it</p>
+                        </div>
+
+                        <div style="margin-top: 20px; padding: 15px; background: #E3F2FD; border-radius: 12px;">
+                            <h4 style="margin-bottom: 10px;">Sarah's Offers to You:</h4>
+                            <div class="want-item" style="background: white; margin-bottom: 10px;">
+                                <span>Weekly spa day - no questions asked</span>
+                                <button class="button secondary" style="padding: 5px 10px; font-size: 12px;">Claim</button>
+                            </div>
+                            <div class="want-item" style="background: white;">
+                                <span>Full day gaming marathon once a month</span>
+                                <button class="button secondary" style="padding: 5px 10px; font-size: 12px;">Claim</button>
+                            </div>
+                        </div>
+
+                        <button class="button">Submit & Exchange Wishes</button>
+                    </div>
+                    <div class="bottom-banner premium">
+                        <p style="text-align: center;">💎 Premium Feature: Big Wishes cost 50 credits each</p>
+                    </div>
+                </div>
+
+                <!-- Schedule Status - Frame 6B - PREMIUM -->
+                <div class="screen">
+                    <div style="position: absolute; top: 10px; left: 10px; font-weight: bold; font-size: 16px; color: #666; z-index: 10;">6B</div>
+                    <div class="screen-header premium">
+                        <div class="header-title">This Week's Leaf Growing <span class="paywall-badge">PRO</span></div>
+                        <div class="header-nav">
+                            <div class="nav-arrows">
+                                <div class="nav-icon">←</div>
+                                <div class="nav-icon">→</div>
+                            </div>
+                            <div class="nav-icons">
+                                <div class="nav-icon">🏠</div>
+                                <div class="nav-icon">📋</div>
+                                <div class="nav-icon">⚙️</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="screen-content">
                         <h3 style="margin-bottom: 15px;">Upcoming Sessions</h3>
@@ -767,16 +1432,38 @@
                             <p style="font-size: 14px; color: #F57C00;">💡 Regular leaf growing strengthens your WillingTree!</p>
                         </div>
                     </div>
+                    <div class="bottom-banner premium">
+                        <p style="text-align: center;">📊 Premium: Advanced scheduling & insights</p>
+                    </div>
                 </div>
 
-                <!-- Growing Leaves (Guessing from Your Big Limb) -->
+                <!-- Growing Leaves - Frame 6C - PREMIUM -->
                 <div class="screen">
-                    <div class="screen-header">
-                        Growing Leaves - You & Sarah
+                    <div style="position: absolute; top: 10px; left: 10px; font-weight: bold; font-size: 16px; color: #666; z-index: 10;">6C</div>
+                    <div class="screen-header premium">
+                        <div class="header-title">Growing Leaves <span class="paywall-badge">PRO</span></div>
+                        <div class="header-nav">
+                            <div class="nav-arrows">
+                                <div class="nav-icon">←</div>
+                                <div class="nav-icon">→</div>
+                            </div>
+                            <div class="nav-icons">
+                                <div class="nav-icon">🏠</div>
+                                <div class="nav-icon">📋</div>
+                                <div class="nav-icon">⚙️</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="screen-content">
-                        <h3 style="margin-bottom: 5px;">Recognize Sarah's branches</h3>
-                        <p style="color: #666; font-size: 14px; margin-bottom: 15px;">2 guesses to find her 3 efforts from YOUR Big Limb</p>
+                        <h3 style="margin-bottom: 5px;">Review Done/Seen Lists First</h3>
+                        <div class="visibility-notice">
+                            <p style="font-weight: 600; margin-bottom: 10px;">⏰ Weekly Visibility Window Open</p>
+                            <p style="font-size: 14px; color: #1565C0;">You have 1 hour to review both Big Branch and Leaves lists</p>
+                            <button class="button secondary" style="margin-top: 10px;">View Done/Seen Lists</button>
+                        </div>
+
+                        <h3 style="margin-top: 20px; margin-bottom: 5px;">Now recognize Sarah's efforts</h3>
+                        <p style="color: #666; font-size: 14px; margin-bottom: 15px;">After reviewing lists, make 2 guesses for her 3 efforts</p>
 
                         <div style="background: #E3F2FD; padding: 10px; border-radius: 8px; margin-bottom: 15px;">
                             <p style="font-size: 14px; color: #1976D2;">🍃 Guesses remaining: 2</p>
@@ -806,13 +1493,27 @@
                         <button class="button">Submit First Guess (2 selected)</button>
                         <button class="button bonus" style="margin-top: 5px;">+ Add Bonus Recognition</button>
                     </div>
+                    <div class="bottom-banner premium">
+                        <p style="text-align: center;">📊 Premium: Detailed recognition tracking</p>
+                    </div>
                 </div>
 
-                <!-- Bonus Recognition Screen -->
+                <!-- Bonus Recognition - Frame 6D - PREMIUM -->
                 <div class="screen">
-                    <div class="screen-header">
-                        <span class="back-button">←</span>
-                        Bonus Recognition
+                    <div style="position: absolute; top: 10px; left: 10px; font-weight: bold; font-size: 16px; color: #666; z-index: 10;">6D</div>
+                    <div class="screen-header premium">
+                        <div class="header-title">Bonus Recognition <span class="paywall-badge">PRO</span></div>
+                        <div class="header-nav">
+                            <div class="nav-arrows">
+                                <div class="nav-icon">←</div>
+                                <div class="nav-icon">→</div>
+                            </div>
+                            <div class="nav-icons">
+                                <div class="nav-icon">🏠</div>
+                                <div class="nav-icon">📋</div>
+                                <div class="nav-icon">⚙️</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="screen-content">
                         <h3 style="margin-bottom: 5px;">Unexpected Acts of Service</h3>
@@ -832,13 +1533,27 @@
                         <button class="button bonus">Add Bonus Leaf</button>
                         <button class="button secondary">Skip</button>
                     </div>
+                    <div class="bottom-banner premium">
+                        <p style="text-align: center;">📊 Premium: Bonus recognition analytics</p>
+                    </div>
                 </div>
 
-                <!-- Recording Option -->
+                <!-- Recording Option - Frame 6E - PREMIUM -->
                 <div class="screen">
-                    <div class="screen-header">
-                        <span class="back-button">←</span>
-                        Record Your Session
+                    <div style="position: absolute; top: 10px; left: 10px; font-weight: bold; font-size: 16px; color: #666; z-index: 10;">6E</div>
+                    <div class="screen-header premium">
+                        <div class="header-title">Record Your Session <span class="paywall-badge">PRO</span></div>
+                        <div class="header-nav">
+                            <div class="nav-arrows">
+                                <div class="nav-icon">←</div>
+                                <div class="nav-icon">→</div>
+                            </div>
+                            <div class="nav-icons">
+                                <div class="nav-icon">🏠</div>
+                                <div class="nav-icon">📋</div>
+                                <div class="nav-icon">⚙️</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="screen-content">
                         <h3 style="margin-bottom: 5px;">Document Your Growth</h3>
@@ -850,20 +1565,35 @@
 
                         <div class="warning-box">
                             <p style="font-weight: 600; margin-bottom: 10px;">🔔 Discussion Prompts Available</p>
-                            <p style="font-size: 14px; color: #666; margin-bottom: 10px;">Sarah's branch efforts on your top priority haven't grown leaves for 3 weeks.</p>
+                            <p style="font-size: 14px; color: #666; margin-bottom: 10px;">Sarah's leaf efforts on your top priority haven't been recognized for 3 weeks.</p>
                             <button class="button secondary">View Safe Discussion Guide</button>
                         </div>
 
                         <div style="margin-top: 20px; padding: 15px; background: #F3E5F5; border-radius: 8px;">
-                            <p style="font-size: 14px; color: #7B1FA2;">Recording helps identify how branches grow into recognized leaves</p>
+                            <p style="font-size: 14px; color: #7B1FA2;">Recording helps identify how efforts grow into recognized leaves</p>
                         </div>
+                    </div>
+                    <div class="bottom-banner premium">
+                        <p style="text-align: center;">📊 Premium: AI-powered conversation analysis</p>
                     </div>
                 </div>
 
-                <!-- Leaf Growing Results -->
+                <!-- Leaf Growing Results - Frame 6F - PREMIUM -->
                 <div class="screen">
-                    <div class="screen-header">
-                        Week 3 Leaf Count
+                    <div style="position: absolute; top: 10px; left: 10px; font-weight: bold; font-size: 16px; color: #666; z-index: 10;">6F</div>
+                    <div class="screen-header premium">
+                        <div class="header-title">Week 3 Results <span class="paywall-badge">PRO</span></div>
+                        <div class="header-nav">
+                            <div class="nav-arrows">
+                                <div class="nav-icon">←</div>
+                                <div class="nav-icon">→</div>
+                            </div>
+                            <div class="nav-icons">
+                                <div class="nav-icon">🏠</div>
+                                <div class="nav-icon">📋</div>
+                                <div class="nav-icon">⚙️</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="screen-content">
                         <h3 style="text-align: center; margin-bottom: 20px;">You & Sarah</h3>
@@ -875,12 +1605,12 @@
 
                         <div class="stats-container">
                             <div class="stat-card">
-                                <div class="stat-value">18</div>
-                                <div class="stat-label">Your Points</div>
+                                <div class="stat-value" style="color: #F57C00;">45</div>
+                                <div class="stat-label">Sun Credits</div>
                             </div>
                             <div class="stat-card">
-                                <div class="stat-value">22</div>
-                                <div class="stat-label">Sarah's Points</div>
+                                <div class="stat-value" style="color: #1976D2;">52</div>
+                                <div class="stat-label">Water Credits</div>
                             </div>
                             <div class="stat-card">
                                 <div class="stat-value">3</div>
@@ -893,28 +1623,32 @@
                         </div>
 
                         <div style="margin-top: 20px; padding: 15px; background: #FFF9E6; border-radius: 8px;">
-                            <div style="font-weight: 600; margin-bottom: 5px;">🎯 Top Priority Leaf!</div>
-                            <div style="font-size: 14px; color: #666;">Sarah's branch grew a leaf on your top priority (3x points)</div>
+                            <div style="font-weight: 600; margin-bottom: 5px;">🎯 Top Priority Match!</div>
+                            <div style="font-size: 14px; color: #666;">Correct guess on Demand item (+5 sun credits, Sarah +5 water credits)</div>
                         </div>
 
                         <div style="margin-top: 15px; padding: 15px; background: #E1BEE7; border-radius: 8px;">
                             <div style="font-weight: 600; margin-bottom: 5px;">🌟 Bonus Leaf!</div>
-                            <div style="font-size: 14px; color: #666;">You recognized: "Cleaned fridge shelf" (+1 each)</div>
+                            <div style="font-size: 14px; color: #666;">You recognized: "Cleaned fridge shelf" (+2 sun, partner +2 water)</div>
                         </div>
 
                         <button class="button">View Journal Prompts</button>
                         <button class="button secondary">Start Next Week</button>
                     </div>
+                    <div class="bottom-banner premium">
+                        <p style="text-align: center;">📊 Premium: Weekly insights & progress tracking</p>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- 6. Dashboard with Tree/Leaf Metaphors -->
+        <!-- 7. Dashboard with Tree/Leaf Metaphors -->
         <div class="flow-section">
-            <h2 class="flow-title">6. Tree Growth Dashboard & Community Forest</h2>
+            <h2 class="flow-title">7. Tree Growth Dashboard & Community Forest</h2>
             <div class="screens">
-                <!-- Main Dashboard -->
+                <!-- Main Dashboard - Frame 7A -->
                 <div class="screen">
+                    <div style="position: absolute; top: 10px; left: 10px; font-weight: bold; font-size: 16px; color: #666; z-index: 10;">7A</div>
                     <div class="screen-header">
                         Your WillingTree Forest
                     </div>
@@ -956,7 +1690,7 @@
                         <div style="background: #f8f8f8; padding: 12px; border-radius: 8px;">
                             <div style="display: flex; justify-content: space-between; align-items: center;">
                                 <div>
-                                    <div style="font-weight: 600;">Branch Recognition</div>
+                                    <div style="font-weight: 600;">Leaf Recognition</div>
                                     <div style="font-size: 14px; color: #666;">Correct leaf guesses</div>
                                 </div>
                                 <div style="font-size: 20px; font-weight: bold; color: #4CAF50;">2 weeks</div>
@@ -983,10 +1717,14 @@
                     </div>
                 </div>
 
-                <!-- Community Forest (Top Trees) -->
+                <!-- Community Forest (Top Trees) - Frame 7B - PREMIUM -->
                 <div class="screen">
-                    <div class="screen-header">
-                        Community Forest
+                    <div style="position: absolute; top: 10px; left: 10px; font-weight: bold; font-size: 16px; color: #666; z-index: 10;">7B</div>
+                    <div class="screen-header premium">
+                        <span>Community Forest <span class="paywall-badge">PRO</span></span>
+                        <div class="header-nav">
+                            <div class="nav-icon"></div>
+                        </div>
                     </div>
                     <div class="screen-content">
                         <div class="trophy-banner">
@@ -1034,16 +1772,22 @@
                     </div>
                 </div>
 
-                <!-- Journal with Tree Metaphors -->
+                <!-- Journal with Tree Metaphors - Frame 7C - PREMIUM -->
                 <div class="screen">
-                    <div class="screen-header">
-                        <span class="back-button">←</span>
-                        Growth Journal
+                    <div style="position: absolute; top: 10px; left: 10px; font-weight: bold; font-size: 16px; color: #666; z-index: 10;">7C</div>
+                    <div class="screen-header premium">
+                        <span style="display: flex; align-items: center;">
+                            <span class="back-button" style="margin-right: 10px;">←</span>
+                            Growth Journal <span class="paywall-badge">PRO</span>
+                        </span>
+                        <div class="header-nav">
+                            <div class="nav-icon"></div>
+                        </div>
                     </div>
                     <div class="screen-content">
                         <div class="journal-prompt">
-                            <div style="font-weight: 600; margin-bottom: 8px;">On Growing Branches</div>
-                            <div style="font-size: 14px; color: #666;">How did choosing which branches to grow from Sarah's Big Limb feel this week?</div>
+                            <div style="font-weight: 600; margin-bottom: 8px;">On Growing Leaves</div>
+                            <div style="font-size: 14px; color: #666;">How did choosing which leaves to grow from Sarah's Big Branch feel this week?</div>
                         </div>
 
                         <textarea style="width: 100%; height: 80px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 15px;" placeholder="Your thoughts..."></textarea>
@@ -1057,12 +1801,15 @@
 
                         <div class="journal-prompt">
                             <div style="font-weight: 600; margin-bottom: 8px;">On Tree Health (Won't)</div>
-                            <div style="font-size: 14px; color: #666;">Are any branches not growing well? What belongs in your "Won't" category?</div>
+                            <div style="font-size: 14px; color: #666;">Are any leaves not growing well? What belongs in your "Won't" category?</div>
                         </div>
 
                         <textarea style="width: 100%; height: 80px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 15px;" placeholder="Your thoughts..."></textarea>
 
                         <button class="button">Save Growth Reflections</button>
+                    </div>
+                    <div class="bottom-banner premium">
+                        <p style="text-align: center;">📊 Premium feature: $1/user/week for insights & coaching</p>
                     </div>
                 </div>
             </div>
