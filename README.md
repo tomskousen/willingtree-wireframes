@@ -44,9 +44,42 @@ node recorder.js
 ```
 
 ### Make Updates & Record New Videos
-**👉 See `QUICK-UPDATE-PROMPT.txt` for a copy-paste prompt template**
 
-For detailed instructions and examples, see `INSTRUCTIONS-FOR-UPDATES.md`
+**Copy this prompt to Claude Code and customize the "CHANGES NEEDED" section:**
+
+```
+I need you to update the WillingTree interactive demo and record a new video.
+
+REPOSITORY: willingtree-wireframes
+
+CURRENT VERSION: v2 (step/substep naming)
+
+CHANGES NEEDED:
+[Describe your changes here, for example:]
+- Update screen 2.5 to add a frequency dropdown
+- Change button text on screen 1.3 from "Continue" to "Get Started"
+- Add new screen 2.11 for bonus content
+- Update color scheme to use #2E7D32 instead of #4CAF50
+
+STEPS TO COMPLETE:
+1. Navigate to the v2/ directory
+2. Read v2/index.html to understand current implementation
+3. Make the requested changes to v2/index.html
+4. Update v2/recorder.js if navigation/screens changed
+5. Open v2/index.html in browser to test changes
+6. Record new demo video: node v2/recorder.js
+7. Save new video to videos/ with descriptive filename
+8. Update v2/README.md to document changes
+9. Show me a summary of all changes made
+
+IMPORTANT CONSTRAINTS:
+✓ Keep step/substep naming (1.1, 2.5, 3.1, etc.)
+✓ All content must fit within 667px height (no scrolling)
+✓ Maintain ruthless reduction design principle
+✓ Test all interactive elements work before recording
+```
+
+For detailed instructions with examples, see `INSTRUCTIONS-FOR-UPDATES.md`
 
 ## 📊 Versions
 

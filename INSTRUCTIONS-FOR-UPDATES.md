@@ -11,7 +11,7 @@ Copy and paste this prompt into Claude Code, filling in the [CHANGES NEEDED] sec
 ```
 I need you to update the WillingTree interactive demo and record a new video.
 
-PROJECT LOCATION: /Users/johnye/JPC/willingtree-wireframes
+REPOSITORY: willingtree-wireframes
 
 CURRENT VERSION: v2 (recommended version with step/substep naming)
 
@@ -23,13 +23,13 @@ CHANGES NEEDED:
 - Adjust the color scheme to use darker green (#2E7D32 instead of #4CAF50)
 
 STEPS TO COMPLETE:
-1. Navigate to /Users/johnye/JPC/willingtree-wireframes/v2/
+1. Navigate to the v2/ directory
 2. Read v2/index.html to understand the current implementation
 3. Make the requested changes to v2/index.html
 4. Update v2/recorder.js if new screens were added or navigation changed
 5. Test the changes by opening v2/index.html in a browser
 6. Record a new demo video using: node v2/recorder.js
-7. Move the new video to videos/v2-demo-[DATE].webm
+7. Save the new video to videos/ with descriptive filename
 8. Update v2/README.md to document what changed
 9. Show me a summary of all changes made
 
@@ -49,8 +49,7 @@ IMPORTANT:
 ```
 I need you to update the WillingTree interactive demo and record a new video.
 
-PROJECT LOCATION: /Users/johnye/JPC/willingtree-wireframes
-
+REPOSITORY: willingtree-wireframes
 CURRENT VERSION: v2
 
 CHANGES NEEDED:
@@ -68,8 +67,7 @@ Complete all 9 steps including recording a new video.
 ```
 I need you to update the WillingTree interactive demo and record a new video.
 
-PROJECT LOCATION: /Users/johnye/JPC/willingtree-wireframes
-
+REPOSITORY: willingtree-wireframes
 CURRENT VERSION: v2
 
 CHANGES NEEDED:
@@ -86,8 +84,7 @@ Complete all 9 steps including recording a new video.
 ```
 I need you to update the WillingTree interactive demo and record a new video.
 
-PROJECT LOCATION: /Users/johnye/JPC/willingtree-wireframes
-
+REPOSITORY: willingtree-wireframes
 CURRENT VERSION: v2
 
 CHANGES NEEDED:
@@ -105,8 +102,7 @@ Complete all 9 steps including recording a new video.
 ```
 I need you to update the WillingTree interactive demo and record a new video.
 
-PROJECT LOCATION: /Users/johnye/JPC/willingtree-wireframes
-
+REPOSITORY: willingtree-wireframes
 CURRENT VERSION: v2
 
 CHANGES NEEDED:
@@ -126,8 +122,7 @@ For complex changes affecting multiple screens:
 ```
 I need you to update the WillingTree interactive demo and record a new video.
 
-PROJECT LOCATION: /Users/johnye/JPC/willingtree-wireframes
-
+REPOSITORY: willingtree-wireframes
 CURRENT VERSION: v2
 
 CHANGES NEEDED:
@@ -189,10 +184,11 @@ The changes aren't showing. Please:
 
 ## File Locations Quick Reference
 
-- **V2 Demo**: `/Users/johnye/JPC/willingtree-wireframes/v2/index.html`
-- **V2 Recorder**: `/Users/johnye/JPC/willingtree-wireframes/v2/recorder.js`
-- **Videos**: `/Users/johnye/JPC/willingtree-wireframes/videos/`
-- **Documentation**: `/Users/johnye/JPC/willingtree-wireframes/v2/README.md`
+- **V2 Demo**: `v2/index.html`
+- **V2 Recorder**: `v2/recorder.js`
+- **Videos**: `videos/`
+- **Documentation**: `v2/README.md`
+- **Main README**: `README.md`
 
 ## After Updates
 
