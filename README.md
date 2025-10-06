@@ -43,6 +43,11 @@ cd v2
 node recorder.js
 ```
 
+### Make Updates & Record New Videos
+**👉 See `QUICK-UPDATE-PROMPT.txt` for a copy-paste prompt template**
+
+For detailed instructions and examples, see `INSTRUCTIONS-FOR-UPDATES.md`
+
 ## 📊 Versions
 
 ### V1 - Original Interactive Demo
