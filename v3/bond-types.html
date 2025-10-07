@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WillingTree Bond Types</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #E8F5E9 0%, #F1F8E9 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            color: #2E7D32;
+            margin-bottom: 12px;
+        }
+
+        .header p {
+            font-size: 18px;
+            color: #666;
+        }
+
+        .bond-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .bond-card.highlighted {
+            border: 3px solid #4CAF50;
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.3);
+        }
+
+        .bond-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .bond-icons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .bond-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .bond-description {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            color: #4CAF50;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .footer-note {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌳 WillingTree Bond Types</h1>
+            <p>Understanding Your Relationship Dynamic</p>
+        </div>
+
+        <!-- Stone-Stone -->
+        <div class="bond-card" id="stone-stone">
+            <div class="bond-header">
+                <div class="bond-icons">
+                    <img src="../images/stone.svg" alt="Stone" style="width: 48px; height: 48px;">
+                    <img src="../images/stone.svg" alt="Stone" style="width: 48px; height: 48px;">
+                </div>
+                <div class="bond-title">Stone-Stone</div>
+            </div>
+            <div class="bond-description">
+                You both provide steady consistency and create a secure foundation together. This stable pairing thrives on predictability and mutual reliability, though you may need to intentionally create opportunities for growth and change. <strong>Downside Risk:</strong> Both may withdraw from conflict or difficult conversations, allowing issues to remain unresolved while maintaining surface-level harmony.
+            </div>
+        </div>
+
+        <!-- Stone-Soil -->
+        <div class="bond-card" id="stone-soil">
+            <div class="bond-header">
+                <div class="bond-icons">
+                    <img src="../images/stone.svg" alt="Stone" style="width: 48px; height: 48px;">
+                    <img src="../images/seedling.svg" alt="Soil" style="width: 48px; height: 48px;">
+                </div>
+                <div class="bond-title">Stone-Soil</div>
+            </div>
+            <div class="bond-description">
+                One provides stability while the other nurtures emotional growth, creating a balanced secure-anxious dynamic. The stone's consistency helps the soil feel safe to express needs, while the soil's warmth softens the stone's edges. <strong>Downside Risk:</strong> The stone may withdraw during emotional intensity while the soil becomes clingy or over-pursues, creating a frustrating pursue-withdraw cycle.
+            </div>
+        </div>
+
+        <!-- Stone-Shovel -->
+        <div class="bond-card" id="stone-shovel">
+            <div class="bond-header">
+                <div class="bond-icons">
+                    <img src="../images/stone.svg" alt="Stone" style="width: 48px; height: 48px;">
+                    <img src="../images/shovel.svg" alt="Shovel" style="width: 48px; height: 48px;">
+                </div>
+                <div class="bond-title">Stone-Shovel</div>
+            </div>
+            <div class="bond-description">
+                Your steady presence grounds the shovel's initiative, creating a complementary action-oriented partnership. Together you build sustainable progress - one maintaining what's built while the other clears new ground. <strong>Downside Risk:</strong> The stone may withdraw and become passive while the shovel takes unilateral action, leading to resentment about unequal effort and decision-making.
+            </div>
+        </div>
+
+        <!-- Stone-Stakes -->
+        <div class="bond-card" id="stone-stakes">
+            <div class="bond-header">
+                <div class="bond-icons">
+                    <img src="../images/stone.svg" alt="Stone" style="width: 48px; height: 48px;">
+                    <img src="../images/young-tree.svg" alt="Stakes" style="width: 48px; height: 48px;">
+                </div>
+                <div class="bond-title">Stone-Stakes</div>
+            </div>
+            <div class="bond-description">
+                Both value structure and consistency, creating a highly organized secure-secure relationship. You excel at setting boundaries and maintaining healthy routines, though you may need to practice flexibility together. <strong>Downside Risk:</strong> The stone may withdraw from planning conversations while the stakes become overly rigid, creating distance as structure replaces emotional connection.
+            </div>
+        </div>
+
+        <!-- Soil-Soil -->
+        <div class="bond-card" id="soil-soil">
+            <div class="bond-header">
+                <div class="bond-icons">
+                    <img src="../images/seedling.svg" alt="Soil" style="width: 48px; height: 48px;">
+                    <img src="../images/seedling.svg" alt="Soil" style="width: 48px; height: 48px;">
+                </div>
+                <div class="bond-title">Soil-Soil</div>
+            </div>
+            <div class="bond-description">
+                You both deeply attune to emotional needs, creating an intensely nurturing anxious-anxious bond. This pairing risks codependency but offers profound emotional understanding when both partners maintain individual identity. <strong>Downside Risk:</strong> Both may become overly enmeshed and lose individual boundaries, creating anxiety spirals where each partner's insecurity amplifies the other's fears.
+            </div>
+        </div>
+
+        <!-- Soil-Shovel -->
+        <div class="bond-card" id="soil-shovel">
+            <div class="bond-header">
+                <div class="bond-icons">
+                    <img src="../images/seedling.svg" alt="Soil" style="width: 48px; height: 48px;">
+                    <img src="../images/shovel.svg" alt="Shovel" style="width: 48px; height: 48px;">
+                </div>
+                <div class="bond-title">Soil-Shovel</div>
+            </div>
+            <div class="bond-description">
+                The soil's emotional attunement meets the shovel's decisive action, balancing anxious and avoidant tendencies. This pairing works when the shovel learns to slow down and the soil learns to trust the shovel's need for space. <strong>Downside Risk:</strong> The soil may become clingy and demand constant reassurance while the shovel distances and escapes into tasks, triggering a painful pursue-withdraw dance.
+            </div>
+        </div>
+
+        <!-- Soil-Stakes -->
+        <div class="bond-card" id="soil-stakes">
+            <div class="bond-header">
+                <div class="bond-icons">
+                    <img src="../images/seedling.svg" alt="Soil" style="width: 48px; height: 48px;">
+                    <img src="../images/young-tree.svg" alt="Stakes" style="width: 48px; height: 48px;">
+                </div>
+                <div class="bond-title">Soil-Stakes</div>
+            </div>
+            <div class="bond-description">
+                The soil's nurturing nature softens the stakes' rigidity, creating an anxious-avoidant "fixer-upper" dynamic. Growth happens when the stakes provide structure without control and the soil expresses needs without clinging. <strong>Downside Risk:</strong> The soil may become anxiously compliant or rebellious while the stakes impose controlling rules, creating either resentful submission or explosive conflict.
+            </div>
+        </div>
+
+        <!-- Shovel-Shovel -->
+        <div class="bond-card" id="shovel-shovel">
+            <div class="bond-header">
+                <div class="bond-icons">
+                    <img src="../images/shovel.svg" alt="Shovel" style="width: 48px; height: 48px;">
+                    <img src="../images/shovel.svg" alt="Shovel" style="width: 48px; height: 48px;">
+                </div>
+                <div class="bond-title">Shovel-Shovel</div>
+            </div>
+            <div class="bond-description">
+                You're both action-oriented and value independence, creating an avoidant-avoidant partnership. This pairing thrives on shared projects and parallel activities but requires intentional emotional vulnerability to deepen intimacy. <strong>Downside Risk:</strong> Both may escape into work or activities to avoid difficult emotions, maintaining surface connection while emotional distance grows and intimacy withers.
+            </div>
+        </div>
+
+        <!-- Shovel-Stakes -->
+        <div class="bond-card" id="shovel-stakes">
+            <div class="bond-header">
+                <div class="bond-icons">
+                    <img src="../images/shovel.svg" alt="Shovel" style="width: 48px; height: 48px;">
+                    <img src="../images/young-tree.svg" alt="Stakes" style="width: 48px; height: 48px;">
+                </div>
+                <div class="bond-title">Shovel-Stakes</div>
+            </div>
+            <div class="bond-description">
+                The shovel's spontaneous action meets the stakes' planned direction, creating a dynamic push-pull tension. When balanced, you combine decisive momentum with strategic guidance, but conflicts arise when one tries to control the other's pace. <strong>Downside Risk:</strong> The shovel may impulsively act without consulting while the stakes rigidly enforce rules, creating power struggles over control and autonomy.
+            </div>
+        </div>
+
+        <!-- Stakes-Stakes -->
+        <div class="bond-card" id="stakes-stakes">
+            <div class="bond-header">
+                <div class="bond-icons">
+                    <img src="../images/young-tree.svg" alt="Stakes" style="width: 48px; height: 48px;">
+                    <img src="../images/young-tree.svg" alt="Stakes" style="width: 48px; height: 48px;">
+                </div>
+                <div class="bond-title">Stakes-Stakes</div>
+            </div>
+            <div class="bond-description">
+                You both provide clear direction and structure, creating a highly organized secure-secure dynamic. This pairing excels at long-term planning and maintaining boundaries, though you may need to practice spontaneity and emotional flexibility together. <strong>Downside Risk:</strong> Both may become rigidly stuck in routines and rules, losing spontaneity and emotional warmth as the relationship becomes more business partnership than intimate bond.
+            </div>
+        </div>
+
+        <div class="footer-note">
+            <strong>Note:</strong> These bond types are based on attachment theory research. No pairing is better than another - each has unique strengths and growth areas. Understanding your dynamic helps you work together more effectively.
+        </div>
+
+        <a href="index.html" class="back-link">← Back to WillingTree Demo</a>
+    </div>
+
+    <script>
+        // Highlight the specific pairing from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const pairing = urlParams.get('pairing');
+
+        if (pairing) {
+            const element = document.getElementById(pairing);
+            if (element) {
+                element.classList.add('highlighted');
+                element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+    </script>
+</body>
+</html>

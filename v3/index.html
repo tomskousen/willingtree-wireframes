@@ -137,6 +137,41 @@
             margin-top: 2px;
         }
 
+        .header-partner {
+            font-size: 13px;
+            font-weight: 500;
+            opacity: 0.95;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Credits Banner */
+        .credits-banner {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 12px;
+        }
+
+        .credit-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-weight: 500;
+        }
+
+        .credit-icon {
+            font-size: 14px;
+        }
+
+        .credit-value {
+            color: #333;
+        }
+
         /* Compact buttons */
         .button {
             background: #4CAF50;
@@ -397,6 +432,16 @@
         ::-webkit-scrollbar-thumb:hover {
             background: rgba(76, 175, 80, 0.7);
         }
+
+        /* Footer section styles */
+        .screen-footer {
+            padding: 16px;
+            background: #f9f9f9;
+            border-top: 1px solid #e0e0e0;
+            font-size: 12px;
+            color: #666;
+            line-height: 1.4;
+        }
     </style>
 </head>
 <body>
@@ -422,6 +467,147 @@
             );
         }
 
+        // View Toggle Component for Paired Mode
+        function ViewToggle({ viewingPartner, setViewingPartner, userName, partnerName }) {
+            return (
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    padding: '10px 20px',
+                    background: '#f5f5f5',
+                    borderBottom: '1px solid #e0e0e0',
+                    gap: '8px'
+                }}>
+                    <button
+                        onClick={() => setViewingPartner(false)}
+                        style={{
+                            flex: 1,
+                            padding: '8px 16px',
+                            background: !viewingPartner ? '#4CAF50' : 'white',
+                            color: !viewingPartner ? 'white' : '#333',
+                            border: !viewingPartner ? 'none' : '1px solid #ddd',
+                            borderRadius: '6px',
+                            fontSize: '13px',
+                            fontWeight: '600',
+                            cursor: 'pointer',
+                            transition: 'all 0.2s'
+                        }}
+                    >
+                        {userName || 'My View'}
+                    </button>
+                    <button
+                        onClick={() => setViewingPartner(true)}
+                        style={{
+                            flex: 1,
+                            padding: '8px 16px',
+                            background: viewingPartner ? '#4CAF50' : 'white',
+                            color: viewingPartner ? 'white' : '#333',
+                            border: viewingPartner ? 'none' : '1px solid #ddd',
+                            borderRadius: '6px',
+                            fontSize: '13px',
+                            fontWeight: '600',
+                            cursor: 'pointer',
+                            transition: 'all 0.2s'
+                        }}
+                    >
+                        {partnerName || 'Partner\'s View'}
+                    </button>
+                </div>
+            );
+        }
+
+        // Waiting for Partner Component
+        function WaitingForPartner({ message, partnerName, onContinue }) {
+            return (
+                <div className="info-box" style={{
+                    background: '#FFF3E0',
+                    padding: '16px',
+                    margin: '16px 0',
+                    textAlign: 'center'
+                }}>
+                    <div style={{fontSize: '32px', marginBottom: '8px'}}>⏳</div>
+                    <div style={{fontSize: '14px', fontWeight: '600', marginBottom: '8px'}}>
+                        Waiting for {partnerName || 'Partner'}
+                    </div>
+                    <div style={{fontSize: '12px', color: '#666', marginBottom: '12px'}}>
+                        {message || 'Your partner needs to complete their part before you can continue.'}
+                    </div>
+                    {onContinue && (
+                        <div style={{fontSize: '11px', color: '#999', marginTop: '8px'}}>
+                            <strong>Demo Mode:</strong> In the real app, you'll be notified when they're done.
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        // Partner Header Component (shows both partner names)
+        function PartnerHeader({ userName, partnerName }) {
+            return (
+                <div style={{
+                    padding: '8px 20px',
+                    background: 'rgba(76, 175, 80, 0.1)',
+                    borderBottom: '1px solid #e0e0e0',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    gap: '8px',
+                    fontSize: '13px',
+                    fontWeight: '500',
+                    color: '#333'
+                }}>
+                    <span>{userName || 'You'}</span>
+                    <span style={{color: '#4CAF50'}}>💚</span>
+                    <span>{partnerName || 'Partner'}</span>
+                </div>
+            );
+        }
+
+        // Credits Display Component (shows below header - right justified)
+        function CreditsDisplay({ credits, screen }) {
+            // Determine which credit to show based on screen
+            const getScreenCredit = (screenCode) => {
+                // Growth screens: 2.1, 2.4, 2.6
+                if (['2.1', '2.4', '2.6'].includes(screenCode)) {
+                    return { icon: '🌱', value: credits.growth };
+                }
+                // Sun screens: 2.2, 2.5, 2.9
+                if (['2.2', '2.5', '2.9'].includes(screenCode)) {
+                    return { icon: '☀️', value: credits.sun };
+                }
+                // Water screens: 2.3, 2.7, 2.8
+                if (['2.3', '2.7', '2.8'].includes(screenCode)) {
+                    return { icon: '💧', value: credits.water };
+                }
+                // Default: don't show on non-Day screens
+                return null;
+            };
+
+            const credit = getScreenCredit(screen);
+            if (!credit) return null;
+
+            return (
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'flex-end',
+                    padding: '8px 20px',
+                    background: 'white',
+                    borderBottom: '1px solid #e0e0e0'
+                }}>
+                    <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        fontSize: '18px',
+                        fontWeight: '600'
+                    }}>
+                        <span>{credit.icon}</span>
+                        <span style={{color: '#333'}}>{credit.value}</span>
+                    </div>
+                </div>
+            );
+        }
+
         // New step/substep naming system
         const SCREENS = {
             // Step 1: Welcome & Setup
@@ -439,7 +625,7 @@
             '2.7': 'day-7',
             '2.8': 'day-8',
             '2.9': 'day-9',
-            '2.10': 'day-10',
+            '2.10': 'harvest',
 
             // Step 3: Daily Activities
             '3.1': 'dashboard',
@@ -467,6 +653,85 @@
                 birthdate: '',
                 gender: ''
             });
+            const [credits, setCredits] = useState({
+                sun: 0,
+                water: 0,
+                growth: 0
+            });
+            const [cycleCount, setCycleCount] = useState(0);
+            const [pairedMode, setPairedMode] = useState(false);
+            const [viewingPartner, setViewingPartner] = useState(false); // Toggle between user and partner view
+
+            // Partner state for paired mode
+            const [partnerData, setPartnerData] = useState({
+                name: '',
+                email: '',
+                status: 'pending', // 'pending', 'active', 'completed'
+                currentScreen: '1.1',
+                credits: {
+                    sun: 0,
+                    water: 0,
+                    growth: 0
+                },
+                // Data exchange fields
+                bondSelections: null, // Day 1: { self: 'Stone', partner: 'Soil' }
+                pollinateList: [], // Items sent from partner (Day 5)
+                fertilizeAllocations: {}, // Point allocations from partner (Day 6)
+                focusActions: [], // Partner's 2 focus items (Day 8)
+                day4Scores: {} // Partner's willingness scores (Day 4)
+            });
+
+            // User's own data for exchange with partner
+            const [myData, setMyData] = useState({
+                bondSelections: null, // Day 1: { self: 'Stone', partner: 'Soil' }
+                pollinateList: [],
+                fertilizeAllocations: {},
+                focusActions: [],
+                day4Scores: {}
+            });
+
+            // Helper function to award credits
+            const awardCredits = (type, amount) => {
+                setCredits(prev => {
+                    const newCredits = { ...prev };
+                    newCredits[type] = prev[type] + amount;
+
+                    // When water is earned, growth accumulates (water × 2 sun equivalent)
+                    if (type === 'water') {
+                        newCredits.growth = prev.growth + (amount * 2);
+                    }
+
+                    return newCredits;
+                });
+            };
+
+            // Helper function to get total credits
+            const getTotalCredits = () => {
+                return credits.sun + credits.water + credits.growth;
+            };
+
+            // Helper to create header with partner info
+            const createHeader = (title, subtitle = null) => {
+                if (pairedMode && currentScreen !== '1.1' && currentScreen !== '1.2' && currentScreen !== '1.3') {
+                    return (
+                        <div className="header">
+                            <div>
+                                {title && <h2>{title}</h2>}
+                                {subtitle && <div className="header-subtitle">{subtitle}</div>}
+                            </div>
+                            <div className="header-partner">
+                                ❤️ {partnerData.name || 'Partner'}
+                            </div>
+                        </div>
+                    );
+                }
+                return (
+                    <div className="header">
+                        {title && <h2>{title}</h2>}
+                        {subtitle && <div className="header-subtitle">{subtitle}</div>}
+                    </div>
+                );
+            };
 
             const renderScreen = () => {
                 const screenId = SCREENS[currentScreen];
@@ -478,29 +743,29 @@
                     case 'profile':
                         return <ProfileScreen formData={formData} setFormData={setFormData} onNext={() => setCurrentScreen('1.3')} setScreen={setCurrentScreen} />;
                     case 'pairing-choice':
-                        return <PairingChoiceScreen setScreen={setCurrentScreen} />;
+                        return <PairingChoiceScreen setScreen={setCurrentScreen} setPairedMode={setPairedMode} setPartnerData={setPartnerData} />;
 
                     // Step 2: 10-Day Onboarding
                     case 'day-1':
-                        return <Day1BondingScreen setScreen={setCurrentScreen} />;
+                        return <Day1BondingScreen setScreen={setCurrentScreen} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={pairedMode} partnerData={partnerData} setMyData={setMyData} setPartnerData={setPartnerData} createHeader={createHeader} />;
                     case 'day-2':
-                        return <Day2TreeMetaphorScreen setScreen={setCurrentScreen} />;
+                        return <Day2TreeMetaphorScreen setScreen={setCurrentScreen} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} />;
                     case 'day-3':
-                        return <Day3CommitmentScreen setScreen={setCurrentScreen} />;
+                        return <Day3CommitmentScreen setScreen={setCurrentScreen} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} />;
                     case 'day-4':
-                        return <Day4WillingnessValuesScreen setScreen={setCurrentScreen} />;
+                        return <Day4WillingnessValuesScreen setScreen={setCurrentScreen} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={pairedMode} setMyData={setMyData} />;
                     case 'day-5':
-                        return <Day5BenchmarksScreen setScreen={setCurrentScreen} />;
+                        return <Day5BenchmarksScreen setScreen={setCurrentScreen} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={pairedMode} setMyData={setMyData} setPartnerData={setPartnerData} />;
                     case 'day-6':
-                        return <Day6SmallBranchesScreen setScreen={setCurrentScreen} />;
+                        return <Day6SmallBranchesScreen setScreen={setCurrentScreen} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={pairedMode} partnerData={partnerData} setMyData={setMyData} setPartnerData={setPartnerData} />;
                     case 'day-7':
-                        return <Day7WillingCommitmentScreen setScreen={setCurrentScreen} />;
+                        return <Day7WillingCommitmentScreen setScreen={setCurrentScreen} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={pairedMode} setMyData={setMyData} />;
                     case 'day-8':
-                        return <Day8PracticeSessionScreen setScreen={setCurrentScreen} />;
+                        return <Day8PracticeSessionScreen setScreen={setCurrentScreen} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} />;
                     case 'day-9':
-                        return <Day9GuessRevealScreen setScreen={setCurrentScreen} />;
-                    case 'day-10':
-                        return <Day10CompletionScreen setScreen={setCurrentScreen} />;
+                        return <Day9GuessRevealScreen setScreen={setCurrentScreen} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={pairedMode} partnerData={partnerData} setPartnerData={setPartnerData} />;
+                    case 'harvest':
+                        return <HarvestScreen setScreen={setCurrentScreen} credits={credits} setCredits={setCredits} cycleCount={cycleCount} setCycleCount={setCycleCount} pairedMode={pairedMode} setPairedMode={setPairedMode} />;
 
                     // Step 3: Daily Activities
                     case 'dashboard':
@@ -561,16 +826,16 @@
 
                     <div className="nav-section">
                         <div className="nav-section-title">Step 2: 10-Day Onboarding</div>
-                        <button className={`nav-button ${currentScreen === '2.1' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.1')}>2.1 Day 1 - Bonding</button>
-                        <button className={`nav-button ${currentScreen === '2.2' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.2')}>2.2 Day 2 - Tree Metaphor</button>
-                        <button className={`nav-button ${currentScreen === '2.3' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.3')}>2.3 Day 3 - Commitment</button>
-                        <button className={`nav-button ${currentScreen === '2.4' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.4')}>2.4 Day 4 - Values</button>
-                        <button className={`nav-button ${currentScreen === '2.5' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.5')}>2.5 Day 5 - Benchmarks</button>
-                        <button className={`nav-button ${currentScreen === '2.6' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.6')}>2.6 Day 6 - Small Branches</button>
-                        <button className={`nav-button ${currentScreen === '2.7' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.7')}>2.7 Day 7 - Commitment</button>
-                        <button className={`nav-button ${currentScreen === '2.8' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.8')}>2.8 Day 8 - Practice</button>
-                        <button className={`nav-button ${currentScreen === '2.9' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.9')}>2.9 Day 9 - Guessing Game</button>
-                        <button className={`nav-button ${currentScreen === '2.10' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.10')}>2.10 Day 10 - Complete</button>
+                        <button className={`nav-button ${currentScreen === '2.1' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.1')}>2.1 Day 1 - Tree Choice</button>
+                        <button className={`nav-button ${currentScreen === '2.2' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.2')}>2.2 Day 2 - Preparing Soil</button>
+                        <button className={`nav-button ${currentScreen === '2.3' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.3')}>2.3 Day 3 - Hope</button>
+                        <button className={`nav-button ${currentScreen === '2.4' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.4')}>2.4 Day 4 - Budding</button>
+                        <button className={`nav-button ${currentScreen === '2.5' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.5')}>2.5 Day 5 - Pollinate</button>
+                        <button className={`nav-button ${currentScreen === '2.6' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.6')}>2.6 Day 6 - Fertilize</button>
+                        <button className={`nav-button ${currentScreen === '2.7' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.7')}>2.7 Day 7 - Watering</button>
+                        <button className={`nav-button ${currentScreen === '2.8' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.8')}>2.8 Day 8 - Small Branch</button>
+                        <button className={`nav-button ${currentScreen === '2.9' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.9')}>2.9 Day 9 - Good Fruits</button>
+                        <button className={`nav-button ${currentScreen === '2.10' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.10')}>2.10 Harvest</button>
                     </div>
 
                     <div className="nav-section">
@@ -628,6 +893,9 @@
                             <button className="button" onClick={onNext} style={{width: '100%'}}>Sign Up</button>
                             <button className="button button-secondary" onClick={() => alert('Login flow not implemented in demo')} style={{width: '100%', marginTop: '12px'}}>Log In</button>
                         </div>
+                    </div>
+                    <div className="screen-footer">
+                        WillingTree helps couples build stronger relationships through daily appreciation and committed actions. Start with our 10-day onboarding to learn the system, then use it daily to grow your relationship stronger.
                     </div>
                 </div>
             );
@@ -695,23 +963,204 @@
                             </button>
                         </div>
                     </div>
+                    <div className="screen-footer">
+                        Your profile helps us personalize your experience. Your information is kept private and is only shared with your partner when you choose to pair. You can update these details anytime in settings.
+                    </div>
                 </div>
             );
         }
 
         // Screen 1.3: Pairing Choice
-        function PairingChoiceScreen({ setScreen }) {
+        function PairingChoiceScreen({ setScreen, setPairedMode, setPartnerData }) {
             const [choice, setChoice] = useState(null);
+            const [showInvite, setShowInvite] = useState(false);
+            const [partnerPhone, setPartnerPhone] = useState('');
+            const [partnerName, setPartnerName] = useState('');
+            const [inviteMethod, setInviteMethod] = useState(null); // 'text' or 'link'
+            const [inviteSent, setInviteSent] = useState(false);
 
-            const handleContinue = () => {
-                if (choice === 'solo') {
-                    alert('Starting solo mode! You can add a partner anytime from settings.');
-                    setScreen('2.1');
-                } else if (choice === 'pair') {
-                    alert('Great! After onboarding, you\'ll be able to send a pairing invitation.');
+            const handleChoiceSelection = (selected) => {
+                setChoice(selected);
+                if (selected === 'pair') {
+                    setShowInvite(true);
+                } else {
+                    setShowInvite(false);
+                }
+            };
+
+            const handleSendInvite = () => {
+                if (inviteMethod === 'text' && partnerPhone && partnerName) {
+                    setInviteSent(true);
+                    const inviteCode = Math.random().toString(36).substr(2, 6).toUpperCase();
+                    const inviteLink = `https://willingtree.app/join/${inviteCode}`;
+
+                    // Enable paired mode
+                    setPairedMode(true);
+                    setPartnerData(prev => ({
+                        ...prev,
+                        name: partnerName,
+                        phone: partnerPhone,
+                        status: 'pending',
+                        inviteCode: inviteCode,
+                        currentScreen: '2.1'
+                    }));
+                    setTimeout(() => {
+                        alert(`📱 Text message sent to ${partnerPhone}!\n\n"${partnerName} has invited you to join WillingTree. Sign up at: ${inviteLink}\nInvite code: ${inviteCode}"\n\nOnce they register, you'll both proceed through the onboarding together.`);
+                        setScreen('2.1');
+                    }, 1000);
+                } else if (inviteMethod === 'link') {
+                    const inviteCode = Math.random().toString(36).substr(2, 6).toUpperCase();
+                    const inviteLink = `https://willingtree.app/join/${inviteCode}`;
+                    navigator.clipboard.writeText(inviteLink);
+
+                    // Enable paired mode with default partner
+                    setPairedMode(true);
+                    setPartnerData(prev => ({
+                        ...prev,
+                        name: 'Partner',
+                        status: 'pending',
+                        inviteCode: inviteCode,
+                        currentScreen: '2.1'
+                    }));
+                    alert(`🔗 Invite link copied to clipboard!\n\n${inviteLink}\nInvite code: ${inviteCode}\n\nShare this with your partner. Once they sign up using this code, you'll both be paired.`);
                     setScreen('2.1');
                 }
             };
+
+            const handleSoloStart = () => {
+                alert('Starting solo mode! You can add a partner anytime from settings.');
+                setScreen('2.1');
+            };
+
+            if (showInvite && choice === 'pair') {
+                return (
+                    <div className="screen">
+                        <div className="header">
+                            <h2>Invite Your Partner</h2>
+                        </div>
+                        <div className="screen-content">
+                            <p className="text-md" style={{marginBottom: '16px'}}>
+                                How would you like to invite your partner?
+                            </p>
+
+                            {!inviteMethod ? (
+                                <>
+                                    <div className="card" onClick={() => setInviteMethod('text')} style={{marginBottom: '12px'}}>
+                                        <div className="card-title">📱 Send Text Invitation</div>
+                                        <div className="card-description">
+                                            We'll text them a personalized invite
+                                        </div>
+                                    </div>
+
+                                    <div className="card" onClick={() => setInviteMethod('link')} style={{marginBottom: '12px'}}>
+                                        <div className="card-title">🔗 Share Invite Link</div>
+                                        <div className="card-description">
+                                            Get a link to share manually
+                                        </div>
+                                    </div>
+
+                                    <div className="button-container">
+                                        <button className="button button-secondary" onClick={() => setShowInvite(false)} style={{width: '100%'}}>
+                                            Back
+                                        </button>
+                                    </div>
+                                </>
+                            ) : inviteMethod === 'text' ? (
+                                <>
+                                    <div className="form-group">
+                                        <label className="form-label">Partner's Name</label>
+                                        <input
+                                            className="input-field"
+                                            type="text"
+                                            placeholder="Their first name"
+                                            value={partnerName}
+                                            onChange={(e) => setPartnerName(e.target.value)}
+                                        />
+                                    </div>
+
+                                    <div className="form-group">
+                                        <label className="form-label">Partner's Phone Number</label>
+                                        <input
+                                            className="input-field"
+                                            type="tel"
+                                            placeholder="(555) 123-4567"
+                                            value={partnerPhone}
+                                            onChange={(e) => setPartnerPhone(e.target.value)}
+                                        />
+                                    </div>
+
+                                    <div className="info-box" style={{fontSize: '12px'}}>
+                                        Your partner will receive a text invitation with a signup link and invite code. Once they register, you'll both be paired and can progress through the onboarding together at your own pace.
+                                    </div>
+
+                                    <div className="button-container">
+                                        <button
+                                            className="button"
+                                            onClick={handleSendInvite}
+                                            disabled={!partnerPhone || !partnerName || inviteSent}
+                                            style={{width: '100%', marginBottom: '8px'}}
+                                        >
+                                            {inviteSent ? 'Sending...' : 'Send Text Invitation'}
+                                        </button>
+                                        <button className="button button-secondary" onClick={() => setInviteMethod(null)} style={{width: '100%'}}>
+                                            Back
+                                        </button>
+                                    </div>
+                                </>
+                            ) : (
+                                <>
+                                    <div className="info-box" style={{marginBottom: '16px'}}>
+                                        <strong>Your unique invite code:</strong>
+                                        <div style={{
+                                            marginTop: '8px',
+                                            padding: '12px',
+                                            background: 'white',
+                                            borderRadius: '6px',
+                                            fontSize: '20px',
+                                            fontWeight: '600',
+                                            letterSpacing: '2px',
+                                            textAlign: 'center',
+                                            fontFamily: 'monospace',
+                                            color: '#4CAF50'
+                                        }}>
+                                            {Math.random().toString(36).substr(2, 6).toUpperCase()}
+                                        </div>
+                                        <div style={{
+                                            marginTop: '8px',
+                                            fontSize: '11px',
+                                            wordBreak: 'break-all',
+                                            fontFamily: 'monospace',
+                                            color: '#666'
+                                        }}>
+                                            https://willingtree.app/join/{Math.random().toString(36).substr(2, 6).toUpperCase()}
+                                        </div>
+                                    </div>
+
+                                    <p className="text-sm" style={{marginBottom: '16px', color: '#666'}}>
+                                        Share this code and link with your partner. They can enter the code during registration to pair with you automatically.
+                                    </p>
+
+                                    <div className="button-container">
+                                        <button
+                                            className="button"
+                                            onClick={handleSendInvite}
+                                            style={{width: '100%', marginBottom: '8px'}}
+                                        >
+                                            Copy Link & Continue
+                                        </button>
+                                        <button className="button button-secondary" onClick={() => setInviteMethod(null)} style={{width: '100%'}}>
+                                            Back
+                                        </button>
+                                    </div>
+                                </>
+                            )}
+                        </div>
+                        <div className="screen-footer">
+                            You and your partner will progress through the onboarding asynchronously - at your own pace. The system will sync your data at key points like Day 5 (Pollinate), Day 6 (Fertilize), and Day 9 (Guessing).
+                        </div>
+                    </div>
+                );
+            }
 
             return (
                 <div className="screen">
@@ -723,37 +1172,42 @@
                             How would you like to use WillingTree?
                         </p>
 
-                        <div className="card" onClick={() => setChoice('solo')} style={{marginBottom: '12px', background: choice === 'solo' ? '#E8F5E9' : 'white', borderColor: choice === 'solo' ? '#4CAF50' : '#e0e0e0'}}>
-                            <div className="card-title">Solo Mode</div>
+                        <div className="card" onClick={() => handleChoiceSelection('solo')} style={{marginBottom: '12px', background: choice === 'solo' ? '#E8F5E9' : 'white', borderColor: choice === 'solo' ? '#4CAF50' : '#e0e0e0'}}>
+                            <div className="card-title">Work on Me</div>
                             <div className="card-description">
                                 Understand and apply the system before pairing
                             </div>
                             {choice === 'solo' && (
                                 <div className="info-box" style={{marginTop: '12px', marginBottom: 0}}>
                                     <strong>What happens next:</strong><br/>
-                                    Complete the 10-day tutorial, then add a partner anytime from settings.
+                                    Complete the 10-day tutorial solo. Add a partner anytime from settings.
                                 </div>
                             )}
                         </div>
 
-                        <div className="card" onClick={() => setChoice('pair')} style={{background: choice === 'pair' ? '#E8F5E9' : 'white', borderColor: choice === 'pair' ? '#4CAF50' : '#e0e0e0'}}>
-                            <div className="card-title">Pair With Someone Now</div>
+                        <div className="card" onClick={() => handleChoiceSelection('pair')} style={{background: choice === 'pair' ? '#E8F5E9' : 'white', borderColor: choice === 'pair' ? '#4CAF50' : '#e0e0e0'}}>
+                            <div className="card-title">Work on Us</div>
                             <div className="card-description">
                                 Start with a partner from the beginning
                             </div>
                             {choice === 'pair' && (
                                 <div className="info-box" style={{marginTop: '12px', marginBottom: 0}}>
                                     <strong>What happens next:</strong><br/>
-                                    Complete onboarding, then send an invitation to your partner via email.
+                                    You'll invite your partner, then both progress through onboarding together.
                                 </div>
                             )}
                         </div>
 
-                        <div className="button-container">
-                            <button className="button" onClick={handleContinue} disabled={!choice} style={{width: '100%'}}>
-                                Continue
-                            </button>
-                        </div>
+                        {choice === 'solo' && (
+                            <div className="button-container">
+                                <button className="button" onClick={handleSoloStart} style={{width: '100%'}}>
+                                    Continue Solo
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                    <div className="screen-footer">
+                        Both paths lead to the same destination. "Work on Me" lets you understand the system first. "Work on Us" lets you build together from day one. You can always change this later.
                     </div>
                 </div>
             );
@@ -763,391 +1217,982 @@
         // STEP 2: 10-DAY ONBOARDING
         // ====================
 
-        // Screen 2.1: Day 1 - Bonding Styles
-        function Day1BondingScreen({ setScreen }) {
-            const [selectedStyle, setSelectedStyle] = useState(null);
+        // Screen 2.1: Day 1 - Your Tree Choice
+        function Day1BondingScreen({ setScreen, awardCredits, credits, currentScreen, pairedMode, partnerData, setMyData, setPartnerData, createHeader }) {
+            const [userStyle, setUserStyle] = useState(null);
+            const [partnerStyle, setPartnerStyle] = useState(null);
+            const [showPartnerQuestion, setShowPartnerQuestion] = useState(false);
+            const [showResult, setShowResult] = useState(false);
+            const [comparisonResult, setComparisonResult] = useState(null);
 
             const styles = [
-                { icon: 'stone', name: 'Stone', trait: 'Steady', desc: 'You provide stability and consistency in your relationship. You\'re the rock others can depend on.' },
-                { icon: 'seedling', name: 'Soil', trait: 'Nurturing', desc: 'You nourish and support growth. You create the conditions for your partner to flourish.' },
-                { icon: 'shovel', name: 'Shovel', trait: 'Action', desc: 'You dig in and get things done. You take initiative and make things happen.' },
-                { icon: 'young-tree', name: 'Stakes', trait: 'Guiding', desc: 'You provide direction and structure. You help keep growth focused and strong.' }
+                { icon: 'stone', name: 'Stone', trait: 'Steady' },
+                { icon: 'seedling', name: 'Soil', trait: 'Nurturing' },
+                { icon: 'shovel', name: 'Shovel', trait: 'Action' },
+                { icon: 'young-tree', name: 'Stakes', trait: 'Guiding' }
             ];
 
+            const handleUserSelection = (style) => {
+                setUserStyle(style);
+                setShowPartnerQuestion(true);
+            };
+
+            const handlePartnerSelection = (style) => {
+                setPartnerStyle(style);
+
+                // Save selections for partner to see (in paired mode)
+                if (pairedMode && setMyData) {
+                    setMyData(prev => ({
+                        ...prev,
+                        bondSelections: {
+                            self: userStyle,
+                            partner: style
+                        }
+                    }));
+                }
+
+                setShowResult(true);
+
+                // In paired mode, check if partner has also completed
+                if (pairedMode && partnerData?.bondSelections) {
+                    compareSelections(userStyle, style, partnerData.bondSelections);
+                }
+            };
+
+            const compareSelections = (myself, myPartner, theirSelections) => {
+                // Check if they match (reversed perspective)
+                const perfectMatch = myself === theirSelections.partner && myPartner === theirSelections.self;
+                const samePerception = myself === theirSelections.self && myPartner === theirSelections.partner;
+
+                if (perfectMatch) {
+                    setComparisonResult({
+                        type: 'perfect',
+                        message: `How fortunate! You both share a similar perspective on your dynamic. You see yourself as ${myself} and your partner as ${myPartner}, while they see themselves as ${theirSelections.self} and you as ${theirSelections.partner}.`
+                    });
+                } else if (samePerception) {
+                    setComparisonResult({
+                        type: 'same',
+                        message: `Interesting! You both chose the same pairing (${myself}-${myPartner}), which suggests you're seeing the dynamic from one person's viewpoint. Take time to discuss each of your individual perspectives.`
+                    });
+                } else {
+                    setComparisonResult({
+                        type: 'different',
+                        message: `Your perspectives differ: You chose ${myself}-${myPartner}, while your partner chose ${theirSelections.self}-${theirSelections.partner}. This is a great opportunity to discuss what each of you is perceiving about your relationship dynamic.`,
+                        differences: {
+                            yours: { self: myself, partner: myPartner },
+                            theirs: { self: theirSelections.self, partner: theirSelections.partner }
+                        }
+                    });
+                }
+            };
+
+            const getExternalUrl = () => {
+                const user = userStyle.toLowerCase();
+                const partner = partnerStyle.toLowerCase();
+                return `https://willingtree.app/bond-types/${user}-${partner}`;
+            };
+
             const handleContinue = () => {
-                alert('Great choice! You\'ve earned your first ☀️ 5 Sun Credits!');
+                // Award 1 growth credit (10 sun + 5 water equivalent combined)
+                awardCredits('sun', 10);
+                awardCredits('water', 5);
                 setScreen('2.2');
             };
+
+            // Check if waiting for partner (in paired mode)
+            const isWaitingForPartner = pairedMode && showResult && !partnerData?.bondSelections;
 
             return (
                 <div className="screen">
                     <div className="day-badge">Day 1 of 10</div>
-                    <div className="header">
-                        <h2>Choose Your Bonding Style</h2>
-                    </div>
-                    <div className="screen-content">
-                        <p className="text-md" style={{marginBottom: '12px'}}>
-                            How do you contribute to your relationships?
-                        </p>
-
-                        <div className="grid-2x2">
-                            {styles.map(style => (
-                                <div
-                                    key={style.name}
-                                    className={`grid-item ${selectedStyle === style.name ? 'selected' : ''}`}
-                                    onClick={() => setSelectedStyle(style.name)}
-                                >
-                                    <div style={{marginBottom: '6px'}}>
-                                        <Icon type={style.icon} size={48} />
-                                    </div>
-                                    <div className="grid-item-name">{style.name}</div>
-                                    <div className="grid-item-trait">{style.trait}</div>
-                                </div>
-                            ))}
+                    {createHeader ? createHeader('Your Tree Choice') : (
+                        <div className="header">
+                            <h2>Your Tree Choice</h2>
                         </div>
-
-                        {selectedStyle && (
-                            <div className="info-box" style={{fontSize: '12px'}}>
-                                {styles.find(s => s.name === selectedStyle)?.desc}
-                            </div>
+                    )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
+                    <div className="screen-content">
+                        {!showPartnerQuestion && (
+                            <>
+                                <p className="text-md" style={{marginBottom: '16px'}}>
+                                    How do you perceive yourself in this relationship?
+                                </p>
+                                <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '16px'}}>
+                                    {styles.map(style => (
+                                        <div
+                                            key={style.name}
+                                            style={{
+                                                padding: '12px',
+                                                border: userStyle === style.name ? '3px solid #4CAF50' : '2px solid #ddd',
+                                                borderRadius: '12px',
+                                                textAlign: 'center',
+                                                cursor: 'pointer',
+                                                background: '#f5f5f0',
+                                                transition: 'all 0.2s'
+                                            }}
+                                            onClick={() => handleUserSelection(style.name)}
+                                        >
+                                            <div style={{marginBottom: '8px'}}>
+                                                <Icon type={style.icon} size={32} />
+                                            </div>
+                                            <div style={{fontSize: '13px', fontWeight: '600', color: '#333'}}>{style.name}</div>
+                                            <div style={{fontSize: '11px', color: '#666', marginTop: '2px'}}>{style.trait}</div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </>
                         )}
 
-                        <div className="button-container">
-                            <button className="button" onClick={handleContinue} disabled={!selectedStyle} style={{width: '100%'}}>
-                                Continue to Day 2
-                            </button>
-                        </div>
+                        {showPartnerQuestion && !showResult && (
+                            <>
+                                <p className="text-md" style={{marginBottom: '16px'}}>
+                                    How do you perceive your partner in this relationship?
+                                </p>
+                                <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '16px'}}>
+                                    {styles.map(style => (
+                                        <div
+                                            key={style.name}
+                                            style={{
+                                                padding: '12px',
+                                                border: partnerStyle === style.name ? '3px solid #4CAF50' : '2px solid #ddd',
+                                                borderRadius: '12px',
+                                                textAlign: 'center',
+                                                cursor: 'pointer',
+                                                background: '#f5f5f0',
+                                                transition: 'all 0.2s'
+                                            }}
+                                            onClick={() => handlePartnerSelection(style.name)}
+                                        >
+                                            <div style={{marginBottom: '8px'}}>
+                                                <Icon type={style.icon} size={32} />
+                                            </div>
+                                            <div style={{fontSize: '13px', fontWeight: '600', color: '#333'}}>{style.name}</div>
+                                            <div style={{fontSize: '11px', color: '#666', marginTop: '2px'}}>{style.trait}</div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </>
+                        )}
+
+                        {showResult && (
+                            <>
+                                {isWaitingForPartner ? (
+                                    <>
+                                        <div style={{marginBottom: '20px', textAlign: 'center'}}>
+                                            <p className="text-md" style={{marginBottom: '16px', color: '#666'}}>
+                                                Your bond pairing:
+                                            </p>
+                                            <div style={{display: 'flex', gap: '16px', justifyContent: 'center', alignItems: 'center', marginBottom: '16px'}}>
+                                                <Icon type={styles.find(s => s.name === userStyle).icon} size={48} />
+                                                <span style={{fontSize: '24px', color: '#333', fontWeight: '600'}}>-</span>
+                                                <Icon type={styles.find(s => s.name === partnerStyle).icon} size={48} />
+                                            </div>
+                                            <p className="text-lg" style={{marginBottom: '12px', color: '#333', fontWeight: '600'}}>
+                                                {userStyle}-{partnerStyle}
+                                            </p>
+                                        </div>
+                                        <WaitingForPartner
+                                            message="Waiting for your partner to complete their bond selections. Once they're done, you'll see a comparison of your perspectives."
+                                            partnerName={partnerData?.name}
+                                        />
+                                    </>
+                                ) : (
+                                    <>
+                                        <div style={{marginBottom: '20px', textAlign: 'center'}}>
+                                            <p className="text-md" style={{marginBottom: '16px', color: '#666'}}>
+                                                Your bond pairing:
+                                            </p>
+                                            <div style={{display: 'flex', gap: '16px', justifyContent: 'center', alignItems: 'center', marginBottom: '16px'}}>
+                                                <Icon type={styles.find(s => s.name === userStyle).icon} size={48} />
+                                                <span style={{fontSize: '24px', color: '#333', fontWeight: '600'}}>-</span>
+                                                <Icon type={styles.find(s => s.name === partnerStyle).icon} size={48} />
+                                            </div>
+                                            <p className="text-lg" style={{marginBottom: '12px', color: '#333', fontWeight: '600'}}>
+                                                {userStyle}-{partnerStyle}
+                                            </p>
+                                            <a
+                                                href={`bond-types.html?pairing=${userStyle.toLowerCase()}-${partnerStyle.toLowerCase()}`}
+                                                target="_blank"
+                                                style={{
+                                                    color: '#4CAF50',
+                                                    textDecoration: 'underline',
+                                                    fontSize: '14px',
+                                                    cursor: 'pointer',
+                                                    fontWeight: '500'
+                                                }}
+                                            >
+                                                Learn more about {userStyle}-{partnerStyle} dynamics →
+                                            </a>
+                                        </div>
+
+                                        {comparisonResult && pairedMode && (
+                                            <div className="info-box" style={{
+                                                background: comparisonResult.type === 'perfect' ? '#E8F5E9' : '#FFF3E0',
+                                                marginBottom: '16px'
+                                            }}>
+                                                <div style={{fontSize: '14px', fontWeight: '600', marginBottom: '8px'}}>
+                                                    {comparisonResult.type === 'perfect' && '✨ Aligned Perspectives'}
+                                                    {comparisonResult.type === 'same' && '🤔 Shared View'}
+                                                    {comparisonResult.type === 'different' && '💬 Different Perspectives'}
+                                                </div>
+                                                <div style={{fontSize: '13px', lineHeight: '1.5'}}>
+                                                    {comparisonResult.message}
+                                                </div>
+                                                {comparisonResult.differences && (
+                                                    <div style={{marginTop: '12px', fontSize: '12px'}}>
+                                                        <div><strong>Your view:</strong> {comparisonResult.differences.yours.self} (you) - {comparisonResult.differences.yours.partner} (partner)</div>
+                                                        <div><strong>Partner's view:</strong> {comparisonResult.differences.theirs.self} (them) - {comparisonResult.differences.theirs.partner} (you)</div>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )}
+                                    </>
+                                )}
+                            </>
+                        )}
+
+                        {showResult && !isWaitingForPartner && (
+                            <div className="button-container">
+                                <button className="button" onClick={handleContinue} style={{width: '100%'}}>
+                                    Continue to Day 2
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                    <div className="screen-footer">
+                        Based on attachment theory research, these bonding styles help you understand how you and your partner naturally connect. Remember, no style is better than another - understanding your dynamic helps you work together more effectively.
                     </div>
                 </div>
             );
         }
 
-        // Screen 2.2: Day 2 - Tree Metaphor
-        function Day2TreeMetaphorScreen({ setScreen }) {
-            const [understood, setUnderstood] = useState(false);
+        // Screen 2.2: Day 2 - Preparing Good Soil
+        function Day2TreeMetaphorScreen({ setScreen, awardCredits, credits, currentScreen }) {
+            const [item1, setItem1] = useState('');
+            const [item2, setItem2] = useState('');
+            const [item3, setItem3] = useState('');
+            const [item4, setItem4] = useState('');
+            const [item5, setItem5] = useState('');
+
+            const handleContinue = () => {
+                // Award 1 sun for each filled text box (up to 5)
+                let sunCredits = 0;
+                if (item1) sunCredits++;
+                if (item2) sunCredits++;
+                if (item3) sunCredits++;
+                if (item4) sunCredits++;
+                if (item5) sunCredits++;
+
+                awardCredits('sun', sunCredits);
+                setScreen('2.3');
+            };
+
+            const filledCount = [item1, item2, item3, item4, item5].filter(i => i).length;
 
             return (
                 <div className="screen">
                     <div className="day-badge">Day 2 of 10</div>
                     <div className="header">
-                        <h2>Understanding the Tree</h2>
+                        <h2>Preparing Good Soil</h2>
                     </div>
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
-                        <p className="text-md" style={{marginBottom: '12px'}}>
-                            Your relationship is like a tree that grows through care:
+                        <p className="text-md" style={{marginBottom: '16px'}}>
+                            List up to 5 things you remember your partner doing for you or the community:
                         </p>
 
-                        <div style={{display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '16px'}}>
-                            <div style={{display: 'flex', alignItems: 'start', gap: '10px'}}>
-                                <div style={{minWidth: '32px', display: 'flex', alignItems: 'center'}}>
-                                    <Icon type="young-tree" size={32} />
-                                </div>
-                                <div>
-                                    <div style={{fontSize: '13px', fontWeight: '600', marginBottom: '2px'}}>Big Branch</div>
-                                    <div style={{fontSize: '12px', color: '#666'}}>Your wants and needs list</div>
-                                </div>
-                            </div>
-                            <div style={{display: 'flex', alignItems: 'start', gap: '10px'}}>
-                                <div style={{minWidth: '32px', display: 'flex', alignItems: 'center'}}>
-                                    <Icon type="seedling" size={32} />
-                                </div>
-                                <div>
-                                    <div style={{fontSize: '13px', fontWeight: '600', marginBottom: '2px'}}>Small Branches</div>
-                                    <div style={{fontSize: '12px', color: '#666'}}>What you're willing to do</div>
-                                </div>
-                            </div>
-                            <div style={{display: 'flex', alignItems: 'start', gap: '10px'}}>
-                                <div style={{fontSize: '24px', minWidth: '32px'}}>🍃</div>
-                                <div>
-                                    <div style={{fontSize: '13px', fontWeight: '600', marginBottom: '2px'}}>Leaves</div>
-                                    <div style={{fontSize: '12px', color: '#666'}}>Recognition of what's been done</div>
-                                </div>
-                            </div>
-                            <div style={{display: 'flex', alignItems: 'start', gap: '10px'}}>
-                                <div style={{fontSize: '24px', minWidth: '32px'}}>🍎</div>
-                                <div>
-                                    <div style={{fontSize: '13px', fontWeight: '600', marginBottom: '2px'}}>Fruits</div>
-                                    <div style={{fontSize: '12px', color: '#666'}}>Rewards from your credits</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="checkbox-group">
-                            <input type="checkbox" checked={understood} onChange={(e) => setUnderstood(e.target.checked)} />
-                            <label>I understand the tree metaphor</label>
+                        <div style={{display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px'}}>
+                            <input
+                                className="input-field"
+                                placeholder="1. Example: Picked up groceries yesterday"
+                                value={item1}
+                                onChange={(e) => setItem1(e.target.value)}
+                            />
+                            <input
+                                className="input-field"
+                                placeholder="2. Example: Called to check on my mom"
+                                value={item2}
+                                onChange={(e) => setItem2(e.target.value)}
+                            />
+                            <input
+                                className="input-field"
+                                placeholder="3. Example: Made dinner twice this week"
+                                value={item3}
+                                onChange={(e) => setItem3(e.target.value)}
+                            />
+                            <input
+                                className="input-field"
+                                placeholder="4. Optional"
+                                value={item4}
+                                onChange={(e) => setItem4(e.target.value)}
+                            />
+                            <input
+                                className="input-field"
+                                placeholder="5. Optional"
+                                value={item5}
+                                onChange={(e) => setItem5(e.target.value)}
+                            />
                         </div>
 
                         <div className="button-container">
-                            <button className="button" onClick={() => setScreen('2.3')} disabled={!understood} style={{width: '100%'}}>
-                                Continue to Day 3
+                            <button className="button" onClick={handleContinue} disabled={filledCount < 3} style={{width: '100%'}}>
+                                Continue to Day 3 ({filledCount}/5 items)
                             </button>
                         </div>
+                    </div>
+                    <div className="screen-footer">
+                        Love bridges two sides: sending and receiving. When your partner serves you or your shared community, they're sending love across that bridge. The receiving side (you) gets to appreciate their efforts, which strengthens the bond and encourages more sending.
                     </div>
                 </div>
             );
         }
 
-        // Screen 2.3: Day 3 - Commitment
-        function Day3CommitmentScreen({ setScreen }) {
-            const [selectedLevel, setSelectedLevel] = useState(null);
+        // Screen 2.3: Day 3 - Hope
+        function Day3CommitmentScreen({ setScreen, awardCredits, credits, currentScreen }) {
+            const [item1, setItem1] = useState('');
+            const [item2, setItem2] = useState('');
+            const [item3, setItem3] = useState('');
 
-            const levels = [
-                { name: 'Curious', desc: 'Exploring to see if this works for me' },
-                { name: 'Interested', desc: 'Willing to give this a try' },
-                { name: 'Dedicated', desc: 'Committed to making this part of my routine' }
-            ];
+            const handleContinue = () => {
+                // Award 1 water for each filled text box (up to 3)
+                let waterCredits = 0;
+                if (item1) waterCredits++;
+                if (item2) waterCredits++;
+                if (item3) waterCredits++;
+
+                awardCredits('water', waterCredits);
+                setScreen('2.4');
+            };
+
+            const filledCount = [item1, item2, item3].filter(i => i).length;
 
             return (
                 <div className="screen">
                     <div className="day-badge">Day 3 of 10</div>
                     <div className="header">
-                        <h2>Your Commitment Level</h2>
+                        <h2>Hope</h2>
                     </div>
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
-                        <p className="text-md" style={{marginBottom: '12px'}}>
-                            How committed are you to growing your relationship?
+                        <p className="text-md" style={{marginBottom: '16px'}}>
+                            List 3 things you've done in the last week that you hope have hit the mark:
                         </p>
 
-                        {levels.map(level => (
-                            <div
-                                key={level.name}
-                                className="card"
-                                onClick={() => setSelectedLevel(level.name)}
-                                style={{background: selectedLevel === level.name ? '#E8F5E9' : 'white', borderColor: selectedLevel === level.name ? '#4CAF50' : '#e0e0e0'}}
-                            >
-                                <div className="card-title">{level.name}</div>
-                                <div className="card-description">{level.desc}</div>
-                            </div>
-                        ))}
+                        <div style={{display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px'}}>
+                            <input
+                                className="input-field"
+                                placeholder="1. Example: Surprised them with coffee in bed"
+                                value={item1}
+                                onChange={(e) => setItem1(e.target.value)}
+                            />
+                            <input
+                                className="input-field"
+                                placeholder="2. Example: Took care of that task they've been avoiding"
+                                value={item2}
+                                onChange={(e) => setItem2(e.target.value)}
+                            />
+                            <input
+                                className="input-field"
+                                placeholder="3. Example: Listened without offering solutions"
+                                value={item3}
+                                onChange={(e) => setItem3(e.target.value)}
+                            />
+                        </div>
 
                         <div className="button-container">
-                            <button className="button" onClick={() => setScreen('2.4')} disabled={!selectedLevel} style={{width: '100%'}}>
-                                Continue to Day 4
+                            <button className="button" onClick={handleContinue} disabled={filledCount < 3} style={{width: '100%'}}>
+                                Continue to Day 4 ({filledCount}/3 items)
                             </button>
                         </div>
+                    </div>
+                    <div className="screen-footer">
+                        There's a difference between service FOR an individual and service TO the relationship. Individual service benefits one person, while service to the relationship benefits both partners or serves your mutual purposes. Both matter, but relationship service builds shared strength.
                     </div>
                 </div>
             );
         }
 
-        // Screen 2.4: Day 4 - Willingness Values
-        function Day4WillingnessValuesScreen({ setScreen }) {
-            const [selectedTasks, setSelectedTasks] = useState([]);
+        // Screen 2.4: Day 4 - Budding, Pruning
+        function Day4WillingnessValuesScreen({ setScreen, awardCredits, credits, currentScreen, pairedMode, setMyData }) {
+            const [scores, setScores] = useState({});
+            const [userGender, setUserGender] = useState('male'); // This would come from profile in real app
 
-            const tasks = [
-                'Cook dinner together',
-                'Give a massage',
-                'Listen actively',
-                'Plan a date night',
-                'Do the dishes',
-                'Give a compliment'
+            const handleContinue = () => {
+                // Save scores for partner to see (in paired mode)
+                if (pairedMode && setMyData) {
+                    setMyData(prev => ({
+                        ...prev,
+                        day4Scores: scores
+                    }));
+                }
+
+                // Award 1 growth credit (10 sun + 5 water equivalent)
+                awardCredits('sun', 10);
+                awardCredits('water', 5);
+                setScreen('2.5');
+            };
+
+            const womenWantList = [
+                'Listen actively without trying to fix',
+                'Plan thoughtful dates or surprises',
+                'Help with household tasks unprompted',
+                'Show physical affection regularly',
+                'Communicate feelings openly',
+                'Defend/support her in public',
+                'Remember important details',
+                'Make her feel desired',
+                'Be emotionally present',
+                'Take initiative in planning',
+                'Show appreciation verbally',
+                'Prioritize quality time together',
+                'Be vulnerable and authentic',
+                'Support her goals and dreams',
+                'Handle conflicts calmly',
+                'Show interest in her day',
+                'Make decisions together',
+                'Be reliable and consistent',
+                'Express love in her language',
+                'Create emotional safety'
             ];
 
-            const toggleTask = (task) => {
-                setSelectedTasks(prev =>
-                    prev.includes(task) ? prev.filter(t => t !== task) : [...prev, task]
-                );
+            const menWantList = [
+                'Express appreciation for efforts',
+                'Show physical affection regularly',
+                'Respect his need for alone time',
+                'Support his goals and ambitions',
+                'Initiate intimacy sometimes',
+                'Trust his decision-making',
+                'Show interest in his hobbies',
+                'Speak respectfully especially in public',
+                'Be his biggest cheerleader',
+                'Make him feel needed',
+                'Laugh at his jokes',
+                'Be direct about needs',
+                'Show affection publicly',
+                'Respect his friendships',
+                'Value his problem-solving',
+                'Create peaceful home environment',
+                'Be his safe place emotionally',
+                'Show desire for him',
+                'Support his leadership',
+                'Celebrate his wins'
+            ];
+
+            // Determine which list to show based on what they're willing to give
+            const listToShow = userGender === 'male' ? womenWantList : menWantList;
+            const listTitle = userGender === 'male' ? 'What Women Want' : 'What Men Want';
+
+            const handleScoreChange = (item, score) => {
+                setScores(prev => ({
+                    ...prev,
+                    [item]: score
+                }));
             };
+
+            const isComplete = Object.keys(scores).length === listToShow.length;
 
             return (
                 <div className="screen">
                     <div className="day-badge">Day 4 of 10</div>
                     <div className="header">
-                        <h2>Prioritize Your Willingness</h2>
+                        <h2>Budding, Pruning</h2>
                     </div>
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
-                        <p className="text-md" style={{marginBottom: '12px'}}>
-                            Which acts of service are you most willing to do? (Select 2-4)
+                        <p className="text-md" style={{marginBottom: '8px'}}>
+                            Score each item 1-5, where 5 means you're most willing to do this:
+                        </p>
+                        <p className="text-sm" style={{marginBottom: '16px', color: '#666'}}>
+                            <strong>{listTitle}</strong>
                         </p>
 
-                        <div style={{display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px'}}>
-                            {tasks.map(task => (
-                                <div
-                                    key={task}
-                                    className="card"
-                                    onClick={() => toggleTask(task)}
-                                    style={{background: selectedTasks.includes(task) ? '#E8F5E9' : 'white', borderColor: selectedTasks.includes(task) ? '#4CAF50' : '#e0e0e0', padding: '12px'}}
-                                >
-                                    <div style={{fontSize: '14px'}}>{task}</div>
+                        <div style={{display: 'flex', flexDirection: 'column', gap: '12px'}}>
+                            {listToShow.map((item, index) => (
+                                <div key={index} style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '10px',
+                                    borderBottom: '1px solid #f0f0f0',
+                                    paddingBottom: '12px'
+                                }}>
+                                    <div style={{flex: '0 0 60%', fontSize: '13px', lineHeight: '1.4'}}>
+                                        {item}
+                                    </div>
+                                    <div style={{
+                                        flex: '0 0 40%',
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                        alignItems: 'center',
+                                        gap: '3px'
+                                    }}>
+                                        {[1, 2, 3, 4, 5].map(score => (
+                                            <div
+                                                key={score}
+                                                onClick={() => handleScoreChange(item, score)}
+                                                style={{
+                                                    width: '26px',
+                                                    height: '26px',
+                                                    borderRadius: '50%',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    fontSize: '12px',
+                                                    fontWeight: '600',
+                                                    cursor: 'pointer',
+                                                    border: scores[item] === score ? '2px solid #4CAF50' : '2px solid #ddd',
+                                                    background: scores[item] === score ? '#E8F5E9' : 'white',
+                                                    color: scores[item] === score ? '#4CAF50' : '#666',
+                                                    transition: 'all 0.2s'
+                                                }}
+                                            >
+                                                {score}
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                             ))}
                         </div>
 
                         <div className="button-container">
-                            <button className="button" onClick={() => setScreen('2.5')} disabled={selectedTasks.length < 2} style={{width: '100%'}}>
+                            <button className="button" onClick={handleContinue} disabled={!isComplete} style={{width: '100%'}}>
                                 Continue to Day 5
                             </button>
                         </div>
+                    </div>
+                    <div className="screen-footer">
+                        Budding is growing new willing actions. Pruning is releasing what doesn't serve the relationship. As you score these, notice which feel natural (budding) and which feel forced (prune). Your highest scores reveal your natural gifts to offer.
                     </div>
                 </div>
             );
         }
 
-        // Screen 2.5: Day 5 - Benchmarks
-        function Day5BenchmarksScreen({ setScreen }) {
-            const [ask, setAsk] = useState('');
-            const [understood, setUnderstood] = useState(false);
+        // Screen 2.5: Day 5 - Pollinate
+        function Day5BenchmarksScreen({ setScreen, awardCredits, credits, currentScreen, pairedMode, setMyData, setPartnerData }) {
+            // Simulate top 12 items from Day 4 scores (filtered and sorted)
+            const top12Items = [
+                { text: 'Listen actively without trying to fix', score: 5 },
+                { text: 'Plan thoughtful dates or surprises', score: 5 },
+                { text: 'Help with household tasks unprompted', score: 5 },
+                { text: 'Show physical affection regularly', score: 4 },
+                { text: 'Communicate feelings openly', score: 4 },
+                { text: 'Defend/support her in public', score: 4 },
+                { text: 'Remember important details', score: 4 },
+                { text: 'Make her feel desired', score: 3 },
+                { text: 'Be emotionally present', score: 3 },
+                { text: 'Take initiative in planning', score: 3 },
+                { text: 'Show appreciation verbally', score: 3 },
+                { text: 'Prioritize quality time together', score: 3 }
+            ];
+
+            const handleSend = () => {
+                // Save list for partner (in paired mode)
+                if (pairedMode && setMyData) {
+                    setMyData(prev => ({
+                        ...prev,
+                        pollinateList: top12Items
+                    }));
+
+                    // Award partner 5 sun credits
+                    if (setPartnerData) {
+                        setPartnerData(prev => ({
+                            ...prev,
+                            credits: {
+                                ...prev.credits,
+                                sun: prev.credits.sun + 5
+                            },
+                            pollinateList: top12Items
+                        }));
+                    }
+                }
+
+                // Sender gets 1 water
+                awardCredits('water', 1);
+                alert('Sent! Your partner will now allocate points to show what matters most to them.');
+                setScreen('2.6');
+            };
 
             return (
                 <div className="screen">
                     <div className="day-badge">Day 5 of 10</div>
                     <div className="header">
-                        <h2>Set Your First Benchmark</h2>
+                        <h2>Pollinate</h2>
                     </div>
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
                         <p className="text-md" style={{marginBottom: '12px'}}>
-                            What's one thing you'd love your partner to do regularly?
+                            Your top 12 willing actions (from Day 4) are ready to send to your partner. These are the behaviors you scored highest - the ones that feel most natural to you.
                         </p>
 
-                        <div className="form-group">
-                            <textarea
-                                className="input-field"
-                                placeholder="Example: I would love if we could have one tech-free dinner together each week..."
-                                value={ask}
-                                onChange={(e) => setAsk(e.target.value)}
-                                style={{minHeight: '80px'}}
-                            />
-                        </div>
-
-                        <div className="checkbox-group">
-                            <input type="checkbox" checked={understood} onChange={(e) => setUnderstood(e.target.checked)} />
-                            <label style={{fontSize: '12px'}}>I understand this is my first "ask" on my Big Branch</label>
+                        <div style={{marginBottom: '16px'}}>
+                            {top12Items.map((item, index) => (
+                                <div key={index} style={{
+                                    padding: '8px 12px',
+                                    background: '#f9f9f9',
+                                    borderRadius: '6px',
+                                    marginBottom: '6px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '8px'
+                                }}>
+                                    <span style={{
+                                        background: item.score === 5 ? '#4CAF50' : item.score === 4 ? '#8BC34A' : '#CDDC39',
+                                        color: 'white',
+                                        padding: '2px 8px',
+                                        borderRadius: '4px',
+                                        fontSize: '11px',
+                                        fontWeight: '600'
+                                    }}>
+                                        {item.score} ★
+                                    </span>
+                                    <span style={{fontSize: '13px'}}>{item.text}</span>
+                                </div>
+                            ))}
                         </div>
 
                         <div className="button-container">
-                            <button className="button" onClick={() => setScreen('2.6')} disabled={!ask || !understood} style={{width: '100%'}}>
-                                Continue to Day 6
+                            <button className="button" onClick={handleSend} style={{width: '100%'}}>
+                                Send to Partner
                             </button>
                         </div>
+                    </div>
+                    <div className="screen-footer">
+                        Pollination is sharing your willingness. You're offering 12 specific ways you're willing to serve. Your partner will respond by showing which ones matter most, creating a matched system of giving and receiving.
                     </div>
                 </div>
             );
         }
 
-        // Screen 2.6: Day 6 - Small Branches
-        function Day6SmallBranchesScreen({ setScreen }) {
-            const [slot1, setSlot1] = useState('');
-            const [selectedNext, setSelectedNext] = useState([]);
+        // Screen 2.6: Day 6 - Fertilize the Tree
+        function Day6SmallBranchesScreen({ setScreen, awardCredits, credits, currentScreen, pairedMode, partnerData, setMyData, setPartnerData }) {
+            const [allocations, setAllocations] = useState({});
 
-            const availableTasks = ['Cook dinner', 'Give massage', 'Listen actively', 'Plan date', 'Do dishes'];
+            // Use partner's actual list in paired mode, or simulate for solo
+            const partnerItems = (pairedMode && partnerData?.pollinateList?.length > 0)
+                ? partnerData.pollinateList.map(item => item.text)
+                : [
+                    'Express appreciation for efforts',
+                    'Show physical affection regularly',
+                    'Respect his need for alone time',
+                    'Support his goals and ambitions',
+                    'Initiate intimacy sometimes',
+                    'Trust his decision-making',
+                    'Show interest in his hobbies',
+                    'Speak respectfully especially in public',
+                    'Be his biggest cheerleader',
+                    'Make him feel needed',
+                    'Laugh at his jokes',
+                    'Be direct about needs'
+                ];
 
-            const toggleTask = (task) => {
-                setSelectedNext(prev => {
-                    if (prev.includes(task)) return prev.filter(t => t !== task);
-                    if (prev.length < 2) return [...prev, task];
-                    return prev;
+            const handleAllocation = (item, delta) => {
+                setAllocations(prev => {
+                    const current = prev[item] || 0;
+                    const newValue = Math.max(0, Math.min(12, current + delta));
+                    return { ...prev, [item]: newValue };
                 });
             };
+
+            const totalAllocated = Object.values(allocations).reduce((sum, val) => sum + val, 0);
+            const canConfirm = totalAllocated === 12;
+
+            const handleConfirm = () => {
+                // Save allocations for partner (in paired mode)
+                if (pairedMode && setMyData) {
+                    setMyData(prev => ({
+                        ...prev,
+                        fertilizeAllocations: allocations
+                    }));
+
+                    // Award partner 1 growth credit (10 sun + 5 water)
+                    if (setPartnerData) {
+                        setPartnerData(prev => ({
+                            ...prev,
+                            credits: {
+                                sun: prev.credits.sun + 10,
+                                water: prev.credits.water + 5,
+                                growth: prev.credits.growth + 1
+                            },
+                            fertilizeAllocations: allocations
+                        }));
+                    }
+                }
+
+                // User also gets 1 growth credit (this is their own work)
+                awardCredits('sun', 10);
+                awardCredits('water', 5);
+                alert('Confirmed! Your partner now knows what matters most to you.');
+                setScreen('2.7');
+            };
+
+            // Check if waiting for partner data (in paired mode)
+            const isWaitingForPartner = pairedMode && (!partnerData?.pollinateList || partnerData.pollinateList.length === 0);
 
             return (
                 <div className="screen">
                     <div className="day-badge">Day 6 of 10</div>
                     <div className="header">
-                        <h2>Create Your Willing List</h2>
+                        <h2>Fertilize the Tree - Grow the Big Branch</h2>
                     </div>
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
-                        <p className="text-md" style={{marginBottom: '12px'}}>
-                            Set up your 3 Small Branches (willing actions):
-                        </p>
+                        {isWaitingForPartner ? (
+                            <>
+                                <WaitingForPartner
+                                    message="Your partner is working on their Day 5 list. You'll be able to allocate points once they send it."
+                                    partnerName={partnerData?.name}
+                                />
+                                <div className="button-container">
+                                    <button className="button button-secondary" onClick={() => setScreen('3.1')} style={{width: '100%'}}>
+                                        Go to Dashboard
+                                    </button>
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                <p className="text-md" style={{marginBottom: '8px'}}>
+                                    Your partner sent their willing actions. You have 12 points to allocate. Assign more points to behaviors that are most valuable to you.
+                                </p>
 
-                        <div style={{marginBottom: '16px'}}>
-                            <div className="form-label">Slot 1: What you're claiming to receive</div>
-                            <select className="input-field" value={slot1} onChange={(e) => setSlot1(e.target.value)} style={{marginBottom: '12px'}}>
-                                <option value="">Select...</option>
-                                <option value="massage">A massage</option>
-                                <option value="dinner">Dinner cooked for me</option>
-                                <option value="listening">Active listening</option>
-                            </select>
+                        <div style={{
+                            background: totalAllocated > 12 ? '#ffebee' : '#E8F5E9',
+                            padding: '8px',
+                            borderRadius: '6px',
+                            marginBottom: '12px',
+                            fontSize: '13px',
+                            fontWeight: '600',
+                            textAlign: 'center'
+                        }}>
+                            Points used: {totalAllocated} / 12
+                        </div>
 
-                            <div className="form-label">Slots 2-3: What you'll do next 5 days (Pick 2)</div>
-                            <div style={{display: 'flex', flexDirection: 'column', gap: '6px'}}>
-                                {availableTasks.map(task => (
-                                    <div key={task} className="checkbox-group" style={{marginBottom: 0}}>
-                                        <input
-                                            type="checkbox"
-                                            checked={selectedNext.includes(task)}
-                                            onChange={() => toggleTask(task)}
-                                            disabled={!selectedNext.includes(task) && selectedNext.length >= 2}
-                                        />
-                                        <label style={{fontSize: '13px'}}>{task}</label>
+                        <div style={{display: 'flex', flexDirection: 'column', gap: '8px'}}>
+                            {partnerItems.map((item, index) => (
+                                <div key={index} style={{
+                                    padding: '8px',
+                                    background: '#f9f9f9',
+                                    borderRadius: '6px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'space-between'
+                                }}>
+                                    <span style={{fontSize: '12px', flex: 1}}>{item}</span>
+                                    <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
+                                        <button
+                                            onClick={() => handleAllocation(item, -1)}
+                                            style={{
+                                                width: '24px',
+                                                height: '24px',
+                                                border: '1px solid #ddd',
+                                                borderRadius: '4px',
+                                                background: 'white',
+                                                cursor: 'pointer',
+                                                fontSize: '14px'
+                                            }}
+                                            disabled={(allocations[item] || 0) === 0}
+                                        >
+                                            −
+                                        </button>
+                                        <span style={{
+                                            width: '20px',
+                                            textAlign: 'center',
+                                            fontSize: '13px',
+                                            fontWeight: '600'
+                                        }}>
+                                            {allocations[item] || 0}
+                                        </span>
+                                        <button
+                                            onClick={() => handleAllocation(item, 1)}
+                                            style={{
+                                                width: '24px',
+                                                height: '24px',
+                                                border: '1px solid #ddd',
+                                                borderRadius: '4px',
+                                                background: 'white',
+                                                cursor: 'pointer',
+                                                fontSize: '14px'
+                                            }}
+                                            disabled={(allocations[item] || 0) === 12 || totalAllocated >= 12}
+                                        >
+                                            +
+                                        </button>
                                     </div>
-                                ))}
-                            </div>
+                                </div>
+                            ))}
                         </div>
 
                         <div className="button-container">
-                            <button className="button" onClick={() => setScreen('2.7')} disabled={!slot1 || selectedNext.length !== 2} style={{width: '100%'}}>
-                                Lock in Small Branches
+                            <button className="button" onClick={handleConfirm} disabled={!canConfirm} style={{width: '100%'}}>
+                                Confirm Allocation
                             </button>
                         </div>
+                            </>
+                        )}
+                    </div>
+                    <div className="screen-footer">
+                        {isWaitingForPartner ? 'In paired mode, you\'ll exchange data asynchronously. Your partner will complete Day 5 at their own pace, then you can continue.' : 'Fertilizing means nourishing what matters. By allocating points, you\'re telling your partner which of their offerings you value most. They\'ll see this as encouragement to prioritize these actions.'}
                     </div>
                 </div>
             );
         }
 
-        // Screen 2.7: Day 7 - Willing Commitment
-        function Day7WillingCommitmentScreen({ setScreen }) {
-            const [commitment, setCommitment] = useState('');
-            const [confirmed, setConfirmed] = useState(false);
+        // Screen 2.7: Day 7 - Willing List, Watering
+        function Day7WillingCommitmentScreen({ setScreen, awardCredits, credits, currentScreen, pairedMode, setMyData }) {
+            const [selected, setSelected] = useState([]);
+
+            // Simulate weighted random selection based on partner's point allocation
+            // Items with more points appear more frequently in the pool
+            const weightedPool = [
+                { text: 'Express appreciation for efforts', points: 3 },
+                { text: 'Express appreciation for efforts', points: 3 },  // Duplicate for weighting
+                { text: 'Express appreciation for efforts', points: 3 },
+                { text: 'Show physical affection regularly', points: 3 },
+                { text: 'Show physical affection regularly', points: 3 },
+                { text: 'Show physical affection regularly', points: 3 },
+                { text: 'Respect his need for alone time', points: 2 },
+                { text: 'Respect his need for alone time', points: 2 },
+                { text: 'Support his goals and ambitions', points: 2 },
+                { text: 'Support his goals and ambitions', points: 2 },
+                { text: 'Be his biggest cheerleader', points: 1 },
+                { text: 'Make him feel needed', points: 1 }
+            ];
+
+            // Get 6 unique items for display
+            const displayItems = [
+                { text: 'Express appreciation for efforts', points: 3 },
+                { text: 'Show physical affection regularly', points: 3 },
+                { text: 'Respect his need for alone time', points: 2 },
+                { text: 'Support his goals and ambitions', points: 2 },
+                { text: 'Be his biggest cheerleader', points: 1 },
+                { text: 'Make him feel needed', points: 1 }
+            ];
+
+            const toggleSelection = (item) => {
+                setSelected(prev => {
+                    if (prev.includes(item)) {
+                        return prev.filter(i => i !== item);
+                    }
+                    if (prev.length < 2) {
+                        return [...prev, item];
+                    }
+                    return prev;
+                });
+            };
+
+            const handleLockIn = () => {
+                // Save focus actions for partner to guess (in paired mode)
+                if (pairedMode && setMyData) {
+                    setMyData(prev => ({
+                        ...prev,
+                        focusActions: selected
+                    }));
+                }
+
+                awardCredits('water', 2);
+                alert('Locked! These are your Small Branches for the next 3 days. The system will remind you daily.');
+                setScreen('2.8');
+            };
 
             return (
                 <div className="screen">
                     <div className="day-badge">Day 7 of 10</div>
                     <div className="header">
-                        <h2>Confirm Your Commitment</h2>
+                        <h2>Willing List, Watering</h2>
                     </div>
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
-                        <p className="text-md" style={{marginBottom: '12px'}}>
-                            Write what you commit to doing this week:
+                        <p className="text-md" style={{marginBottom: '8px'}}>
+                            Based on your partner's point allocation, the system randomly selected 6 items from your Big Branch. Items with more points have more tickets in the lottery, so higher-valued items appear more often.
+                        </p>
+                        <p className="text-sm" style={{marginBottom: '12px', color: '#666'}}>
+                            Select 2 items to focus on for the next 3 days:
                         </p>
 
-                        <div className="form-group">
-                            <textarea
-                                className="input-field"
-                                placeholder="I commit to..."
-                                value={commitment}
-                                onChange={(e) => setCommitment(e.target.value)}
-                                style={{minHeight: '70px'}}
-                            />
-                        </div>
-
-                        <div className="checkbox-group">
-                            <input type="checkbox" checked={confirmed} onChange={(e) => setConfirmed(e.target.checked)} />
-                            <label style={{fontSize: '12px'}}>I commit to following through</label>
+                        <div style={{display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px'}}>
+                            {displayItems.map((item, index) => (
+                                <div
+                                    key={index}
+                                    onClick={() => toggleSelection(item.text)}
+                                    style={{
+                                        padding: '10px',
+                                        background: selected.includes(item.text) ? '#E8F5E9' : '#f9f9f9',
+                                        borderRadius: '6px',
+                                        border: selected.includes(item.text) ? '2px solid #4CAF50' : '2px solid transparent',
+                                        cursor: 'pointer',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '10px'
+                                    }}
+                                >
+                                    <input
+                                        type="checkbox"
+                                        checked={selected.includes(item.text)}
+                                        onChange={() => {}}
+                                        style={{width: '18px', height: '18px'}}
+                                    />
+                                    <div style={{flex: 1}}>
+                                        <div style={{fontSize: '13px'}}>{item.text}</div>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
 
                         <div className="button-container">
-                            <button className="button" onClick={() => setScreen('2.8')} disabled={!commitment || !confirmed} style={{width: '100%'}}>
-                                Confirm Commitment
+                            <button className="button" onClick={handleLockIn} disabled={selected.length !== 2} style={{width: '100%'}}>
+                                Lock in My 2 Focus Items
                             </button>
                         </div>
+                    </div>
+                    <div className="screen-footer">
+                        Watering means doing the service actions your partner values. Sunshine is the attention and awareness you bring. Both water (action) and sunshine (attention) are powerful for growth - together they help your relationship flourish.
                     </div>
                 </div>
             );
         }
 
-        // Screen 2.8: Day 8 - Practice Session
-        function Day8PracticeSessionScreen({ setScreen }) {
+        // Screen 2.8: Day 8 - Small Branch Grows
+        function Day8PracticeSessionScreen({ setScreen, awardCredits, credits, currentScreen }) {
             const [practiced, setPracticed] = useState(false);
             const [plan, setPlan] = useState('');
+
+            // These would be carried over from Day 7 selection
+            const focusActions = [
+                'Express appreciation for efforts',
+                'Show physical affection regularly'
+            ];
+
+            const handleContinue = () => {
+                awardCredits('water', 2);
+                setScreen('2.9');
+            };
 
             return (
                 <div className="screen">
                     <div className="day-badge">Day 8 of 10</div>
                     <div className="header">
-                        <h2>Practice Making It Happen</h2>
+                        <h2>Small Branch Grows</h2>
                     </div>
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
                         <p className="text-md" style={{marginBottom: '12px'}}>
-                            When and how will you do your committed actions?
+                            You committed to 2 focus actions. Practice makes them habits.
                         </p>
+
+                        <div className="info-box" style={{marginBottom: '16px'}}>
+                            <strong>Your 2 focus actions for the next 3 days:</strong>
+                            <ul style={{marginTop: '8px', marginBottom: 0, paddingLeft: '20px'}}>
+                                {focusActions.map((action, index) => (
+                                    <li key={index} style={{fontSize: '12px'}}>{action}</li>
+                                ))}
+                            </ul>
+                        </div>
 
                         <div className="checkbox-group">
                             <input type="checkbox" checked={practiced} onChange={(e) => setPracticed(e.target.checked)} />
-                            <label style={{fontSize: '12px'}}>I've thought about when I'll do this</label>
+                            <label style={{fontSize: '12px'}}>I've practiced these today</label>
                         </div>
 
                         <div className="form-group">
+                            <label className="form-label">Implementation plan:</label>
                             <textarea
                                 className="input-field"
                                 placeholder="My plan: I will do this right after..."
@@ -1158,72 +2203,252 @@
                         </div>
 
                         <div className="button-container">
-                            <button className="button" onClick={() => setScreen('2.9')} disabled={!practiced || !plan} style={{width: '100%'}}>
-                                Continue to Day 9
+                            <button className="button" onClick={handleContinue} disabled={!practiced || !plan} style={{width: '100%'}}>
+                                Log My Practice
                             </button>
                         </div>
+                    </div>
+                    <div className="screen-footer">
+                        Growth requires repetition. By practicing your 2 focus actions daily, you're building muscle memory. After 3 days, these become easier and more natural - that's when Small Branches become strong.
                     </div>
                 </div>
             );
         }
 
-        // Screen 2.9: Day 9 - Guessing Game
-        function Day9GuessRevealScreen({ setScreen }) {
-            const [selectedGuess, setSelectedGuess] = useState(null);
-            const [guessAttempt, setGuessAttempt] = useState(0);
+        // Screen 2.9: Day 9 - Identify the Good Fruits
+        function Day9GuessRevealScreen({ setScreen, awardCredits, credits, currentScreen, pairedMode, partnerData, setPartnerData }) {
+            const [selectedGuesses, setSelectedGuesses] = useState([]);
 
-            const options = ['Cook dinner', 'Give massage', 'Listen actively', 'Plan date'];
-            const correctAnswer = 'Cook dinner';
+            // In paired mode, use actual partner's focus actions; otherwise simulate
+            const correctAnswers = (pairedMode && partnerData?.focusActions?.length === 2)
+                ? partnerData.focusActions
+                : ['Listen actively without trying to fix', 'Show physical affection regularly'];
 
-            const handleGuess = () => {
-                if (selectedGuess === correctAnswer) {
-                    alert('Correct! 🎯\n\nYou earn: ☀️ +5 Sun Credits\nThey earn: 💧 +5 Water Credits');
-                    setTimeout(() => setScreen('2.10'), 500);
-                } else if (guessAttempt === 0) {
-                    alert('Not quite! 💭\n\nYou have one more guess.');
-                    setGuessAttempt(1);
-                    setSelectedGuess(null);
-                } else {
-                    alert('Good try! The answer was: ' + correctAnswer);
-                    setTimeout(() => setScreen('2.10'), 500);
+            // Generate options: 2 correct + 4 decoys
+            const decoys = [
+                'Plan thoughtful dates or surprises',
+                'Help with household tasks unprompted',
+                'Communicate feelings openly',
+                'Be emotionally present',
+                'Remember important details',
+                'Support goals and ambitions'
+            ].filter(d => !correctAnswers.includes(d)).slice(0, 4);
+
+            const options = [
+                ...correctAnswers.map(text => ({ text, correct: true })),
+                ...decoys.map(text => ({ text, correct: false }))
+            ];
+
+            const toggleGuess = (option) => {
+                setSelectedGuesses(prev => {
+                    if (prev.includes(option)) {
+                        return prev.filter(o => o !== option);
+                    }
+                    if (prev.length < 2) {
+                        return [...prev, option];
+                    }
+                    return prev;
+                });
+            };
+
+            const handleSubmit = () => {
+                const correctCount = selectedGuesses.filter(guess => guess.correct).length;
+
+                // Award partner sun credits (in paired mode)
+                if (pairedMode && setPartnerData && correctCount > 0) {
+                    setPartnerData(prev => ({
+                        ...prev,
+                        credits: {
+                            ...prev.credits,
+                            sun: prev.credits.sun + (correctCount * 5)
+                        }
+                    }));
                 }
+
+                // Partner gets 5 sun per correct guess
+                // User gets water = 1/2 of points assigned to guessed behaviors
+                if (correctCount === 2) {
+                    // User gets water based on points (simulated as 6 water for perfect match)
+                    awardCredits('water', 6);
+                    alert('Perfect! 🎯 Partner earns ☀️ +10 Sun. You earn 💧 +6 Water. You\'re in sync!');
+                } else if (correctCount === 1) {
+                    awardCredits('water', 3);
+                    alert('Close! One match. Partner earns ☀️ +5 Sun. You earn 💧 +3 Water.');
+                } else {
+                    alert('Good try! No matches this time. Communication is key!');
+                }
+
+                setTimeout(() => setScreen('2.10'), 500);
             };
 
             return (
                 <div className="screen">
                     <div className="day-badge">Day 9 of 10</div>
                     <div className="header">
-                        <h2>The Guessing Game</h2>
+                        <h2>Identify the Good Fruits</h2>
                     </div>
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
                         <p className="text-md" style={{marginBottom: '12px'}}>
-                            Guess what your partner chose to do for you this week:
+                            Your partner focused on 2 actions this week. Can you identify what they were working on?
+                        </p>
+                        <p className="text-sm" style={{marginBottom: '12px', color: '#666'}}>
+                            Select 2 items you think they focused on:
                         </p>
 
                         <div style={{display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px'}}>
-                            {options.map(option => (
+                            {options.map((option, index) => (
                                 <div
-                                    key={option}
-                                    className="card"
-                                    onClick={() => setSelectedGuess(option)}
-                                    style={{background: selectedGuess === option ? '#E8F5E9' : 'white', borderColor: selectedGuess === option ? '#4CAF50' : '#e0e0e0', padding: '12px'}}
+                                    key={index}
+                                    onClick={() => toggleGuess(option)}
+                                    style={{
+                                        padding: '10px',
+                                        background: selectedGuesses.includes(option) ? '#E8F5E9' : 'white',
+                                        border: selectedGuesses.includes(option) ? '2px solid #4CAF50' : '2px solid #e0e0e0',
+                                        borderRadius: '8px',
+                                        cursor: 'pointer',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '10px'
+                                    }}
                                 >
-                                    <div style={{fontSize: '14px'}}>{option}</div>
+                                    <input
+                                        type="checkbox"
+                                        checked={selectedGuesses.includes(option)}
+                                        onChange={() => {}}
+                                        style={{width: '18px', height: '18px'}}
+                                    />
+                                    <span style={{fontSize: '13px'}}>{option.text}</span>
                                 </div>
                             ))}
                         </div>
 
-                        {guessAttempt > 0 && (
-                            <div className="warning-box" style={{fontSize: '12px', marginBottom: '12px'}}>
-                                This is your last guess!
-                            </div>
-                        )}
-
                         <div className="button-container">
-                            <button className="button" onClick={handleGuess} disabled={!selectedGuess} style={{width: '100%'}}>
-                                Make My Guess
+                            <button className="button" onClick={handleSubmit} disabled={selectedGuesses.length !== 2} style={{width: '100%'}}>
+                                Submit My Guesses
                             </button>
                         </div>
+                    </div>
+                    <div className="screen-footer">
+                        Identifying fruits means recognizing efforts. When you correctly guess your partner's focus, it shows you're paying attention. Bonuses reward awareness and strengthen your connection.
+                    </div>
+                </div>
+            );
+        }
+
+        // Screen 2.10: Harvest
+        function HarvestScreen({ setScreen, credits, setCredits, cycleCount, setCycleCount, pairedMode, setPairedMode }) {
+            const totalCredits = credits.sun + credits.water + credits.growth;
+            const canAffordReferral = totalCredits >= 100;
+            const canAffordPaired = totalCredits >= 200;
+
+            const handleReferral = () => {
+                // Spend 100 credits but preserve the rest
+                const remaining = totalCredits - 100;
+                setCredits({
+                    sun: credits.sun,
+                    water: credits.water,
+                    growth: credits.growth
+                });
+                // Deduct 100 from the total proportionally
+                const ratio = remaining / totalCredits;
+                setCredits({
+                    sun: Math.floor(credits.sun * ratio),
+                    water: Math.floor(credits.water * ratio),
+                    growth: Math.floor(credits.growth * ratio)
+                });
+                setCycleCount(prev => prev + 1);
+                alert('🎁 Great! You\'ve earned a 50% discount code for a friend. Check your email for the referral link.');
+                setScreen('2.2'); // Restart cycle with remaining credits
+            };
+
+            const handlePairedUpgrade = () => {
+                // Spend 200 credits
+                setCredits({ sun: 0, water: 0, growth: 0 });
+                setPairedMode(true);
+                alert('🎉 Congratulations! You\'ve unlocked Working Together mode. You and your partner can now work through the tree cycle together!');
+                setScreen('3.1'); // Go to dashboard in paired mode
+            };
+
+            const handleContinue = () => {
+                // Not enough credits to harvest, but credits are preserved
+                setCycleCount(prev => prev + 1);
+                setScreen('2.2'); // Restart cycle keeping all credits
+            };
+
+            return (
+                <div className="screen">
+                    <div className="day-badge">Day 10 of 10</div>
+                    <div className="header">
+                        <h2>🌾 Harvest!</h2>
+                    </div>
+                    <div className="screen-content">
+                        <div style={{textAlign: 'center', marginBottom: '20px'}}>
+                            <div style={{fontSize: '48px', marginBottom: '12px'}}>🌳</div>
+                            <h3 style={{fontSize: '18px', marginBottom: '8px'}}>Time to Harvest</h3>
+                            <p className="text-md" style={{marginBottom: '16px'}}>
+                                You've completed a growth cycle! You can spend your credits or continue growing.
+                            </p>
+                        </div>
+
+                        <div className="info-box" style={{marginBottom: '16px'}}>
+                            <strong>Your Credits:</strong><br/>
+                            ☀️ Sun: {credits.sun}<br/>
+                            💧 Water: {credits.water}<br/>
+                            🌱 Growth: {credits.growth}<br/>
+                            <strong>Total: {totalCredits}</strong>
+                        </div>
+
+                        <div style={{marginBottom: '20px'}}>
+                            <h4 style={{fontSize: '14px', marginBottom: '12px', fontWeight: '600'}}>Harvest Options:</h4>
+
+                            <div className="card" style={{marginBottom: '12px', opacity: canAffordReferral ? 1 : 0.5}}>
+                                <div className="card-title">🎁 50% Friend Referral</div>
+                                <div className="card-description" style={{marginBottom: '8px'}}>
+                                    Give a friend 50% off their WillingTree subscription
+                                </div>
+                                <div style={{fontSize: '12px', color: '#666', marginBottom: '8px'}}>
+                                    Cost: 100 credits
+                                </div>
+                                <button
+                                    className="button"
+                                    onClick={handleReferral}
+                                    disabled={!canAffordReferral}
+                                    style={{width: '100%'}}
+                                >
+                                    {canAffordReferral ? 'Get Referral Code' : 'Need 100 credits'}
+                                </button>
+                            </div>
+
+                            <div className="card" style={{marginBottom: '12px', opacity: canAffordPaired ? 1 : 0.5}}>
+                                <div className="card-title">💚 Upgrade to Working Together</div>
+                                <div className="card-description" style={{marginBottom: '8px'}}>
+                                    Work through the tree cycle with your partner in real-time
+                                </div>
+                                <div style={{fontSize: '12px', color: '#666', marginBottom: '8px'}}>
+                                    Cost: 200 credits
+                                </div>
+                                <button
+                                    className="button"
+                                    onClick={handlePairedUpgrade}
+                                    disabled={!canAffordPaired}
+                                    style={{width: '100%'}}
+                                >
+                                    {canAffordPaired ? 'Unlock Paired Mode' : 'Need 200 credits'}
+                                </button>
+                            </div>
+                        </div>
+
+                        {totalCredits < 100 && (
+                            <div className="button-container">
+                                <button className="button button-secondary" onClick={handleContinue} style={{width: '100%'}}>
+                                    Continue Growing (Start New Cycle)
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                    <div className="screen-footer">
+                        Each cycle deepens your practice. If you don't have enough credits to harvest, start another cycle to keep building your relationship skills. Credits accumulate across cycles!
                     </div>
                 </div>
             );
@@ -1266,6 +2491,9 @@
                                 Start My WillingTree Journey
                             </button>
                         </div>
+                    </div>
+                    <div className="screen-footer">
+                        You've completed the foundation. Now the real journey begins. Use WillingTree daily to build habits of appreciation, commitment, and awareness. Small daily actions compound into lasting relationship growth.
                     </div>
                 </div>
             );
@@ -1319,6 +2547,9 @@
                                 Manage Tree
                             </button>
                         </div>
+                    </div>
+                    <div className="screen-footer">
+                        Your daily hub for relationship growth. Complete daily appreciations, update your branches weekly, and play the guessing game to stay connected. Consistency matters more than perfection.
                     </div>
                 </div>
             );
