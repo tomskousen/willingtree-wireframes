@@ -1,10 +1,11 @@
 {
   "name": "willingtree-wireframes",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Interactive wireframes and demos for WillingTree relationship app",
   "scripts": {
     "record-v1": "cd v1 && node recorder.js",
     "record-v2": "cd v2 && node recorder.js",
+    "record-v3": "cd v3 && node recorder.js",
     "install-browsers": "npx playwright install chromium"
   },
   "keywords": [
@@ -16,6 +17,6 @@
   "author": "WillingTree Team",
   "license": "MIT",
   "devDependencies": {
-    "playwright": "^1.40.0"
+    "playwright": "^1.56.0"
   }
 }

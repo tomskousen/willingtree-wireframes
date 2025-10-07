@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WillingTree Complete Wireframes - V3</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #1a1a2e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+            max-width: 1400px;
+        }
+
+        .phone-frame {
+            width: 375px;
+            height: 667px;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .navigation-panel {
+            width: 280px;
+            background: #2d2d44;
+            border-radius: 12px;
+            padding: 20px;
+            max-height: 667px;
+            overflow-y: auto;
+            color: white;
+        }
+
+        .nav-section {
+            margin-bottom: 20px;
+        }
+
+        .nav-section-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #4CAF50;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-button {
+            width: 100%;
+            padding: 8px 12px;
+            background: rgba(76, 175, 80, 0.1);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            border-radius: 6px;
+            color: white;
+            font-size: 12px;
+            cursor: pointer;
+            margin-bottom: 6px;
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .nav-button:hover {
+            background: rgba(76, 175, 80, 0.2);
+            border-color: #4CAF50;
+        }
+
+        .nav-button.active {
+            background: #4CAF50;
+            border-color: #4CAF50;
+            font-weight: 500;
+        }
+
+        .screen {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            animation: fadeIn 0.3s ease;
+            overflow: hidden; /* Prevent scrolling */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .screen-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto; /* Allow scrolling only in content area */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Compact header for more content space */
+        .header {
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 50px;
+        }
+
+        .header h1 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .header h2 {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .header-subtitle {
+            font-size: 12px;
+            opacity: 0.9;
+            margin-top: 2px;
+        }
+
+        /* Compact buttons */
+        .button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .button:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+
+        .button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .button-secondary {
+            background: white;
+            color: #4CAF50;
+            border: 2px solid #4CAF50;
+        }
+
+        .button-secondary:hover {
+            background: #f1f8f4;
+        }
+
+        /* Compact form fields */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 6px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px 0;
+            border: none;
+            border-bottom: 1px solid #ddd;
+            font-size: 14px;
+            background: transparent;
+            transition: border-color 0.2s;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-bottom-color: #4CAF50;
+        }
+
+        select.input-field {
+            padding: 10px 0;
+        }
+
+        textarea.input-field {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            resize: vertical;
+            min-height: 70px;
+        }
+
+        /* Compact checkboxes */
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 12px 0;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+        }
+
+        .checkbox-group label {
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Compact cards */
+        .card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .card:hover {
+            border-color: #4CAF50;
+            background: #f8fdf9;
+        }
+
+        .card.selected {
+            border-color: #4CAF50;
+            background: #E8F5E9;
+        }
+
+        .card-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .card-description {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        /* Compact grid for bonding styles */
+        .grid-2x2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 16px 0;
+        }
+
+        .grid-item {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .grid-item:hover {
+            border-color: #4CAF50;
+            background: #f8fdf9;
+        }
+
+        .grid-item.selected {
+            border-color: #4CAF50;
+            background: #E8F5E9;
+        }
+
+        .grid-item-emoji {
+            font-size: 32px;
+            margin-bottom: 6px;
+        }
+
+        .grid-item-name {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .grid-item-trait {
+            font-size: 11px;
+            color: #666;
+        }
+
+        /* Compact text */
+        .text-lg {
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 12px;
+        }
+
+        .text-md {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .text-sm {
+            font-size: 12px;
+            color: #999;
+            line-height: 1.4;
+        }
+
+        /* Compact info boxes */
+        .info-box {
+            background: #E8F5E9;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 12px 0;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .warning-box {
+            background: #FFF3E0;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 12px 0;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        /* Screen label */
+        .screen-label {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            z-index: 10;
+        }
+
+        /* Day badge */
+        .day-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #4CAF50;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 10;
+        }
+
+        /* Button container at bottom */
+        .button-container {
+            margin-top: auto;
+            padding-top: 16px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(76, 175, 80, 0.5);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(76, 175, 80, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        // Icon Component for rendering SVG icons
+        function Icon({ type, size = 64 }) {
+            const iconPath = `../images/${type}.svg`;
+            return (
+                <img
+                    src={iconPath}
+                    alt={type}
+                    style={{
+                        width: `${size}px`,
+                        height: `${size}px`,
+                        display: 'inline-block',
+                        verticalAlign: 'middle'
+                    }}
+                />
+            );
+        }
+
+        // New step/substep naming system
+        const SCREENS = {
+            // Step 1: Welcome & Setup
+            '1.1': 'welcome',
+            '1.2': 'profile',
+            '1.3': 'pairing-choice',
+
+            // Step 2: 10-Day Onboarding
+            '2.1': 'day-1',
+            '2.2': 'day-2',
+            '2.3': 'day-3',
+            '2.4': 'day-4',
+            '2.5': 'day-5',
+            '2.6': 'day-6',
+            '2.7': 'day-7',
+            '2.8': 'day-8',
+            '2.9': 'day-9',
+            '2.10': 'day-10',
+
+            // Step 3: Daily Activities
+            '3.1': 'dashboard',
+            '3.2': 'daily-appreciation',
+            '3.3': 'weekly-gift',
+            '3.4': 'manage-tree',
+
+            // Step 4: Branch Building
+            '4.1': 'build-big-branch',
+            '4.2': 'big-branch-details',
+            '4.3': 'small-branches',
+
+            // Step 5: Partner Interaction
+            '5.1': 'partner-big-branch',
+            '5.2': 'prioritize-small',
+            '5.3': 'guessing-game',
+            '5.4': 'credits-earned',
+            '5.5': 'visibility-window',
+        };
+
+        function WillingTreeApp() {
+            const [currentScreen, setCurrentScreen] = useState('1.1');
+            const [formData, setFormData] = useState({
+                name: '',
+                birthdate: '',
+                gender: ''
+            });
+
+            const renderScreen = () => {
+                const screenId = SCREENS[currentScreen];
+
+                switch(screenId) {
+                    // Step 1: Welcome & Setup
+                    case 'welcome':
+                        return <WelcomeScreen onNext={() => setCurrentScreen('1.2')} setScreen={setCurrentScreen} />;
+                    case 'profile':
+                        return <ProfileScreen formData={formData} setFormData={setFormData} onNext={() => setCurrentScreen('1.3')} setScreen={setCurrentScreen} />;
+                    case 'pairing-choice':
+                        return <PairingChoiceScreen setScreen={setCurrentScreen} />;
+
+                    // Step 2: 10-Day Onboarding
+                    case 'day-1':
+                        return <Day1BondingScreen setScreen={setCurrentScreen} />;
+                    case 'day-2':
+                        return <Day2TreeMetaphorScreen setScreen={setCurrentScreen} />;
+                    case 'day-3':
+                        return <Day3CommitmentScreen setScreen={setCurrentScreen} />;
+                    case 'day-4':
+                        return <Day4WillingnessValuesScreen setScreen={setCurrentScreen} />;
+                    case 'day-5':
+                        return <Day5BenchmarksScreen setScreen={setCurrentScreen} />;
+                    case 'day-6':
+                        return <Day6SmallBranchesScreen setScreen={setCurrentScreen} />;
+                    case 'day-7':
+                        return <Day7WillingCommitmentScreen setScreen={setCurrentScreen} />;
+                    case 'day-8':
+                        return <Day8PracticeSessionScreen setScreen={setCurrentScreen} />;
+                    case 'day-9':
+                        return <Day9GuessRevealScreen setScreen={setCurrentScreen} />;
+                    case 'day-10':
+                        return <Day10CompletionScreen setScreen={setCurrentScreen} />;
+
+                    // Step 3: Daily Activities
+                    case 'dashboard':
+                        return <DashboardScreen setScreen={setCurrentScreen} />;
+                    case 'daily-appreciation':
+                        return <DailyAppreciationScreen setScreen={setCurrentScreen} />;
+                    case 'weekly-gift':
+                        return <WeeklyGiftScreen setScreen={setCurrentScreen} />;
+                    case 'manage-tree':
+                        return <ManageTreeScreen setScreen={setCurrentScreen} />;
+
+                    // Step 4: Branch Building
+                    case 'build-big-branch':
+                        return <BuildBigBranchScreen setScreen={setCurrentScreen} />;
+                    case 'big-branch-details':
+                        return <BigBranchDetailsScreen setScreen={setCurrentScreen} />;
+                    case 'small-branches':
+                        return <SmallBranchesScreen setScreen={setCurrentScreen} />;
+
+                    // Step 5: Partner Interaction
+                    case 'partner-big-branch':
+                        return <PartnerBigBranchScreen setScreen={setCurrentScreen} />;
+                    case 'prioritize-small':
+                        return <PrioritizeSmallScreen setScreen={setCurrentScreen} />;
+                    case 'guessing-game':
+                        return <GuessingGameScreen setScreen={setCurrentScreen} />;
+                    case 'credits-earned':
+                        return <CreditsEarnedScreen setScreen={setCurrentScreen} />;
+                    case 'visibility-window':
+                        return <VisibilityWindowScreen setScreen={setCurrentScreen} />;
+
+                    default:
+                        return <PlaceholderScreen code={currentScreen} />;
+                }
+            };
+
+            return (
+                <div className="container">
+                    <NavigationPanel currentScreen={currentScreen} setCurrentScreen={setCurrentScreen} />
+                    <div className="phone-frame">
+                        <div className="screen-label">{currentScreen}</div>
+                        {renderScreen()}
+                    </div>
+                </div>
+            );
+        }
+
+        // Navigation Panel Component
+        function NavigationPanel({ currentScreen, setCurrentScreen }) {
+            return (
+                <div className="navigation-panel">
+                    <div className="nav-section">
+                        <div className="nav-section-title">Step 1: Welcome & Setup</div>
+                        <button className={`nav-button ${currentScreen === '1.1' ? 'active' : ''}`} onClick={() => setCurrentScreen('1.1')}>1.1 Welcome</button>
+                        <button className={`nav-button ${currentScreen === '1.2' ? 'active' : ''}`} onClick={() => setCurrentScreen('1.2')}>1.2 Profile</button>
+                        <button className={`nav-button ${currentScreen === '1.3' ? 'active' : ''}`} onClick={() => setCurrentScreen('1.3')}>1.3 Pairing Choice</button>
+                    </div>
+
+                    <div className="nav-section">
+                        <div className="nav-section-title">Step 2: 10-Day Onboarding</div>
+                        <button className={`nav-button ${currentScreen === '2.1' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.1')}>2.1 Day 1 - Bonding</button>
+                        <button className={`nav-button ${currentScreen === '2.2' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.2')}>2.2 Day 2 - Tree Metaphor</button>
+                        <button className={`nav-button ${currentScreen === '2.3' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.3')}>2.3 Day 3 - Commitment</button>
+                        <button className={`nav-button ${currentScreen === '2.4' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.4')}>2.4 Day 4 - Values</button>
+                        <button className={`nav-button ${currentScreen === '2.5' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.5')}>2.5 Day 5 - Benchmarks</button>
+                        <button className={`nav-button ${currentScreen === '2.6' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.6')}>2.6 Day 6 - Small Branches</button>
+                        <button className={`nav-button ${currentScreen === '2.7' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.7')}>2.7 Day 7 - Commitment</button>
+                        <button className={`nav-button ${currentScreen === '2.8' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.8')}>2.8 Day 8 - Practice</button>
+                        <button className={`nav-button ${currentScreen === '2.9' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.9')}>2.9 Day 9 - Guessing Game</button>
+                        <button className={`nav-button ${currentScreen === '2.10' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.10')}>2.10 Day 10 - Complete</button>
+                    </div>
+
+                    <div className="nav-section">
+                        <div className="nav-section-title">Step 3: Daily Activities</div>
+                        <button className={`nav-button ${currentScreen === '3.1' ? 'active' : ''}`} onClick={() => setCurrentScreen('3.1')}>3.1 Dashboard</button>
+                        <button className={`nav-button ${currentScreen === '3.2' ? 'active' : ''}`} onClick={() => setCurrentScreen('3.2')}>3.2 Daily Appreciation</button>
+                        <button className={`nav-button ${currentScreen === '3.3' ? 'active' : ''}`} onClick={() => setCurrentScreen('3.3')}>3.3 Weekly Gift</button>
+                        <button className={`nav-button ${currentScreen === '3.4' ? 'active' : ''}`} onClick={() => setCurrentScreen('3.4')}>3.4 Manage Tree</button>
+                    </div>
+
+                    <div className="nav-section">
+                        <div className="nav-section-title">Step 4: Branch Building</div>
+                        <button className={`nav-button ${currentScreen === '4.1' ? 'active' : ''}`} onClick={() => setCurrentScreen('4.1')}>4.1 Build Big Branch</button>
+                        <button className={`nav-button ${currentScreen === '4.2' ? 'active' : ''}`} onClick={() => setCurrentScreen('4.2')}>4.2 Big Branch Details</button>
+                        <button className={`nav-button ${currentScreen === '4.3' ? 'active' : ''}`} onClick={() => setCurrentScreen('4.3')}>4.3 Small Branches</button>
+                    </div>
+
+                    <div className="nav-section">
+                        <div className="nav-section-title">Step 5: Partner Interaction</div>
+                        <button className={`nav-button ${currentScreen === '5.1' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.1')}>5.1 Partner Big Branch</button>
+                        <button className={`nav-button ${currentScreen === '5.2' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.2')}>5.2 Prioritize Small</button>
+                        <button className={`nav-button ${currentScreen === '5.3' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.3')}>5.3 Guessing Game</button>
+                        <button className={`nav-button ${currentScreen === '5.4' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.4')}>5.4 Credits Earned</button>
+                        <button className={`nav-button ${currentScreen === '5.5' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.5')}>5.5 Visibility Window</button>
+                    </div>
+                </div>
+            );
+        }
+
+        // ====================
+        // STEP 1: WELCOME & SETUP
+        // ====================
+
+        // Screen 1.1: Welcome
+        function WelcomeScreen({ onNext, setScreen }) {
+            return (
+                <div className="screen">
+                    <div className="header">
+                        <div>
+                            <h1>WillingTree</h1>
+                            <div className="header-subtitle">Grow stronger relationships together</div>
+                        </div>
+                    </div>
+                    <div className="screen-content">
+                        <div style={{flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', padding: '0 30px'}}>
+                            <div style={{marginBottom: '20px'}}>
+                                <Icon type="logo" size={80} />
+                            </div>
+                            <h2 style={{fontSize: '24px', marginBottom: '12px', color: '#333'}}>Welcome to WillingTree</h2>
+                            <p className="text-md" style={{marginBottom: '24px'}}>
+                                Build appreciation, track commitments, and grow your relationship through daily care.
+                            </p>
+                        </div>
+                        <div className="button-container">
+                            <button className="button" onClick={onNext} style={{width: '100%'}}>Sign Up</button>
+                            <button className="button button-secondary" onClick={() => alert('Login flow not implemented in demo')} style={{width: '100%', marginTop: '12px'}}>Log In</button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Screen 1.2: Profile Setup
+        function ProfileScreen({ formData, setFormData, onNext, setScreen }) {
+            const [isValid, setIsValid] = useState(false);
+
+            const handleInputChange = (field, value) => {
+                const newData = { ...formData, [field]: value };
+                setFormData(newData);
+                setIsValid(newData.name && newData.birthdate && newData.gender);
+            };
+
+            return (
+                <div className="screen">
+                    <div className="header">
+                        <h2>Create Your Profile</h2>
+                    </div>
+                    <div className="screen-content">
+                        <p className="text-md" style={{marginBottom: '20px'}}>
+                            Tell us a bit about yourself to get started.
+                        </p>
+
+                        <div className="form-group">
+                            <label className="form-label">Name</label>
+                            <input
+                                className="input-field"
+                                type="text"
+                                placeholder="Your name"
+                                value={formData.name}
+                                onChange={(e) => handleInputChange('name', e.target.value)}
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label className="form-label">Birthdate</label>
+                            <input
+                                className="input-field"
+                                type="date"
+                                value={formData.birthdate}
+                                onChange={(e) => handleInputChange('birthdate', e.target.value)}
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label className="form-label">Gender</label>
+                            <select
+                                className="input-field"
+                                value={formData.gender}
+                                onChange={(e) => handleInputChange('gender', e.target.value)}
+                            >
+                                <option value="">Select gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="non-binary">Non-binary</option>
+                                <option value="prefer-not-to-say">Prefer not to say</option>
+                            </select>
+                        </div>
+
+                        <div className="button-container">
+                            <button className="button" onClick={onNext} disabled={!isValid} style={{width: '100%'}}>
+                                Continue
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Screen 1.3: Pairing Choice
+        function PairingChoiceScreen({ setScreen }) {
+            const [choice, setChoice] = useState(null);
+
+            const handleContinue = () => {
+                if (choice === 'solo') {
+                    alert('Starting solo mode! You can add a partner anytime from settings.');
+                    setScreen('2.1');
+                } else if (choice === 'pair') {
+                    alert('Great! After onboarding, you\'ll be able to send a pairing invitation.');
+                    setScreen('2.1');
+                }
+            };
+
+            return (
+                <div className="screen">
+                    <div className="header">
+                        <h2>Choose Your Path</h2>
+                    </div>
+                    <div className="screen-content">
+                        <p className="text-md" style={{marginBottom: '16px'}}>
+                            How would you like to use WillingTree?
+                        </p>
+
+                        <div className="card" onClick={() => setChoice('solo')} style={{marginBottom: '12px', background: choice === 'solo' ? '#E8F5E9' : 'white', borderColor: choice === 'solo' ? '#4CAF50' : '#e0e0e0'}}>
+                            <div className="card-title">Solo Mode</div>
+                            <div className="card-description">
+                                Understand and apply the system before pairing
+                            </div>
+                            {choice === 'solo' && (
+                                <div className="info-box" style={{marginTop: '12px', marginBottom: 0}}>
+                                    <strong>What happens next:</strong><br/>
+                                    Complete the 10-day tutorial, then add a partner anytime from settings.
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="card" onClick={() => setChoice('pair')} style={{background: choice === 'pair' ? '#E8F5E9' : 'white', borderColor: choice === 'pair' ? '#4CAF50' : '#e0e0e0'}}>
+                            <div className="card-title">Pair With Someone Now</div>
+                            <div className="card-description">
+                                Start with a partner from the beginning
+                            </div>
+                            {choice === 'pair' && (
+                                <div className="info-box" style={{marginTop: '12px', marginBottom: 0}}>
+                                    <strong>What happens next:</strong><br/>
+                                    Complete onboarding, then send an invitation to your partner via email.
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="button-container">
+                            <button className="button" onClick={handleContinue} disabled={!choice} style={{width: '100%'}}>
+                                Continue
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // ====================
+        // STEP 2: 10-DAY ONBOARDING
+        // ====================
+
+        // Screen 2.1: Day 1 - Bonding Styles
+        function Day1BondingScreen({ setScreen }) {
+            const [selectedStyle, setSelectedStyle] = useState(null);
+
+            const styles = [
+                { icon: 'stone', name: 'Stone', trait: 'Steady', desc: 'You provide stability and consistency in your relationship. You\'re the rock others can depend on.' },
+                { icon: 'seedling', name: 'Soil', trait: 'Nurturing', desc: 'You nourish and support growth. You create the conditions for your partner to flourish.' },
+                { icon: 'shovel', name: 'Shovel', trait: 'Action', desc: 'You dig in and get things done. You take initiative and make things happen.' },
+                { icon: 'young-tree', name: 'Stakes', trait: 'Guiding', desc: 'You provide direction and structure. You help keep growth focused and strong.' }
+            ];
+
+            const handleContinue = () => {
+                alert('Great choice! You\'ve earned your first ☀️ 5 Sun Credits!');
+                setScreen('2.2');
+            };
+
+            return (
+                <div className="screen">
+                    <div className="day-badge">Day 1 of 10</div>
+                    <div className="header">
+                        <h2>Choose Your Bonding Style</h2>
+                    </div>
+                    <div className="screen-content">
+                        <p className="text-md" style={{marginBottom: '12px'}}>
+                            How do you contribute to your relationships?
+                        </p>
+
+                        <div className="grid-2x2">
+                            {styles.map(style => (
+                                <div
+                                    key={style.name}
+                                    className={`grid-item ${selectedStyle === style.name ? 'selected' : ''}`}
+                                    onClick={() => setSelectedStyle(style.name)}
+                                >
+                                    <div style={{marginBottom: '6px'}}>
+                                        <Icon type={style.icon} size={48} />
+                                    </div>
+                                    <div className="grid-item-name">{style.name}</div>
+                                    <div className="grid-item-trait">{style.trait}</div>
+                                </div>
+                            ))}
+                        </div>
+
+                        {selectedStyle && (
+                            <div className="info-box" style={{fontSize: '12px'}}>
+                                {styles.find(s => s.name === selectedStyle)?.desc}
+                            </div>
+                        )}
+
+                        <div className="button-container">
+                            <button className="button" onClick={handleContinue} disabled={!selectedStyle} style={{width: '100%'}}>
+                                Continue to Day 2
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Screen 2.2: Day 2 - Tree Metaphor
+        function Day2TreeMetaphorScreen({ setScreen }) {
+            const [understood, setUnderstood] = useState(false);
+
+            return (
+                <div className="screen">
+                    <div className="day-badge">Day 2 of 10</div>
+                    <div className="header">
+                        <h2>Understanding the Tree</h2>
+                    </div>
+                    <div className="screen-content">
+                        <p className="text-md" style={{marginBottom: '12px'}}>
+                            Your relationship is like a tree that grows through care:
+                        </p>
+
+                        <div style={{display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '16px'}}>
+                            <div style={{display: 'flex', alignItems: 'start', gap: '10px'}}>
+                                <div style={{minWidth: '32px', display: 'flex', alignItems: 'center'}}>
+                                    <Icon type="young-tree" size={32} />
+                                </div>
+                                <div>
+                                    <div style={{fontSize: '13px', fontWeight: '600', marginBottom: '2px'}}>Big Branch</div>
+                                    <div style={{fontSize: '12px', color: '#666'}}>Your wants and needs list</div>
+                                </div>
+                            </div>
+                            <div style={{display: 'flex', alignItems: 'start', gap: '10px'}}>
+                                <div style={{minWidth: '32px', display: 'flex', alignItems: 'center'}}>
+                                    <Icon type="seedling" size={32} />
+                                </div>
+                                <div>
+                                    <div style={{fontSize: '13px', fontWeight: '600', marginBottom: '2px'}}>Small Branches</div>
+                                    <div style={{fontSize: '12px', color: '#666'}}>What you're willing to do</div>
+                                </div>
+                            </div>
+                            <div style={{display: 'flex', alignItems: 'start', gap: '10px'}}>
+                                <div style={{fontSize: '24px', minWidth: '32px'}}>🍃</div>
+                                <div>
+                                    <div style={{fontSize: '13px', fontWeight: '600', marginBottom: '2px'}}>Leaves</div>
+                                    <div style={{fontSize: '12px', color: '#666'}}>Recognition of what's been done</div>
+                                </div>
+                            </div>
+                            <div style={{display: 'flex', alignItems: 'start', gap: '10px'}}>
+                                <div style={{fontSize: '24px', minWidth: '32px'}}>🍎</div>
+                                <div>
+                                    <div style={{fontSize: '13px', fontWeight: '600', marginBottom: '2px'}}>Fruits</div>
+                                    <div style={{fontSize: '12px', color: '#666'}}>Rewards from your credits</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="checkbox-group">
+                            <input type="checkbox" checked={understood} onChange={(e) => setUnderstood(e.target.checked)} />
+                            <label>I understand the tree metaphor</label>
+                        </div>
+
+                        <div className="button-container">
+                            <button className="button" onClick={() => setScreen('2.3')} disabled={!understood} style={{width: '100%'}}>
+                                Continue to Day 3
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Screen 2.3: Day 3 - Commitment
+        function Day3CommitmentScreen({ setScreen }) {
+            const [selectedLevel, setSelectedLevel] = useState(null);
+
+            const levels = [
+                { name: 'Curious', desc: 'Exploring to see if this works for me' },
+                { name: 'Interested', desc: 'Willing to give this a try' },
+                { name: 'Dedicated', desc: 'Committed to making this part of my routine' }
+            ];
+
+            return (
+                <div className="screen">
+                    <div className="day-badge">Day 3 of 10</div>
+                    <div className="header">
+                        <h2>Your Commitment Level</h2>
+                    </div>
+                    <div className="screen-content">
+                        <p className="text-md" style={{marginBottom: '12px'}}>
+                            How committed are you to growing your relationship?
+                        </p>
+
+                        {levels.map(level => (
+                            <div
+                                key={level.name}
+                                className="card"
+                                onClick={() => setSelectedLevel(level.name)}
+                                style={{background: selectedLevel === level.name ? '#E8F5E9' : 'white', borderColor: selectedLevel === level.name ? '#4CAF50' : '#e0e0e0'}}
+                            >
+                                <div className="card-title">{level.name}</div>
+                                <div className="card-description">{level.desc}</div>
+                            </div>
+                        ))}
+
+                        <div className="button-container">
+                            <button className="button" onClick={() => setScreen('2.4')} disabled={!selectedLevel} style={{width: '100%'}}>
+                                Continue to Day 4
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Screen 2.4: Day 4 - Willingness Values
+        function Day4WillingnessValuesScreen({ setScreen }) {
+            const [selectedTasks, setSelectedTasks] = useState([]);
+
+            const tasks = [
+                'Cook dinner together',
+                'Give a massage',
+                'Listen actively',
+                'Plan a date night',
+                'Do the dishes',
+                'Give a compliment'
+            ];
+
+            const toggleTask = (task) => {
+                setSelectedTasks(prev =>
+                    prev.includes(task) ? prev.filter(t => t !== task) : [...prev, task]
+                );
+            };
+
+            return (
+                <div className="screen">
+                    <div className="day-badge">Day 4 of 10</div>
+                    <div className="header">
+                        <h2>Prioritize Your Willingness</h2>
+                    </div>
+                    <div className="screen-content">
+                        <p className="text-md" style={{marginBottom: '12px'}}>
+                            Which acts of service are you most willing to do? (Select 2-4)
+                        </p>
+
+                        <div style={{display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px'}}>
+                            {tasks.map(task => (
+                                <div
+                                    key={task}
+                                    className="card"
+                                    onClick={() => toggleTask(task)}
+                                    style={{background: selectedTasks.includes(task) ? '#E8F5E9' : 'white', borderColor: selectedTasks.includes(task) ? '#4CAF50' : '#e0e0e0', padding: '12px'}}
+                                >
+                                    <div style={{fontSize: '14px'}}>{task}</div>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="button-container">
+                            <button className="button" onClick={() => setScreen('2.5')} disabled={selectedTasks.length < 2} style={{width: '100%'}}>
+                                Continue to Day 5
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Screen 2.5: Day 5 - Benchmarks
+        function Day5BenchmarksScreen({ setScreen }) {
+            const [ask, setAsk] = useState('');
+            const [understood, setUnderstood] = useState(false);
+
+            return (
+                <div className="screen">
+                    <div className="day-badge">Day 5 of 10</div>
+                    <div className="header">
+                        <h2>Set Your First Benchmark</h2>
+                    </div>
+                    <div className="screen-content">
+                        <p className="text-md" style={{marginBottom: '12px'}}>
+                            What's one thing you'd love your partner to do regularly?
+                        </p>
+
+                        <div className="form-group">
+                            <textarea
+                                className="input-field"
+                                placeholder="Example: I would love if we could have one tech-free dinner together each week..."
+                                value={ask}
+                                onChange={(e) => setAsk(e.target.value)}
+                                style={{minHeight: '80px'}}
+                            />
+                        </div>
+
+                        <div className="checkbox-group">
+                            <input type="checkbox" checked={understood} onChange={(e) => setUnderstood(e.target.checked)} />
+                            <label style={{fontSize: '12px'}}>I understand this is my first "ask" on my Big Branch</label>
+                        </div>
+
+                        <div className="button-container">
+                            <button className="button" onClick={() => setScreen('2.6')} disabled={!ask || !understood} style={{width: '100%'}}>
+                                Continue to Day 6
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Screen 2.6: Day 6 - Small Branches
+        function Day6SmallBranchesScreen({ setScreen }) {
+            const [slot1, setSlot1] = useState('');
+            const [selectedNext, setSelectedNext] = useState([]);
+
+            const availableTasks = ['Cook dinner', 'Give massage', 'Listen actively', 'Plan date', 'Do dishes'];
+
+            const toggleTask = (task) => {
+                setSelectedNext(prev => {
+                    if (prev.includes(task)) return prev.filter(t => t !== task);
+                    if (prev.length < 2) return [...prev, task];
+                    return prev;
+                });
+            };
+
+            return (
+                <div className="screen">
+                    <div className="day-badge">Day 6 of 10</div>
+                    <div className="header">
+                        <h2>Create Your Willing List</h2>
+                    </div>
+                    <div className="screen-content">
+                        <p className="text-md" style={{marginBottom: '12px'}}>
+                            Set up your 3 Small Branches (willing actions):
+                        </p>
+
+                        <div style={{marginBottom: '16px'}}>
+                            <div className="form-label">Slot 1: What you're claiming to receive</div>
+                            <select className="input-field" value={slot1} onChange={(e) => setSlot1(e.target.value)} style={{marginBottom: '12px'}}>
+                                <option value="">Select...</option>
+                                <option value="massage">A massage</option>
+                                <option value="dinner">Dinner cooked for me</option>
+                                <option value="listening">Active listening</option>
+                            </select>
+
+                            <div className="form-label">Slots 2-3: What you'll do next 5 days (Pick 2)</div>
+                            <div style={{display: 'flex', flexDirection: 'column', gap: '6px'}}>
+                                {availableTasks.map(task => (
+                                    <div key={task} className="checkbox-group" style={{marginBottom: 0}}>
+                                        <input
+                                            type="checkbox"
+                                            checked={selectedNext.includes(task)}
+                                            onChange={() => toggleTask(task)}
+                                            disabled={!selectedNext.includes(task) && selectedNext.length >= 2}
+                                        />
+                                        <label style={{fontSize: '13px'}}>{task}</label>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="button-container">
+                            <button className="button" onClick={() => setScreen('2.7')} disabled={!slot1 || selectedNext.length !== 2} style={{width: '100%'}}>
+                                Lock in Small Branches
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Screen 2.7: Day 7 - Willing Commitment
+        function Day7WillingCommitmentScreen({ setScreen }) {
+            const [commitment, setCommitment] = useState('');
+            const [confirmed, setConfirmed] = useState(false);
+
+            return (
+                <div className="screen">
+                    <div className="day-badge">Day 7 of 10</div>
+                    <div className="header">
+                        <h2>Confirm Your Commitment</h2>
+                    </div>
+                    <div className="screen-content">
+                        <p className="text-md" style={{marginBottom: '12px'}}>
+                            Write what you commit to doing this week:
+                        </p>
+
+                        <div className="form-group">
+                            <textarea
+                                className="input-field"
+                                placeholder="I commit to..."
+                                value={commitment}
+                                onChange={(e) => setCommitment(e.target.value)}
+                                style={{minHeight: '70px'}}
+                            />
+                        </div>
+
+                        <div className="checkbox-group">
+                            <input type="checkbox" checked={confirmed} onChange={(e) => setConfirmed(e.target.checked)} />
+                            <label style={{fontSize: '12px'}}>I commit to following through</label>
+                        </div>
+
+                        <div className="button-container">
+                            <button className="button" onClick={() => setScreen('2.8')} disabled={!commitment || !confirmed} style={{width: '100%'}}>
+                                Confirm Commitment
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Screen 2.8: Day 8 - Practice Session
+        function Day8PracticeSessionScreen({ setScreen }) {
+            const [practiced, setPracticed] = useState(false);
+            const [plan, setPlan] = useState('');
+
+            return (
+                <div className="screen">
+                    <div className="day-badge">Day 8 of 10</div>
+                    <div className="header">
+                        <h2>Practice Making It Happen</h2>
+                    </div>
+                    <div className="screen-content">
+                        <p className="text-md" style={{marginBottom: '12px'}}>
+                            When and how will you do your committed actions?
+                        </p>
+
+                        <div className="checkbox-group">
+                            <input type="checkbox" checked={practiced} onChange={(e) => setPracticed(e.target.checked)} />
+                            <label style={{fontSize: '12px'}}>I've thought about when I'll do this</label>
+                        </div>
+
+                        <div className="form-group">
+                            <textarea
+                                className="input-field"
+                                placeholder="My plan: I will do this right after..."
+                                value={plan}
+                                onChange={(e) => setPlan(e.target.value)}
+                                style={{minHeight: '70px'}}
+                            />
+                        </div>
+
+                        <div className="button-container">
+                            <button className="button" onClick={() => setScreen('2.9')} disabled={!practiced || !plan} style={{width: '100%'}}>
+                                Continue to Day 9
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Screen 2.9: Day 9 - Guessing Game
+        function Day9GuessRevealScreen({ setScreen }) {
+            const [selectedGuess, setSelectedGuess] = useState(null);
+            const [guessAttempt, setGuessAttempt] = useState(0);
+
+            const options = ['Cook dinner', 'Give massage', 'Listen actively', 'Plan date'];
+            const correctAnswer = 'Cook dinner';
+
+            const handleGuess = () => {
+                if (selectedGuess === correctAnswer) {
+                    alert('Correct! 🎯\n\nYou earn: ☀️ +5 Sun Credits\nThey earn: 💧 +5 Water Credits');
+                    setTimeout(() => setScreen('2.10'), 500);
+                } else if (guessAttempt === 0) {
+                    alert('Not quite! 💭\n\nYou have one more guess.');
+                    setGuessAttempt(1);
+                    setSelectedGuess(null);
+                } else {
+                    alert('Good try! The answer was: ' + correctAnswer);
+                    setTimeout(() => setScreen('2.10'), 500);
+                }
+            };
+
+            return (
+                <div className="screen">
+                    <div className="day-badge">Day 9 of 10</div>
+                    <div className="header">
+                        <h2>The Guessing Game</h2>
+                    </div>
+                    <div className="screen-content">
+                        <p className="text-md" style={{marginBottom: '12px'}}>
+                            Guess what your partner chose to do for you this week:
+                        </p>
+
+                        <div style={{display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px'}}>
+                            {options.map(option => (
+                                <div
+                                    key={option}
+                                    className="card"
+                                    onClick={() => setSelectedGuess(option)}
+                                    style={{background: selectedGuess === option ? '#E8F5E9' : 'white', borderColor: selectedGuess === option ? '#4CAF50' : '#e0e0e0', padding: '12px'}}
+                                >
+                                    <div style={{fontSize: '14px'}}>{option}</div>
+                                </div>
+                            ))}
+                        </div>
+
+                        {guessAttempt > 0 && (
+                            <div className="warning-box" style={{fontSize: '12px', marginBottom: '12px'}}>
+                                This is your last guess!
+                            </div>
+                        )}
+
+                        <div className="button-container">
+                            <button className="button" onClick={handleGuess} disabled={!selectedGuess} style={{width: '100%'}}>
+                                Make My Guess
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Screen 2.10: Day 10 - Completion
+        function Day10CompletionScreen({ setScreen }) {
+            const [ready, setReady] = useState(false);
+
+            return (
+                <div className="screen">
+                    <div className="day-badge">Day 10 of 10</div>
+                    <div className="header">
+                        <h2>You're Ready!</h2>
+                    </div>
+                    <div className="screen-content">
+                        <div style={{textAlign: 'center', marginBottom: '20px'}}>
+                            <div style={{fontSize: '48px', marginBottom: '12px'}}>🎉</div>
+                            <h3 style={{fontSize: '18px', marginBottom: '8px'}}>Onboarding Complete!</h3>
+                            <p className="text-md">
+                                You've learned the core concepts of WillingTree. Now it's time to start your real journey.
+                            </p>
+                        </div>
+
+                        <div className="info-box" style={{fontSize: '12px', marginBottom: '16px'}}>
+                            <strong>What you've learned:</strong><br/>
+                            • Your bonding style<br/>
+                            • Tree metaphor (branches, leaves, fruits)<br/>
+                            • Setting benchmarks and commitments<br/>
+                            • The guessing game and credits
+                        </div>
+
+                        <div className="checkbox-group">
+                            <input type="checkbox" checked={ready} onChange={(e) => setReady(e.target.checked)} />
+                            <label style={{fontSize: '12px'}}>I'm ready to start my WillingTree journey</label>
+                        </div>
+
+                        <div className="button-container">
+                            <button className="button" onClick={() => setScreen('3.1')} disabled={!ready} style={{width: '100%'}}>
+                                Start My WillingTree Journey
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // ====================
+        // STEP 3: DAILY ACTIVITIES
+        // ====================
+
+        // Screen 3.1: Dashboard
+        function DashboardScreen({ setScreen }) {
+            return (
+                <div className="screen">
+                    <div className="header">
+                        <h1>Dashboard</h1>
+                    </div>
+                    <div className="screen-content">
+                        <div className="card" onClick={() => setScreen('3.2')}>
+                            <div className="card-title">💚 Daily Appreciation</div>
+                            <div className="card-description">Share what you appreciate today</div>
+                        </div>
+
+                        <div className="card" onClick={() => setScreen('3.3')}>
+                            <div className="card-title">🎁 Weekly Gift</div>
+                            <div className="card-description">See your special gift this week</div>
+                        </div>
+
+                        <div className="card" onClick={() => setScreen('4.1')}>
+                            <div className="card-title" style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
+                                <Icon type="young-tree" size={20} />
+                                <span>Build Big Branch</span>
+                            </div>
+                            <div className="card-description">Add to your wants/needs list</div>
+                        </div>
+
+                        <div className="card" onClick={() => setScreen('4.3')}>
+                            <div className="card-title" style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
+                                <Icon type="seedling" size={20} />
+                                <span>Small Branches</span>
+                            </div>
+                            <div className="card-description">Update your willing actions</div>
+                        </div>
+
+                        <div className="card" onClick={() => setScreen('5.3')}>
+                            <div className="card-title">🎯 Guessing Game</div>
+                            <div className="card-description">Guess your partner's choices</div>
+                        </div>
+
+                        <div className="button-container">
+                            <button className="button button-secondary" onClick={() => setScreen('3.4')} style={{width: '100%'}}>
+                                Manage Tree
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Placeholder screens for remaining features
+        function DailyAppreciationScreen({ setScreen }) {
+            return <PlaceholderScreen code="3.2" title="Daily Appreciation" setScreen={setScreen} />;
+        }
+
+        function WeeklyGiftScreen({ setScreen }) {
+            return <PlaceholderScreen code="3.3" title="Weekly Gift" setScreen={setScreen} />;
+        }
+
+        function ManageTreeScreen({ setScreen }) {
+            return <PlaceholderScreen code="3.4" title="Manage Tree" setScreen={setScreen} />;
+        }
+
+        function BuildBigBranchScreen({ setScreen }) {
+            return <PlaceholderScreen code="4.1" title="Build Big Branch" setScreen={setScreen} />;
+        }
+
+        function BigBranchDetailsScreen({ setScreen }) {
+            return <PlaceholderScreen code="4.2" title="Big Branch Details" setScreen={setScreen} />;
+        }
+
+        function SmallBranchesScreen({ setScreen }) {
+            return <PlaceholderScreen code="4.3" title="Small Branches" setScreen={setScreen} />;
+        }
+
+        function PartnerBigBranchScreen({ setScreen }) {
+            return <PlaceholderScreen code="5.1" title="Partner's Big Branch" setScreen={setScreen} />;
+        }
+
+        function PrioritizeSmallScreen({ setScreen }) {
+            return <PlaceholderScreen code="5.2" title="Prioritize Small Branches" setScreen={setScreen} />;
+        }
+
+        function GuessingGameScreen({ setScreen }) {
+            return <PlaceholderScreen code="5.3" title="Guessing Game" setScreen={setScreen} />;
+        }
+
+        function CreditsEarnedScreen({ setScreen }) {
+            return <PlaceholderScreen code="5.4" title="Credits Earned" setScreen={setScreen} />;
+        }
+
+        function VisibilityWindowScreen({ setScreen }) {
+            return <PlaceholderScreen code="5.5" title="Visibility Window" setScreen={setScreen} />;
+        }
+
+        // Generic placeholder for unimplemented screens
+        function PlaceholderScreen({ code, title, setScreen }) {
+            return (
+                <div className="screen">
+                    <div className="header">
+                        <h2>{title || `Screen ${code}`}</h2>
+                    </div>
+                    <div className="screen-content">
+                        <div style={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#999', fontSize: '14px'}}>
+                            This screen is not yet implemented in the demo.
+                        </div>
+                        <div className="button-container">
+                            <button className="button button-secondary" onClick={() => setScreen('3.1')} style={{width: '100%'}}>
+                                Back to Dashboard
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Render the app
+        ReactDOM.render(<WillingTreeApp />, document.getElementById('root'));
+    </script>
+</body>
+</html>
