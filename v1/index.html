@@ -1,0 +1,2002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WillingTree Complete Wireframes</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #1a1a2e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+            max-width: 1400px;
+        }
+
+        .phone-frame {
+            width: 375px;
+            height: 667px;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .navigation-panel {
+            width: 250px;
+            background: #2d2d44;
+            border-radius: 12px;
+            padding: 20px;
+            max-height: 667px;
+            overflow-y: auto;
+            color: white;
+        }
+
+        .nav-section {
+            margin-bottom: 20px;
+        }
+
+        .nav-section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #4CAF50;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-button {
+            width: 100%;
+            padding: 10px;
+            background: rgba(76, 175, 80, 0.1);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            border-radius: 6px;
+            color: white;
+            font-size: 13px;
+            cursor: pointer;
+            margin-bottom: 8px;
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .nav-button:hover {
+            background: rgba(76, 175, 80, 0.2);
+            border-color: #4CAF50;
+        }
+
+        .nav-button.active {
+            background: #4CAF50;
+            border-color: #4CAF50;
+            font-weight: 500;
+        }
+
+        .screen {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .header {
+            background: #f8f8f8;
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .header-clean {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: none;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .nav-arrows {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-icon {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e0e0e0;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .nav-icon:hover {
+            background: #d0d0d0;
+            transform: scale(1.05);
+        }
+
+        .nav-icon:active {
+            transform: scale(0.95);
+        }
+
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .content-centered {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 30px;
+        }
+
+        .tree-emoji {
+            font-size: 72px;
+            margin-bottom: 40px;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: 400;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .highlight {
+            color: #4CAF50;
+            font-weight: 500;
+        }
+
+        .button {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            margin-bottom: 12px;
+        }
+
+        .button-primary {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .button-primary:hover {
+            background: #45a049;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+
+        .button-primary:active {
+            transform: translateY(0);
+        }
+
+        .button-secondary {
+            background: transparent;
+            color: #4CAF50;
+            border: 1px solid #4CAF50;
+        }
+
+        .button-secondary:hover {
+            background: rgba(76, 175, 80, 0.1);
+        }
+
+        .button-danger {
+            background: #f44336;
+            color: white;
+        }
+
+        .button-danger:hover {
+            background: #da190b;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px 0;
+            border: none;
+            border-bottom: 1px solid #ddd;
+            font-size: 16px;
+            font-family: inherit;
+            background: transparent;
+            outline: none;
+            transition: border-color 0.2s;
+            margin-bottom: 25px;
+        }
+
+        .input-field:focus {
+            border-bottom-color: #4CAF50;
+        }
+
+        .pairing-card {
+            background: #f8f8f8;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .pairing-card:hover {
+            background: #f0f0f0;
+            transform: translateX(2px);
+        }
+
+        .pairing-names {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .menu-dots {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .menu-dots:hover {
+            background: rgba(0,0,0,0.1);
+        }
+
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            background: white;
+            border-top: 1px solid #eee;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 11px;
+            color: #666;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .nav-item:hover {
+            background: #f5f5f5;
+            color: #4CAF50;
+        }
+
+        .placeholder-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #999;
+            font-size: 48px;
+            font-weight: 300;
+        }
+
+        .info-box {
+            background: #E8F5E9;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .warning-box {
+            background: #FFF3E0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .day-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #4CAF50;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 10;
+        }
+
+        .screen-label {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            z-index: 10;
+        }
+
+        .clickable-item {
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .clickable-item:hover {
+            background: #E8F5E9 !important;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(76, 175, 80, 0.5);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(76, 175, 80, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        const SCREENS = {
+            '1A': 'welcome', '1B': 'profile', '1B2': 'pairing-choice', '1C': 'dashboard', '1D': 'manage-tree',
+            '2A': 'day-1', '2B': 'day-2', '2C': 'day-3', '2D': 'day-4', '2E': 'day-5',
+            '2F': 'day-6', '2G': 'day-7', '2H': 'day-8', '2I': 'day-9', '2J': 'day-10',
+            '3A': 'daily-appreciation', '3B': 'weekly-gift', '3C': 'build-big-branch',
+            '4A': 'building-big-branch', '4B': 'small-branches',
+            '5A': 'partner-big-branch', '5B': 'prioritize-small', '5C': 'guessing-game',
+            '5D': 'credits-earned', '5E': 'visibility-window',
+        };
+
+        function WillingTreeApp() {
+            const [currentScreen, setCurrentScreen] = useState('1A');
+            const [formData, setFormData] = useState({
+                name: '',
+                birthdate: '',
+                gender: ''
+            });
+
+            const renderScreen = () => {
+                const screenId = SCREENS[currentScreen];
+
+                switch(screenId) {
+                    case 'welcome':
+                        return <WelcomeScreen onNext={() => setCurrentScreen('1B')} setScreen={setCurrentScreen} />;
+                    case 'profile':
+                        return <ProfileScreen formData={formData} setFormData={setFormData} onNext={() => setCurrentScreen('1B2')} setScreen={setCurrentScreen} />;
+                    case 'pairing-choice':
+                        return <PairingChoiceScreen setScreen={setCurrentScreen} />;
+                    case 'dashboard':
+                        return <DashboardScreen setScreen={setCurrentScreen} />;
+                    case 'manage-tree':
+                        return <ManageTreeScreen setScreen={setCurrentScreen} />;
+                    case 'daily-appreciation':
+                        return <DailyAppreciationScreen setScreen={setCurrentScreen} />;
+                    case 'weekly-gift':
+                        return <WeeklyGiftScreen setScreen={setCurrentScreen} />;
+                    case 'build-big-branch':
+                        return <BuildBigBranchScreen setScreen={setCurrentScreen} />;
+                    case 'building-big-branch':
+                        return <BuildingBigBranchDetailScreen setScreen={setCurrentScreen} />;
+                    case 'small-branches':
+                        return <SmallBranchesScreen setScreen={setCurrentScreen} />;
+                    case 'partner-big-branch':
+                        return <PartnerBigBranchScreen setScreen={setCurrentScreen} />;
+                    case 'guessing-game':
+                        return <GuessingGameScreen setScreen={setCurrentScreen} />;
+
+                    // Onboarding Days 1-10
+                    case 'day-1':
+                        return <Day1BondingScreen setScreen={setCurrentScreen} />;
+                    case 'day-2':
+                        return <Day2TreeMetaphorScreen setScreen={setCurrentScreen} />;
+                    case 'day-3':
+                        return <Day3CommitmentScreen setScreen={setCurrentScreen} />;
+                    case 'day-4':
+                        return <Day4WillingnessScreen setScreen={setCurrentScreen} />;
+                    case 'day-5':
+                        return <Day5BenchmarkScreen setScreen={setCurrentScreen} />;
+                    case 'day-6':
+                        return <Day6SmallBranchesScreen setScreen={setCurrentScreen} />;
+                    case 'day-7':
+                        return <Day7WillingCommitmentScreen setScreen={setCurrentScreen} />;
+                    case 'day-8':
+                        return <Day8PracticeCommitmentScreen setScreen={setCurrentScreen} />;
+                    case 'day-9':
+                        return <Day9GuessRevealScreen setScreen={setCurrentScreen} />;
+                    case 'day-10':
+                        return <Day10CompletionScreen setScreen={setCurrentScreen} />;
+
+                    default:
+                        if (screenId?.startsWith('day-')) {
+                            const dayNum = screenId.split('-')[1];
+                            return <DayPlaceholderScreen dayNum={dayNum} screenCode={currentScreen} setScreen={setCurrentScreen} />;
+                        }
+                        return <PlaceholderScreen screenCode={currentScreen} setScreen={setCurrentScreen} />;
+                }
+            };
+
+            return (
+                <div className="container">
+                    <div className="navigation-panel">
+                        <h3 style={{color: '#4CAF50', marginBottom: '20px', fontSize: '16px'}}>WillingTree Wireframes</h3>
+
+                        <div className="nav-section">
+                            <div className="nav-section-title">Section 1: Onboarding</div>
+                            <button className={`nav-button ${currentScreen === '1A' ? 'active' : ''}`} onClick={() => setCurrentScreen('1A')}>1A: Welcome</button>
+                            <button className={`nav-button ${currentScreen === '1B' ? 'active' : ''}`} onClick={() => setCurrentScreen('1B')}>1B: Profile Setup</button>
+                            <button className={`nav-button ${currentScreen === '1B2' ? 'active' : ''}`} onClick={() => setCurrentScreen('1B2')}>1B2: Pairing Choice</button>
+                            <button className={`nav-button ${currentScreen === '1C' ? 'active' : ''}`} onClick={() => setCurrentScreen('1C')}>1C: Dashboard</button>
+                            <button className={`nav-button ${currentScreen === '1D' ? 'active' : ''}`} onClick={() => setCurrentScreen('1D')}>1D: Manage Tree</button>
+                        </div>
+
+                        <div className="nav-section">
+                            <div className="nav-section-title">Section 2: Days 1-10</div>
+                            {['2A', '2B', '2C', '2D', '2E', '2F', '2G', '2H', '2I', '2J'].map((code, idx) => (
+                                <button key={code} className={`nav-button ${currentScreen === code ? 'active' : ''}`} onClick={() => setCurrentScreen(code)}>
+                                    {code}: Day {idx + 1}
+                                </button>
+                            ))}
+                        </div>
+
+                        <div className="nav-section">
+                            <div className="nav-section-title">Section 3: Daily Warm-up</div>
+                            <button className={`nav-button ${currentScreen === '3A' ? 'active' : ''}`} onClick={() => setCurrentScreen('3A')}>3A: Daily Appreciation</button>
+                            <button className={`nav-button ${currentScreen === '3B' ? 'active' : ''}`} onClick={() => setCurrentScreen('3B')}>3B: Weekly Gift</button>
+                            <button className={`nav-button ${currentScreen === '3C' ? 'active' : ''}`} onClick={() => setCurrentScreen('3C')}>3C: Build Big Branch</button>
+                        </div>
+
+                        <div className="nav-section">
+                            <div className="nav-section-title">Section 4: Growing</div>
+                            <button className={`nav-button ${currentScreen === '4A' ? 'active' : ''}`} onClick={() => setCurrentScreen('4A')}>4A: Building Big Branch</button>
+                            <button className={`nav-button ${currentScreen === '4B' ? 'active' : ''}`} onClick={() => setCurrentScreen('4B')}>4B: Small Branches</button>
+                        </div>
+
+                        <div className="nav-section">
+                            <div className="nav-section-title">Section 5: Guessing Game</div>
+                            <button className={`nav-button ${currentScreen === '5A' ? 'active' : ''}`} onClick={() => setCurrentScreen('5A')}>5A: Partner's Big Branch</button>
+                            <button className={`nav-button ${currentScreen === '5C' ? 'active' : ''}`} onClick={() => setCurrentScreen('5C')}>5C: Guessing Game</button>
+                        </div>
+                    </div>
+
+                    <div className="phone-frame">
+                        {renderScreen()}
+                    </div>
+                </div>
+            );
+        }
+
+        function WelcomeScreen({ onNext, setScreen }) {
+            return (
+                <div className="screen">
+                    <div className="screen-label">1A</div>
+                    <div className="header-clean">
+                        <div className="header-title" style={{color: '#4CAF50'}}>WillingTree</div>
+                    </div>
+                    <div className="content content-centered">
+                        <div className="tree-emoji">🌳</div>
+                        <h2 className="title">Welcome to WillingTree</h2>
+                        <p className="subtitle">
+                            Evolve core relationships with the trust/safety that emerges when practicing <span className="highlight">Want • Willing</span>
+                        </p>
+                        <button className="button button-primary" onClick={onNext}>Sign Up</button>
+                        <button className="button button-secondary" onClick={() => alert('Login functionality - would authenticate existing user')}>Log In</button>
+                    </div>
+                </div>
+            );
+        }
+
+        function ProfileScreen({ formData, setFormData, onNext, setScreen }) {
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                if (formData.name && formData.birthdate && formData.gender) {
+                    onNext();
+                } else {
+                    alert('Please fill in all fields');
+                }
+            };
+
+            return (
+                <div className="screen">
+                    <div className="screen-label">1B</div>
+                    <div className="header-clean">
+                        <div className="header-title">Profile Setup</div>
+                    </div>
+                    <div className="content">
+                        <form onSubmit={handleSubmit}>
+                            <h3 style={{fontSize: '20px', fontWeight: 400, color: '#333', marginBottom: '40px'}}>Complete Your Profile</h3>
+
+                            <input
+                                type="text"
+                                className="input-field"
+                                placeholder="Name"
+                                value={formData.name}
+                                onChange={(e) => setFormData({...formData, name: e.target.value})}
+                            />
+
+                            <input
+                                type="date"
+                                className="input-field"
+                                value={formData.birthdate}
+                                onChange={(e) => setFormData({...formData, birthdate: e.target.value})}
+                            />
+
+                            <select
+                                className="input-field"
+                                value={formData.gender}
+                                onChange={(e) => setFormData({...formData, gender: e.target.value})}
+                            >
+                                <option value="">Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="non-binary">Non-binary</option>
+                                <option value="prefer-not-say">Prefer not to say</option>
+                            </select>
+
+                            <button type="submit" className="button button-primary" style={{marginTop: '20px'}}>Continue</button>
+                        </form>
+                    </div>
+                </div>
+            );
+        }
+
+        function PairingChoiceScreen({ setScreen }) {
+            const [choice, setChoice] = useState(null);
+
+            return (
+                <div className="screen">
+                    <div className="screen-label">1B2</div>
+                    <div className="header-clean">
+                        <div className="header-title">How Do You Want to Start?</div>
+                    </div>
+                    <div className="content content-centered">
+                        <div style={{fontSize: '48px', marginBottom: '30px'}}>🌱</div>
+                        <h3 style={{fontSize: '20px', fontWeight: '400', marginBottom: '15px', color: '#333'}}>
+                            Choose Your Path
+                        </h3>
+                        <p style={{color: '#666', fontSize: '14px', marginBottom: '35px', textAlign: 'center', padding: '0 20px'}}>
+                            WillingTree works best with a partner, but you can start solo and invite someone later
+                        </p>
+
+                        <div style={{width: '100%', marginBottom: '25px'}}>
+                            <div
+                                className="clickable-item"
+                                style={{
+                                    background: choice === 'solo' ? '#E8F5E9' : '#f8f8f8',
+                                    border: choice === 'solo' ? '2px solid #4CAF50' : '2px solid transparent',
+                                    borderRadius: '12px',
+                                    padding: '20px',
+                                    marginBottom: '15px',
+                                    cursor: 'pointer',
+                                    transition: 'all 0.2s'
+                                }}
+                                onClick={() => setChoice('solo')}>
+                                <div style={{display: 'flex', alignItems: 'center', marginBottom: '10px'}}>
+                                    <div style={{fontSize: '32px', marginRight: '15px'}}>🧘</div>
+                                    <div>
+                                        <div style={{fontSize: '16px', fontWeight: '600', marginBottom: '3px'}}>
+                                            Solo Mode
+                                        </div>
+                                        <div style={{fontSize: '13px', color: '#666'}}>
+                                            Understand and apply the system before pairing
+                                        </div>
+                                    </div>
+                                </div>
+                                {choice === 'solo' && (
+                                    <div style={{background: 'white', borderRadius: '8px', padding: '12px', marginTop: '12px'}}>
+                                        <div style={{fontSize: '12px', color: '#2E7D32', marginBottom: '5px', fontWeight: '600'}}>
+                                            ✓ What happens next:
+                                        </div>
+                                        <ul style={{fontSize: '12px', color: '#666', paddingLeft: '20px', margin: 0}}>
+                                            <li>Complete 10-day onboarding to learn WillingTree</li>
+                                            <li>Practice with example scenarios</li>
+                                            <li>Invite your partner anytime from your dashboard</li>
+                                        </ul>
+                                    </div>
+                                )}
+                            </div>
+
+                            <div
+                                className="clickable-item"
+                                style={{
+                                    background: choice === 'pair' ? '#E8F5E9' : '#f8f8f8',
+                                    border: choice === 'pair' ? '2px solid #4CAF50' : '2px solid transparent',
+                                    borderRadius: '12px',
+                                    padding: '20px',
+                                    cursor: 'pointer',
+                                    transition: 'all 0.2s'
+                                }}
+                                onClick={() => setChoice('pair')}>
+                                <div style={{display: 'flex', alignItems: 'center', marginBottom: '10px'}}>
+                                    <div style={{fontSize: '32px', marginRight: '15px'}}>👥</div>
+                                    <div>
+                                        <div style={{fontSize: '16px', fontWeight: '600', marginBottom: '3px'}}>
+                                            Pair With Someone Now
+                                        </div>
+                                        <div style={{fontSize: '13px', color: '#666'}}>
+                                            I have a partner ready to join together
+                                        </div>
+                                    </div>
+                                </div>
+                                {choice === 'pair' && (
+                                    <div style={{background: 'white', borderRadius: '8px', padding: '12px', marginTop: '12px'}}>
+                                        <div style={{fontSize: '12px', color: '#2E7D32', marginBottom: '5px', fontWeight: '600'}}>
+                                            ✓ What happens next:
+                                        </div>
+                                        <ul style={{fontSize: '12px', color: '#666', paddingLeft: '20px', margin: 0}}>
+                                            <li>Generate your unique pairing code</li>
+                                            <li>Share with your partner to create your tree</li>
+                                            <li>Both complete onboarding together</li>
+                                        </ul>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+
+                        <button
+                            className="button button-primary"
+                            disabled={choice === null}
+                            style={{opacity: choice !== null ? 1 : 0.5}}
+                            onClick={() => {
+                                if (choice === 'solo') {
+                                    alert('Great choice! 🌱\n\nYou\'ll learn WillingTree at your own pace.\n\nYou can add a partner anytime from your dashboard.\n\nLet\'s start your 10-day onboarding!');
+                                    setScreen('2A'); // Go to Day 1
+                                } else {
+                                    alert('Pairing feature coming soon! 👥\n\nFor now, starting you in solo mode.\n\nYou can invite your partner after onboarding.');
+                                    setScreen('2A'); // Go to Day 1
+                                }
+                            }}>
+                            Continue
+                        </button>
+
+                        <div className="info-box" style={{marginTop: '20px'}}>
+                            <p style={{fontSize: '13px', color: '#2E7D32'}}>
+                                💡 You can always add a partner later from your dashboard
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function DashboardScreen({ setScreen }) {
+            return (
+                <div className="screen">
+                    <div className="screen-label">1C</div>
+                    <div className="header">
+                        <div className="header-title">My WillingTrees</div>
+                        <div className="header-nav">
+                            <div className="nav-arrows">
+                                <div className="nav-icon" onClick={() => setScreen('1B')}>←</div>
+                                <div className="nav-icon" onClick={() => setScreen('1D')}>→</div>
+                            </div>
+                            <div className="nav-icons">
+                                <div className="nav-icon" onClick={() => setScreen('1C')}>🏠</div>
+                                <div className="nav-icon" onClick={() => alert('Trees list view')}>📋</div>
+                                <div className="nav-icon" onClick={() => alert('Settings screen')}>⚙️</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="content">
+                        <div className="pairing-card" onClick={() => setScreen('1D')}>
+                            <span className="menu-dots" onClick={(e) => {e.stopPropagation(); alert('Tree options:\n• View details\n• Pause\n• Graduate\n• End tree');}}>⋮</span>
+                            <div className="pairing-names">You & Sarah</div>
+                            <div style={{color: '#666', fontSize: '14px'}}>Week 3 • ☀️ 42 • 💧 38 • 🍃15 leaves</div>
+                        </div>
+
+                        <div className="pairing-card" onClick={() => alert('Opening tree with Mike...')}>
+                            <span className="menu-dots" onClick={(e) => {e.stopPropagation(); alert('Tree options:\n• View details\n• Pause\n• Graduate\n• End tree');}}>⋮</span>
+                            <div className="pairing-names">You & Mike</div>
+                            <div style={{color: '#666', fontSize: '14px'}}>Week 1 • ☀️ 15 • 💧 12 • 🍃5 leaves</div>
+                        </div>
+
+                        <div style={{border: '2px dashed #ddd', borderRadius: '12px', padding: '30px 20px', textAlign: 'center', color: '#666', cursor: 'pointer', transition: 'all 0.2s'}}
+                            onMouseEnter={(e) => e.target.style.background = '#f8f8f8'}
+                            onMouseLeave={(e) => e.target.style.background = 'transparent'}
+                            onClick={() => alert('New pairing flow:\n1. Enter partner code or\n2. Send invitation\n3. Wait for acceptance')}>
+                            <div style={{fontSize: '36px', marginBottom: '10px'}}>+</div>
+                            <div>New pairing to add another WillingTree</div>
+                            <div style={{fontSize: '12px', marginTop: '5px'}}>(1 of 3 slots available)</div>
+                        </div>
+                    </div>
+                    <div className="bottom-nav">
+                        <div className="nav-item" onClick={() => setScreen('1C')}>🏠<br/>Home</div>
+                        <div className="nav-item" onClick={() => alert('All trees view')}>🌳<br/>Trees</div>
+                        <div className="nav-item" onClick={() => alert('Weekly schedule view')}>📅<br/>Schedule</div>
+                        <div className="nav-item" onClick={() => alert('Profile settings')}>👤<br/>Profile</div>
+                    </div>
+                </div>
+            );
+        }
+
+        function ManageTreeScreen({ setScreen }) {
+            return (
+                <div className="screen">
+                    <div className="screen-label">1D</div>
+                    <div className="header">
+                        <div className="header-title">Manage WillingTree</div>
+                        <div className="header-nav">
+                            <div className="nav-arrows">
+                                <div className="nav-icon" onClick={() => setScreen('1C')}>←</div>
+                                <div className="nav-icon" onClick={() => alert('No next screen')}>→</div>
+                            </div>
+                            <div className="nav-icons">
+                                <div className="nav-icon" onClick={() => setScreen('1C')}>🏠</div>
+                                <div className="nav-icon" onClick={() => alert('Trees list')}>📋</div>
+                                <div className="nav-icon" onClick={() => alert('Settings')}>⚙️</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="content">
+                        <h3 style={{marginBottom: '5px', fontSize: '18px'}}>You & Sarah</h3>
+                        <p style={{color: '#666', fontSize: '14px', marginBottom: '25px'}}>Active for 3 weeks • 15 leaves grown</p>
+
+                        <button className="button button-secondary" onClick={() => alert('Tree paused.\n\nYou and Sarah can resume anytime. Credits will be frozen until you resume.')}>
+                            Pause Tree (Take a Break)
+                        </button>
+                        <button className="button button-secondary" onClick={() => alert('Congratulations!\n\nYour tree is graduated. You\'ve accomplished your relationship goals together.')}>
+                            Graduate Tree (Complete)
+                        </button>
+
+                        <div className="warning-box">
+                            <p style={{fontWeight: 600, marginBottom: '10px'}}>⚠️ Permanent Actions</p>
+                            <p style={{fontSize: '14px', color: '#666', marginBottom: '15px'}}>Ending a tree frees up a slot for new connections</p>
+                            <button className="button button-danger" onClick={() => {
+                                if (confirm('Are you sure you want to end this tree?\n\nThis action cannot be undone. All progress will be archived.')) {
+                                    alert('Tree ended and archived.\n\nYou now have 2 available slots for new trees.');
+                                    setScreen('1C');
+                                }
+                            }}>End Tree & Archive</button>
+                        </div>
+
+                        <div className="info-box">
+                            <p style={{fontSize: '14px', color: '#2E7D32'}}>💡 Trees can be paused temporarily, graduated when goals are met, or ended to make room for new growth.</p>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function DayPlaceholderScreen({ dayNum, screenCode, setScreen }) {
+            return (
+                <div className="screen">
+                    <div className="day-badge">{screenCode}</div>
+                    <div className="header">
+                        <div className="header-title">Day {dayNum}</div>
+                    </div>
+                    <div className="content">
+                        <div className="placeholder-screen">
+                            Day {dayNum}
+                        </div>
+                        <div style={{textAlign: 'center', color: '#999', fontSize: '14px', padding: '20px'}}>
+                            This screen will teach users about the WillingTree system mechanics on day {dayNum} of onboarding.
+                        </div>
+                        <button className="button button-primary" onClick={() => alert(`Day ${dayNum} content coming soon!\n\nThis will include:\n• Interactive tutorial\n• System mechanics explanation\n• Practice exercises`)}>
+                            Start Day {dayNum}
+                        </button>
+                    </div>
+                </div>
+            );
+        }
+
+        function DailyAppreciationScreen({ setScreen }) {
+            const [text, setText] = useState('');
+            return (
+                <div className="screen">
+                    <div className="screen-label">3A</div>
+                    <div className="header">
+                        <div className="header-title">Daily Appreciation</div>
+                    </div>
+                    <div className="content">
+                        <h3 style={{marginBottom: '15px', fontSize: '18px'}}>Today's Appreciation</h3>
+                        <p style={{color: '#666', marginBottom: '25px', fontSize: '14px'}}>
+                            What did you notice your partner doing today that you appreciate?
+                        </p>
+
+                        <textarea
+                            style={{
+                                width: '100%',
+                                minHeight: '120px',
+                                padding: '15px',
+                                border: '1px solid #ddd',
+                                borderRadius: '8px',
+                                fontSize: '15px',
+                                fontFamily: 'inherit',
+                                marginBottom: '20px'
+                            }}
+                            placeholder="I noticed when you..."
+                            value={text}
+                            onChange={(e) => setText(e.target.value)}
+                        />
+
+                        <button className="button button-primary" onClick={() => {
+                            if (text.trim()) {
+                                alert(`Appreciation shared! ☀️\n\nYou earned 2 Sun Credits\nSarah received 2 Water Credits\n\n"${text}"`);
+                                setText('');
+                            } else {
+                                alert('Please write your appreciation first');
+                            }
+                        }}>Share Appreciation</button>
+
+                        <div className="info-box" style={{marginTop: '25px'}}>
+                            <p style={{fontSize: '13px', color: '#2E7D32'}}>
+                                💡 Daily appreciations earn you <strong>☀️ Sun Credits</strong> and give your partner <strong>💧 Water Credits</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function WeeklyGiftScreen({ setScreen }) {
+            return (
+                <div className="screen">
+                    <div className="screen-label">3B</div>
+                    <div className="header">
+                        <div className="header-title">Your Weekly Gift 🎁</div>
+                    </div>
+                    <div className="content content-centered">
+                        <div style={{fontSize: '64px', marginBottom: '30px'}}>🎁</div>
+                        <h3 className="title" style={{fontSize: '20px'}}>You've Earned a Gift!</h3>
+                        <p className="subtitle" style={{fontSize: '14px', marginBottom: '30px'}}>
+                            Your partner can now choose one item from your Big Branch to work on this week
+                        </p>
+
+                        <div style={{background: '#f8f8f8', borderRadius: '12px', padding: '20px', width: '100%', marginBottom: '20px'}}>
+                            <div style={{fontSize: '14px', color: '#666', marginBottom: '10px'}}>This week's gift cost:</div>
+                            <div style={{fontSize: '24px', fontWeight: '500'}}>☀️ 10 Sun Credits</div>
+                        </div>
+
+                        <button className="button button-primary" onClick={() => {
+                            alert('Sarah selected:\n\n"Cook dinner more often"\n\nYou\'ll be notified when she completes it!');
+                            setScreen('5A');
+                        }}>View Sarah's Selection</button>
+                    </div>
+                </div>
+            );
+        }
+
+        function BuildBigBranchScreen({ setScreen }) {
+            const [wants, setWants] = useState(['', '', '']);
+
+            return (
+                <div className="screen">
+                    <div className="screen-label">3C</div>
+                    <div className="header">
+                        <div className="header-title">Build Your Big Branch</div>
+                    </div>
+                    <div className="content">
+                        <h3 style={{marginBottom: '10px', fontSize: '18px'}}>Your Wants/Needs</h3>
+                        <p style={{color: '#666', marginBottom: '25px', fontSize: '14px'}}>
+                            What would make your life better if your partner could help with it?
+                        </p>
+
+                        {wants.map((want, i) => (
+                            <div key={i} style={{marginBottom: '20px'}}>
+                                <input
+                                    type="text"
+                                    className="input-field"
+                                    placeholder={`Want/Need #${i + 1}`}
+                                    value={want}
+                                    onChange={(e) => {
+                                        const newWants = [...wants];
+                                        newWants[i] = e.target.value;
+                                        setWants(newWants);
+                                    }}
+                                    style={{marginBottom: '5px'}}
+                                />
+                            </div>
+                        ))}
+
+                        <button className="button button-secondary" style={{marginBottom: '25px'}} onClick={() => setWants([...wants, ''])}>
+                            + Add Another Want
+                        </button>
+                        <button className="button button-primary" onClick={() => {
+                            const filled = wants.filter(w => w.trim());
+                            if (filled.length > 0) {
+                                alert(`Big Branch saved! 🌳\n\n${filled.length} wants/needs added:\n${filled.map((w, i) => `${i + 1}. ${w}`).join('\n')}`);
+                                setScreen('4A');
+                            } else {
+                                alert('Please add at least one want/need');
+                            }
+                        }}>Save Big Branch</button>
+
+                        <div className="info-box">
+                            <p style={{fontSize: '13px', color: '#2E7D32'}}>
+                                💡 Your partner will see these and choose which ones they're willing to help with
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function BuildingBigBranchDetailScreen({ setScreen }) {
+            return (
+                <div className="screen">
+                    <div className="screen-label">4A</div>
+                    <div className="header">
+                        <div className="header-title">Building the Big Branch</div>
+                    </div>
+                    <div className="content">
+                        <h3 style={{marginBottom: '10px', fontSize: '18px'}}>Expand Your Wants</h3>
+                        <p style={{color: '#666', marginBottom: '25px', fontSize: '14px'}}>
+                            Add specific details and point values to help your partner understand
+                        </p>
+
+                        <div style={{background: '#f8f8f8', borderRadius: '12px', padding: '15px', marginBottom: '15px'}}>
+                            <div style={{fontWeight: '500', marginBottom: '8px'}}>Cook dinner more often</div>
+                            <div style={{fontSize: '13px', color: '#666', marginBottom: '10px'}}>
+                                Details: I'd love if you could cook 2-3 times per week
+                            </div>
+                            <div style={{display: 'flex', gap: '10px'}}>
+                                <div className="clickable-item" style={{flex: 1, textAlign: 'center', padding: '8px', background: '#E8F5E9', borderRadius: '6px', fontSize: '13px'}}
+                                    onClick={() => alert('Set to Low Priority (1pt)')}>
+                                    Low: 1pt
+                                </div>
+                                <div className="clickable-item" style={{flex: 1, textAlign: 'center', padding: '8px', background: '#FFF9C4', borderRadius: '6px', fontSize: '13px'}}
+                                    onClick={() => alert('Set to Medium Priority (3pts)')}>
+                                    Medium: 3pts
+                                </div>
+                                <div className="clickable-item" style={{flex: 1, textAlign: 'center', padding: '8px', background: '#FFECB3', borderRadius: '6px', fontSize: '13px'}}
+                                    onClick={() => alert('Set to High Priority (5pts)')}>
+                                    High: 5pts
+                                </div>
+                            </div>
+                        </div>
+
+                        <button className="button button-primary" onClick={() => {
+                            alert('Big Branch submitted with points! 🌳\n\nYour partner can now see your prioritized list.');
+                            setScreen('4B');
+                        }}>Submit Big Branch with Points</button>
+                    </div>
+                </div>
+            );
+        }
+
+        function SmallBranchesScreen({ setScreen }) {
+            const [selected, setSelected] = useState([true, false, false]);
+
+            return (
+                <div className="screen">
+                    <div className="screen-label">4B</div>
+                    <div className="header">
+                        <div className="header-title">Your Small Branches</div>
+                    </div>
+                    <div className="content">
+                        <h3 style={{marginBottom: '10px', fontSize: '18px'}}>What You're Willing To Do</h3>
+                        <p style={{color: '#666', marginBottom: '25px', fontSize: '14px'}}>
+                            Choose items from Sarah's Big Branch that you're willing to work on
+                        </p>
+
+                        {['Take out trash regularly', 'Walk the dog in the morning', 'Plan date nights'].map((item, i) => (
+                            <div key={i} style={{background: selected[i] ? '#E8F5E9' : '#f8f8f8', borderRadius: '12px', padding: '15px', marginBottom: '15px', cursor: 'pointer'}}
+                                onClick={() => {
+                                    const newSelected = [...selected];
+                                    newSelected[i] = !newSelected[i];
+                                    setSelected(newSelected);
+                                }}>
+                                <div style={{display: 'flex', alignItems: 'center', marginBottom: '8px'}}>
+                                    <input type="checkbox" style={{marginRight: '10px'}} checked={selected[i]} readOnly />
+                                    <span style={{flex: 1, fontWeight: selected[i] ? '500' : 'normal'}}>{item}</span>
+                                    <span style={{color: selected[i] ? '#4CAF50' : '#666', fontSize: '13px'}}>{[3, 5, 3][i]}pts</span>
+                                </div>
+                            </div>
+                        ))}
+
+                        <button className="button button-primary" onClick={() => {
+                            const count = selected.filter(s => s).length;
+                            if (count > 0) {
+                                alert(`Locked in ${count} Small Branch${count > 1 ? 'es' : ''}! 🌿\n\nYou'll work on these this week.`);
+                                setScreen('5C');
+                            } else {
+                                alert('Please select at least one item');
+                            }
+                        }}>Lock in my Small Branches</button>
+                    </div>
+                </div>
+            );
+        }
+
+        function PartnerBigBranchScreen({ setScreen }) {
+            const [selected, setSelected] = useState(null);
+
+            return (
+                <div className="screen">
+                    <div className="screen-label">5A</div>
+                    <div className="header">
+                        <div className="header-title">Sarah's Big Branch</div>
+                    </div>
+                    <div className="content">
+                        <h3 style={{marginBottom: '10px', fontSize: '18px'}}>Form Your Small Branches</h3>
+                        <p style={{color: '#666', marginBottom: '25px', fontSize: '14px'}}>
+                            1 assigned task + select 1 from 6 random items
+                        </p>
+
+                        <div style={{background: '#FFE0B2', borderRadius: '12px', padding: '15px', marginBottom: '15px', border: '2px solid #FF9800'}}>
+                            <div style={{fontSize: '12px', color: '#E65100', marginBottom: '5px', fontWeight: '600'}}>ASSIGNED TASK</div>
+                            <div style={{fontWeight: '500'}}>Take out recycling</div>
+                        </div>
+
+                        <p style={{color: '#666', fontSize: '14px', marginBottom: '15px'}}>Choose 1 additional Small Branch from these 6:</p>
+
+                        {['Clean kitchen', 'Do laundry', 'Grocery shopping', 'Water plants'].map((item, i) => (
+                            <div key={i} className="clickable-item" style={{background: selected === i ? '#E8F5E9' : '#f8f8f8', borderRadius: '12px', padding: '15px', marginBottom: '10px'}}
+                                onClick={() => setSelected(i)}>
+                                <div style={{display: 'flex', alignItems: 'center'}}>
+                                    <input type="radio" name="willing" style={{marginRight: '10px'}} checked={selected === i} readOnly />
+                                    <span style={{flex: 1}}>{item}</span>
+                                </div>
+                            </div>
+                        ))}
+
+                        <button className="button button-primary" style={{marginTop: '15px'}} onClick={() => {
+                            if (selected !== null) {
+                                alert('Small Branches confirmed! 🌿\n\nYou\'re committed to working on these this week.');
+                                setScreen('5C');
+                            } else {
+                                alert('Please select one additional branch');
+                            }
+                        }}>Continue</button>
+                    </div>
+                </div>
+            );
+        }
+
+        function GuessingGameScreen({ setScreen }) {
+            const [guessed, setGuessed] = useState(null);
+
+            return (
+                <div className="screen">
+                    <div className="screen-label">5C</div>
+                    <div className="header">
+                        <div className="header-title">Guessing Game</div>
+                    </div>
+                    <div className="content">
+                        <h3 style={{marginBottom: '10px', fontSize: '18px'}}>What Small Branches was Sarah working on?</h3>
+                        <p style={{color: '#666', marginBottom: '25px', fontSize: '14px'}}>
+                            Guess from your Big Branch (2 attempts)
+                        </p>
+
+                        <div style={{textAlign: 'center', marginBottom: '30px'}}>
+                            <div style={{fontSize: '48px', marginBottom: '10px'}}>🎯</div>
+                            <div style={{color: '#666', fontSize: '14px'}}>Attempt {guessed !== null ? '2' : '1'} of 2</div>
+                        </div>
+
+                        {['Cook dinner', 'Do laundry', 'Plan date night', 'Take out trash'].map((item, i) => (
+                            <div key={i} className="clickable-item"
+                                style={{background: guessed === i ? (i === 0 ? '#E8F5E9' : '#FFEBEE') : '#f8f8f8', borderRadius: '12px', padding: '15px', marginBottom: '10px', cursor: 'pointer', transition: 'all 0.2s'}}
+                                onClick={() => {
+                                    setGuessed(i);
+                                    setTimeout(() => {
+                                        if (i === 0) {
+                                            alert('Correct! 🎯\n\nYou earned:\n☀️ +3 Sun Credits\n💧 Sarah earned +3 Water Credits');
+                                        } else {
+                                            alert('Not quite! Try again.\n\nYou have 1 more attempt.');
+                                        }
+                                    }, 300);
+                                }}>
+                                {item}
+                                {guessed === i && (i === 0 ? ' ✓' : ' ✗')}
+                            </div>
+                        ))}
+
+                        <div className="info-box" style={{marginTop: '25px'}}>
+                            <p style={{fontSize: '13px', color: '#2E7D32'}}>
+                                🎯 Correct guesses earn sun credits for you & water credits for Sarah
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // ==================== ONBOARDING DAYS 1-5 ====================
+
+        function Day1BondingScreen({ setScreen }) {
+            const [selectedStyle, setSelectedStyle] = useState(null);
+
+            const styles = [
+                { emoji: '🪨', name: 'Stone', trait: 'Steady', desc: 'You provide stability and consistency in your relationships' },
+                { emoji: '🌱', name: 'Soil', trait: 'Nurturing', desc: 'You nourish and support your partner\'s growth' },
+                { emoji: '🚿', name: 'Shovel', trait: 'Action', desc: 'You dig in and get things done together' },
+                { emoji: '🌳', name: 'Stakes', trait: 'Guiding', desc: 'You provide direction and structure' }
+            ];
+
+            return (
+                <div className="screen">
+                    <div className="day-badge">2A</div>
+                    <div className="header">
+                        <div className="header-title">Day 1: Bonding Style</div>
+                    </div>
+                    <div className="content">
+                        <h3 style={{marginBottom: '10px', fontSize: '18px'}}>How Do You Partner?</h3>
+                        <p style={{color: '#666', marginBottom: '25px', fontSize: '14px'}}>
+                            Choose the style that best describes how you show up in relationships
+                        </p>
+
+                        <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '25px'}}>
+                            {styles.map((style, i) => (
+                                <div key={i}
+                                    className="clickable-item"
+                                    style={{
+                                        background: selectedStyle === i ? '#E8F5E9' : '#f8f8f8',
+                                        border: selectedStyle === i ? '2px solid #4CAF50' : '2px solid transparent',
+                                        borderRadius: '12px',
+                                        padding: '15px',
+                                        textAlign: 'center',
+                                        cursor: 'pointer',
+                                        transition: 'all 0.2s'
+                                    }}
+                                    onClick={() => setSelectedStyle(i)}>
+                                    <div style={{fontSize: '36px', marginBottom: '8px'}}>{style.emoji}</div>
+                                    <div style={{fontWeight: '600', fontSize: '15px', marginBottom: '3px'}}>{style.name}</div>
+                                    <div style={{fontSize: '12px', color: '#666'}}>{style.trait}</div>
+                                </div>
+                            ))}
+                        </div>
+
+                        {selectedStyle !== null && (
+                            <div style={{background: '#E8F5E9', borderRadius: '8px', padding: '15px', marginBottom: '20px'}}>
+                                <p style={{fontSize: '14px', color: '#2E7D32'}}>
+                                    ✓ {styles[selectedStyle].desc}
+                                </p>
+                            </div>
+                        )}
+
+                        <button
+                            className="button button-primary"
+                            onClick={() => {
+                                if (selectedStyle !== null) {
+                                    alert(`Great choice! ${styles[selectedStyle].name} style selected.\n\nYou've earned your first 5 ☀️ Sun Credits!`);
+                                    setScreen('2B');
+                                } else {
+                                    alert('Please select a bonding style first');
+                                }
+                            }}>
+                            Continue to Day 2
+                        </button>
+
+                        <div className="info-box">
+                            <p style={{fontSize: '13px', color: '#2E7D32'}}>
+                                🌱 Understanding your partnership style earns your first 5 sun credits!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function Day2TreeMetaphorScreen({ setScreen }) {
+            const [understood, setUnderstood] = useState(false);
+
+            const metaphors = [
+                { icon: '🌳', term: 'Big Branch', meaning: 'Your Wants/Needs List - what you want from your partner' },
+                { icon: '🌿', term: 'Small Branches', meaning: 'Your Willing List - what you\'re willing to do for them' },
+                { icon: '🍃', term: 'Leaves', meaning: 'Done/Seen recognitions - appreciation for completed actions' },
+                { icon: '🍎', term: 'Fruits', meaning: 'Rewards bought with credits - treats and gifts' }
+            ];
+
+            return (
+                <div className="screen">
+                    <div className="day-badge">2B</div>
+                    <div className="header">
+                        <div className="header-title">Day 2: The Tree Metaphor</div>
+                    </div>
+                    <div className="content">
+                        <h3 style={{marginBottom: '10px', fontSize: '18px'}}>Understanding Your WillingTree</h3>
+                        <p style={{color: '#666', marginBottom: '25px', fontSize: '14px'}}>
+                            Every relationship is a living tree that grows through appreciation and action
+                        </p>
+
+                        <div style={{textAlign: 'center', fontSize: '64px', marginBottom: '20px'}}>🌳</div>
+
+                        {metaphors.map((item, i) => (
+                            <div key={i} style={{background: '#f8f8f8', borderRadius: '12px', padding: '15px', marginBottom: '12px'}}>
+                                <div style={{display: 'flex', alignItems: 'center', marginBottom: '8px'}}>
+                                    <div style={{fontSize: '24px', marginRight: '12px'}}>{item.icon}</div>
+                                    <div style={{fontWeight: '600', fontSize: '15px'}}>{item.term}</div>
+                                </div>
+                                <div style={{fontSize: '13px', color: '#666', paddingLeft: '36px'}}>{item.meaning}</div>
+                            </div>
+                        ))}
+
+                        <div style={{background: '#FFF9C4', borderRadius: '8px', padding: '15px', marginTop: '20px', marginBottom: '20px'}}>
+                            <p style={{fontSize: '14px', color: '#666', marginBottom: '10px'}}>
+                                <strong>The Magic:</strong> When you appreciate your partner's efforts (giving them Leaves 🍃), you both earn credits:
+                            </p>
+                            <p style={{fontSize: '13px', color: '#666'}}>
+                                • You get ☀️ Sun Credits for appreciating<br/>
+                                • They get 💧 Water Credits for being appreciated
+                            </p>
+                        </div>
+
+                        <div style={{display: 'flex', alignItems: 'center', marginBottom: '20px'}}>
+                            <input
+                                type="checkbox"
+                                checked={understood}
+                                onChange={(e) => setUnderstood(e.target.checked)}
+                                style={{marginRight: '10px'}}
+                            />
+                            <span style={{fontSize: '14px'}}>I understand the tree metaphor</span>
+                        </div>
+
+                        <button
+                            className="button button-primary"
+                            disabled={!understood}
+                            style={{opacity: understood ? 1 : 0.5}}
+                            onClick={() => {
+                                alert('Perfect! 🌱\n\nYou\'ve learned the foundation of WillingTree.\n\n+5 ☀️ Sun Credits earned!');
+                                setScreen('2C');
+                            }}>
+                            Continue to Day 3
+                        </button>
+                    </div>
+                </div>
+            );
+        }
+
+        function Day3CommitmentScreen({ setScreen }) {
+            const [commitmentLevel, setCommitmentLevel] = useState(null);
+
+            const levels = [
+                { label: 'Casual', desc: 'Checking in occasionally', color: '#E3F2FD' },
+                { label: 'Regular', desc: 'Weekly interactions', color: '#C5E1A5' },
+                { label: 'Dedicated', desc: 'Daily engagement', color: '#A5D6A7' },
+                { label: 'All-In', desc: 'Full commitment to growth', color: '#66BB6A' }
+            ];
+
+            return (
+                <div className="screen">
+                    <div className="day-badge">2C</div>
+                    <div className="header">
+                        <div className="header-title">Day 3: Your Commitment</div>
+                    </div>
+                    <div className="content">
+                        <h3 style={{marginBottom: '10px', fontSize: '18px'}}>How Committed Are You?</h3>
+                        <p style={{color: '#666', marginBottom: '25px', fontSize: '14px'}}>
+                            Your WillingTree grows based on how much energy you both invest
+                        </p>
+
+                        <div style={{marginBottom: '25px'}}>
+                            {levels.map((level, i) => (
+                                <div key={i}
+                                    className="clickable-item"
+                                    style={{
+                                        background: commitmentLevel === i ? level.color : '#f8f8f8',
+                                        border: commitmentLevel === i ? '2px solid #4CAF50' : '2px solid transparent',
+                                        borderRadius: '12px',
+                                        padding: '15px',
+                                        marginBottom: '12px',
+                                        cursor: 'pointer',
+                                        transition: 'all 0.2s'
+                                    }}
+                                    onClick={() => setCommitmentLevel(i)}>
+                                    <div style={{fontWeight: '600', fontSize: '15px', marginBottom: '5px'}}>{level.label}</div>
+                                    <div style={{fontSize: '13px', color: '#666'}}>{level.desc}</div>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="info-box">
+                            <p style={{fontSize: '13px', color: '#2E7D32'}}>
+                                💡 You can change your commitment level anytime. Start where you're comfortable!
+                            </p>
+                        </div>
+
+                        <button
+                            className="button button-primary"
+                            disabled={commitmentLevel === null}
+                            style={{opacity: commitmentLevel !== null ? 1 : 0.5, marginTop: '20px'}}
+                            onClick={() => {
+                                alert(`${levels[commitmentLevel].label} commitment set! 🌱\n\nRemember: Even small, consistent actions grow strong trees.\n\n+3 ☀️ Sun Credits`);
+                                setScreen('2D');
+                            }}>
+                            Continue to Day 4
+                        </button>
+                    </div>
+                </div>
+            );
+        }
+
+        function Day4WillingnessScreen({ setScreen }) {
+            const [priorities, setPriorities] = useState({ high: [], medium: [], low: [] });
+
+            const sampleTasks = [
+                'Cook dinner together',
+                'Take out the trash',
+                'Plan a date night',
+                'Help with chores',
+                'Give a massage',
+                'Listen actively'
+            ];
+
+            const handleDrop = (task, priority) => {
+                setPriorities(prev => {
+                    const newPriorities = { ...prev };
+                    // Remove from all categories
+                    Object.keys(newPriorities).forEach(key => {
+                        newPriorities[key] = newPriorities[key].filter(t => t !== task);
+                    });
+                    // Add to new category
+                    newPriorities[priority] = [...newPriorities[priority], task];
+                    return newPriorities;
+                });
+            };
+
+            return (
+                <div className="screen">
+                    <div className="day-badge">2D</div>
+                    <div className="header">
+                        <div className="header-title">Day 4: Willingness Values</div>
+                    </div>
+                    <div className="content">
+                        <h3 style={{marginBottom: '10px', fontSize: '18px'}}>Set Your Priorities</h3>
+                        <p style={{color: '#666', marginBottom: '20px', fontSize: '14px'}}>
+                            Assign willingness values to show what you're eager, willing, or hesitant to do
+                        </p>
+
+                        <div style={{marginBottom: '15px'}}>
+                            <div style={{fontSize: '13px', color: '#666', marginBottom: '8px', fontWeight: '600'}}>Available Tasks (tap to prioritize):</div>
+                            {sampleTasks.filter(task =>
+                                !priorities.high.includes(task) &&
+                                !priorities.medium.includes(task) &&
+                                !priorities.low.includes(task)
+                            ).map((task, i) => (
+                                <div key={i} className="clickable-item"
+                                    style={{background: '#f8f8f8', borderRadius: '8px', padding: '10px', marginBottom: '8px', fontSize: '13px'}}
+                                    onClick={() => handleDrop(task, 'medium')}>
+                                    {task}
+                                </div>
+                            ))}
+                        </div>
+
+                        <div style={{marginBottom: '12px'}}>
+                            <div style={{fontSize: '13px', fontWeight: '600', marginBottom: '5px', color: '#2E7D32'}}>High Priority (5pts)</div>
+                            <div style={{background: '#E8F5E9', borderRadius: '8px', padding: '10px', minHeight: '50px'}}>
+                                {priorities.high.map((task, i) => (
+                                    <div key={i} style={{fontSize: '13px', marginBottom: '5px'}}>• {task}</div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div style={{marginBottom: '12px'}}>
+                            <div style={{fontSize: '13px', fontWeight: '600', marginBottom: '5px', color: '#F57C00'}}>Medium Priority (3pts)</div>
+                            <div style={{background: '#FFF9C4', borderRadius: '8px', padding: '10px', minHeight: '50px'}}>
+                                {priorities.medium.map((task, i) => (
+                                    <div key={i} style={{fontSize: '13px', marginBottom: '5px'}}>• {task}</div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="info-box" style={{marginTop: '20px'}}>
+                            <p style={{fontSize: '13px', color: '#2E7D32'}}>
+                                💡 Higher priority items earn more credits when completed!
+                            </p>
+                        </div>
+
+                        <button
+                            className="button button-primary"
+                            style={{marginTop: '15px'}}
+                            onClick={() => {
+                                const total = priorities.high.length + priorities.medium.length + priorities.low.length;
+                                alert(`Priorities set! 🎯\n\n${total} tasks prioritized\n\n+5 ☀️ Sun Credits earned!`);
+                                setScreen('2E');
+                            }}>
+                            Continue to Day 5
+                        </button>
+                    </div>
+                </div>
+            );
+        }
+
+        function Day5BenchmarkScreen({ setScreen }) {
+            const [benchmark, setBenchmark] = useState('');
+            const [understood, setUnderstood] = useState(false);
+
+            return (
+                <div className="screen">
+                    <div className="day-badge">2E</div>
+                    <div className="header">
+                        <div className="header-title">Day 5: Benchmarks</div>
+                    </div>
+                    <div className="content">
+                        <h3 style={{marginBottom: '10px', fontSize: '18px'}}>Set Your First Ask</h3>
+                        <p style={{color: '#666', marginBottom: '20px', fontSize: '14px'}}>
+                            What's one thing you'd like to see progress on this week?
+                        </p>
+
+                        <textarea
+                            style={{
+                                width: '100%',
+                                minHeight: '100px',
+                                padding: '15px',
+                                border: '1px solid #ddd',
+                                borderRadius: '8px',
+                                fontSize: '15px',
+                                fontFamily: 'inherit',
+                                marginBottom: '20px'
+                            }}
+                            placeholder="Example: I'd love if we could have one tech-free dinner together this week..."
+                            value={benchmark}
+                            onChange={(e) => setBenchmark(e.target.value)}
+                        />
+
+                        <div style={{background: '#E8F5E9', borderRadius: '12px', padding: '15px', marginBottom: '20px'}}>
+                            <div style={{fontWeight: '600', marginBottom: '10px', color: '#2E7D32'}}>💧 Understanding Rollover</div>
+                            <p style={{fontSize: '13px', color: '#666', marginBottom: '8px'}}>
+                                Water Credits rollover for <strong>4 weeks</strong>. This means:
+                            </p>
+                            <ul style={{fontSize: '13px', color: '#666', paddingLeft: '20px', marginBottom: '0'}}>
+                                <li>Credits don't expire immediately</li>
+                                <li>You have time to "spend" them on rewards</li>
+                                <li>Streaks double your water credit returns</li>
+                            </ul>
+                        </div>
+
+                        <div style={{display: 'flex', alignItems: 'center', marginBottom: '20px'}}>
+                            <input
+                                type="checkbox"
+                                checked={understood}
+                                onChange={(e) => setUnderstood(e.target.checked)}
+                                style={{marginRight: '10px'}}
+                            />
+                            <span style={{fontSize: '14px'}}>I understand benchmarks and rollover</span>
+                        </div>
+
+                        <button
+                            className="button button-primary"
+                            disabled={!benchmark.trim() || !understood}
+                            style={{opacity: (benchmark.trim() && understood) ? 1 : 0.5}}
+                            onClick={() => {
+                                alert(`Benchmark set! 🎯\n\n"${benchmark}"\n\nYou've completed Days 1-5!\n\n+10 ☀️ Sun Credits bonus!`);
+                                setScreen('2F');
+                            }}>
+                            Continue to Day 6
+                        </button>
+
+                        <div className="info-box" style={{marginTop: '15px'}}>
+                            <p style={{fontSize: '13px', color: '#2E7D32'}}>
+                                🌟 Halfway through onboarding! Days 6-10 will teach you the active gameplay.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function Day6SmallBranchesScreen({ setScreen }) {
+            const [selectedSlot1, setSelectedSlot1] = useState(null);
+            const [selectedSlots23, setSelectedSlots23] = useState([]);
+
+            const partnerWants = [
+                'Help with dishes after dinner',
+                'Morning coffee ready when they wake',
+                'Plan weekend activities',
+                'Take out trash/recycling',
+                'Give shoulder massage',
+                'Listen without phone distractions'
+            ];
+
+            const toggleSlot23 = (idx) => {
+                setSelectedSlots23(prev => {
+                    if (prev.includes(idx)) {
+                        return prev.filter(i => i !== idx);
+                    } else if (prev.length < 2) {
+                        return [...prev, idx];
+                    } else {
+                        return prev;
+                    }
+                });
+            };
+
+            return (
+                <div className="screen">
+                    <div className="day-badge">2F</div>
+                    <div className="header">
+                        <div className="header-title">Day 6: Small Branches</div>
+                    </div>
+                    <div className="content">
+                        <h3 style={{marginBottom: '10px', fontSize: '18px'}}>Create Your Willing List</h3>
+                        <p style={{color: '#666', marginBottom: '20px', fontSize: '14px'}}>
+                            Choose what you're willing to do from your partner's Big Branch
+                        </p>
+
+                        <div style={{background: '#FFE0B2', borderRadius: '12px', padding: '15px', marginBottom: '15px', border: '2px solid #FF9800'}}>
+                            <div style={{fontSize: '12px', color: '#E65100', marginBottom: '8px', fontWeight: '600'}}>SLOT 1 - CLAIM RECEIVING</div>
+                            <div style={{fontSize: '13px', color: '#666', marginBottom: '10px'}}>
+                                This is what you'll work on this week. Choose wisely!
+                            </div>
+                            <select
+                                className="input-field"
+                                value={selectedSlot1 ?? ''}
+                                onChange={(e) => setSelectedSlot1(e.target.value ? parseInt(e.target.value) : null)}
+                                style={{marginBottom: '0', background: 'white', padding: '10px', borderRadius: '8px', border: '1px solid #FF9800'}}>
+                                <option value="">Select one...</option>
+                                {partnerWants.map((want, i) => (
+                                    <option key={i} value={i}>{want}</option>
+                                ))}
+                            </select>
+                        </div>
+
+                        <div style={{background: '#E8F5E9', borderRadius: '12px', padding: '15px', marginBottom: '20px'}}>
+                            <div style={{fontSize: '12px', color: '#2E7D32', marginBottom: '8px', fontWeight: '600'}}>
+                                SLOTS 2-3 - PLAN NEXT 5 DAYS
+                            </div>
+                            <div style={{fontSize: '13px', color: '#666', marginBottom: '12px'}}>
+                                Choose 2 more items you're considering for next week
+                            </div>
+                            {partnerWants.map((want, i) => (
+                                i !== selectedSlot1 && (
+                                    <div key={i}
+                                        className="clickable-item"
+                                        style={{
+                                            background: selectedSlots23.includes(i) ? '#C8E6C9' : 'white',
+                                            border: selectedSlots23.includes(i) ? '2px solid #4CAF50' : '1px solid #ddd',
+                                            borderRadius: '8px',
+                                            padding: '10px',
+                                            marginBottom: '8px',
+                                            fontSize: '13px',
+                                            cursor: 'pointer'
+                                        }}
+                                        onClick={() => toggleSlot23(i)}>
+                                        <input
+                                            type="checkbox"
+                                            checked={selectedSlots23.includes(i)}
+                                            readOnly
+                                            style={{marginRight: '8px'}}
+                                        />
+                                        {want}
+                                    </div>
+                                )
+                            ))}
+                            <div style={{fontSize: '12px', color: '#666', marginTop: '10px'}}>
+                                {selectedSlots23.length}/2 selected
+                            </div>
+                        </div>
+
+                        <button
+                            className="button button-primary"
+                            disabled={selectedSlot1 === null || selectedSlots23.length !== 2}
+                            style={{opacity: (selectedSlot1 !== null && selectedSlots23.length === 2) ? 1 : 0.5}}
+                            onClick={() => {
+                                alert(`Small Branches created! 🌿\n\nSlot 1 (This Week):\n• ${partnerWants[selectedSlot1]}\n\nPlanning (Next 5 Days):\n• ${partnerWants[selectedSlots23[0]]}\n• ${partnerWants[selectedSlots23[1]]}\n\n+8 ☀️ Sun Credits!`);
+                                setScreen('2G');
+                            }}>
+                            Lock in Small Branches
+                        </button>
+
+                        <div className="info-box" style={{marginTop: '15px'}}>
+                            <p style={{fontSize: '13px', color: '#2E7D32'}}>
+                                💡 Slot 1 is your commitment. Slots 2-3 help you plan ahead for sustainability.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function Day7WillingCommitmentScreen({ setScreen }) {
+            const [commitment, setCommitment] = useState('');
+            const [understood, setUnderstood] = useState(false);
+
+            return (
+                <div className="screen">
+                    <div className="day-badge">2G</div>
+                    <div className="header">
+                        <div className="header-title">Day 7: Willing Commitment</div>
+                    </div>
+                    <div className="content">
+                        <h3 style={{marginBottom: '10px', fontSize: '18px'}}>Your Weekly Promise</h3>
+                        <p style={{color: '#666', marginBottom: '20px', fontSize: '14px'}}>
+                            What you choose from your partner's Big Branch becomes your commitment
+                        </p>
+
+                        <div style={{background: '#f8f8f8', borderRadius: '12px', padding: '20px', marginBottom: '20px'}}>
+                            <div style={{fontSize: '14px', fontWeight: '600', marginBottom: '15px'}}>This Week's Commitment:</div>
+                            <div style={{background: '#E8F5E9', borderRadius: '8px', padding: '15px', marginBottom: '15px'}}>
+                                <div style={{fontSize: '24px', marginBottom: '8px'}}>🌿</div>
+                                <div style={{fontSize: '15px', fontWeight: '500'}}>Help with dishes after dinner</div>
+                                <div style={{fontSize: '12px', color: '#666', marginTop: '5px'}}>From Sarah's Big Branch</div>
+                            </div>
+
+                            <div style={{fontSize: '13px', color: '#666', marginBottom: '12px'}}>
+                                <strong>What this means:</strong>
+                            </div>
+                            <ul style={{fontSize: '13px', color: '#666', paddingLeft: '20px'}}>
+                                <li>You've committed to work on this for the week</li>
+                                <li>Your partner will see you're willing</li>
+                                <li>When you complete it, you both earn credits</li>
+                                <li>You can track your progress daily</li>
+                            </ul>
+                        </div>
+
+                        <textarea
+                            style={{
+                                width: '100%',
+                                minHeight: '80px',
+                                padding: '12px',
+                                border: '1px solid #ddd',
+                                borderRadius: '8px',
+                                fontSize: '14px',
+                                fontFamily: 'inherit',
+                                marginBottom: '15px'
+                            }}
+                            placeholder="Write your personal commitment in your own words..."
+                            value={commitment}
+                            onChange={(e) => setCommitment(e.target.value)}
+                        />
+
+                        <div style={{display: 'flex', alignItems: 'center', marginBottom: '20px'}}>
+                            <input
+                                type="checkbox"
+                                checked={understood}
+                                onChange={(e) => setUnderstood(e.target.checked)}
+                                style={{marginRight: '10px'}}
+                            />
+                            <span style={{fontSize: '14px'}}>I commit to working on this with good intent</span>
+                        </div>
+
+                        <button
+                            className="button button-primary"
+                            disabled={!commitment.trim() || !understood}
+                            style={{opacity: (commitment.trim() && understood) ? 1 : 0.5}}
+                            onClick={() => {
+                                alert(`Commitment made! 🤝\n\n"${commitment}"\n\nYour partner will be notified.\n\n+5 ☀️ Sun Credits`);
+                                setScreen('2H');
+                            }}>
+                            Confirm Commitment
+                        </button>
+                    </div>
+                </div>
+            );
+        }
+
+        function Day8PracticeCommitmentScreen({ setScreen }) {
+            const [practiced, setPracticed] = useState(false);
+            const [reflection, setReflection] = useState('');
+
+            return (
+                <div className="screen">
+                    <div className="day-badge">2H</div>
+                    <div className="header">
+                        <div className="header-title">Day 8: Practice Session</div>
+                    </div>
+                    <div className="content">
+                        <h3 style={{marginBottom: '10px', fontSize: '18px'}}>Try It Once</h3>
+                        <p style={{color: '#666', marginBottom: '20px', fontSize: '14px'}}>
+                            Let's practice your commitment right now as a trial run
+                        </p>
+
+                        <div style={{background: '#FFF9C4', borderRadius: '12px', padding: '20px', marginBottom: '20px'}}>
+                            <div style={{fontSize: '14px', fontWeight: '600', marginBottom: '12px'}}>⚡ Your Practice Task:</div>
+                            <div style={{fontSize: '15px', marginBottom: '15px'}}>Help with dishes after dinner</div>
+
+                            <div style={{fontSize: '13px', color: '#666', marginBottom: '12px'}}>
+                                <strong>Practice Steps:</strong>
+                            </div>
+                            <ol style={{fontSize: '13px', color: '#666', paddingLeft: '20px', marginBottom: '15px'}}>
+                                <li>Think about when you'll do this today or tomorrow</li>
+                                <li>Visualize completing it successfully</li>
+                                <li>Consider what might get in the way</li>
+                                <li>Plan how you'll follow through</li>
+                            </ol>
+
+                            <div style={{display: 'flex', alignItems: 'center', marginTop: '15px'}}>
+                                <input
+                                    type="checkbox"
+                                    checked={practiced}
+                                    onChange={(e) => setPracticed(e.target.checked)}
+                                    style={{marginRight: '10px'}}
+                                />
+                                <span style={{fontSize: '14px'}}>I've thought through how I'll do this</span>
+                            </div>
+                        </div>
+
+                        {practiced && (
+                            <div style={{marginBottom: '20px'}}>
+                                <div style={{fontSize: '14px', fontWeight: '500', marginBottom: '10px'}}>Quick Reflection:</div>
+                                <textarea
+                                    style={{
+                                        width: '100%',
+                                        minHeight: '80px',
+                                        padding: '12px',
+                                        border: '1px solid #ddd',
+                                        borderRadius: '8px',
+                                        fontSize: '14px',
+                                        fontFamily: 'inherit'
+                                    }}
+                                    placeholder="When will you do this? What might make it easier?"
+                                    value={reflection}
+                                    onChange={(e) => setReflection(e.target.value)}
+                                />
+                            </div>
+                        )}
+
+                        <button
+                            className="button button-primary"
+                            disabled={!practiced || !reflection.trim()}
+                            style={{opacity: (practiced && reflection.trim()) ? 1 : 0.5}}
+                            onClick={() => {
+                                alert(`Great planning! 📝\n\nYou've thought through your commitment.\n\nNow you're ready to learn the guessing game!\n\n+7 ☀️ Sun Credits`);
+                                setScreen('2I');
+                            }}>
+                            Continue to Day 9
+                        </button>
+
+                        <div className="info-box" style={{marginTop: '15px'}}>
+                            <p style={{fontSize: '13px', color: '#2E7D32'}}>
+                                💡 Mental practice increases follow-through by 40%
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function Day9GuessRevealScreen({ setScreen }) {
+            const [guessAttempt, setGuessAttempt] = useState(0);
+            const [selectedGuess, setSelectedGuess] = useState(null);
+
+            const yourBigBranch = [
+                'Cook dinner more often',
+                'Plan date nights',
+                'Help with laundry',
+                'Morning coffee surprise'
+            ];
+
+            const correctAnswer = 0; // "Cook dinner more often"
+
+            const handleGuess = () => {
+                if (selectedGuess === correctAnswer) {
+                    alert('Correct! 🎯\n\nYou guessed what your partner chose to work on!\n\nYou earn: ☀️ +5 Sun Credits\nThey earn: 💧 +5 Water Credits\n\nThis is how recognition works!');
+                    setTimeout(() => setScreen('2J'), 500);
+                } else if (guessAttempt === 0) {
+                    alert('Not quite! 💭\n\nYou have one more guess.\n\nThink about what they might be most willing to do...');
+                    setGuessAttempt(1);
+                    setSelectedGuess(null);
+                } else {
+                    alert('The answer was: "Cook dinner more often" 🍳\n\nThey still earn 💧 +2 Water Credits for trying!\n\nYou\'ll get better at guessing as you learn each other.');
+                    setTimeout(() => setScreen('2J'), 500);
+                }
+            };
+
+            return (
+                <div className="screen">
+                    <div className="day-badge">2I</div>
+                    <div className="header">
+                        <div className="header-title">Day 9: The Guessing Game</div>
+                    </div>
+                    <div className="content">
+                        <h3 style={{marginBottom: '10px', fontSize: '18px'}}>Guess & Reveal</h3>
+                        <p style={{color: '#666', marginBottom: '20px', fontSize: '14px'}}>
+                            Can you guess which Small Branch your partner chose from YOUR Big Branch?
+                        </p>
+
+                        <div style={{textAlign: 'center', marginBottom: '25px'}}>
+                            <div style={{fontSize: '48px', marginBottom: '10px'}}>🎯</div>
+                            <div style={{fontSize: '14px', color: '#666'}}>
+                                Attempt {guessAttempt + 1} of 2
+                            </div>
+                        </div>
+
+                        <div style={{background: '#E3F2FD', borderRadius: '12px', padding: '15px', marginBottom: '20px'}}>
+                            <div style={{fontSize: '13px', fontWeight: '600', marginBottom: '10px', color: '#1565C0'}}>
+                                💡 How The Guessing Game Works:
+                            </div>
+                            <ul style={{fontSize: '13px', color: '#666', paddingLeft: '20px', margin: 0}}>
+                                <li>Each week, guess what they're working on</li>
+                                <li>2 attempts to get it right</li>
+                                <li>Correct guess = both earn bonus credits</li>
+                                <li>Wrong guess = they still earn recognition</li>
+                            </ul>
+                        </div>
+
+                        <div style={{fontSize: '14px', fontWeight: '500', marginBottom: '12px'}}>
+                            What did your partner choose from your Big Branch?
+                        </div>
+
+                        {yourBigBranch.map((item, i) => (
+                            <div key={i}
+                                className="clickable-item"
+                                style={{
+                                    background: selectedGuess === i ? '#E8F5E9' : '#f8f8f8',
+                                    border: selectedGuess === i ? '2px solid #4CAF50' : '1px solid #ddd',
+                                    borderRadius: '12px',
+                                    padding: '15px',
+                                    marginBottom: '10px',
+                                    cursor: 'pointer',
+                                    fontSize: '14px'
+                                }}
+                                onClick={() => setSelectedGuess(i)}>
+                                {item}
+                            </div>
+                        ))}
+
+                        <button
+                            className="button button-primary"
+                            disabled={selectedGuess === null}
+                            style={{opacity: selectedGuess !== null ? 1 : 0.5, marginTop: '15px'}}
+                            onClick={handleGuess}>
+                            Make My Guess
+                        </button>
+
+                        <div className="info-box" style={{marginTop: '20px'}}>
+                            <p style={{fontSize: '13px', color: '#2E7D32'}}>
+                                🌟 Guessing shows you're paying attention to what matters to them
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function Day10CompletionScreen({ setScreen }) {
+            const [ready, setReady] = useState(false);
+
+            return (
+                <div className="screen">
+                    <div className="day-badge">2J</div>
+                    <div className="header">
+                        <div className="header-title">Day 10: Ready to Grow!</div>
+                    </div>
+                    <div className="content content-centered">
+                        <div style={{fontSize: '72px', marginBottom: '20px'}}>🌳</div>
+                        <h2 style={{fontSize: '24px', fontWeight: '400', marginBottom: '15px'}}>Congratulations!</h2>
+                        <p style={{color: '#666', fontSize: '15px', marginBottom: '30px', textAlign: 'center'}}>
+                            You've completed the 10-day onboarding and learned how WillingTree works
+                        </p>
+
+                        <div style={{background: '#E8F5E9', borderRadius: '12px', padding: '20px', marginBottom: '25px', width: '100%', textAlign: 'left'}}>
+                            <div style={{fontWeight: '600', marginBottom: '15px', fontSize: '15px'}}>✅ What You've Learned:</div>
+                            <div style={{fontSize: '13px', color: '#666', marginBottom: '8px'}}>✓ Your bonding style (Day 1)</div>
+                            <div style={{fontSize: '13px', color: '#666', marginBottom: '8px'}}>✓ The tree metaphor system (Day 2)</div>
+                            <div style={{fontSize: '13px', color: '#666', marginBottom: '8px'}}>✓ Setting commitment levels (Day 3)</div>
+                            <div style={{fontSize: '13px', color: '#666', marginBottom: '8px'}}>✓ Prioritizing willingness (Day 4)</div>
+                            <div style={{fontSize: '13px', color: '#666', marginBottom: '8px'}}>✓ Benchmarks & rollover (Day 5)</div>
+                            <div style={{fontSize: '13px', color: '#666', marginBottom: '8px'}}>✓ Creating Small Branches (Day 6)</div>
+                            <div style={{fontSize: '13px', color: '#666', marginBottom: '8px'}}>✓ Making commitments (Days 7-8)</div>
+                            <div style={{fontSize: '13px', color: '#666', marginBottom: '0'}}>✓ The guessing game (Day 9)</div>
+                        </div>
+
+                        <div style={{background: '#FFF9C4', borderRadius: '12px', padding: '20px', marginBottom: '25px', width: '100%'}}>
+                            <div style={{fontSize: '18px', fontWeight: '600', marginBottom: '10px'}}>🎉 Your Starting Credits:</div>
+                            <div style={{display: 'flex', justifyContent: 'space-around', marginTop: '15px'}}>
+                                <div style={{textAlign: 'center'}}>
+                                    <div style={{fontSize: '32px', marginBottom: '5px'}}>☀️</div>
+                                    <div style={{fontSize: '24px', fontWeight: '600', color: '#F57C00'}}>50</div>
+                                    <div style={{fontSize: '12px', color: '#666'}}>Sun Credits</div>
+                                </div>
+                                <div style={{textAlign: 'center'}}>
+                                    <div style={{fontSize: '32px', marginBottom: '5px'}}>💧</div>
+                                    <div style={{fontSize: '24px', fontWeight: '600', color: '#1976D2'}}>10</div>
+                                    <div style={{fontSize: '12px', color: '#666'}}>Water Credits</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style={{display: 'flex', alignItems: 'center', marginBottom: '25px'}}>
+                            <input
+                                type="checkbox"
+                                checked={ready}
+                                onChange={(e) => setReady(e.target.checked)}
+                                style={{marginRight: '10px'}}
+                            />
+                            <span style={{fontSize: '14px'}}>I'm ready to start growing my WillingTree!</span>
+                        </div>
+
+                        <button
+                            className="button button-primary"
+                            disabled={!ready}
+                            style={{opacity: ready ? 1 : 0.5}}
+                            onClick={() => {
+                                alert('Your tree is planted! 🌱\n\nYou\'ll now enter the main app and start your relationship growth journey.\n\nGood luck!');
+                                setScreen('1C');
+                            }}>
+                            Start My WillingTree Journey
+                        </button>
+
+                        <div className="info-box" style={{marginTop: '20px'}}>
+                            <p style={{fontSize: '13px', color: '#2E7D32'}}>
+                                💚 Remember: Small, consistent actions grow the strongest trees
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // ==================== END ONBOARDING DAYS 1-10 ====================
+
+        function PlaceholderScreen({ screenCode, setScreen }) {
+            return (
+                <div className="screen">
+                    <div className="screen-label">{screenCode}</div>
+                    <div className="header">
+                        <div className="header-title">Screen {screenCode}</div>
+                    </div>
+                    <div className="content">
+                        <div className="placeholder-screen">
+                            {screenCode}
+                        </div>
+                        <div style={{textAlign: 'center', color: '#999', fontSize: '14px', padding: '20px'}}>
+                            This screen is part of the WillingTree wireframes. Content coming soon.
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<WillingTreeApp />);
+    </script>
+</body>
+</html>
