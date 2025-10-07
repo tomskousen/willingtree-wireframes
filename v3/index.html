@@ -638,17 +638,27 @@
             '4.2': 'big-branch-details',
             '4.3': 'small-branches',
 
-            // Step 5: Paired Onboarding (Working Together)
-            '5.1': 'paired-day-1',
-            '5.2': 'paired-day-2',
-            '5.3': 'paired-day-3',
-            '5.4': 'paired-day-4',
-            '5.5': 'paired-day-5',
-            '5.6': 'paired-day-6',
-            '5.7': 'paired-day-7',
-            '5.8': 'paired-day-8',
-            '5.9': 'paired-day-9',
-            '5.10': 'paired-harvest',
+            // Step 5: Paired Onboarding (Working Together) - Dual View
+            '5.11': 'paired-day-1-user',
+            '5.12': 'paired-day-1-partner',
+            '5.21': 'paired-day-2-user',
+            '5.22': 'paired-day-2-partner',
+            '5.31': 'paired-day-3-user',
+            '5.32': 'paired-day-3-partner',
+            '5.41': 'paired-day-4-user',
+            '5.42': 'paired-day-4-partner',
+            '5.51': 'paired-day-5-user',
+            '5.52': 'paired-day-5-partner',
+            '5.61': 'paired-day-6-user',
+            '5.62': 'paired-day-6-partner',
+            '5.71': 'paired-day-7-user',
+            '5.72': 'paired-day-7-partner',
+            '5.81': 'paired-day-8-user',
+            '5.82': 'paired-day-8-partner',
+            '5.91': 'paired-day-9-user',
+            '5.92': 'paired-day-9-partner',
+            '5.101': 'paired-harvest-user',
+            '5.102': 'paired-harvest-partner',
         };
 
         function WillingTreeApp() {
@@ -723,10 +733,12 @@
             };
 
             // Helper to create header with partner info (only for Step 5 paired screens)
-            const createHeader = (title, subtitle = null) => {
+            const createHeader = (title, subtitle = null, userName = null) => {
                 const isPairedScreen = currentScreen.startsWith('5.');
 
                 if (isPairedScreen && pairedMode) {
+                    // Show which user's perspective we're seeing
+                    const partnerName = userName === formData.name ? partnerData.name : formData.name;
                     return (
                         <div className="header">
                             <div>
@@ -734,7 +746,7 @@
                                 {subtitle && <div className="header-subtitle">{subtitle}</div>}
                             </div>
                             <div className="header-partner">
-                                ❤️ {partnerData.name || 'Partner'}
+                                ❤️ {partnerName || 'Partner'}
                             </div>
                         </div>
                     );
@@ -799,27 +811,56 @@
                     case 'small-branches':
                         return <SmallBranchesScreen setScreen={setCurrentScreen} />;
 
-                    // Step 5: Paired Onboarding (Working Together)
-                    case 'paired-day-1':
-                        return <Day1BondingScreen setScreen={setCurrentScreen} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={pairedMode} partnerData={partnerData} setMyData={setMyData} setPartnerData={setPartnerData} createHeader={createHeader} />;
-                    case 'paired-day-2':
-                        return <Day2TreeMetaphorScreen setScreen={setCurrentScreen} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={pairedMode} createHeader={createHeader} />;
-                    case 'paired-day-3':
-                        return <Day3CommitmentScreen setScreen={setCurrentScreen} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={pairedMode} createHeader={createHeader} />;
-                    case 'paired-day-4':
-                        return <Day4WillingnessValuesScreen setScreen={setCurrentScreen} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={pairedMode} setMyData={setMyData} createHeader={createHeader} />;
-                    case 'paired-day-5':
-                        return <Day5BenchmarksScreen setScreen={setCurrentScreen} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={pairedMode} setMyData={setMyData} setPartnerData={setPartnerData} createHeader={createHeader} />;
-                    case 'paired-day-6':
-                        return <Day6SmallBranchesScreen setScreen={setCurrentScreen} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={pairedMode} partnerData={partnerData} setMyData={setMyData} setPartnerData={setPartnerData} createHeader={createHeader} />;
-                    case 'paired-day-7':
-                        return <Day7WillingCommitmentScreen setScreen={setCurrentScreen} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={pairedMode} setMyData={setMyData} createHeader={createHeader} />;
-                    case 'paired-day-8':
-                        return <Day8PracticeSessionScreen setScreen={setCurrentScreen} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={pairedMode} createHeader={createHeader} />;
-                    case 'paired-day-9':
-                        return <Day9GuessRevealScreen setScreen={setCurrentScreen} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={pairedMode} partnerData={partnerData} setPartnerData={setPartnerData} createHeader={createHeader} />;
-                    case 'paired-harvest':
-                        return <HarvestScreen setScreen={setCurrentScreen} credits={credits} setCredits={setCredits} cycleCount={cycleCount} setCycleCount={setCycleCount} pairedMode={pairedMode} setPairedMode={setPairedMode} createHeader={createHeader} />;
+                    // Step 5: Paired Onboarding (Working Together) - Dual View
+                    case 'paired-day-1-user':
+                        return <Day1BondingScreen goToNext={() => setCurrentScreen('5.12')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={true} partnerData={partnerData} setMyData={setMyData} setPartnerData={setPartnerData} createHeader={createHeader} userName={formData.name} />;
+                    case 'paired-day-1-partner':
+                        return <Day1BondingScreen goToNext={() => setCurrentScreen('5.21')} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} pairedMode={true} partnerData={{...partnerData, name: formData.name}} setMyData={(fn) => setPartnerData(fn)} setPartnerData={setMyData} createHeader={createHeader} userName={partnerData.name} />;
+
+                    case 'paired-day-2-user':
+                        return <Day2TreeMetaphorScreen goToNext={() => setCurrentScreen('5.22')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} userName={formData.name} />;
+                    case 'paired-day-2-partner':
+                        return <Day2TreeMetaphorScreen goToNext={() => setCurrentScreen('5.31')} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} userName={partnerData.name} />;
+
+                    case 'paired-day-3-user':
+                        return <Day3CommitmentScreen goToNext={() => setCurrentScreen('5.32')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} userName={formData.name} />;
+                    case 'paired-day-3-partner':
+                        return <Day3CommitmentScreen goToNext={() => setCurrentScreen('5.41')} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} userName={partnerData.name} />;
+
+                    case 'paired-day-4-user':
+                        return <Day4WillingnessValuesScreen goToNext={() => setCurrentScreen('5.42')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={true} setMyData={setMyData} createHeader={createHeader} userName={formData.name} />;
+                    case 'paired-day-4-partner':
+                        return <Day4WillingnessValuesScreen goToNext={() => setCurrentScreen('5.51')} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} pairedMode={true} setMyData={(fn) => setPartnerData(fn)} createHeader={createHeader} userName={partnerData.name} />;
+
+                    case 'paired-day-5-user':
+                        return <Day5BenchmarksScreen goToNext={() => setCurrentScreen('5.52')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={true} setMyData={setMyData} setPartnerData={setPartnerData} createHeader={createHeader} userName={formData.name} />;
+                    case 'paired-day-5-partner':
+                        return <Day5BenchmarksScreen goToNext={() => setCurrentScreen('5.61')} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} pairedMode={true} setMyData={(fn) => setPartnerData(fn)} setPartnerData={setMyData} createHeader={createHeader} userName={partnerData.name} />;
+
+                    case 'paired-day-6-user':
+                        return <Day6SmallBranchesScreen goToNext={() => setCurrentScreen('5.62')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={true} partnerData={partnerData} setMyData={setMyData} setPartnerData={setPartnerData} createHeader={createHeader} userName={formData.name} />;
+                    case 'paired-day-6-partner':
+                        return <Day6SmallBranchesScreen goToNext={() => setCurrentScreen('5.71')} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} pairedMode={true} partnerData={{...partnerData, name: formData.name, pollinateList: myData.pollinateList}} setMyData={(fn) => setPartnerData(fn)} setPartnerData={setMyData} createHeader={createHeader} userName={partnerData.name} />;
+
+                    case 'paired-day-7-user':
+                        return <Day7WillingCommitmentScreen goToNext={() => setCurrentScreen('5.72')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={true} setMyData={setMyData} createHeader={createHeader} userName={formData.name} />;
+                    case 'paired-day-7-partner':
+                        return <Day7WillingCommitmentScreen goToNext={() => setCurrentScreen('5.81')} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} pairedMode={true} setMyData={(fn) => setPartnerData(fn)} createHeader={createHeader} userName={partnerData.name} />;
+
+                    case 'paired-day-8-user':
+                        return <Day8PracticeSessionScreen goToNext={() => setCurrentScreen('5.82')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} userName={formData.name} />;
+                    case 'paired-day-8-partner':
+                        return <Day8PracticeSessionScreen goToNext={() => setCurrentScreen('5.91')} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} userName={partnerData.name} />;
+
+                    case 'paired-day-9-user':
+                        return <Day9GuessRevealScreen goToNext={() => setCurrentScreen('5.92')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={true} partnerData={partnerData} setPartnerData={setPartnerData} createHeader={createHeader} userName={formData.name} />;
+                    case 'paired-day-9-partner':
+                        return <Day9GuessRevealScreen goToNext={() => setCurrentScreen('5.101')} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} pairedMode={true} partnerData={{...partnerData, name: formData.name, focusActions: myData.focusActions}} setPartnerData={setMyData} createHeader={createHeader} userName={partnerData.name} />;
+
+                    case 'paired-harvest-user':
+                        return <HarvestScreen goToNext={() => setCurrentScreen('5.102')} credits={credits} setCredits={setCredits} cycleCount={cycleCount} setCycleCount={setCycleCount} pairedMode={true} setPairedMode={setPairedMode} createHeader={createHeader} userName={formData.name} />;
+                    case 'paired-harvest-partner':
+                        return <HarvestScreen goToNext={() => setCurrentScreen('5.21')} credits={partnerData.credits} setCredits={(fn) => setPartnerData(prev => ({...prev, credits: fn(prev.credits)}))} cycleCount={cycleCount} setCycleCount={setCycleCount} pairedMode={true} setPairedMode={setPairedMode} createHeader={createHeader} userName={partnerData.name} />;
 
                     default:
                         return <PlaceholderScreen code={currentScreen} />;
@@ -1030,7 +1071,7 @@
                     }));
                     setTimeout(() => {
                         alert(`📱 Text message sent to ${partnerPhone}!\n\n"${partnerName} has invited you to join WillingTree. Sign up at: ${inviteLink}\nInvite code: ${inviteCode}"\n\nOnce they register, you'll both proceed through the paired onboarding together.`);
-                        setScreen('5.1');
+                        setScreen('5.11');
                     }, 1000);
                 } else if (inviteMethod === 'link') {
                     const inviteCode = Math.random().toString(36).substr(2, 6).toUpperCase();
@@ -1047,7 +1088,7 @@
                         currentScreen: '2.1'
                     }));
                     alert(`🔗 Invite link copied to clipboard!\n\n${inviteLink}\nInvite code: ${inviteCode}\n\nShare this with your partner. Once they sign up using this code, you'll both be paired.`);
-                    setScreen('5.1');
+                    setScreen('5.11');
                 }
             };
 
@@ -1243,7 +1284,7 @@
         // ====================
 
         // Screen 2.1: Day 1 - Your Tree Choice
-        function Day1BondingScreen({ goToNext, awardCredits, credits, currentScreen, pairedMode, partnerData, setMyData, setPartnerData, createHeader }) {
+        function Day1BondingScreen({ goToNext, awardCredits, credits, currentScreen, pairedMode, partnerData, setMyData, setPartnerData, createHeader, userName }) {
             const [userStyle, setUserStyle] = useState(null);
             const [partnerStyle, setPartnerStyle] = useState(null);
             const [showPartnerQuestion, setShowPartnerQuestion] = useState(false);
@@ -1331,7 +1372,7 @@
             return (
                 <div className="screen">
                     <div className="day-badge">Day 1 of 10</div>
-                    {createHeader ? createHeader('Your Tree Choice') : (
+                    {createHeader ? createHeader('Your Tree Choice', null, userName) : (
                         <div className="header">
                             <h2>Your Tree Choice</h2>
                         </div>
