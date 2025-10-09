@@ -3947,8 +3947,16 @@
                     <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
                         <p className="text-md" style={{marginBottom: '16px', lineHeight: '1.6'}}>
-                            We protect ourselves from shame by telling stories about who we are, what we deserve, and why things happen the way they do. <a href="https://brenebrown.com/books-audio/" target="_blank" style={{color: '#4CAF50'}}>Brené Brown</a> teaches that shame thrives in secrecy and silence—when we name our shame and share our stories with trusted others, it loses its power. <a href="https://www.finlayson-fife.com/" target="_blank" style={{color: '#4CAF50'}}>Dr. Jennifer Finlayson-Fife</a> emphasizes that true intimacy requires the courage to reveal ourselves fully, including our fears and desires. <a href="https://cruciallearning.com/books/crucial-conversations-book/" target="_blank" style={{color: '#4CAF50'}}>Crucial Conversations</a> shows how we unconsciously create "victim," "villain," and "helpless" stories that prevent honest dialogue. Even <a href="https://www.amazon.com/Mans-Search-Meaning-Viktor-Frankl/dp/0807014273" target="_blank" style={{color: '#4CAF50'}}>Viktor Frankl</a> discovered in concentration camps that the stories we tell about suffering determine whether we find meaning or despair. Unpacking the stories we tell ourselves—and choosing new ones—is essential to creating the intimate partnership we truly want.
+                            We protect ourselves from shame by telling stories about who we are, what we deserve, and why things happen the way they do. Unpacking the stories we tell ourselves—and choosing new ones—is essential to creating the intimate partnership we truly want.
                         </p>
+
+                        <ul style={{marginBottom: '16px', fontSize: '14px', lineHeight: '1.5', paddingLeft: '20px', color: '#555'}}>
+                            <li style={{marginBottom: '8px'}}><a href="https://brenebrown.com/books-audio/" target="_blank" style={{color: '#4CAF50'}}>Brené Brown</a> teaches that shame thrives in secrecy and silence—when we name our shame and share our stories with trusted others, it loses its power.</li>
+                            <li style={{marginBottom: '8px'}}><a href="https://www.finlayson-fife.com/" target="_blank" style={{color: '#4CAF50'}}>Dr. Jennifer Finlayson-Fife</a> emphasizes that true intimacy requires the courage to reveal ourselves fully, including our fears and desires.</li>
+                            <li style={{marginBottom: '8px'}}><a href="https://cruciallearning.com/books/crucial-conversations-book/" target="_blank" style={{color: '#4CAF50'}}>Crucial Conversations</a> shows how we unconsciously create "victim," "villain," and "helpless" stories that prevent honest dialogue.</li>
+                            <li style={{marginBottom: '8px'}}><a href="https://www.amazon.com/Mans-Search-Meaning-Viktor-Frankl/dp/0807014273" target="_blank" style={{color: '#4CAF50'}}>Viktor Frankl</a> discovered in concentration camps that the stories we tell about suffering determine whether we find meaning or despair.</li>
+                            <li style={{marginBottom: '8px'}}><a href="https://partnerable.ai" target="_blank" style={{color: '#4CAF50'}}>Tom Skousen (Partnerable)</a> teaches that the ability to go into another's story and represent it in the world is a key to partnering.</li>
+                        </ul>
 
                         <p className="text-md" style={{marginBottom: '16px', fontWeight: '600'}}>
                             What story do you want for your relationship? Choose the model that best represents your vision:
@@ -3963,14 +3971,14 @@
                                     padding: '16px',
                                     textAlign: 'center',
                                     cursor: 'pointer',
-                                    background: selectedModel === 'shared' ? '#E8F5E9' : 'white',
+                                    background: selectedModel === 'shared' ? '#E8F5E9' : '#f5f5f0',
                                     transition: 'all 0.2s'
                                 }}
                             >
                                 <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style={{margin: '0 auto 8px'}}>
-                                    <circle cx="35" cy="50" r="30" fill="none" stroke="#4CAF50" strokeWidth="2"/>
-                                    <circle cx="65" cy="50" r="30" fill="none" stroke="#4CAF50" strokeWidth="2"/>
-                                    <ellipse cx="50" cy="50" rx="15" ry="30" fill="#C8E6C9"/>
+                                    <circle cx="35" cy="50" r="28" fill="none" stroke="#000000" strokeWidth="2.5"/>
+                                    <circle cx="65" cy="50" r="28" fill="none" stroke="#000000" strokeWidth="2.5"/>
+                                    <path d="M 50 22 Q 35 35, 35 50 Q 35 65, 50 78 Q 65 65, 65 50 Q 65 35, 50 22 Z" fill="#000000" opacity="0.15"/>
                                 </svg>
                                 <div style={{fontWeight: '600', color: '#2E7D32', marginBottom: '4px'}}>SHARED</div>
                                 <div style={{fontSize: '12px', color: '#666'}}>We create overlap</div>
@@ -3984,13 +3992,14 @@
                                     padding: '16px',
                                     textAlign: 'center',
                                     cursor: 'pointer',
-                                    background: selectedModel === 'essential' ? '#E8F5E9' : 'white',
+                                    background: selectedModel === 'essential' ? '#E8F5E9' : '#f5f5f0',
                                     transition: 'all 0.2s'
                                 }}
                             >
                                 <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style={{margin: '0 auto 8px'}}>
-                                    <path d="M 30 80 L 50 20 L 70 80 Z" fill="none" stroke="#4CAF50" strokeWidth="2"/>
-                                    <line x1="40" y1="60" x2="60" y2="60" stroke="#4CAF50" strokeWidth="2"/>
+                                    <line x1="30" y1="80" x2="50" y2="20" stroke="#000000" strokeWidth="2.5" strokeLinecap="round"/>
+                                    <line x1="70" y1="80" x2="50" y2="20" stroke="#000000" strokeWidth="2.5" strokeLinecap="round"/>
+                                    <line x1="38" y1="58" x2="62" y2="58" stroke="#000000" strokeWidth="2.5" strokeLinecap="round"/>
                                 </svg>
                                 <div style={{fontWeight: '600', color: '#2E7D32', marginBottom: '4px'}}>ESSENTIAL</div>
                                 <div style={{fontSize: '12px', color: '#666'}}>We support each other</div>
@@ -4004,17 +4013,20 @@
                                     padding: '16px',
                                     textAlign: 'center',
                                     cursor: 'pointer',
-                                    background: selectedModel === 'integrated' ? '#E8F5E9' : 'white',
+                                    background: selectedModel === 'integrated' ? '#E8F5E9' : '#f5f5f0',
                                     transition: 'all 0.2s'
                                 }}
                             >
                                 <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style={{margin: '0 auto 8px'}}>
-                                    <path d="M 30 20 Q 40 50, 30 80" fill="none" stroke="#4CAF50" strokeWidth="2"/>
-                                    <path d="M 70 20 Q 60 50, 70 80" fill="none" stroke="#4CAF50" strokeWidth="2"/>
-                                    <circle cx="30" cy="30" r="3" fill="#4CAF50"/>
-                                    <circle cx="70" cy="30" r="3" fill="#4CAF50"/>
-                                    <circle cx="30" cy="70" r="3" fill="#4CAF50"/>
-                                    <circle cx="70" cy="70" r="3" fill="#4CAF50"/>
+                                    <path d="M 30 15 Q 25 50, 30 85" fill="none" stroke="#000000" strokeWidth="2.5"/>
+                                    <path d="M 70 15 Q 75 50, 70 85" fill="none" stroke="#000000" strokeWidth="2.5"/>
+                                    <line x1="30" y1="25" x2="70" y2="25" stroke="#000000" strokeWidth="1.5" opacity="0.4"/>
+                                    <line x1="30" y1="38" x2="70" y2="38" stroke="#000000" strokeWidth="1.5" opacity="0.4"/>
+                                    <line x1="30" y1="50" x2="70" y2="50" stroke="#000000" strokeWidth="1.5" opacity="0.6"/>
+                                    <line x1="30" y1="62" x2="70" y2="62" stroke="#000000" strokeWidth="1.5" opacity="0.4"/>
+                                    <line x1="30" y1="75" x2="70" y2="75" stroke="#000000" strokeWidth="1.5" opacity="0.4"/>
+                                    <text x="18" y="28" fontSize="8" fill="#000000" opacity="0.6">Want</text>
+                                    <text x="72" y="28" fontSize="8" fill="#000000" opacity="0.6">Willing</text>
                                 </svg>
                                 <div style={{fontWeight: '600', color: '#2E7D32', marginBottom: '4px'}}>INTEGRATED</div>
                                 <div style={{fontSize: '12px', color: '#666'}}>We interweave lives</div>
@@ -4028,17 +4040,18 @@
                                     padding: '16px',
                                     textAlign: 'center',
                                     cursor: 'pointer',
-                                    background: selectedModel === 'independent' ? '#E8F5E9' : 'white',
+                                    background: selectedModel === 'independent' ? '#E8F5E9' : '#f5f5f0',
                                     transition: 'all 0.2s'
                                 }}
                             >
                                 <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style={{margin: '0 auto 8px'}}>
-                                    <line x1="30" y1="20" x2="30" y2="80" stroke="#4CAF50" strokeWidth="2"/>
-                                    <line x1="70" y1="20" x2="70" y2="80" stroke="#4CAF50" strokeWidth="2"/>
-                                    <line x1="25" y1="20" x2="35" y2="20" stroke="#4CAF50" strokeWidth="2"/>
-                                    <line x1="65" y1="20" x2="75" y2="20" stroke="#4CAF50" strokeWidth="2"/>
-                                    <line x1="25" y1="80" x2="35" y2="80" stroke="#4CAF50" strokeWidth="2"/>
-                                    <line x1="65" y1="80" x2="75" y2="80" stroke="#4CAF50" strokeWidth="2"/>
+                                    <line x1="30" y1="15" x2="30" y2="85" stroke="#000000" strokeWidth="2.5" strokeLinecap="round"/>
+                                    <line x1="70" y1="15" x2="70" y2="85" stroke="#000000" strokeWidth="2.5" strokeLinecap="round"/>
+                                    <line x1="23" y1="15" x2="37" y2="15" stroke="#000000" strokeWidth="2.5" strokeLinecap="round"/>
+                                    <line x1="63" y1="15" x2="77" y2="15" stroke="#000000" strokeWidth="2.5" strokeLinecap="round"/>
+                                    <line x1="23" y1="85" x2="37" y2="85" stroke="#000000" strokeWidth="2.5" strokeLinecap="round"/>
+                                    <line x1="63" y1="85" x2="77" y2="85" stroke="#000000" strokeWidth="2.5" strokeLinecap="round"/>
+                                    <line x1="30" y1="50" x2="70" y2="50" stroke="#000000" strokeWidth="2.5" strokeLinecap="round"/>
                                 </svg>
                                 <div style={{fontWeight: '600', color: '#2E7D32', marginBottom: '4px'}}>INDEPENDENT</div>
                                 <div style={{fontSize: '12px', color: '#666'}}>We stand parallel</div>
