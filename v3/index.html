@@ -703,27 +703,31 @@
             '4.2': 'big-branch-details',
             '4.3': 'small-branches',
 
-            // Step 5: Paired Onboarding (Working Together) - Dual View
-            '5.11': 'paired-day-1-user',
-            '5.12': 'paired-day-1-partner',
-            '5.21': 'paired-day-2-user',
-            '5.22': 'paired-day-2-partner',
-            '5.31': 'paired-day-3-user',
-            '5.32': 'paired-day-3-partner',
-            '5.41': 'paired-day-4-user',
-            '5.42': 'paired-day-4-partner',
-            '5.51': 'paired-day-5-user',
-            '5.52': 'paired-day-5-partner',
-            '5.61': 'paired-day-6-user',
-            '5.62': 'paired-day-6-partner',
-            '5.71': 'paired-day-7-user',
-            '5.72': 'paired-day-7-partner',
-            '5.81': 'paired-day-8-user',
-            '5.82': 'paired-day-8-partner',
-            '5.91': 'paired-day-9-user',
-            '5.92': 'paired-day-9-partner',
-            '5.101': 'paired-harvest-user',
-            '5.102': 'paired-harvest-partner',
+            // Step 5: Paired Onboarding (Working Together) - 3-Level Structure
+            // Level 1 - Foundation (Paired)
+            '5.1.1': 'paired-level1-screen1',
+            '5.1.2': 'paired-level1-screen2',
+            '5.1.3': 'paired-level1-screen3',
+            '5.1.4': 'paired-level1-screen4',
+            '5.1.5': 'paired-level1-screen5',
+            '5.1.6': 'paired-level1-screen6',
+            '5.1.7': 'paired-level1-screen7',
+            // Level 2 - Deepening (Paired)
+            '5.2.1': 'paired-level2-screen1',
+            '5.2.2': 'paired-level2-screen2',
+            '5.2.3': 'paired-level2-screen3',
+            '5.2.4': 'paired-level2-screen4',
+            '5.2.5': 'paired-level2-screen5',
+            '5.2.6': 'paired-level2-screen6',
+            '5.2.7': 'paired-level2-screen7',
+            // Level 3 - Mastery (Paired)
+            '5.3.1': 'paired-level3-screen1',
+            '5.3.2': 'paired-level3-screen2',
+            '5.3.3': 'paired-level3-screen3',
+            '5.3.4': 'paired-level3-screen4',
+            '5.3.5': 'paired-level3-screen5',
+            '5.3.6': 'paired-level3-screen6',
+            '5.3.7': 'paired-level3-screen7',
         };
 
         function WillingTreeApp() {
@@ -761,7 +765,9 @@
                 pollinateList: [], // Items sent from partner (Day 5)
                 fertilizeAllocations: {}, // Point allocations from partner (Day 6)
                 focusActions: [], // Partner's 2 focus items (Day 8)
-                day4Scores: {} // Partner's willingness scores (Day 4)
+                day4Scores: {}, // Partner's willingness scores (Day 4)
+                canCustomizeWants: false, // Partner's Want customization unlock status
+                customizedWants: [] // Partner's customized wants
             });
 
             // User's own data for exchange with partner
@@ -954,56 +960,116 @@
                     case 'small-branches':
                         return <SmallBranchesScreen setScreen={setCurrentScreen} />;
 
-                    // Step 5: Paired Onboarding (Working Together) - Dual View
-                    case 'paired-day-1-user':
-                        return <Day1BondingScreen goToNext={() => setCurrentScreen('5.12')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={true} partnerData={partnerData} setMyData={setMyData} setPartnerData={setPartnerData} createHeader={createHeader} userName={formData.name} />;
-                    case 'paired-day-1-partner':
-                        return <Day1BondingScreen goToNext={() => setCurrentScreen('5.21')} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} pairedMode={true} partnerData={{...partnerData, name: formData.name}} setMyData={(fn) => setPartnerData(fn)} setPartnerData={setMyData} createHeader={createHeader} userName={partnerData.name} />;
+                    // Step 5: Paired Onboarding (Working Together) - 3-Level Structure
+                    // Uses ViewToggle to switch between user/partner perspectives
 
-                    case 'paired-day-2-user':
-                        return <Day2TreeMetaphorScreen goToNext={() => setCurrentScreen('5.22')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} userName={formData.name} />;
-                    case 'paired-day-2-partner':
-                        return <Day2TreeMetaphorScreen goToNext={() => setCurrentScreen('5.31')} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} userName={partnerData.name} />;
+                    // Level 1 - Foundation (Paired)
+                    case 'paired-level1-screen1': // 5.1.1 Want/Willing
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
+                                {!viewingPartner ? (
+                                    <Level2PairingStressScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} myData={myData} />
+                                ) : (
+                                    <Level2PairingStressScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} myData={partnerData} />
+                                )}
+                            </div>
+                        );
 
-                    case 'paired-day-3-user':
-                        return <Day3CommitmentScreen goToNext={() => setCurrentScreen('5.32')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} userName={formData.name} />;
-                    case 'paired-day-3-partner':
-                        return <Day3CommitmentScreen goToNext={() => setCurrentScreen('5.41')} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} userName={partnerData.name} />;
+                    case 'paired-level1-screen2': // 5.1.2 Active Appreciation
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
+                                {!viewingPartner ? (
+                                    <Level2ActiveAppreciationScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />
+                                ) : (
+                                    <Level2ActiveAppreciationScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} />
+                                )}
+                            </div>
+                        );
 
-                    case 'paired-day-4-user':
-                        return <Day4WillingnessValuesScreen goToNext={() => setCurrentScreen('5.42')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={true} setMyData={setMyData} createHeader={createHeader} userName={formData.name} userGender={formData.gender} />;
-                    case 'paired-day-4-partner':
-                        return <Day4WillingnessValuesScreen goToNext={() => setCurrentScreen('5.51')} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} pairedMode={true} setMyData={(fn) => setPartnerData(fn)} createHeader={createHeader} userName={partnerData.name} userGender={partnerData.gender} />;
+                    case 'paired-level1-screen3': // 5.1.3 Binary Willing
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
+                                {!viewingPartner ? (
+                                    <Level2BinaryWillingScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} myData={myData} canCustomizeWants={canCustomizeWants} />
+                                ) : (
+                                    <Level2BinaryWillingScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} myData={partnerData} canCustomizeWants={canCustomizeWants} />
+                                )}
+                            </div>
+                        );
 
-                    case 'paired-day-5-user':
-                        return <Day5BenchmarksScreen goToNext={() => setCurrentScreen('5.52')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={true} setMyData={setMyData} setPartnerData={setPartnerData} createHeader={createHeader} userName={formData.name} />;
-                    case 'paired-day-5-partner':
-                        return <Day5BenchmarksScreen goToNext={() => setCurrentScreen('5.61')} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} pairedMode={true} setMyData={(fn) => setPartnerData(fn)} setPartnerData={setMyData} createHeader={createHeader} userName={partnerData.name} />;
+                    case 'paired-level1-screen4': // 5.1.4 Personalize Wants
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
+                                {!viewingPartner ? (
+                                    <Level2PersonalizeWantsScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} myData={myData} setMyData={setMyData} canCustomizeWants={canCustomizeWants} customizedWants={customizedWants} setCustomizedWants={setCustomizedWants} />
+                                ) : (
+                                    <Level2PersonalizeWantsScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} myData={partnerData} setMyData={setPartnerData} canCustomizeWants={canCustomizeWants} customizedWants={partnerData.customizedWants} setCustomizedWants={(fn) => setPartnerData(prev => ({...prev, customizedWants: fn}))} />
+                                )}
+                            </div>
+                        );
 
-                    case 'paired-day-6-user':
-                        return <Day6SmallBranchesScreen goToNext={() => setCurrentScreen('5.62')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={true} partnerData={partnerData} setMyData={setMyData} setPartnerData={setPartnerData} createHeader={createHeader} userName={formData.name} />;
-                    case 'paired-day-6-partner':
-                        return <Day6SmallBranchesScreen goToNext={() => setCurrentScreen('5.71')} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} pairedMode={true} partnerData={{...partnerData, name: formData.name, pollinateList: myData.pollinateList}} setMyData={(fn) => setPartnerData(fn)} setPartnerData={setMyData} createHeader={createHeader} userName={partnerData.name} />;
+                    case 'paired-level1-screen5': // 5.1.5 Discover Why
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
+                                {!viewingPartner ? (
+                                    <Level2DiscoverWhyScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />
+                                ) : (
+                                    <Level2DiscoverWhyScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} />
+                                )}
+                            </div>
+                        );
 
-                    case 'paired-day-7-user':
-                        return <Day7WillingCommitmentScreen goToNext={() => setCurrentScreen('5.72')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={true} setMyData={setMyData} createHeader={createHeader} userName={formData.name} />;
-                    case 'paired-day-7-partner':
-                        return <Day7WillingCommitmentScreen goToNext={() => setCurrentScreen('5.81')} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} pairedMode={true} setMyData={(fn) => setPartnerData(fn)} createHeader={createHeader} userName={partnerData.name} />;
+                    case 'paired-level1-screen6': // 5.1.6 Guess Unwilling
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
+                                {!viewingPartner ? (
+                                    <Level2GuessUnwillingScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} myData={myData} partnerData={partnerData} setPartnerData={setPartnerData} />
+                                ) : (
+                                    <Level2GuessUnwillingScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} myData={partnerData} partnerData={myData} setPartnerData={setMyData} />
+                                )}
+                            </div>
+                        );
 
-                    case 'paired-day-8-user':
-                        return <Day8PracticeSessionScreen goToNext={() => setCurrentScreen('5.82')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} userName={formData.name} />;
-                    case 'paired-day-8-partner':
-                        return <Day8PracticeSessionScreen goToNext={() => setCurrentScreen('5.91')} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} userName={partnerData.name} />;
+                    case 'paired-level1-screen7': // 5.1.7 Harvest
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
+                                {!viewingPartner ? (
+                                    <HarvestScreen goToNext={() => setCurrentScreen('5.2.1')} credits={credits} setCredits={setCredits} cycleCount={cycleCount} setCycleCount={setCycleCount} pairedMode={true} setPairedMode={setPairedMode} createHeader={createHeader} canCustomizeWants={canCustomizeWants} setCanCustomizeWants={setCanCustomizeWants} />
+                                ) : (
+                                    <HarvestScreen goToNext={() => setCurrentScreen('5.2.1')} credits={partnerData.credits} setCredits={(fn) => setPartnerData(prev => ({...prev, credits: fn(prev.credits)}))} cycleCount={cycleCount} setCycleCount={setCycleCount} pairedMode={true} setPairedMode={setPairedMode} createHeader={createHeader} canCustomizeWants={partnerData.canCustomizeWants} setCanCustomizeWants={(val) => setPartnerData(prev => ({...prev, canCustomizeWants: val}))} />
+                                )}
+                            </div>
+                        );
 
-                    case 'paired-day-9-user':
-                        return <Day9GuessRevealScreen goToNext={() => setCurrentScreen('5.92')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={true} partnerData={partnerData} setPartnerData={setPartnerData} createHeader={createHeader} userName={formData.name} />;
-                    case 'paired-day-9-partner':
-                        return <Day9GuessRevealScreen goToNext={() => setCurrentScreen('5.101')} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} pairedMode={true} partnerData={{...partnerData, name: formData.name, focusActions: myData.focusActions}} setPartnerData={setMyData} createHeader={createHeader} userName={partnerData.name} />;
-
-                    case 'paired-harvest-user':
-                        return <HarvestScreen goToNext={() => setCurrentScreen('5.102')} credits={credits} setCredits={setCredits} cycleCount={cycleCount} setCycleCount={setCycleCount} pairedMode={true} setPairedMode={setPairedMode} createHeader={createHeader} userName={formData.name} />;
-                    case 'paired-harvest-partner':
-                        return <HarvestScreen goToNext={() => setCurrentScreen('5.21')} credits={partnerData.credits} setCredits={(fn) => setPartnerData(prev => ({...prev, credits: fn(prev.credits)}))} cycleCount={cycleCount} setCycleCount={setCycleCount} pairedMode={true} setPairedMode={setPairedMode} createHeader={createHeader} userName={partnerData.name} />;
+                    // Level 2 - Deepening (Paired) - Placeholder screens for now
+                    case 'paired-level2-screen1':
+                    case 'paired-level2-screen2':
+                    case 'paired-level2-screen3':
+                    case 'paired-level2-screen4':
+                    case 'paired-level2-screen5':
+                    case 'paired-level2-screen6':
+                    case 'paired-level2-screen7':
+                    // Level 3 - Mastery (Paired) - Placeholder screens for now
+                    case 'paired-level3-screen1':
+                    case 'paired-level3-screen2':
+                    case 'paired-level3-screen3':
+                    case 'paired-level3-screen4':
+                    case 'paired-level3-screen5':
+                    case 'paired-level3-screen6':
+                    case 'paired-level3-screen7':
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
+                                <PlaceholderScreen code={currentScreen} message="Paired mode Level 2 & 3 content coming soon. Currently showing Level 1 (Foundation) only." />
+                            </div>
+                        );
 
                     default:
                         return <PlaceholderScreen code={currentScreen} />;
@@ -1081,27 +1147,31 @@
                     </div>
 
                     <div className="nav-section">
-                        <div className="nav-section-title">Step 5: Paired Onboarding (Dual View)</div>
-                        <button className={`nav-button ${currentScreen === '5.11' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.11')}>5.11 Day 1 - User</button>
-                        <button className={`nav-button ${currentScreen === '5.12' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.12')}>5.12 Day 1 - Partner</button>
-                        <button className={`nav-button ${currentScreen === '5.21' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.21')}>5.21 Day 2 - User</button>
-                        <button className={`nav-button ${currentScreen === '5.22' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.22')}>5.22 Day 2 - Partner</button>
-                        <button className={`nav-button ${currentScreen === '5.31' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.31')}>5.31 Day 3 - User</button>
-                        <button className={`nav-button ${currentScreen === '5.32' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.32')}>5.32 Day 3 - Partner</button>
-                        <button className={`nav-button ${currentScreen === '5.41' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.41')}>5.41 Day 4 - User</button>
-                        <button className={`nav-button ${currentScreen === '5.42' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.42')}>5.42 Day 4 - Partner</button>
-                        <button className={`nav-button ${currentScreen === '5.51' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.51')}>5.51 Day 5 - User</button>
-                        <button className={`nav-button ${currentScreen === '5.52' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.52')}>5.52 Day 5 - Partner</button>
-                        <button className={`nav-button ${currentScreen === '5.61' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.61')}>5.61 Day 6 - User</button>
-                        <button className={`nav-button ${currentScreen === '5.62' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.62')}>5.62 Day 6 - Partner</button>
-                        <button className={`nav-button ${currentScreen === '5.71' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.71')}>5.71 Day 7 - User</button>
-                        <button className={`nav-button ${currentScreen === '5.72' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.72')}>5.72 Day 7 - Partner</button>
-                        <button className={`nav-button ${currentScreen === '5.81' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.81')}>5.81 Day 8 - User</button>
-                        <button className={`nav-button ${currentScreen === '5.82' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.82')}>5.82 Day 8 - Partner</button>
-                        <button className={`nav-button ${currentScreen === '5.91' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.91')}>5.91 Day 9 - User</button>
-                        <button className={`nav-button ${currentScreen === '5.92' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.92')}>5.92 Day 9 - Partner</button>
-                        <button className={`nav-button ${currentScreen === '5.101' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.101')}>5.101 Harvest - User</button>
-                        <button className={`nav-button ${currentScreen === '5.102' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.102')}>5.102 Harvest - Partner</button>
+                        <div className="nav-section-title">Step 5: Paired Onboarding (3 Levels)</div>
+                        <div style={{fontSize: '12px', fontWeight: '600', marginBottom: '8px', color: '#666'}}>Level 1 - Foundation</div>
+                        <button className={`nav-button ${currentScreen === '5.1.1' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.1.1')}>5.1.1 Want/Willing</button>
+                        <button className={`nav-button ${currentScreen === '5.1.2' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.1.2')}>5.1.2 Active Appreciation</button>
+                        <button className={`nav-button ${currentScreen === '5.1.3' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.1.3')}>5.1.3 Binary Willing</button>
+                        <button className={`nav-button ${currentScreen === '5.1.4' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.1.4')}>5.1.4 Personalize Wants</button>
+                        <button className={`nav-button ${currentScreen === '5.1.5' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.1.5')}>5.1.5 Discover Why</button>
+                        <button className={`nav-button ${currentScreen === '5.1.6' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.1.6')}>5.1.6 Guess Unwilling</button>
+                        <button className={`nav-button ${currentScreen === '5.1.7' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.1.7')}>5.1.7 Harvest</button>
+                        <div style={{fontSize: '12px', fontWeight: '600', marginBottom: '8px', marginTop: '12px', color: '#666'}}>Level 2 - Deepening</div>
+                        <button className={`nav-button ${currentScreen === '5.2.1' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.2.1')}>5.2.1 Screen 1</button>
+                        <button className={`nav-button ${currentScreen === '5.2.2' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.2.2')}>5.2.2 Screen 2</button>
+                        <button className={`nav-button ${currentScreen === '5.2.3' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.2.3')}>5.2.3 Screen 3</button>
+                        <button className={`nav-button ${currentScreen === '5.2.4' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.2.4')}>5.2.4 Screen 4</button>
+                        <button className={`nav-button ${currentScreen === '5.2.5' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.2.5')}>5.2.5 Screen 5</button>
+                        <button className={`nav-button ${currentScreen === '5.2.6' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.2.6')}>5.2.6 Screen 6</button>
+                        <button className={`nav-button ${currentScreen === '5.2.7' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.2.7')}>5.2.7 Screen 7</button>
+                        <div style={{fontSize: '12px', fontWeight: '600', marginBottom: '8px', marginTop: '12px', color: '#666'}}>Level 3 - Mastery</div>
+                        <button className={`nav-button ${currentScreen === '5.3.1' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.3.1')}>5.3.1 Screen 1</button>
+                        <button className={`nav-button ${currentScreen === '5.3.2' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.3.2')}>5.3.2 Screen 2</button>
+                        <button className={`nav-button ${currentScreen === '5.3.3' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.3.3')}>5.3.3 Screen 3</button>
+                        <button className={`nav-button ${currentScreen === '5.3.4' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.3.4')}>5.3.4 Screen 4</button>
+                        <button className={`nav-button ${currentScreen === '5.3.5' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.3.5')}>5.3.5 Screen 5</button>
+                        <button className={`nav-button ${currentScreen === '5.3.6' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.3.6')}>5.3.6 Screen 6</button>
+                        <button className={`nav-button ${currentScreen === '5.3.7' ? 'active' : ''}`} onClick={() => setCurrentScreen('5.3.7')}>5.3.7 Screen 7</button>
                     </div>
                 </div>
             );
