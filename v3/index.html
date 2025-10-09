@@ -1056,8 +1056,26 @@
                     case 'paired-level2-screen5':
                     case 'paired-level2-screen6':
                     case 'paired-level2-screen7':
-                    // Level 3 - Mastery (Paired) - Placeholder screens for now
-                    case 'paired-level3-screen1':
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
+                                <PlaceholderScreen code={currentScreen} message="Paired mode Level 2 content coming soon. Currently showing Level 1 (Foundation) only." />
+                            </div>
+                        );
+
+                    // Level 3 - Mastery (Paired)
+                    case 'paired-level3-screen1': // 5.3.1 The Story I Want
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
+                                {!viewingPartner ? (
+                                    <Level3ArticulateWantsScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />
+                                ) : (
+                                    <Level3ArticulateWantsScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} />
+                                )}
+                            </div>
+                        );
+
                     case 'paired-level3-screen2':
                     case 'paired-level3-screen3':
                     case 'paired-level3-screen4':
@@ -1067,7 +1085,7 @@
                         return (
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
-                                <PlaceholderScreen code={currentScreen} message="Paired mode Level 2 & 3 content coming soon. Currently showing Level 1 (Foundation) only." />
+                                <PlaceholderScreen code={currentScreen} message="Paired mode Level 3 content coming soon." />
                             </div>
                         );
 
@@ -3913,25 +3931,128 @@
         // ===== LEVEL 3 PLACEHOLDER SCREENS =====
 
         function Level3ArticulateWantsScreen({ goToNext, awardCredits, credits, currentScreen, createHeader }) {
+            const [selectedModel, setSelectedModel] = useState('');
+
+            const handleContinue = () => {
+                awardCredits('sun', 5);
+                goToNext();
+            };
+
             return (
                 <div className="screen">
                     <div className="day-badge">Lvl 3 - 1</div>
-                    {createHeader ? createHeader('Articulating Core Wants') : (
-                        <div className="header"><h2>Articulating Core Wants</h2></div>
+                    {createHeader ? createHeader('The Story I Want') : (
+                        <div className="header"><h2>The Story I Want</h2></div>
                     )}
                     <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
-                        <p className="text-md" style={{marginBottom: '16px'}}>
-                            [Level 3 Screen 1 - To be designed]
+                        <p className="text-md" style={{marginBottom: '16px', lineHeight: '1.6'}}>
+                            We protect ourselves from shame by telling stories about who we are, what we deserve, and why things happen the way they do. <a href="https://brenebrown.com/books-audio/" target="_blank" style={{color: '#4CAF50'}}>Brené Brown</a> teaches that shame thrives in secrecy and silence—when we name our shame and share our stories with trusted others, it loses its power. <a href="https://www.finlayson-fife.com/" target="_blank" style={{color: '#4CAF50'}}>Dr. Jennifer Finlayson-Fife</a> emphasizes that true intimacy requires the courage to reveal ourselves fully, including our fears and desires. <a href="https://cruciallearning.com/books/crucial-conversations-book/" target="_blank" style={{color: '#4CAF50'}}>Crucial Conversations</a> shows how we unconsciously create "victim," "villain," and "helpless" stories that prevent honest dialogue. Even <a href="https://www.amazon.com/Mans-Search-Meaning-Viktor-Frankl/dp/0807014273" target="_blank" style={{color: '#4CAF50'}}>Viktor Frankl</a> discovered in concentration camps that the stories we tell about suffering determine whether we find meaning or despair. Unpacking the stories we tell ourselves—and choosing new ones—is essential to creating the intimate partnership we truly want.
                         </p>
-                        <p className="text-md" style={{marginBottom: '16px'}}>
-                            This screen will help you identify and name 3-5 core relationship wants.
+
+                        <p className="text-md" style={{marginBottom: '16px', fontWeight: '600'}}>
+                            What story do you want for your relationship? Choose the model that best represents your vision:
                         </p>
+
+                        <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '24px'}}>
+                            <div
+                                onClick={() => setSelectedModel('shared')}
+                                style={{
+                                    border: selectedModel === 'shared' ? '3px solid #4CAF50' : '2px solid #ddd',
+                                    borderRadius: '12px',
+                                    padding: '16px',
+                                    textAlign: 'center',
+                                    cursor: 'pointer',
+                                    background: selectedModel === 'shared' ? '#E8F5E9' : 'white',
+                                    transition: 'all 0.2s'
+                                }}
+                            >
+                                <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style={{margin: '0 auto 8px'}}>
+                                    <circle cx="35" cy="50" r="30" fill="none" stroke="#4CAF50" strokeWidth="2"/>
+                                    <circle cx="65" cy="50" r="30" fill="none" stroke="#4CAF50" strokeWidth="2"/>
+                                    <ellipse cx="50" cy="50" rx="15" ry="30" fill="#C8E6C9"/>
+                                </svg>
+                                <div style={{fontWeight: '600', color: '#2E7D32', marginBottom: '4px'}}>SHARED</div>
+                                <div style={{fontSize: '12px', color: '#666'}}>We create overlap</div>
+                            </div>
+
+                            <div
+                                onClick={() => setSelectedModel('essential')}
+                                style={{
+                                    border: selectedModel === 'essential' ? '3px solid #4CAF50' : '2px solid #ddd',
+                                    borderRadius: '12px',
+                                    padding: '16px',
+                                    textAlign: 'center',
+                                    cursor: 'pointer',
+                                    background: selectedModel === 'essential' ? '#E8F5E9' : 'white',
+                                    transition: 'all 0.2s'
+                                }}
+                            >
+                                <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style={{margin: '0 auto 8px'}}>
+                                    <path d="M 30 80 L 50 20 L 70 80 Z" fill="none" stroke="#4CAF50" strokeWidth="2"/>
+                                    <line x1="40" y1="60" x2="60" y2="60" stroke="#4CAF50" strokeWidth="2"/>
+                                </svg>
+                                <div style={{fontWeight: '600', color: '#2E7D32', marginBottom: '4px'}}>ESSENTIAL</div>
+                                <div style={{fontSize: '12px', color: '#666'}}>We support each other</div>
+                            </div>
+
+                            <div
+                                onClick={() => setSelectedModel('integrated')}
+                                style={{
+                                    border: selectedModel === 'integrated' ? '3px solid #4CAF50' : '2px solid #ddd',
+                                    borderRadius: '12px',
+                                    padding: '16px',
+                                    textAlign: 'center',
+                                    cursor: 'pointer',
+                                    background: selectedModel === 'integrated' ? '#E8F5E9' : 'white',
+                                    transition: 'all 0.2s'
+                                }}
+                            >
+                                <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style={{margin: '0 auto 8px'}}>
+                                    <path d="M 30 20 Q 40 50, 30 80" fill="none" stroke="#4CAF50" strokeWidth="2"/>
+                                    <path d="M 70 20 Q 60 50, 70 80" fill="none" stroke="#4CAF50" strokeWidth="2"/>
+                                    <circle cx="30" cy="30" r="3" fill="#4CAF50"/>
+                                    <circle cx="70" cy="30" r="3" fill="#4CAF50"/>
+                                    <circle cx="30" cy="70" r="3" fill="#4CAF50"/>
+                                    <circle cx="70" cy="70" r="3" fill="#4CAF50"/>
+                                </svg>
+                                <div style={{fontWeight: '600', color: '#2E7D32', marginBottom: '4px'}}>INTEGRATED</div>
+                                <div style={{fontSize: '12px', color: '#666'}}>We interweave lives</div>
+                            </div>
+
+                            <div
+                                onClick={() => setSelectedModel('independent')}
+                                style={{
+                                    border: selectedModel === 'independent' ? '3px solid #4CAF50' : '2px solid #ddd',
+                                    borderRadius: '12px',
+                                    padding: '16px',
+                                    textAlign: 'center',
+                                    cursor: 'pointer',
+                                    background: selectedModel === 'independent' ? '#E8F5E9' : 'white',
+                                    transition: 'all 0.2s'
+                                }}
+                            >
+                                <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style={{margin: '0 auto 8px'}}>
+                                    <line x1="30" y1="20" x2="30" y2="80" stroke="#4CAF50" strokeWidth="2"/>
+                                    <line x1="70" y1="20" x2="70" y2="80" stroke="#4CAF50" strokeWidth="2"/>
+                                    <line x1="25" y1="20" x2="35" y2="20" stroke="#4CAF50" strokeWidth="2"/>
+                                    <line x1="65" y1="20" x2="75" y2="20" stroke="#4CAF50" strokeWidth="2"/>
+                                    <line x1="25" y1="80" x2="35" y2="80" stroke="#4CAF50" strokeWidth="2"/>
+                                    <line x1="65" y1="80" x2="75" y2="80" stroke="#4CAF50" strokeWidth="2"/>
+                                </svg>
+                                <div style={{fontWeight: '600', color: '#2E7D32', marginBottom: '4px'}}>INDEPENDENT</div>
+                                <div style={{fontSize: '12px', color: '#666'}}>We stand parallel</div>
+                            </div>
+                        </div>
+
                         <div className="button-container">
-                            <button className="button" onClick={() => { awardCredits('sun', 5); goToNext(); }} style={{width: '100%'}}>
-                                Continue (Placeholder)
+                            <button className="button" onClick={handleContinue} disabled={!selectedModel} style={{width: '100%'}}>
+                                Continue
                             </button>
                         </div>
+                    </div>
+                    <div className="screen-footer">
+                        The story you choose shapes the relationship you create. Choose consciously.
                     </div>
                 </div>
             );
