@@ -742,6 +742,8 @@
             const [pairedMode, setPairedMode] = useState(false);
             const [viewingPartner, setViewingPartner] = useState(false); // Toggle between user and partner view
             const [menuOpen, setMenuOpen] = useState(false);
+            const [canCustomizeWants, setCanCustomizeWants] = useState(false); // Unlocked after purchasing at Harvest
+            const [customizedWants, setCustomizedWants] = useState([]); // User's personalized want list
 
             // Partner state for paired mode
             const [partnerData, setPartnerData] = useState({
@@ -900,7 +902,7 @@
                     case 'level1-good-fruits':
                         return <Day9GuessRevealScreen goToNext={() => setCurrentScreen('2.1.7')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} partnerData={null} setPartnerData={setPartnerData} createHeader={createHeader} />;
                     case 'level1-harvest':
-                        return <HarvestScreen goToNext={() => setCurrentScreen('2.2.1')} credits={credits} setCredits={setCredits} cycleCount={cycleCount} setCycleCount={setCycleCount} pairedMode={false} setPairedMode={setPairedMode} createHeader={createHeader} level={1} />;
+                        return <HarvestScreen goToNext={() => setCurrentScreen('2.2.1')} credits={credits} setCredits={setCredits} cycleCount={cycleCount} setCycleCount={setCycleCount} pairedMode={false} setPairedMode={setPairedMode} createHeader={createHeader} level={1} canCustomizeWants={canCustomizeWants} setCanCustomizeWants={setCanCustomizeWants} />;
 
                     // Step 2: Individual Journey - Level 2 (Deepening)
                     case 'level2-pairing-stress':
@@ -908,11 +910,11 @@
                     case 'level2-active-appreciation':
                         return <Level2ActiveAppreciationScreen goToNext={() => setCurrentScreen('2.2.3')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />;
                     case 'level2-binary-willing':
-                        return <Level2BinaryWillingScreen goToNext={() => setCurrentScreen('2.2.4')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} partnerData={partnerData} setMyData={setMyData} />;
+                        return <Level2BinaryWillingScreen goToNext={() => setCurrentScreen('2.2.4')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} partnerData={partnerData} setMyData={setMyData} myData={myData} canCustomizeWants={canCustomizeWants} customizedWants={customizedWants} />;
                     case 'level2-personalize-wants':
-                        return <Level2PersonalizeWantsScreen goToNext={() => setCurrentScreen('2.2.5')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} setMyData={setMyData} />;
+                        return <Level2PersonalizeWantsScreen goToNext={() => setCurrentScreen('2.2.5')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} setMyData={setMyData} myData={myData} canCustomizeWants={canCustomizeWants} customizedWants={customizedWants} setCustomizedWants={setCustomizedWants} />;
                     case 'level2-discover-why':
-                        return <Level2DiscoverWhyScreen goToNext={() => setCurrentScreen('2.2.6')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} setMyData={setMyData} />;
+                        return <Level2DiscoverWhyScreen goToNext={() => setCurrentScreen('2.2.6')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} setMyData={setMyData} myData={myData} />;
                     case 'level2-guess-unwilling':
                         return <Level2GuessUnwillingScreen goToNext={() => setCurrentScreen('2.2.7')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} partnerData={partnerData} />;
                     case 'level2-harvest':
@@ -2761,10 +2763,11 @@
         }
 
         // Screen 2.10: Harvest
-        function HarvestScreen({ setScreen, credits, setCredits, cycleCount, setCycleCount, pairedMode, setPairedMode }) {
+        function HarvestScreen({ setScreen, goToNext, credits, setCredits, cycleCount, setCycleCount, pairedMode, setPairedMode, canCustomizeWants, setCanCustomizeWants, createHeader, level }) {
             const totalCredits = credits.sun + credits.water + credits.growth;
             const canAffordReferral = totalCredits >= 100;
             const canAffordPaired = totalCredits >= 200;
+            const canAffordCustomWants = totalCredits >= 50;
 
             const handleReferral = () => {
                 // Spend 100 credits but preserve the rest
@@ -2794,10 +2797,31 @@
                 setScreen('3.1'); // Go to dashboard in paired mode
             };
 
+            const handleCustomWants = () => {
+                // Spend 50 credits proportionally
+                const remaining = totalCredits - 50;
+                const ratio = remaining / totalCredits;
+                setCredits({
+                    sun: Math.floor(credits.sun * ratio),
+                    water: Math.floor(credits.water * ratio),
+                    growth: Math.floor(credits.growth * ratio)
+                });
+                setCanCustomizeWants(true);
+                alert('✨ Unlocked! You can now customize your Want list in Level 2. Replace generic wants with your own specific needs.');
+                if (goToNext) {
+                    goToNext();
+                } else {
+                    setScreen('2.2.1');
+                }
+            };
+
             const handleContinue = () => {
                 // Not enough credits to harvest, but credits are preserved
-                setCycleCount(prev => prev + 1);
-                setScreen('2.2'); // Restart cycle keeping all credits
+                if (goToNext) {
+                    goToNext();
+                } else if (setScreen) {
+                    setScreen('2.2.1');
+                }
             };
 
             return (
@@ -2825,6 +2849,26 @@
 
                         <div style={{marginBottom: '20px'}}>
                             <h4 style={{fontSize: '14px', marginBottom: '12px', fontWeight: '600'}}>Harvest Options:</h4>
+
+                            {!canCustomizeWants && (
+                                <div className="card" style={{marginBottom: '12px', opacity: canAffordCustomWants ? 1 : 0.5}}>
+                                    <div className="card-title">✏️ Customize Your Wants</div>
+                                    <div className="card-description" style={{marginBottom: '8px'}}>
+                                        Replace generic wants with your own specific needs in Level 2
+                                    </div>
+                                    <div style={{fontSize: '12px', color: '#666', marginBottom: '8px'}}>
+                                        Cost: 50 credits
+                                    </div>
+                                    <button
+                                        className="button"
+                                        onClick={handleCustomWants}
+                                        disabled={!canAffordCustomWants}
+                                        style={{width: '100%'}}
+                                    >
+                                        {canAffordCustomWants ? 'Unlock Custom Wants' : 'Need 50 credits'}
+                                    </button>
+                                </div>
+                            )}
 
                             <div className="card" style={{marginBottom: '12px', opacity: canAffordReferral ? 1 : 0.5}}>
                                 <div className="card-title">🎁 50% Friend Referral</div>
@@ -3322,14 +3366,27 @@
         }
 
         // Level 2 Screen 3: Binary Willing List
-        function Level2BinaryWillingScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, partnerData, setMyData }) {
+        function Level2BinaryWillingScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, partnerData, setMyData, myData, canCustomizeWants, customizedWants }) {
             const [responses, setResponses] = useState({});
 
-            const pollinateList = partnerData?.pollinateList || [
-                { text: 'Listen actively without trying to fix' },
-                { text: 'Show physical affection regularly' },
-                { text: 'Help with household tasks unprompted' }
-            ];
+            // Use customized wants if available, otherwise use the Big Branch list from Level 1 (Day 6 fertilize results)
+            // The Big Branch list is the top 6 items from partner's allocation
+            const bigBranchList = myData?.fertilizeAllocations
+                ? Object.entries(myData.fertilizeAllocations)
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 6)
+                    .map(([text, points]) => ({ text, points }))
+                : [];
+
+            const pollinateList = canCustomizeWants && customizedWants.length > 0
+                ? customizedWants
+                : bigBranchList.length > 0
+                    ? bigBranchList
+                    : [
+                        { text: 'Listen actively without trying to fix' },
+                        { text: 'Show physical affection regularly' },
+                        { text: 'Help with household tasks unprompted' }
+                    ];
 
             const handleResponse = (item, response) => {
                 setResponses(prev => ({ ...prev, [item]: response }));
@@ -3422,22 +3479,25 @@
         }
 
         // Level 2 Screen 4: Personalize Wants
-        function Level2PersonalizeWantsScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, setMyData }) {
+        function Level2PersonalizeWantsScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, setMyData, myData, canCustomizeWants, customizedWants, setCustomizedWants }) {
             const [selectedWants, setSelectedWants] = useState([]);
             const [whys, setWhys] = useState({});
 
-            const wantsList = [
-                'More quality time together',
-                'Better communication about feelings',
-                'More physical affection',
-                'Help with household responsibilities',
-                'Support for my goals and dreams',
-                'More emotional presence',
-                'Active listening without fixing',
-                'Appreciation for my efforts',
-                'Shared decision-making',
-                'Date nights and fun activities'
-            ];
+            // Get the items the user said "yes" to in 2.2.3
+            const binaryResponses = myData?.binaryResponses || {};
+            const yesItems = Object.entries(binaryResponses)
+                .filter(([item, response]) => response === 'yes')
+                .map(([item]) => item);
+
+            const wantsList = yesItems.length > 0
+                ? yesItems
+                : [
+                    'More quality time together',
+                    'Better communication about feelings',
+                    'More physical affection',
+                    'Help with household responsibilities',
+                    'Support for my goals and dreams'
+                ];
 
             const maxSelections = Math.floor(wantsList.length / 2);
 
@@ -3458,11 +3518,15 @@
 
             const handleContinue = () => {
                 const wantsWithWhys = selectedWants.map(want => ({
-                    what: want,
+                    text: want,
                     why: whys[want] || ''
                 }));
                 if (setMyData) {
                     setMyData(prev => ({ ...prev, personalizedWants: wantsWithWhys }));
+                }
+                // Save to customizedWants if user has unlocked customization
+                if (canCustomizeWants && setCustomizedWants) {
+                    setCustomizedWants(wantsWithWhys);
                 }
                 awardCredits('growth', 1);
                 goToNext();
@@ -3478,8 +3542,11 @@
                     )}
                     <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
-                        <p className="text-md" style={{marginBottom: '16px'}}>
-                            Select up to {maxSelections} wants and explain WHY each matters to you:
+                        <p className="text-md" style={{marginBottom: '8px'}}>
+                            For the ones you're willing to do, try and articulate WHY each matters to you:
+                        </p>
+                        <p className="text-sm" style={{marginBottom: '16px', color: '#666', fontStyle: 'italic'}}>
+                            For example: You want them to pick up their socks. Dirty socks on the floor means what to you? We are slobs? No self-respect? What is the story your brain tells if the want goes unfulfilled?
                         </p>
 
                         <div style={{display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '16px'}}>
@@ -3532,13 +3599,24 @@
         }
 
         // Level 2 Screen 5: Discover the Why
-        function Level2DiscoverWhyScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, setMyData }) {
-            const [discovery1, setDiscovery1] = useState('');
-            const [discovery2, setDiscovery2] = useState('');
+        function Level2DiscoverWhyScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, setMyData, myData }) {
+            const [sharing1, setSharing1] = useState('');
+            const [whyQuestion1, setWhyQuestion1] = useState('');
+            const [sharing2, setSharing2] = useState('');
+            const [whyQuestion2, setWhyQuestion2] = useState('');
+
+            // Get the personalized wants from previous screen
+            const personalizedWants = myData?.personalizedWants || [];
 
             const handleContinue = () => {
                 if (setMyData) {
-                    setMyData(prev => ({ ...prev, whyDiscoveries: [discovery1, discovery2] }));
+                    setMyData(prev => ({
+                        ...prev,
+                        sharingAndAsking: [
+                            { sharing: sharing1, whyQuestion: whyQuestion1 },
+                            { sharing: sharing2, whyQuestion: whyQuestion2 }
+                        ]
+                    }));
                 }
                 awardCredits('water', 5);
                 goToNext();
@@ -3547,46 +3625,65 @@
             return (
                 <div className="screen">
                     <div className="day-badge">Lvl 2 - 5</div>
-                    {createHeader ? createHeader('Discover the Why') : (
-                        <div className="header"><h2>Discover the Why</h2></div>
+                    {createHeader ? createHeader('Share & Ask Why') : (
+                        <div className="header"><h2>Share & Ask Why</h2></div>
                     )}
                     <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
-                        <p className="text-md" style={{marginBottom: '16px'}}>
-                            Go a little undercover this week. Discover the WHY behind your partner's WHAT. What are they really asking for beneath their requests?
+                        <p className="text-md" style={{marginBottom: '8px'}}>
+                            Share what you will be trying to do for your partner, and ask about the meaning:
+                        </p>
+                        <p className="text-sm" style={{marginBottom: '16px', color: '#666', fontStyle: 'italic'}}>
+                            "If I do _____ for you (remember this might not even be something they asked), what would it mean to you? Why is that, do you think?"
                         </p>
 
                         <div style={{marginBottom: '16px'}}>
-                            <p className="text-sm" style={{marginBottom: '8px', color: '#666'}}>
-                                Discovery 1: What I learned about what they really need...
+                            <p className="text-sm" style={{marginBottom: '8px', fontWeight: '600'}}>
+                                First Action:
                             </p>
+                            <input
+                                className="input-field"
+                                placeholder="What will you try to do for your partner?"
+                                value={sharing1}
+                                onChange={(e) => setSharing1(e.target.value)}
+                                style={{marginBottom: '8px'}}
+                            />
                             <textarea
                                 className="input-field"
-                                placeholder="Example: When they ask for help with dishes, they're really asking to feel like we're a team..."
-                                value={discovery1}
-                                onChange={(e) => setDiscovery1(e.target.value)}
+                                placeholder="Ask: 'If I do this for you, what would it mean to you? Why is that, do you think?'"
+                                value={whyQuestion1}
+                                onChange={(e) => setWhyQuestion1(e.target.value)}
+                                rows={3}
                                 style={{marginBottom: '16px'}}
                             />
 
-                            <p className="text-sm" style={{marginBottom: '8px', color: '#666'}}>
-                                Discovery 2: Another insight about their deeper need...
+                            <p className="text-sm" style={{marginBottom: '8px', fontWeight: '600'}}>
+                                Second Action:
                             </p>
+                            <input
+                                className="input-field"
+                                placeholder="Another thing you'll try to do for your partner"
+                                value={sharing2}
+                                onChange={(e) => setSharing2(e.target.value)}
+                                style={{marginBottom: '8px'}}
+                            />
                             <textarea
                                 className="input-field"
-                                placeholder="Example: When they want to talk, they're seeking emotional connection, not solutions..."
-                                value={discovery2}
-                                onChange={(e) => setDiscovery2(e.target.value)}
+                                placeholder="Ask: 'If I do this for you, what would it mean to you? Why is that, do you think?'"
+                                value={whyQuestion2}
+                                onChange={(e) => setWhyQuestion2(e.target.value)}
+                                rows={3}
                             />
                         </div>
 
                         <div className="button-container">
-                            <button className="button" onClick={handleContinue} disabled={!discovery1 || !discovery2} style={{width: '100%'}}>
+                            <button className="button" onClick={handleContinue} disabled={!sharing1 || !whyQuestion1 || !sharing2 || !whyQuestion2} style={{width: '100%'}}>
                                 Continue
                             </button>
                         </div>
                     </div>
                     <div className="screen-footer">
-                        Understanding the why behind the what transforms surface requests into deep connection. Most fights are about unmet deeper needs, not the surface issue.
+                        By asking "why" about what you're willing to do, you discover the deeper meaning behind your partner's wants. This transforms acts of service into acts of deep connection.
                     </div>
                 </div>
             );
