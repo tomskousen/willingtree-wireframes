@@ -1076,7 +1076,18 @@
                             </div>
                         );
 
-                    case 'paired-level3-screen2':
+                    case 'paired-level3-screen2': // 5.3.2 Translating
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
+                                {!viewingPartner ? (
+                                    <Level3NonAttachedScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />
+                                ) : (
+                                    <Level3NonAttachedScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} />
+                                )}
+                            </div>
+                        );
+
                     case 'paired-level3-screen3':
                     case 'paired-level3-screen4':
                     case 'paired-level3-screen5':
@@ -4072,25 +4083,95 @@
         }
 
         function Level3NonAttachedScreen({ goToNext, awardCredits, credits, currentScreen, createHeader }) {
+            const [behaviors, setBehaviors] = useState([
+                { yourStory: '', theirStory: '' },
+                { yourStory: '', theirStory: '' },
+                { yourStory: '', theirStory: '' }
+            ]);
+
+            const handleYourStoryChange = (index, value) => {
+                const newBehaviors = [...behaviors];
+                newBehaviors[index].yourStory = value;
+                setBehaviors(newBehaviors);
+            };
+
+            const handleTheirStoryChange = (index, value) => {
+                const newBehaviors = [...behaviors];
+                newBehaviors[index].theirStory = value;
+                setBehaviors(newBehaviors);
+            };
+
+            const allFieldsFilled = behaviors.every(b => b.yourStory.trim() && b.theirStory.trim());
+
+            const handleContinue = () => {
+                awardCredits('water', 5);
+                goToNext();
+            };
+
             return (
                 <div className="screen">
                     <div className="day-badge">Lvl 3 - 2</div>
-                    {createHeader ? createHeader('Non-Attached Communication') : (
-                        <div className="header"><h2>Non-Attached Communication</h2></div>
+                    {createHeader ? createHeader('Translating') : (
+                        <div className="header"><h2>Translating</h2></div>
                     )}
                     <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
-                        <p className="text-md" style={{marginBottom: '16px'}}>
-                            [Level 3 Screen 2 - To be designed]
+                        <p className="text-md" style={{marginBottom: '12px', lineHeight: '1.6'}}>
+                            List three mildly annoying behaviors, then rewrite the script with your partner as the hero making a reasonable, rational choice.
                         </p>
-                        <p className="text-md" style={{marginBottom: '16px'}}>
-                            This screen will teach Gottman's 5:1 ratio and practice stating wants without demand.
-                        </p>
+
+                        <div style={{background: '#FFF3E0', border: '2px solid #FF9800', borderRadius: '8px', padding: '12px', marginBottom: '16px', fontSize: '13px'}}>
+                            <strong style={{color: '#F57C00'}}>Example:</strong>
+                            <div style={{marginTop: '6px', marginBottom: '4px'}}>
+                                <span style={{color: '#666'}}>Your story:</span> "Kitchen's a disaster after dinner. He doesn't care about my need for a clean house."
+                            </div>
+                            <div>
+                                <span style={{color: '#666'}}>Their story:</span> "He thinks playing outside with the kids is more important than cleaning up immediately."
+                            </div>
+                        </div>
+
+                        {behaviors.map((behavior, index) => (
+                            <div key={index} style={{marginBottom: '20px', background: '#f5f5f0', padding: '12px', borderRadius: '8px'}}>
+                                <div style={{fontSize: '14px', fontWeight: '600', color: '#2E7D32', marginBottom: '8px'}}>
+                                    Behavior {index + 1}
+                                </div>
+
+                                <div style={{marginBottom: '10px'}}>
+                                    <label className="text-sm" style={{display: 'block', marginBottom: '4px', color: '#666'}}>
+                                        Your story (villain version):
+                                    </label>
+                                    <input
+                                        className="input-field"
+                                        placeholder="They don't care about..."
+                                        value={behavior.yourStory}
+                                        onChange={(e) => handleYourStoryChange(index, e.target.value)}
+                                        style={{fontSize: '14px'}}
+                                    />
+                                </div>
+
+                                <div>
+                                    <label className="text-sm" style={{display: 'block', marginBottom: '4px', color: '#666'}}>
+                                        Their story (hero version):
+                                    </label>
+                                    <input
+                                        className="input-field"
+                                        placeholder="They think/value/believe..."
+                                        value={behavior.theirStory}
+                                        onChange={(e) => handleTheirStoryChange(index, e.target.value)}
+                                        style={{fontSize: '14px'}}
+                                    />
+                                </div>
+                            </div>
+                        ))}
+
                         <div className="button-container">
-                            <button className="button" onClick={() => { awardCredits('water', 5); goToNext(); }} style={{width: '100%'}}>
-                                Continue (Placeholder)
+                            <button className="button" onClick={handleContinue} disabled={!allFieldsFilled} style={{width: '100%'}}>
+                                Continue
                             </button>
                         </div>
+                    </div>
+                    <div className="screen-footer">
+                        When you can see their story, you can stop fighting and start connecting.
                     </div>
                 </div>
             );
