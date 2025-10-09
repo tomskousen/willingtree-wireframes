@@ -3369,12 +3369,10 @@
         function Level2BinaryWillingScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, partnerData, setMyData, myData, canCustomizeWants, customizedWants }) {
             const [responses, setResponses] = useState({});
 
-            // Use customized wants if available, otherwise use the Big Branch list from Level 1 (Day 6 fertilize results)
-            // The Big Branch list is the top 6 items from partner's allocation
+            // Use customized wants if available, otherwise use the FULL Big Branch list (all 12 items from Level 1 fertilize)
             const bigBranchList = myData?.fertilizeAllocations
                 ? Object.entries(myData.fertilizeAllocations)
                     .sort((a, b) => b[1] - a[1])
-                    .slice(0, 6)
                     .map(([text, points]) => ({ text, points }))
                 : [];
 
@@ -3385,7 +3383,16 @@
                     : [
                         { text: 'Listen actively without trying to fix' },
                         { text: 'Show physical affection regularly' },
-                        { text: 'Help with household tasks unprompted' }
+                        { text: 'Help with household tasks unprompted' },
+                        { text: 'Communicate feelings openly' },
+                        { text: 'Show appreciation verbally' },
+                        { text: 'Be emotionally present' },
+                        { text: 'Handle conflicts calmly' },
+                        { text: 'Make decisions together' },
+                        { text: 'Support goals and dreams' },
+                        { text: 'Prioritize quality time together' },
+                        { text: 'Be reliable and consistent' },
+                        { text: 'Create emotional safety' }
                     ];
 
             const handleResponse = (item, response) => {
@@ -3694,11 +3701,11 @@
             const [selectedGuesses, setSelectedGuesses] = useState([]);
             const [submitted, setSubmitted] = useState(false);
 
-            // Get the Big Branch list that partner saw (same list they responded to)
+            // Get the FULL Big Branch list (all 12 items that went through fertilize in 2.1.4)
+            // This is the customized list partner saw in 2.2.3
             const bigBranchList = myData?.fertilizeAllocations
                 ? Object.entries(myData.fertilizeAllocations)
                     .sort((a, b) => b[1] - a[1])
-                    .slice(0, 6)
                     .map(([text, points]) => ({ text, points }))
                 : [];
 
@@ -3707,7 +3714,16 @@
                 : [
                     { text: 'Listen actively without trying to fix' },
                     { text: 'Show physical affection regularly' },
-                    { text: 'Help with household tasks unprompted' }
+                    { text: 'Help with household tasks unprompted' },
+                    { text: 'Communicate feelings openly' },
+                    { text: 'Show appreciation verbally' },
+                    { text: 'Be emotionally present' },
+                    { text: 'Handle conflicts calmly' },
+                    { text: 'Make decisions together' },
+                    { text: 'Support goals and dreams' },
+                    { text: 'Prioritize quality time together' },
+                    { text: 'Be reliable and consistent' },
+                    { text: 'Create emotional safety' }
                 ];
 
             const toggleGuess = (item) => {
