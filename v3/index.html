@@ -916,7 +916,7 @@
                     case 'level2-discover-why':
                         return <Level2DiscoverWhyScreen goToNext={() => setCurrentScreen('2.2.6')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} setMyData={setMyData} myData={myData} />;
                     case 'level2-guess-unwilling':
-                        return <Level2GuessUnwillingScreen goToNext={() => setCurrentScreen('2.2.7')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} partnerData={partnerData} />;
+                        return <Level2GuessUnwillingScreen goToNext={() => setCurrentScreen('2.2.7')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} partnerData={partnerData} myData={myData} />;
                     case 'level2-harvest':
                         return <HarvestScreen goToNext={() => setCurrentScreen('2.3.1')} credits={credits} setCredits={setCredits} cycleCount={cycleCount} setCycleCount={setCycleCount} pairedMode={false} setPairedMode={setPairedMode} createHeader={createHeader} level={2} />;
 
@@ -3690,17 +3690,48 @@
         }
 
         // Level 2 Screen 6: Guess the Unwilling
-        function Level2GuessUnwillingScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, partnerData }) {
-            const [guess, setGuess] = useState('');
+        function Level2GuessUnwillingScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, partnerData, myData }) {
+            const [selectedGuesses, setSelectedGuesses] = useState([]);
             const [submitted, setSubmitted] = useState(false);
+
+            // Get the Big Branch list that partner saw (same list they responded to)
+            const bigBranchList = myData?.fertilizeAllocations
+                ? Object.entries(myData.fertilizeAllocations)
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 6)
+                    .map(([text, points]) => ({ text, points }))
+                : [];
+
+            const listPartnerSaw = bigBranchList.length > 0
+                ? bigBranchList
+                : [
+                    { text: 'Listen actively without trying to fix' },
+                    { text: 'Show physical affection regularly' },
+                    { text: 'Help with household tasks unprompted' }
+                ];
+
+            const toggleGuess = (item) => {
+                if (selectedGuesses.includes(item)) {
+                    setSelectedGuesses(selectedGuesses.filter(i => i !== item));
+                } else {
+                    setSelectedGuesses([...selectedGuesses, item]);
+                }
+            };
 
             const handleSubmit = () => {
                 // In real app, check against partner's actual unwilling items
-                const isCorrect = Math.random() > 0.5; // Simulate correctness
+                const partnerNoResponses = partnerData?.binaryResponses
+                    ? Object.entries(partnerData.binaryResponses)
+                        .filter(([item, response]) => response === 'no')
+                        .map(([item]) => item)
+                    : [];
 
-                if (isCorrect) {
-                    awardCredits('growth', 10);
-                    alert('Correct! +10 growth bonus. You truly understand your partner!');
+                const correctGuesses = selectedGuesses.filter(g => partnerNoResponses.includes(g));
+                const bonusCredits = correctGuesses.length * 10;
+
+                if (bonusCredits > 0) {
+                    awardCredits('growth', bonusCredits);
+                    alert(`Correct! You identified ${correctGuesses.length} item(s) they were unwilling to do. +${bonusCredits} growth bonus!`);
                 } else {
                     alert('Not quite, but good effort. Understanding takes time and attention.');
                 }
@@ -3719,26 +3750,42 @@
                     )}
                     <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
-                        <p className="text-md" style={{marginBottom: '16px'}}>
-                            Your partner completed their binary willing list (Yes/No responses). Can you guess something they were UNWILLING to do?
+                        <p className="text-md" style={{marginBottom: '8px'}}>
+                            Your partner saw this list and responded Yes/No. Which ones do you think they were UNWILLING to do?
                         </p>
                         <p className="text-sm" style={{marginBottom: '16px', color: '#666'}}>
-                            <strong>Bonus:</strong> Guess correctly and earn 10 growth credits!
+                            <strong>Bonus:</strong> Earn 10 growth credits for each correct guess!
                         </p>
 
-                        <textarea
-                            className="input-field"
-                            placeholder="I think my partner said 'No' to..."
-                            value={guess}
-                            onChange={(e) => setGuess(e.target.value)}
-                            disabled={submitted}
-                            style={{marginBottom: '16px'}}
-                        />
+                        <div style={{display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px'}}>
+                            {listPartnerSaw.map((item, index) => (
+                                <div
+                                    key={index}
+                                    onClick={() => !submitted && toggleGuess(item.text)}
+                                    style={{
+                                        padding: '12px',
+                                        background: selectedGuesses.includes(item.text) ? '#ffebee' : '#f9f9f9',
+                                        border: selectedGuesses.includes(item.text) ? '2px solid #f44336' : '2px solid #e0e0e0',
+                                        borderRadius: '8px',
+                                        cursor: submitted ? 'default' : 'pointer',
+                                        fontSize: '14px'
+                                    }}
+                                >
+                                    <input
+                                        type="checkbox"
+                                        checked={selectedGuesses.includes(item.text)}
+                                        readOnly
+                                        style={{marginRight: '10px'}}
+                                    />
+                                    {item.text}
+                                </div>
+                            ))}
+                        </div>
 
                         {!submitted ? (
                             <div className="button-container">
-                                <button className="button" onClick={handleSubmit} disabled={!guess} style={{width: '100%'}}>
-                                    Submit Guess
+                                <button className="button" onClick={handleSubmit} disabled={selectedGuesses.length === 0} style={{width: '100%'}}>
+                                    Submit Guess ({selectedGuesses.length} selected)
                                 </button>
                             </div>
                         ) : (
