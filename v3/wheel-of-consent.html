@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wheel of Consent - WillingTree</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #E8F5E9 0%, #F1F8E9 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            color: #2E7D32;
+            margin-bottom: 12px;
+        }
+
+        .header p {
+            font-size: 18px;
+            color: #666;
+        }
+
+        .wheel-diagram {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .wheel-image-placeholder {
+            width: 100%;
+            max-width: 400px;
+            height: 400px;
+            margin: 0 auto 24px;
+            border: 3px solid #4CAF50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, #E8F5E9 0%, #F1F8E9 50%, #FFF3E0 75%, #FCE4EC 100%);
+            position: relative;
+        }
+
+        .wheel-labels {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .wheel-label {
+            position: absolute;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            text-align: center;
+        }
+
+        .wheel-label.top { top: 10%; left: 50%; transform: translateX(-50%); }
+        .wheel-label.right { top: 50%; right: 10%; transform: translateY(-50%); }
+        .wheel-label.bottom { bottom: 10%; left: 50%; transform: translateX(-50%); }
+        .wheel-label.left { top: 50%; left: 10%; transform: translateY(-50%); }
+
+        .content-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .content-card h2 {
+            font-size: 24px;
+            color: #2E7D32;
+            margin-bottom: 16px;
+        }
+
+        .content-card h3 {
+            font-size: 18px;
+            color: #388E3C;
+            margin-top: 20px;
+            margin-bottom: 12px;
+        }
+
+        .content-card p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 12px;
+        }
+
+        .concept-box {
+            background: #E8F5E9;
+            border-left: 4px solid #4CAF50;
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 8px;
+        }
+
+        .concept-box strong {
+            color: #2E7D32;
+            font-size: 17px;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .comparison-item {
+            background: #F5F5F0;
+            padding: 16px;
+            border-radius: 12px;
+            border: 2px solid #e0e0e0;
+        }
+
+        .comparison-item h4 {
+            font-size: 16px;
+            color: #2E7D32;
+            margin-bottom: 8px;
+        }
+
+        .comparison-item p {
+            font-size: 14px;
+            color: #666;
+            margin: 0;
+        }
+
+        .highlight-box {
+            background: #FFF3E0;
+            border: 2px solid #FF9800;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+
+        .highlight-box h3 {
+            color: #F57C00;
+            margin-top: 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            color: #4CAF50;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .wheel-image-placeholder {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 The Wheel of Consent</h1>
+            <p>Understanding Wanting vs. Willing</p>
+        </div>
+
+        <div class="wheel-diagram">
+            <div class="wheel-image-placeholder">
+                <div class="wheel-labels">
+                    <div class="wheel-label top">DOING<br>(You Act)</div>
+                    <div class="wheel-label right">WANTING<br>(For You)</div>
+                    <div class="wheel-label bottom">BEING DONE FOR<br>(They Act)</div>
+                    <div class="wheel-label left">WILLING<br>(For Them)</div>
+                </div>
+            </div>
+            <p style="font-size: 14px; color: #666; font-style: italic;">
+                The Wheel of Consent framework by Dr. Betty Martin
+            </p>
+        </div>
+
+        <div class="content-card">
+            <h2>What is the Wheel of Consent?</h2>
+            <p>
+                The Wheel of Consent is a powerful framework developed by Dr. Betty Martin that helps us understand touch, consent, and mutual pleasure in relationships. At its core, it distinguishes between two fundamental questions:
+            </p>
+            <div class="concept-box">
+                <strong>1. "What do I WANT?"</strong> — Acting for your own pleasure/benefit
+            </div>
+            <div class="concept-box">
+                <strong>2. "What am I WILLING to do?"</strong> — Acting for your partner's pleasure/benefit
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>The Four Quadrants</h2>
+
+            <div class="comparison-grid">
+                <div class="comparison-item">
+                    <h4>🎯 TAKING (You Do, For You)</h4>
+                    <p>You act for your own pleasure. You're in charge, they accept. Example: "I want to hug you."</p>
+                </div>
+
+                <div class="comparison-item">
+                    <h4>🎁 SERVING (You Do, For Them)</h4>
+                    <p>You act for their pleasure. They're in charge, you accept. Example: "Would you like a massage?"</p>
+                </div>
+
+                <div class="comparison-item">
+                    <h4>🌊 ACCEPTING (They Do, For You)</h4>
+                    <p>They act for your pleasure. You're in charge, they accept. Example: "Will you scratch my back?"</p>
+                </div>
+
+                <div class="comparison-item">
+                    <h4>✨ ALLOWING (They Do, For Them)</h4>
+                    <p>They act for their pleasure. They're in charge, you accept. Example: "May I hold your hand?"</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>Wanting vs. Willing: The Key Distinction</h2>
+
+            <h3>💚 Wanting (For You)</h3>
+            <p>
+                When you're <strong>wanting</strong>, you're focused on your own experience, pleasure, or benefit. You're in charge of what happens. This isn't selfish—it's essential! Knowing what you want and being able to ask for it is a foundational skill in healthy relationships.
+            </p>
+            <p><em>Examples: "I want to kiss you," "I want you to listen to me," "I want affection right now."</em></p>
+
+            <h3>🤝 Willing (For Them)</h3>
+            <p>
+                When you're <strong>willing</strong>, you're offering to do something for your partner's benefit. You accept their desires and choose to participate. Being willing doesn't mean being resentful or coerced—it means genuine, generous availability without expectation.
+            </p>
+            <p><em>Examples: "I'm willing to give you a massage," "I'm willing to listen," "I'm willing to try that activity with you."</em></p>
+        </div>
+
+        <div class="content-card">
+            <h2>Doing vs. Being Done For</h2>
+
+            <h3>🏃 Doing (You Act)</h3>
+            <p>
+                When you're <strong>doing</strong>, you're the active participant. You're the one initiating, touching, speaking, or acting. The question is: Are you doing it for yourself (wanting) or for them (willing)?
+            </p>
+
+            <h3>🧘 Being Done For (They Act)</h3>
+            <p>
+                When you're <strong>being done for</strong>, you're the recipient. You're allowing someone else to touch you, serve you, or act toward you. The question is: Are they doing it for you (accepting their service) or for themselves (allowing their desire)?
+            </p>
+        </div>
+
+        <div class="highlight-box">
+            <h3>🌳 Why This Matters for WillingTree</h3>
+            <p>
+                Most relationship advice focuses on <strong>wanting</strong>: "Communicate your needs!" "Ask for what you want!" While important, this is only half the picture.
+            </p>
+            <p style="margin-top: 12px;">
+                WillingTree emphasizes the often-neglected <strong>willing</strong> side. We help you discover:
+            </p>
+            <ul style="margin-left: 20px; margin-top: 8px;">
+                <li style="margin-bottom: 8px;">What you're genuinely willing to do (without resentment)</li>
+                <li style="margin-bottom: 8px;">What your partner is willing to do for you</li>
+                <li style="margin-bottom: 8px;">How to communicate willingness authentically</li>
+                <li style="margin-bottom: 8px;">How to accept your partner's willing service with grace</li>
+            </ul>
+            <p style="margin-top: 12px;">
+                When both partners know what the other is <strong>truly willing</strong> to do, and when both can express their <strong>wants</strong> without fear, the relationship flourishes.
+            </p>
+        </div>
+
+        <div class="content-card">
+            <h2>Avoiding the Traps</h2>
+
+            <div class="concept-box">
+                <strong>❌ The Obligation Trap</strong>
+                <p style="margin-top: 8px; margin-bottom: 0;">
+                    Saying you're willing when you're actually resentful creates a toxic dynamic. True willingness is freely given, with no strings attached.
+                </p>
+            </div>
+
+            <div class="concept-box">
+                <strong>❌ The Codependency Trap</strong>
+                <p style="margin-top: 8px; margin-bottom: 0;">
+                    Only serving (willing) without ever wanting creates burnout and resentment. Healthy relationships have both giving and receiving.
+                </p>
+            </div>
+
+            <div class="concept-box">
+                <strong>❌ The Selfish Trap</strong>
+                <p style="margin-top: 8px; margin-bottom: 0;">
+                    Only taking what you want without considering what you're willing to give creates imbalance. Mutuality requires both wanting and willing.
+                </p>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>How WillingTree Uses This Framework</h2>
+            <p>
+                Throughout your WillingTree journey, you'll practice:
+            </p>
+            <ul style="margin-left: 20px; line-height: 1.8;">
+                <li><strong>Identifying</strong> what you're truly willing to do for your partner</li>
+                <li><strong>Distinguishing</strong> willing actions from resentful obligations</li>
+                <li><strong>Communicating</strong> your wants clearly and without attachment</li>
+                <li><strong>Accepting</strong> your partner's willing service with gratitude</li>
+                <li><strong>Allowing</strong> your partner to take what they want when you're willing</li>
+                <li><strong>Honoring</strong> both your willingness and your boundaries</li>
+            </ul>
+            <p style="margin-top: 16px;">
+                By understanding the difference between wanting and willing, you'll build a relationship based on authentic generosity rather than obligation, and genuine desire rather than guilt.
+            </p>
+        </div>
+
+        <div class="content-card">
+            <h2>Further Learning</h2>
+            <p>
+                The Wheel of Consent was created by Dr. Betty Martin, a somatic educator and practitioner. To learn more about this framework:
+            </p>
+            <ul style="margin-left: 20px; line-height: 1.8; margin-top: 12px;">
+                <li>Watch Dr. Betty Martin's video: <a href="https://bettymartin.org/videos/" target="_blank" style="color: #4CAF50;">The Wheel of Consent</a></li>
+                <li>Read her book: <em>The Art of Receiving and Giving</em></li>
+                <li>Visit: <a href="https://wheelofconsent.org" target="_blank" style="color: #4CAF50;">wheelofconsent.org</a></li>
+            </ul>
+        </div>
+
+        <a href="index.html" class="back-link">← Back to WillingTree</a>
+    </div>
+</body>
+</html>

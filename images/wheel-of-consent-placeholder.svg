@@ -1,0 +1,25 @@
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer circle -->
+  <circle cx="200" cy="200" r="180" fill="#E8F5E9" stroke="#4CAF50" stroke-width="4"/>
+
+  <!-- Dividing lines -->
+  <line x1="200" y1="20" x2="200" y2="380" stroke="#4CAF50" stroke-width="2"/>
+  <line x1="20" y1="200" x2="380" y2="200" stroke="#4CAF50" stroke-width="2"/>
+
+  <!-- Quadrant labels -->
+  <text x="200" y="110" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2E7D32">DOING</text>
+  <text x="200" y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#666">(You Act, For You)</text>
+
+  <text x="290" y="205" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2E7D32">WANTING</text>
+  <text x="290" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#666">(For You)</text>
+
+  <text x="200" y="295" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2E7D32">BEING DONE FOR</text>
+  <text x="200" y="315" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#666">(They Act, For You)</text>
+
+  <text x="110" y="205" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2E7D32">WILLING</text>
+  <text x="110" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#666">(For Them)</text>
+
+  <!-- Center circle -->
+  <circle cx="200" cy="200" r="40" fill="white" stroke="#4CAF50" stroke-width="2"/>
+  <text x="200" y="200" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2E7D32" dy=".3em">Consent</text>
+</svg>
