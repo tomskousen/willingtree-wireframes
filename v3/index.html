@@ -1032,17 +1032,36 @@
                     </div>
 
                     <div className="nav-section">
-                        <div className="nav-section-title">Step 2: 10-Day Onboarding</div>
-                        <button className={`nav-button ${currentScreen === '2.1' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.1')}>2.1 Day 1 - Tree Choice</button>
-                        <button className={`nav-button ${currentScreen === '2.2' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.2')}>2.2 Day 2 - Preparing Soil</button>
-                        <button className={`nav-button ${currentScreen === '2.3' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.3')}>2.3 Day 3 - Hope</button>
-                        <button className={`nav-button ${currentScreen === '2.4' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.4')}>2.4 Day 4 - Budding</button>
-                        <button className={`nav-button ${currentScreen === '2.5' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.5')}>2.5 Day 5 - Pollinate</button>
-                        <button className={`nav-button ${currentScreen === '2.6' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.6')}>2.6 Day 6 - Fertilize</button>
-                        <button className={`nav-button ${currentScreen === '2.7' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.7')}>2.7 Day 7 - Watering</button>
-                        <button className={`nav-button ${currentScreen === '2.8' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.8')}>2.8 Day 8 - Small Branch</button>
-                        <button className={`nav-button ${currentScreen === '2.9' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.9')}>2.9 Day 9 - Good Fruits</button>
-                        <button className={`nav-button ${currentScreen === '2.10' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.10')}>2.10 Harvest</button>
+                        <div className="nav-section-title">Level 1: Foundation</div>
+                        <button className={`nav-button ${currentScreen === '2.1.1' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.1.1')}>2.1.1 Tree Choice</button>
+                        <button className={`nav-button ${currentScreen === '2.1.2' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.1.2')}>2.1.2 Preparing Soil</button>
+                        <button className={`nav-button ${currentScreen === '2.1.3' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.1.3')}>2.1.3 Budding+Pollinate</button>
+                        <button className={`nav-button ${currentScreen === '2.1.4' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.1.4')}>2.1.4 Fertilize</button>
+                        <button className={`nav-button ${currentScreen === '2.1.5' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.1.5')}>2.1.5 Watering+Branch</button>
+                        <button className={`nav-button ${currentScreen === '2.1.6' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.1.6')}>2.1.6 Good Fruits</button>
+                        <button className={`nav-button ${currentScreen === '2.1.7' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.1.7')}>2.1.7 Harvest</button>
+                    </div>
+
+                    <div className="nav-section">
+                        <div className="nav-section-title">Level 2: Deepening</div>
+                        <button className={`nav-button ${currentScreen === '2.2.1' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.2.1')}>2.2.1 Pairing Stress</button>
+                        <button className={`nav-button ${currentScreen === '2.2.2' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.2.2')}>2.2.2 Active Appreciation</button>
+                        <button className={`nav-button ${currentScreen === '2.2.3' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.2.3')}>2.2.3 Binary Willing</button>
+                        <button className={`nav-button ${currentScreen === '2.2.4' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.2.4')}>2.2.4 Personalize Wants</button>
+                        <button className={`nav-button ${currentScreen === '2.2.5' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.2.5')}>2.2.5 Discover Why</button>
+                        <button className={`nav-button ${currentScreen === '2.2.6' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.2.6')}>2.2.6 Guess Unwilling</button>
+                        <button className={`nav-button ${currentScreen === '2.2.7' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.2.7')}>2.2.7 Harvest</button>
+                    </div>
+
+                    <div className="nav-section">
+                        <div className="nav-section-title">Level 3: Mastery</div>
+                        <button className={`nav-button ${currentScreen === '2.3.1' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.3.1')}>2.3.1 Articulate Wants</button>
+                        <button className={`nav-button ${currentScreen === '2.3.2' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.3.2')}>2.3.2 Non-Attached Comm</button>
+                        <button className={`nav-button ${currentScreen === '2.3.3' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.3.3')}>2.3.3 Safe No Practice</button>
+                        <button className={`nav-button ${currentScreen === '2.3.4' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.3.4')}>2.3.4 Want Negotiation</button>
+                        <button className={`nav-button ${currentScreen === '2.3.5' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.3.5')}>2.3.5 Rejection Resilience</button>
+                        <button className={`nav-button ${currentScreen === '2.3.6' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.3.6')}>2.3.6 Bid Recognition</button>
+                        <button className={`nav-button ${currentScreen === '2.3.7' ? 'active' : ''}`} onClick={() => setCurrentScreen('2.3.7')}>2.3.7 Harvest</button>
                     </div>
 
                     <div className="nav-section">
@@ -1787,7 +1806,7 @@
         }
 
         // Screen 2.2: Day 2 - Preparing Good Soil
-        function Day2TreeMetaphorScreen({ setScreen, awardCredits, credits, currentScreen }) {
+        function Day2TreeMetaphorScreen({ setScreen, goToNext, awardCredits, credits, currentScreen, createHeader }) {
             const [item1, setItem1] = useState('');
             const [item2, setItem2] = useState('');
             const [item3, setItem3] = useState('');
@@ -1804,17 +1823,21 @@
                 if (item5) sunCredits++;
 
                 awardCredits('sun', sunCredits);
-                setScreen('2.3');
+                if (goToNext) {
+                    goToNext();
+                } else if (setScreen) {
+                    setScreen('2.3');
+                }
             };
 
             const filledCount = [item1, item2, item3, item4, item5].filter(i => i).length;
 
             return (
                 <div className="screen">
-                    <div className="day-badge">Day 2 of 10</div>
-                    <div className="header">
-                        <h2>Preparing Good Soil</h2>
-                    </div>
+                    <div className="day-badge">Level 1 - Screen 2 of 7</div>
+                    {createHeader ? createHeader('Preparing Good Soil') : (
+                        <div className="header"><h2>Preparing Good Soil</h2></div>
+                    )}
                     <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
                         <p className="text-md" style={{marginBottom: '16px'}}>
@@ -2762,6 +2785,939 @@
                     </div>
                     <div className="screen-footer">
                         Each cycle deepens your practice. If you don't have enough credits to harvest, start another cycle to keep building your relationship skills. Credits accumulate across cycles!
+                    </div>
+                </div>
+            );
+        }
+
+        // ===== LEVEL 1 COMBINED SCREENS =====
+
+        // Level 1 Screen 3: Budding/Pruning + Pollinate (Combined 2.4 + 2.5)
+        function Level1BuddingPollinateScreen({ goToNext, awardCredits, credits, currentScreen, pairedMode, setMyData, userGender, createHeader }) {
+            const [step, setStep] = useState(1); // 1 = scoring, 2 = send list
+            const [scores, setScores] = useState({});
+
+            const womenWantList = [
+                'Listen actively without trying to fix', 'Plan thoughtful dates or surprises',
+                'Help with household tasks unprompted', 'Show physical affection regularly',
+                'Communicate feelings openly', 'Defend/support her in public',
+                'Remember important details', 'Make her feel desired',
+                'Be emotionally present', 'Take initiative in planning',
+                'Show appreciation verbally', 'Prioritize quality time together',
+                'Be vulnerable and authentic', 'Support her goals and dreams',
+                'Handle conflicts calmly', 'Show interest in her day',
+                'Make decisions together', 'Be reliable and consistent',
+                'Express love in her language', 'Create emotional safety'
+            ];
+
+            const menWantList = [
+                'Express appreciation for efforts', 'Show physical affection regularly',
+                'Respect his need for alone time', 'Support his goals and ambitions',
+                'Initiate intimacy sometimes', 'Trust his decision-making',
+                'Show interest in his hobbies', 'Speak respectfully especially in public',
+                'Be his biggest cheerleader', 'Make him feel needed',
+                'Laugh at his jokes', 'Be direct about needs',
+                'Show affection publicly', 'Respect his friendships',
+                'Value his problem-solving', 'Create peaceful home environment',
+                'Be his safe place emotionally', 'Show desire for him',
+                'Support his leadership', 'Celebrate his wins'
+            ];
+
+            const listToShow = userGender === 'male' ? womenWantList : menWantList;
+            const listTitle = userGender === 'male' ? 'What Women Want' : 'What Men Want';
+
+            const handleScoreChange = (item, score) => {
+                setScores(prev => ({ ...prev, [item]: score }));
+            };
+
+            const isStepComplete = Object.keys(scores).length === listToShow.length;
+
+            const handleContinueToSend = () => {
+                if (pairedMode && setMyData) {
+                    setMyData(prev => ({ ...prev, day4Scores: scores }));
+                }
+                awardCredits('sun', 10);
+                awardCredits('water', 5);
+                setStep(2);
+            };
+
+            const handleSendList = () => {
+                const top12Items = Object.entries(scores)
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 12)
+                    .map(([text, score]) => ({ text, score }));
+
+                if (pairedMode && setMyData) {
+                    setMyData(prev => ({ ...prev, pollinateList: top12Items }));
+                }
+
+                awardCredits('water', 1);
+                alert('List sent! Your partner will now allocate points to show what matters most.');
+                goToNext();
+            };
+
+            if (step === 1) {
+                return (
+                    <div className="screen">
+                        <div className="day-badge">Level 1 - Screen 3 of 7</div>
+                        {createHeader ? createHeader('Budding, Pruning') : (
+                            <div className="header"><h2>Budding, Pruning</h2></div>
+                        )}
+                        <CreditsDisplay credits={credits} screen={currentScreen} />
+                        <div className="screen-content">
+                            <p className="text-md" style={{marginBottom: '8px'}}>
+                                Score each item 1-5, where 5 means you're most willing to do this:
+                            </p>
+                            <p className="text-sm" style={{marginBottom: '16px', color: '#666'}}>
+                                <strong>{listTitle}</strong>
+                            </p>
+
+                            <div style={{display: 'flex', flexDirection: 'column', gap: '12px'}}>
+                                {listToShow.map((item, index) => (
+                                    <div key={index} style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '10px',
+                                        padding: '8px',
+                                        background: '#f9f9f9',
+                                        borderRadius: '6px'
+                                    }}>
+                                        <span style={{fontSize: '13px', flex: 1}}>{item}</span>
+                                        <div style={{display: 'flex', gap: '4px'}}>
+                                            {[1, 2, 3, 4, 5].map(score => (
+                                                <label key={score} style={{
+                                                    cursor: 'pointer',
+                                                    padding: '4px 8px',
+                                                    borderRadius: '4px',
+                                                    background: scores[item] === score ? '#4CAF50' : '#e0e0e0',
+                                                    color: scores[item] === score ? 'white' : '#666',
+                                                    fontSize: '12px',
+                                                    fontWeight: '500'
+                                                }}>
+                                                    <input
+                                                        type="radio"
+                                                        name={`score-${index}`}
+                                                        value={score}
+                                                        checked={scores[item] === score}
+                                                        onChange={() => handleScoreChange(item, score)}
+                                                        style={{display: 'none'}}
+                                                    />
+                                                    {score}
+                                                </label>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="button-container">
+                                <button className="button" onClick={handleContinueToSend} disabled={!isStepComplete} style={{width: '100%'}}>
+                                    Continue to Pollinate
+                                </button>
+                            </div>
+                        </div>
+                        <div className="screen-footer">
+                            Budding means growing what works (scoring 4-5). Pruning means releasing what doesn't (1-2). Your top 12 items will be your "willing list" - actions you're naturally inclined to do.
+                        </div>
+                    </div>
+                );
+            }
+
+            // Step 2: Pollinate (send list)
+            const top12Items = Object.entries(scores)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 12)
+                .map(([text, score]) => ({ text, score }));
+
+            return (
+                <div className="screen">
+                    <div className="day-badge">Level 1 - Screen 3 of 7</div>
+                    {createHeader ? createHeader('Pollinate') : (
+                        <div className="header"><h2>Pollinate</h2></div>
+                    )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
+                    <div className="screen-content">
+                        <p className="text-md" style={{marginBottom: '12px'}}>
+                            Your top 12 willing actions are ready to send to your partner:
+                        </p>
+
+                        <div style={{marginBottom: '16px'}}>
+                            {top12Items.map((item, index) => (
+                                <div key={index} style={{
+                                    padding: '8px 12px',
+                                    background: '#f9f9f9',
+                                    borderRadius: '6px',
+                                    marginBottom: '6px',
+                                    fontSize: '13px'
+                                }}>
+                                    {item.text}
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="button-container">
+                            <button className="button" onClick={handleSendList} style={{width: '100%'}}>
+                                Send to Partner
+                            </button>
+                        </div>
+                    </div>
+                    <div className="screen-footer">
+                        Pollination is sharing your willingness. You're offering 12 specific ways you're willing to serve. Your partner will respond by showing which ones matter most.
+                    </div>
+                </div>
+            );
+        }
+
+        // Level 1 Screen 5: Watering + Small Branch (Combined 2.7 + 2.8)
+        function Level1WateringBranchScreen({ goToNext, awardCredits, credits, currentScreen, pairedMode, setMyData, createHeader }) {
+            const [step, setStep] = useState(1); // 1 = select 2 actions, 2 = practice commitment
+            const [selectedActions, setSelectedActions] = useState([]);
+            const [practiceNotes, setPracticeNotes] = useState('');
+
+            // Simulated weighted list (in real app, from partner's allocations)
+            const weightedList = [
+                'Listen actively without trying to fix',
+                'Show physical affection regularly',
+                'Help with household tasks unprompted',
+                'Plan thoughtful dates or surprises',
+                'Communicate feelings openly',
+                'Be emotionally present'
+            ];
+
+            const toggleAction = (action) => {
+                if (selectedActions.includes(action)) {
+                    setSelectedActions(selectedActions.filter(a => a !== action));
+                } else if (selectedActions.length < 2) {
+                    setSelectedActions([...selectedActions, action]);
+                }
+            };
+
+            const handleCommit = () => {
+                if (pairedMode && setMyData) {
+                    setMyData(prev => ({ ...prev, focusActions: selectedActions }));
+                }
+                awardCredits('water', 2);
+                setStep(2);
+            };
+
+            const handlePractice = () => {
+                awardCredits('water', 2);
+                alert('Great! Keep practicing these actions this week.');
+                goToNext();
+            };
+
+            if (step === 1) {
+                return (
+                    <div className="screen">
+                        <div className="day-badge">Level 1 - Screen 5 of 7</div>
+                        {createHeader ? createHeader('Willing List, Watering') : (
+                            <div className="header"><h2>Willing List, Watering</h2></div>
+                        )}
+                        <CreditsDisplay credits={credits} screen={currentScreen} />
+                        <div className="screen-content">
+                            <p className="text-md" style={{marginBottom: '12px'}}>
+                                Your partner has shown what matters most to them. Select 2 actions you'll focus on this week:
+                            </p>
+
+                            <div style={{display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px'}}>
+                                {weightedList.map((action, index) => (
+                                    <div
+                                        key={index}
+                                        onClick={() => toggleAction(action)}
+                                        style={{
+                                            padding: '12px',
+                                            background: selectedActions.includes(action) ? '#E8F5E9' : 'white',
+                                            border: selectedActions.includes(action) ? '2px solid #4CAF50' : '2px solid #e0e0e0',
+                                            borderRadius: '8px',
+                                            cursor: 'pointer',
+                                            fontSize: '14px'
+                                        }}
+                                    >
+                                        <input
+                                            type="checkbox"
+                                            checked={selectedActions.includes(action)}
+                                            readOnly
+                                            style={{marginRight: '10px'}}
+                                        />
+                                        {action}
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="button-container">
+                                <button className="button" onClick={handleCommit} disabled={selectedActions.length !== 2} style={{width: '100%'}}>
+                                    Commit to These 2 Actions
+                                </button>
+                            </div>
+                        </div>
+                        <div className="screen-footer">
+                            Choose wisely - these are your focus areas for the week. Watering means consistent attention to what matters most to your partner.
+                        </div>
+                    </div>
+                );
+            }
+
+            // Step 2: Practice commitment
+            return (
+                <div className="screen">
+                    <div className="day-badge">Level 1 - Screen 5 of 7</div>
+                    {createHeader ? createHeader('Small Branch Grows') : (
+                        <div className="header"><h2>Small Branch Grows</h2></div>
+                    )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
+                    <div className="screen-content">
+                        <p className="text-md" style={{marginBottom: '12px'}}>
+                            This week, practice these 2 actions:
+                        </p>
+
+                        <div style={{marginBottom: '16px'}}>
+                            {selectedActions.map((action, index) => (
+                                <div key={index} style={{
+                                    padding: '10px',
+                                    background: '#E8F5E9',
+                                    borderRadius: '6px',
+                                    marginBottom: '8px',
+                                    fontSize: '14px',
+                                    fontWeight: '500'
+                                }}>
+                                    ✓ {action}
+                                </div>
+                            ))}
+                        </div>
+
+                        <p className="text-md" style={{marginBottom: '12px'}}>
+                            Track your practice (optional):
+                        </p>
+
+                        <textarea
+                            className="input-field"
+                            placeholder="How did it go this week? Any observations..."
+                            value={practiceNotes}
+                            onChange={(e) => setPracticeNotes(e.target.value)}
+                            style={{marginBottom: '16px'}}
+                        />
+
+                        <div className="button-container">
+                            <button className="button" onClick={handlePractice} style={{width: '100%'}}>
+                                Continue
+                            </button>
+                        </div>
+                    </div>
+                    <div className="screen-footer">
+                        Small branches grow through repeated practice. Each time you follow through, you strengthen the relationship and build trust.
+                    </div>
+                </div>
+            );
+        }
+
+        // ===== LEVEL 2 SCREENS =====
+
+        // Level 2 Screen 1: Pairing Under Stress
+        function Level2PairingStressScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, myData }) {
+            const [example1, setExample1] = useState('');
+            const [example2, setExample2] = useState('');
+
+            const handleContinue = () => {
+                awardCredits('sun', 5);
+                goToNext();
+            };
+
+            const bondType = myData?.bondSelections ?
+                `${myData.bondSelections.self}-${myData.bondSelections.partner}` :
+                'Stone-Soil';
+
+            return (
+                <div className="screen">
+                    <div className="day-badge">Level 2 - Screen 1 of 7</div>
+                    {createHeader ? createHeader('Pairing Under Stress') : (
+                        <div className="header"><h2>Pairing Under Stress</h2></div>
+                    )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
+                    <div className="screen-content">
+                        <p className="text-md" style={{marginBottom: '16px'}}>
+                            Your bond type: <strong>{bondType}</strong>
+                        </p>
+                        <p className="text-md" style={{marginBottom: '16px'}}>
+                            Read your pairing description (from Level 1, Screen 1). Now provide 2 examples of how this dynamic shows up when you're under stress:
+                        </p>
+
+                        <div style={{marginBottom: '16px'}}>
+                            <input
+                                className="input-field"
+                                placeholder="Example 1: When stressed, I tend to..."
+                                value={example1}
+                                onChange={(e) => setExample1(e.target.value)}
+                                style={{marginBottom: '12px'}}
+                            />
+                            <input
+                                className="input-field"
+                                placeholder="Example 2: My partner tends to..."
+                                value={example2}
+                                onChange={(e) => setExample2(e.target.value)}
+                            />
+                        </div>
+
+                        <div className="button-container">
+                            <button className="button" onClick={handleContinue} disabled={!example1 || !example2} style={{width: '100%'}}>
+                                Continue
+                            </button>
+                        </div>
+                    </div>
+                    <div className="screen-footer">
+                        Recognizing your patterns under stress is the first step to changing them. Awareness creates choice.
+                    </div>
+                </div>
+            );
+        }
+
+        // Level 2 Screen 2: Active Appreciation
+        function Level2ActiveAppreciationScreen({ goToNext, awardCredits, credits, currentScreen, createHeader }) {
+            const [example1, setExample1] = useState('');
+            const [example2, setExample2] = useState('');
+            const [example3, setExample3] = useState('');
+
+            const handleContinue = () => {
+                const count = [example1, example2, example3].filter(e => e).length;
+                awardCredits('water', count);
+                goToNext();
+            };
+
+            return (
+                <div className="screen">
+                    <div className="day-badge">Level 2 - Screen 2 of 7</div>
+                    {createHeader ? createHeader('Active Appreciation') : (
+                        <div className="header"><h2>Active Appreciation</h2></div>
+                    )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
+                    <div className="screen-content">
+                        <p className="text-md" style={{marginBottom: '16px'}}>
+                            Appreciate your partner by USING their efforts, even if imperfect. Example: They make the bed sub-par, but you accept the effort.
+                        </p>
+                        <p className="text-md" style={{marginBottom: '16px'}}>
+                            List 3 ways you actively used/accepted your partner's efforts this week:
+                        </p>
+
+                        <div style={{marginBottom: '16px'}}>
+                            <input
+                                className="input-field"
+                                placeholder="1. I used/accepted..."
+                                value={example1}
+                                onChange={(e) => setExample1(e.target.value)}
+                                style={{marginBottom: '12px'}}
+                            />
+                            <input
+                                className="input-field"
+                                placeholder="2. I used/accepted..."
+                                value={example2}
+                                onChange={(e) => setExample2(e.target.value)}
+                                style={{marginBottom: '12px'}}
+                            />
+                            <input
+                                className="input-field"
+                                placeholder="3. I used/accepted..."
+                                value={example3}
+                                onChange={(e) => setExample3(e.target.value)}
+                            />
+                        </div>
+
+                        <div className="button-container">
+                            <button className="button" onClick={handleContinue} disabled={!example1 || !example2} style={{width: '100%'}}>
+                                Continue ({[example1, example2, example3].filter(e => e).length}/3)
+                            </button>
+                        </div>
+                    </div>
+                    <div className="screen-footer">
+                        Using your partner's efforts (even imperfect ones) sends a powerful message: "Your contribution matters and I value you."
+                    </div>
+                </div>
+            );
+        }
+
+        // Level 2 Screen 3: Binary Willing List
+        function Level2BinaryWillingScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, partnerData, setMyData }) {
+            const [responses, setResponses] = useState({});
+
+            const pollinateList = partnerData?.pollinateList || [
+                { text: 'Listen actively without trying to fix' },
+                { text: 'Show physical affection regularly' },
+                { text: 'Help with household tasks unprompted' }
+            ];
+
+            const handleResponse = (item, response) => {
+                setResponses(prev => ({ ...prev, [item]: response }));
+            };
+
+            const handleContinue = () => {
+                if (setMyData) {
+                    setMyData(prev => ({ ...prev, binaryResponses: responses }));
+                }
+                const yesCount = Object.values(responses).filter(r => r === 'yes').length;
+                awardCredits('sun', yesCount);
+                goToNext();
+            };
+
+            const allAnswered = pollinateList.every(item => responses[item.text]);
+
+            return (
+                <div className="screen">
+                    <div className="day-badge">Level 2 - Screen 3 of 7</div>
+                    {createHeader ? createHeader('Binary Willing List') : (
+                        <div className="header"><h2>Binary Willing List</h2></div>
+                    )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
+                    <div className="screen-content">
+                        <p className="text-md" style={{marginBottom: '12px'}}>
+                            Your partner sent their willing list. For each item, answer Yes or No:
+                        </p>
+                        <p className="text-sm" style={{marginBottom: '16px', color: '#666'}}>
+                            <strong>Yes</strong> = 100% willing, full buy-in, NO resentment<br/>
+                            <strong>No</strong> = Would resent it or not fully willing
+                        </p>
+
+                        <div style={{display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '16px'}}>
+                            {pollinateList.map((item, index) => (
+                                <div key={index} style={{
+                                    padding: '12px',
+                                    background: '#f9f9f9',
+                                    borderRadius: '8px'
+                                }}>
+                                    <div style={{marginBottom: '8px', fontSize: '14px'}}>{item.text}</div>
+                                    <div style={{display: 'flex', gap: '8px'}}>
+                                        <button
+                                            onClick={() => handleResponse(item.text, 'yes')}
+                                            style={{
+                                                flex: 1,
+                                                padding: '8px',
+                                                background: responses[item.text] === 'yes' ? '#4CAF50' : '#e0e0e0',
+                                                color: responses[item.text] === 'yes' ? 'white' : '#666',
+                                                border: 'none',
+                                                borderRadius: '6px',
+                                                cursor: 'pointer',
+                                                fontSize: '13px',
+                                                fontWeight: '500'
+                                            }}
+                                        >
+                                            Yes
+                                        </button>
+                                        <button
+                                            onClick={() => handleResponse(item.text, 'no')}
+                                            style={{
+                                                flex: 1,
+                                                padding: '8px',
+                                                background: responses[item.text] === 'no' ? '#f44336' : '#e0e0e0',
+                                                color: responses[item.text] === 'no' ? 'white' : '#666',
+                                                border: 'none',
+                                                borderRadius: '6px',
+                                                cursor: 'pointer',
+                                                fontSize: '13px',
+                                                fontWeight: '500'
+                                            }}
+                                        >
+                                            No
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="button-container">
+                            <button className="button" onClick={handleContinue} disabled={!allAnswered} style={{width: '100%'}}>
+                                Submit Responses
+                            </button>
+                        </div>
+                    </div>
+                    <div className="screen-footer">
+                        Honest "no" responses protect the relationship. Resentful "yes" responses erode it. Only say yes when you truly mean it.
+                    </div>
+                </div>
+            );
+        }
+
+        // Level 2 Screen 4: Personalize Wants
+        function Level2PersonalizeWantsScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, setMyData }) {
+            const [selectedWants, setSelectedWants] = useState([]);
+            const [whys, setWhys] = useState({});
+
+            const wantsList = [
+                'More quality time together',
+                'Better communication about feelings',
+                'More physical affection',
+                'Help with household responsibilities',
+                'Support for my goals and dreams',
+                'More emotional presence',
+                'Active listening without fixing',
+                'Appreciation for my efforts',
+                'Shared decision-making',
+                'Date nights and fun activities'
+            ];
+
+            const maxSelections = Math.floor(wantsList.length / 2);
+
+            const toggleWant = (want) => {
+                if (selectedWants.includes(want)) {
+                    setSelectedWants(selectedWants.filter(w => w !== want));
+                    const newWhys = {...whys};
+                    delete newWhys[want];
+                    setWhys(newWhys);
+                } else if (selectedWants.length < maxSelections) {
+                    setSelectedWants([...selectedWants, want]);
+                }
+            };
+
+            const handleWhyChange = (want, value) => {
+                setWhys(prev => ({ ...prev, [want]: value }));
+            };
+
+            const handleContinue = () => {
+                const wantsWithWhys = selectedWants.map(want => ({
+                    what: want,
+                    why: whys[want] || ''
+                }));
+                if (setMyData) {
+                    setMyData(prev => ({ ...prev, personalizedWants: wantsWithWhys }));
+                }
+                awardCredits('growth', 1);
+                goToNext();
+            };
+
+            const allWhysProvided = selectedWants.every(want => whys[want]?.trim());
+
+            return (
+                <div className="screen">
+                    <div className="day-badge">Level 2 - Screen 4 of 7</div>
+                    {createHeader ? createHeader('Personalize Wants') : (
+                        <div className="header"><h2>Personalize Wants</h2></div>
+                    )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
+                    <div className="screen-content">
+                        <p className="text-md" style={{marginBottom: '16px'}}>
+                            Select up to {maxSelections} wants and explain WHY each matters to you:
+                        </p>
+
+                        <div style={{display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '16px'}}>
+                            {wantsList.map((want, index) => (
+                                <div key={index}>
+                                    <div
+                                        onClick={() => toggleWant(want)}
+                                        style={{
+                                            padding: '12px',
+                                            background: selectedWants.includes(want) ? '#E8F5E9' : '#f9f9f9',
+                                            border: selectedWants.includes(want) ? '2px solid #4CAF50' : '2px solid #e0e0e0',
+                                            borderRadius: '8px',
+                                            cursor: 'pointer',
+                                            fontSize: '14px',
+                                            marginBottom: selectedWants.includes(want) ? '8px' : '0'
+                                        }}
+                                    >
+                                        <input
+                                            type="checkbox"
+                                            checked={selectedWants.includes(want)}
+                                            readOnly
+                                            style={{marginRight: '10px'}}
+                                        />
+                                        {want}
+                                    </div>
+                                    {selectedWants.includes(want) && (
+                                        <input
+                                            className="input-field"
+                                            placeholder="Why does this matter to you?"
+                                            value={whys[want] || ''}
+                                            onChange={(e) => handleWhyChange(want, e.target.value)}
+                                            style={{marginBottom: '12px'}}
+                                        />
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="button-container">
+                            <button className="button" onClick={handleContinue} disabled={selectedWants.length === 0 || !allWhysProvided} style={{width: '100%'}}>
+                                Continue ({selectedWants.length}/{maxSelections} selected)
+                            </button>
+                        </div>
+                    </div>
+                    <div className="screen-footer">
+                        The "why" behind your "what" helps your partner understand what you truly need, not just what you want.
+                    </div>
+                </div>
+            );
+        }
+
+        // Level 2 Screen 5: Discover the Why
+        function Level2DiscoverWhyScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, setMyData }) {
+            const [discovery1, setDiscovery1] = useState('');
+            const [discovery2, setDiscovery2] = useState('');
+
+            const handleContinue = () => {
+                if (setMyData) {
+                    setMyData(prev => ({ ...prev, whyDiscoveries: [discovery1, discovery2] }));
+                }
+                awardCredits('water', 5);
+                goToNext();
+            };
+
+            return (
+                <div className="screen">
+                    <div className="day-badge">Level 2 - Screen 5 of 7</div>
+                    {createHeader ? createHeader('Discover the Why') : (
+                        <div className="header"><h2>Discover the Why</h2></div>
+                    )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
+                    <div className="screen-content">
+                        <p className="text-md" style={{marginBottom: '16px'}}>
+                            Go a little undercover this week. Discover the WHY behind your partner's WHAT. What are they really asking for beneath their requests?
+                        </p>
+
+                        <div style={{marginBottom: '16px'}}>
+                            <p className="text-sm" style={{marginBottom: '8px', color: '#666'}}>
+                                Discovery 1: What I learned about what they really need...
+                            </p>
+                            <textarea
+                                className="input-field"
+                                placeholder="Example: When they ask for help with dishes, they're really asking to feel like we're a team..."
+                                value={discovery1}
+                                onChange={(e) => setDiscovery1(e.target.value)}
+                                style={{marginBottom: '16px'}}
+                            />
+
+                            <p className="text-sm" style={{marginBottom: '8px', color: '#666'}}>
+                                Discovery 2: Another insight about their deeper need...
+                            </p>
+                            <textarea
+                                className="input-field"
+                                placeholder="Example: When they want to talk, they're seeking emotional connection, not solutions..."
+                                value={discovery2}
+                                onChange={(e) => setDiscovery2(e.target.value)}
+                            />
+                        </div>
+
+                        <div className="button-container">
+                            <button className="button" onClick={handleContinue} disabled={!discovery1 || !discovery2} style={{width: '100%'}}>
+                                Continue
+                            </button>
+                        </div>
+                    </div>
+                    <div className="screen-footer">
+                        Understanding the why behind the what transforms surface requests into deep connection. Most fights are about unmet deeper needs, not the surface issue.
+                    </div>
+                </div>
+            );
+        }
+
+        // Level 2 Screen 6: Guess the Unwilling
+        function Level2GuessUnwillingScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, partnerData }) {
+            const [guess, setGuess] = useState('');
+            const [submitted, setSubmitted] = useState(false);
+
+            const handleSubmit = () => {
+                // In real app, check against partner's actual unwilling items
+                const isCorrect = Math.random() > 0.5; // Simulate correctness
+
+                if (isCorrect) {
+                    awardCredits('growth', 10);
+                    alert('Correct! +10 growth bonus. You truly understand your partner!');
+                } else {
+                    alert('Not quite, but good effort. Understanding takes time and attention.');
+                }
+                setSubmitted(true);
+            };
+
+            const handleContinue = () => {
+                goToNext();
+            };
+
+            return (
+                <div className="screen">
+                    <div className="day-badge">Level 2 - Screen 6 of 7</div>
+                    {createHeader ? createHeader('Guess the Unwilling') : (
+                        <div className="header"><h2>Guess the Unwilling</h2></div>
+                    )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
+                    <div className="screen-content">
+                        <p className="text-md" style={{marginBottom: '16px'}}>
+                            Your partner completed their binary willing list (Yes/No responses). Can you guess something they were UNWILLING to do?
+                        </p>
+                        <p className="text-sm" style={{marginBottom: '16px', color: '#666'}}>
+                            <strong>Bonus:</strong> Guess correctly and earn 10 growth credits!
+                        </p>
+
+                        <textarea
+                            className="input-field"
+                            placeholder="I think my partner said 'No' to..."
+                            value={guess}
+                            onChange={(e) => setGuess(e.target.value)}
+                            disabled={submitted}
+                            style={{marginBottom: '16px'}}
+                        />
+
+                        {!submitted ? (
+                            <div className="button-container">
+                                <button className="button" onClick={handleSubmit} disabled={!guess} style={{width: '100%'}}>
+                                    Submit Guess
+                                </button>
+                            </div>
+                        ) : (
+                            <div className="button-container">
+                                <button className="button" onClick={handleContinue} style={{width: '100%'}}>
+                                    Continue
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                    <div className="screen-footer">
+                        Knowing what your partner can't give (without resentment) is just as important as knowing what they can. It shows deep attunement.
+                    </div>
+                </div>
+            );
+        }
+
+        // ===== LEVEL 3 PLACEHOLDER SCREENS =====
+
+        function Level3ArticulateWantsScreen({ goToNext, awardCredits, credits, currentScreen, createHeader }) {
+            return (
+                <div className="screen">
+                    <div className="day-badge">Level 3 - Screen 1 of 7</div>
+                    {createHeader ? createHeader('Articulating Core Wants') : (
+                        <div className="header"><h2>Articulating Core Wants</h2></div>
+                    )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
+                    <div className="screen-content">
+                        <p className="text-md" style={{marginBottom: '16px'}}>
+                            [Level 3 Screen 1 - To be designed]
+                        </p>
+                        <p className="text-md" style={{marginBottom: '16px'}}>
+                            This screen will help you identify and name 3-5 core relationship wants.
+                        </p>
+                        <div className="button-container">
+                            <button className="button" onClick={() => { awardCredits('sun', 5); goToNext(); }} style={{width: '100%'}}>
+                                Continue (Placeholder)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function Level3NonAttachedScreen({ goToNext, awardCredits, credits, currentScreen, createHeader }) {
+            return (
+                <div className="screen">
+                    <div className="day-badge">Level 3 - Screen 2 of 7</div>
+                    {createHeader ? createHeader('Non-Attached Communication') : (
+                        <div className="header"><h2>Non-Attached Communication</h2></div>
+                    )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
+                    <div className="screen-content">
+                        <p className="text-md" style={{marginBottom: '16px'}}>
+                            [Level 3 Screen 2 - To be designed]
+                        </p>
+                        <p className="text-md" style={{marginBottom: '16px'}}>
+                            This screen will teach Gottman's 5:1 ratio and practice stating wants without demand.
+                        </p>
+                        <div className="button-container">
+                            <button className="button" onClick={() => { awardCredits('water', 5); goToNext(); }} style={{width: '100%'}}>
+                                Continue (Placeholder)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function Level3SafeNoScreen({ goToNext, awardCredits, credits, currentScreen, createHeader }) {
+            return (
+                <div className="screen">
+                    <div className="day-badge">Level 3 - Screen 3 of 7</div>
+                    {createHeader ? createHeader('Safe No Practice') : (
+                        <div className="header"><h2>Safe No Practice</h2></div>
+                    )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
+                    <div className="screen-content">
+                        <p className="text-md" style={{marginBottom: '16px'}}>
+                            [Level 3 Screen 3 - To be designed]
+                        </p>
+                        <p className="text-md" style={{marginBottom: '16px'}}>
+                            This screen will help practice saying and receiving "no" while maintaining relationship safety.
+                        </p>
+                        <div className="button-container">
+                            <button className="button" onClick={() => { awardCredits('sun', 5); goToNext(); }} style={{width: '100%'}}>
+                                Continue (Placeholder)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function Level3WantNegotiationScreen({ goToNext, awardCredits, credits, currentScreen, createHeader }) {
+            return (
+                <div className="screen">
+                    <div className="day-badge">Level 3 - Screen 4 of 7</div>
+                    {createHeader ? createHeader('Want Negotiation') : (
+                        <div className="header"><h2>Want Negotiation</h2></div>
+                    )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
+                    <div className="screen-content">
+                        <p className="text-md" style={{marginBottom: '16px'}}>
+                            [Level 3 Screen 4 - To be designed]
+                        </p>
+                        <p className="text-md" style={{marginBottom: '16px'}}>
+                            This screen will explore alternative ways to meet underlying needs when partner says no.
+                        </p>
+                        <div className="button-container">
+                            <button className="button" onClick={() => { awardCredits('growth', 1); goToNext(); }} style={{width: '100%'}}>
+                                Continue (Placeholder)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function Level3RejectionResilienceScreen({ goToNext, awardCredits, credits, currentScreen, createHeader }) {
+            return (
+                <div className="screen">
+                    <div className="day-badge">Level 3 - Screen 5 of 7</div>
+                    {createHeader ? createHeader('Rejection Resilience') : (
+                        <div className="header"><h2>Rejection Resilience</h2></div>
+                    )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
+                    <div className="screen-content">
+                        <p className="text-md" style={{marginBottom: '16px'}}>
+                            [Level 3 Screen 5 - To be designed]
+                        </p>
+                        <p className="text-md" style={{marginBottom: '16px'}}>
+                            This screen will teach Gottman research: 20-30% rejection rate is normal/healthy.
+                        </p>
+                        <div className="button-container">
+                            <button className="button" onClick={() => { awardCredits('water', 5); goToNext(); }} style={{width: '100%'}}>
+                                Continue (Placeholder)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function Level3BidRecognitionScreen({ goToNext, awardCredits, credits, currentScreen, createHeader }) {
+            return (
+                <div className="screen">
+                    <div className="day-badge">Level 3 - Screen 6 of 7</div>
+                    {createHeader ? createHeader('Bid Recognition') : (
+                        <div className="header"><h2>Bid Recognition</h2></div>
+                    )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
+                    <div className="screen-content">
+                        <p className="text-md" style={{marginBottom: '16px'}}>
+                            [Level 3 Screen 6 - To be designed]
+                        </p>
+                        <p className="text-md" style={{marginBottom: '16px'}}>
+                            This screen will teach identifying and responding to partner's bids (Gottman: masters accept 86% vs 33%).
+                        </p>
+                        <div className="button-container">
+                            <button className="button" onClick={() => { awardCredits('sun', 5); goToNext(); }} style={{width: '100%'}}>
+                                Continue (Placeholder)
+                            </button>
+                        </div>
                     </div>
                 </div>
             );
