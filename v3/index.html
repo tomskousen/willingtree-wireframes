@@ -1846,46 +1846,11 @@
                         )}
 
                         {showResult && !isWaitingForPartner && (
-                            <>
-                                <div style={{marginTop: '24px', marginBottom: '16px', textAlign: 'center'}}>
-                                    <p className="text-sm" style={{marginBottom: '12px', color: '#666'}}>
-                                        Learn about the foundational concepts:
-                                    </p>
-                                    <a
-                                        href="wheel-of-consent.html"
-                                        target="_blank"
-                                        style={{
-                                            display: 'inline-block',
-                                            border: '2px solid #4CAF50',
-                                            borderRadius: '8px',
-                                            padding: '8px',
-                                            cursor: 'pointer',
-                                            transition: 'all 0.2s'
-                                        }}
-                                        onMouseOver={(e) => e.currentTarget.style.boxShadow = '0 4px 12px rgba(76, 175, 80, 0.3)'}
-                                        onMouseOut={(e) => e.currentTarget.style.boxShadow = 'none'}
-                                    >
-                                        <img
-                                            src="../images/wheel-of-consent-placeholder.svg"
-                                            alt="Wheel of Consent - Click to learn more"
-                                            style={{
-                                                width: '100%',
-                                                maxWidth: '280px',
-                                                height: 'auto',
-                                                display: 'block'
-                                            }}
-                                        />
-                                        <div style={{fontSize: '12px', color: '#4CAF50', marginTop: '8px', fontWeight: '500'}}>
-                                            Click to learn about Wanting & Willing →
-                                        </div>
-                                    </a>
-                                </div>
-                                <div className="button-container">
-                                    <button className="button" onClick={handleContinue} style={{width: '100%'}}>
-                                        Continue to Day 2
-                                    </button>
-                                </div>
-                            </>
+                            <div className="button-container">
+                                <button className="button" onClick={handleContinue} style={{width: '100%'}}>
+                                    Continue
+                                </button>
+                            </div>
                         )}
                     </div>
                     <div className="screen-footer">
@@ -3246,57 +3211,113 @@
 
         // Level 2 Screen 1: Pairing Under Stress
         function Level2PairingStressScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, myData }) {
-            const [example1, setExample1] = useState('');
-            const [example2, setExample2] = useState('');
+            const [taking, setTaking] = useState('');
+            const [serving, setServing] = useState('');
+            const [accepting, setAccepting] = useState('');
+            const [allowing, setAllowing] = useState('');
 
             const handleContinue = () => {
                 awardCredits('sun', 5);
                 goToNext();
             };
 
-            const bondType = myData?.bondSelections ?
-                `${myData.bondSelections.self}-${myData.bondSelections.partner}` :
-                'Stone-Soil';
+            const allFieldsFilled = taking && serving && accepting && allowing;
 
             return (
                 <div className="screen">
                     <div className="day-badge">Lvl 2 - 1</div>
-                    {createHeader ? createHeader('Pairing Under Stress') : (
-                        <div className="header"><h2>Pairing Under Stress</h2></div>
+                    {createHeader ? createHeader('Want/Willing') : (
+                        <div className="header"><h2>Want/Willing</h2></div>
                     )}
                     <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
-                        <p className="text-md" style={{marginBottom: '16px'}}>
-                            Your bond type: <strong>{bondType}</strong>
-                        </p>
-                        <p className="text-md" style={{marginBottom: '16px'}}>
-                            Read your pairing description (from Level 1, Screen 1). Now provide 2 examples of how this dynamic shows up when you're under stress:
+                        <div style={{textAlign: 'center', marginBottom: '20px'}}>
+                            <a href="wheel-of-consent.html" target="_blank" style={{color: '#4CAF50', textDecoration: 'none', fontSize: '16px'}}>
+                                📖 Learn about the Wheel of Consent
+                            </a>
+                        </div>
+
+                        <div style={{textAlign: 'center', marginBottom: '24px'}}>
+                            <img src="../images/wheel-of-consent-placeholder.svg" alt="Wheel of Consent" style={{maxWidth: '300px', width: '100%', height: 'auto'}} />
+                        </div>
+
+                        <p className="text-md" style={{marginBottom: '20px'}}>
+                            The Wheel of Consent helps us understand four ways of interacting. Complete these examples with a few key words:
                         </p>
 
                         <div style={{marginBottom: '16px'}}>
-                            <input
-                                className="input-field"
-                                placeholder="Example 1: When stressed, I tend to..."
-                                value={example1}
-                                onChange={(e) => setExample1(e.target.value)}
-                                style={{marginBottom: '12px'}}
-                            />
-                            <input
-                                className="input-field"
-                                placeholder="Example 2: My partner tends to..."
-                                value={example2}
-                                onChange={(e) => setExample2(e.target.value)}
-                            />
+                            <label className="text-sm" style={{display: 'block', marginBottom: '8px', fontWeight: '600', color: '#2E7D32'}}>
+                                🎯 TAKING (You do, for you):
+                            </label>
+                            <div style={{marginBottom: '8px'}}>
+                                <span className="text-sm">I want to hug you because I need </span>
+                                <input
+                                    className="input-field"
+                                    placeholder="comfort / reassurance"
+                                    value={taking}
+                                    onChange={(e) => setTaking(e.target.value)}
+                                    style={{display: 'inline-block', width: 'auto', minWidth: '200px', marginLeft: '4px'}}
+                                />
+                            </div>
+                        </div>
+
+                        <div style={{marginBottom: '16px'}}>
+                            <label className="text-sm" style={{display: 'block', marginBottom: '8px', fontWeight: '600', color: '#2E7D32'}}>
+                                🎁 SERVING (You do, for them):
+                            </label>
+                            <div style={{marginBottom: '8px'}}>
+                                <span className="text-sm">I'm willing to give you a massage because you need </span>
+                                <input
+                                    className="input-field"
+                                    placeholder="relaxation / care"
+                                    value={serving}
+                                    onChange={(e) => setServing(e.target.value)}
+                                    style={{display: 'inline-block', width: 'auto', minWidth: '200px', marginLeft: '4px'}}
+                                />
+                            </div>
+                        </div>
+
+                        <div style={{marginBottom: '16px'}}>
+                            <label className="text-sm" style={{display: 'block', marginBottom: '8px', fontWeight: '600', color: '#2E7D32'}}>
+                                🌊 ACCEPTING (They do, for you):
+                            </label>
+                            <div style={{marginBottom: '8px'}}>
+                                <span className="text-sm">Will you scratch my back? I need </span>
+                                <input
+                                    className="input-field"
+                                    placeholder="relief / attention"
+                                    value={accepting}
+                                    onChange={(e) => setAccepting(e.target.value)}
+                                    style={{display: 'inline-block', width: 'auto', minWidth: '200px', marginLeft: '4px'}}
+                                />
+                            </div>
+                        </div>
+
+                        <div style={{marginBottom: '16px'}}>
+                            <label className="text-sm" style={{display: 'block', marginBottom: '8px', fontWeight: '600', color: '#2E7D32'}}>
+                                ✨ ALLOWING (They do, for them):
+                            </label>
+                            <div style={{marginBottom: '8px'}}>
+                                <span className="text-sm">May I hold your hand? (I want this because I need </span>
+                                <input
+                                    className="input-field"
+                                    placeholder="connection / closeness"
+                                    value={allowing}
+                                    onChange={(e) => setAllowing(e.target.value)}
+                                    style={{display: 'inline-block', width: 'auto', minWidth: '200px', marginLeft: '4px'}}
+                                />
+                                <span className="text-sm">)</span>
+                            </div>
                         </div>
 
                         <div className="button-container">
-                            <button className="button" onClick={handleContinue} disabled={!example1 || !example2} style={{width: '100%'}}>
+                            <button className="button" onClick={handleContinue} disabled={!allFieldsFilled} style={{width: '100%'}}>
                                 Continue
                             </button>
                         </div>
                     </div>
                     <div className="screen-footer">
-                        Recognizing your patterns under stress is the first step to changing them. Awareness creates choice.
+                        Understanding the difference between wanting and willing creates authentic generosity in relationships.
                     </div>
                 </div>
             );
