@@ -1100,7 +1100,18 @@
                             </div>
                         );
 
-                    case 'paired-level3-screen4':
+                    case 'paired-level3-screen4': // 5.3.4 Unattached Wanting
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
+                                {!viewingPartner ? (
+                                    <Level3WantNegotiationScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />
+                                ) : (
+                                    <Level3WantNegotiationScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} />
+                                )}
+                            </div>
+                        );
+
                     case 'paired-level3-screen5':
                     case 'paired-level3-screen6':
                     case 'paired-level3-screen7':
@@ -4347,25 +4358,111 @@
         }
 
         function Level3WantNegotiationScreen({ goToNext, awardCredits, credits, currentScreen, createHeader }) {
+            const [wants, setWants] = useState(Array(12).fill(''));
+            const [signature, setSignature] = useState('');
+
+            const handleWantChange = (index, value) => {
+                const newWants = [...wants];
+                newWants[index] = value;
+                setWants(newWants);
+            };
+
+            const filledWants = wants.filter(w => w.trim()).length;
+            const canContinue = filledWants >= 8 && signature.trim();
+
+            const handleContinue = () => {
+                awardCredits('growth', 1);
+                goToNext();
+            };
+
             return (
                 <div className="screen">
                     <div className="day-badge">Lvl 3 - 4</div>
-                    {createHeader ? createHeader('Want Negotiation') : (
-                        <div className="header"><h2>Want Negotiation</h2></div>
+                    {createHeader ? createHeader('Unattached Wanting') : (
+                        <div className="header"><h2>Unattached Wanting</h2></div>
                     )}
                     <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
-                        <p className="text-md" style={{marginBottom: '16px'}}>
-                            [Level 3 Screen 4 - To be designed]
+                        <p className="text-md" style={{marginBottom: '12px', lineHeight: '1.6'}}>
+                            List your wants (minimum 8, ideally 12). Organize them with most important at the top, least important at the bottom.
                         </p>
-                        <p className="text-md" style={{marginBottom: '16px'}}>
-                            This screen will explore alternative ways to meet underlying needs when partner says no.
-                        </p>
+
+                        <div style={{marginBottom: '16px'}}>
+                            <div style={{fontSize: '13px', fontWeight: '600', color: '#2E7D32', marginBottom: '8px'}}>
+                                Top Half (Most Important)
+                            </div>
+                            {wants.slice(0, 6).map((want, index) => (
+                                <input
+                                    key={index}
+                                    className="input-field"
+                                    placeholder={`Want ${index + 1}${index < 2 ? ' (required)' : ''}`}
+                                    value={want}
+                                    onChange={(e) => handleWantChange(index, e.target.value)}
+                                    style={{marginBottom: '8px', fontSize: '14px'}}
+                                />
+                            ))}
+                        </div>
+
+                        <div style={{marginBottom: '20px'}}>
+                            <div style={{fontSize: '13px', fontWeight: '600', color: '#666', marginBottom: '8px'}}>
+                                Bottom Half (Less Important)
+                            </div>
+                            {wants.slice(6, 12).map((want, index) => (
+                                <input
+                                    key={index + 6}
+                                    className="input-field"
+                                    placeholder={`Want ${index + 7}${index < 2 ? ' (required)' : ''}`}
+                                    value={want}
+                                    onChange={(e) => handleWantChange(index + 6, e.target.value)}
+                                    style={{marginBottom: '8px', fontSize: '14px'}}
+                                />
+                            ))}
+                        </div>
+
+                        <div style={{background: '#f5f5f0', padding: '16px', borderRadius: '8px', marginBottom: '16px'}}>
+                            <p style={{fontSize: '15px', fontWeight: '700', fontStyle: 'italic', lineHeight: '1.6', color: '#2E7D32', marginBottom: '16px'}}>
+                                "These are my wants. I understand you are different. It is ok if they are not given, now or even ever. But, to know me, you should know I care in these ways."
+                            </p>
+
+                            <div style={{marginBottom: '8px'}}>
+                                <label className="text-sm" style={{display: 'block', marginBottom: '6px', color: '#666', fontWeight: '500'}}>
+                                    Type your name to sign:
+                                </label>
+                                <input
+                                    className="input-field"
+                                    placeholder="Your name"
+                                    value={signature}
+                                    onChange={(e) => setSignature(e.target.value)}
+                                    style={{fontSize: '14px', marginBottom: '8px'}}
+                                />
+                                {signature && (
+                                    <div style={{
+                                        fontFamily: "'Brush Script MT', cursive, 'Dancing Script', 'Pacifico', 'Great Vibes', serif",
+                                        fontSize: '32px',
+                                        color: '#2E7D32',
+                                        padding: '12px',
+                                        textAlign: 'center',
+                                        borderTop: '1px solid #ddd',
+                                        marginTop: '8px'
+                                    }}>
+                                        {signature}
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+
+                        <div style={{fontSize: '13px', color: '#666', marginBottom: '12px', textAlign: 'center'}}>
+                            {filledWants} of 12 wants listed (minimum 8 required)
+                        </div>
+
                         <div className="button-container">
-                            <button className="button" onClick={() => { awardCredits('growth', 1); goToNext(); }} style={{width: '100%'}}>
-                                Continue (Placeholder)
+                            <button className="button" onClick={handleContinue} disabled={!canContinue} style={{width: '100%'}}>
+                                Continue
                             </button>
                         </div>
+                    </div>
+                    <div className="screen-footer">
+                        Wanting without attachment is the foundation of authentic intimacy.
                     </div>
                 </div>
             );
