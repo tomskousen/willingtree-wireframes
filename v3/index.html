@@ -664,17 +664,33 @@
             '1.25': 'payment',
             '1.3': 'pairing-choice',
 
-            // Step 2: 10-Day Onboarding
-            '2.1': 'day-1',
-            '2.2': 'day-2',
-            '2.3': 'day-3',
-            '2.4': 'day-4',
-            '2.5': 'day-5',
-            '2.6': 'day-6',
-            '2.7': 'day-7',
-            '2.8': 'day-8',
-            '2.9': 'day-9',
-            '2.10': 'harvest',
+            // Step 2: Individual Journey (3 Levels x 7 Screens)
+            // Level 1: Foundation
+            '2.1.1': 'level1-tree-choice',
+            '2.1.2': 'level1-preparing-soil',
+            '2.1.3': 'level1-budding-pollinate',
+            '2.1.4': 'level1-fertilize',
+            '2.1.5': 'level1-watering-branch',
+            '2.1.6': 'level1-good-fruits',
+            '2.1.7': 'level1-harvest',
+
+            // Level 2: Deepening
+            '2.2.1': 'level2-pairing-stress',
+            '2.2.2': 'level2-active-appreciation',
+            '2.2.3': 'level2-binary-willing',
+            '2.2.4': 'level2-personalize-wants',
+            '2.2.5': 'level2-discover-why',
+            '2.2.6': 'level2-guess-unwilling',
+            '2.2.7': 'level2-harvest',
+
+            // Level 3: Mastery
+            '2.3.1': 'level3-articulate-wants',
+            '2.3.2': 'level3-non-attached-communication',
+            '2.3.3': 'level3-safe-no-practice',
+            '2.3.4': 'level3-want-negotiation',
+            '2.3.5': 'level3-rejection-resilience',
+            '2.3.6': 'level3-bid-recognition',
+            '2.3.7': 'level3-harvest',
 
             // Step 3: Daily Activities
             '3.1': 'dashboard',
@@ -870,27 +886,53 @@
                     case 'pairing-choice':
                         return <PairingChoiceScreen setScreen={setCurrentScreen} setPairedMode={setPairedMode} setPartnerData={setPartnerData} />;
 
-                    // Step 2: 10-Day Onboarding (Solo - no partner features)
-                    case 'day-1':
-                        return <Day1BondingScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} partnerData={null} setMyData={setMyData} setPartnerData={setPartnerData} createHeader={createHeader} />;
-                    case 'day-2':
-                        return <Day2TreeMetaphorScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} />;
-                    case 'day-3':
-                        return <Day3CommitmentScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} />;
-                    case 'day-4':
-                        return <Day4WillingnessValuesScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} setMyData={setMyData} userGender={formData.gender} />;
-                    case 'day-5':
-                        return <Day5BenchmarksScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} setMyData={setMyData} setPartnerData={setPartnerData} />;
-                    case 'day-6':
-                        return <Day6SmallBranchesScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} partnerData={null} setMyData={setMyData} setPartnerData={setPartnerData} />;
-                    case 'day-7':
-                        return <Day7WillingCommitmentScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} setMyData={setMyData} />;
-                    case 'day-8':
-                        return <Day8PracticeSessionScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} />;
-                    case 'day-9':
-                        return <Day9GuessRevealScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} partnerData={null} setPartnerData={setPartnerData} />;
-                    case 'harvest':
-                        return <HarvestScreen goToNext={goToNext} credits={credits} setCredits={setCredits} cycleCount={cycleCount} setCycleCount={setCycleCount} pairedMode={false} setPairedMode={setPairedMode} />;
+                    // Step 2: Individual Journey - Level 1 (Foundation)
+                    case 'level1-tree-choice':
+                        return <Day1BondingScreen goToNext={() => setCurrentScreen('2.1.2')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} partnerData={null} setMyData={setMyData} setPartnerData={setPartnerData} createHeader={createHeader} />;
+                    case 'level1-preparing-soil':
+                        return <Day2TreeMetaphorScreen goToNext={() => setCurrentScreen('2.1.3')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />;
+                    case 'level1-budding-pollinate':
+                        return <Level1BuddingPollinateScreen goToNext={() => setCurrentScreen('2.1.4')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} setMyData={setMyData} userGender={formData.gender} createHeader={createHeader} />;
+                    case 'level1-fertilize':
+                        return <Day6SmallBranchesScreen setScreen={setCurrentScreen} goToNext={() => setCurrentScreen('2.1.5')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} partnerData={null} setMyData={setMyData} setPartnerData={setPartnerData} createHeader={createHeader} />;
+                    case 'level1-watering-branch':
+                        return <Level1WateringBranchScreen goToNext={() => setCurrentScreen('2.1.6')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} setMyData={setMyData} createHeader={createHeader} />;
+                    case 'level1-good-fruits':
+                        return <Day9GuessRevealScreen goToNext={() => setCurrentScreen('2.1.7')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} partnerData={null} setPartnerData={setPartnerData} createHeader={createHeader} />;
+                    case 'level1-harvest':
+                        return <HarvestScreen goToNext={() => setCurrentScreen('2.2.1')} credits={credits} setCredits={setCredits} cycleCount={cycleCount} setCycleCount={setCycleCount} pairedMode={false} setPairedMode={setPairedMode} createHeader={createHeader} level={1} />;
+
+                    // Step 2: Individual Journey - Level 2 (Deepening)
+                    case 'level2-pairing-stress':
+                        return <Level2PairingStressScreen goToNext={() => setCurrentScreen('2.2.2')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} myData={myData} />;
+                    case 'level2-active-appreciation':
+                        return <Level2ActiveAppreciationScreen goToNext={() => setCurrentScreen('2.2.3')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />;
+                    case 'level2-binary-willing':
+                        return <Level2BinaryWillingScreen goToNext={() => setCurrentScreen('2.2.4')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} partnerData={partnerData} setMyData={setMyData} />;
+                    case 'level2-personalize-wants':
+                        return <Level2PersonalizeWantsScreen goToNext={() => setCurrentScreen('2.2.5')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} setMyData={setMyData} />;
+                    case 'level2-discover-why':
+                        return <Level2DiscoverWhyScreen goToNext={() => setCurrentScreen('2.2.6')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} setMyData={setMyData} />;
+                    case 'level2-guess-unwilling':
+                        return <Level2GuessUnwillingScreen goToNext={() => setCurrentScreen('2.2.7')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} partnerData={partnerData} />;
+                    case 'level2-harvest':
+                        return <HarvestScreen goToNext={() => setCurrentScreen('2.3.1')} credits={credits} setCredits={setCredits} cycleCount={cycleCount} setCycleCount={setCycleCount} pairedMode={false} setPairedMode={setPairedMode} createHeader={createHeader} level={2} />;
+
+                    // Step 2: Individual Journey - Level 3 (Mastery)
+                    case 'level3-articulate-wants':
+                        return <Level3ArticulateWantsScreen goToNext={() => setCurrentScreen('2.3.2')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} setMyData={setMyData} />;
+                    case 'level3-non-attached-communication':
+                        return <Level3NonAttachedScreen goToNext={() => setCurrentScreen('2.3.3')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />;
+                    case 'level3-safe-no-practice':
+                        return <Level3SafeNoScreen goToNext={() => setCurrentScreen('2.3.4')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />;
+                    case 'level3-want-negotiation':
+                        return <Level3WantNegotiationScreen goToNext={() => setCurrentScreen('2.3.5')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />;
+                    case 'level3-rejection-resilience':
+                        return <Level3RejectionResilienceScreen goToNext={() => setCurrentScreen('2.3.6')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />;
+                    case 'level3-bid-recognition':
+                        return <Level3BidRecognitionScreen goToNext={() => setCurrentScreen('2.3.7')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />;
+                    case 'level3-harvest':
+                        return <HarvestScreen goToNext={() => setCurrentScreen('3.1')} credits={credits} setCredits={setCredits} cycleCount={cycleCount} setCycleCount={setCycleCount} pairedMode={false} setPairedMode={setPairedMode} createHeader={createHeader} level={3} />;
 
                     // Step 3: Daily Activities
                     case 'dashboard':
@@ -1306,7 +1348,7 @@
             const handleSoloStart = () => {
                 alert('Starting solo mode! You can add a partner anytime from settings.');
                 setPairedMode(false);
-                setScreen('2.1');
+                setScreen('2.1.1');
             };
 
             if (showInvite && choice === 'pair') {
