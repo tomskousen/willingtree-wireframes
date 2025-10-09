@@ -930,7 +930,7 @@
                     case 'level3-articulate-wants':
                         return <Level3ArticulateWantsScreen goToNext={() => setCurrentScreen('2.3.2')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} setMyData={setMyData} />;
                     case 'level3-non-attached-communication':
-                        return <Level3NonAttachedScreen goToNext={() => setCurrentScreen('2.3.3')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />;
+                        return <Level3NonAttachedScreen goToNext={() => setCurrentScreen('2.3.3')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} myData={myData} />;
                     case 'level3-safe-no-practice':
                         return <Level3SafeNoScreen goToNext={() => setCurrentScreen('2.3.4')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />;
                     case 'level3-want-negotiation':
@@ -1081,14 +1081,25 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
                                 {!viewingPartner ? (
-                                    <Level3NonAttachedScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />
+                                    <Level3NonAttachedScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} myData={myData} />
                                 ) : (
-                                    <Level3NonAttachedScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} />
+                                    <Level3NonAttachedScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} myData={partnerData} />
                                 )}
                             </div>
                         );
 
-                    case 'paired-level3-screen3':
+                    case 'paired-level3-screen3': // 5.3.3 Beneath my Resistance
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
+                                {!viewingPartner ? (
+                                    <Level3SafeNoScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />
+                                ) : (
+                                    <Level3SafeNoScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} />
+                                )}
+                            </div>
+                        );
+
                     case 'paired-level3-screen4':
                     case 'paired-level3-screen5':
                     case 'paired-level3-screen6':
@@ -4082,12 +4093,24 @@
             );
         }
 
-        function Level3NonAttachedScreen({ goToNext, awardCredits, credits, currentScreen, createHeader }) {
-            const [behaviors, setBehaviors] = useState([
-                { yourStory: '', theirStory: '' },
-                { yourStory: '', theirStory: '' },
-                { yourStory: '', theirStory: '' }
-            ]);
+        function Level3NonAttachedScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, myData }) {
+            // Get top 3 behaviors from Level 2 fertilize allocations (highest point values)
+            const getTopBehaviors = () => {
+                if (myData?.fertilizeAllocations && Object.keys(myData.fertilizeAllocations).length > 0) {
+                    return Object.entries(myData.fertilizeAllocations)
+                        .sort((a, b) => b[1] - a[1]) // Sort by points descending
+                        .slice(0, 3) // Take top 3
+                        .map(([text, points]) => ({ behavior: text, yourStory: '', theirStory: '' }));
+                }
+                // Fallback if no data
+                return [
+                    { behavior: 'Behavior 1', yourStory: '', theirStory: '' },
+                    { behavior: 'Behavior 2', yourStory: '', theirStory: '' },
+                    { behavior: 'Behavior 3', yourStory: '', theirStory: '' }
+                ];
+            };
+
+            const [behaviors, setBehaviors] = useState(getTopBehaviors());
 
             const handleYourStoryChange = (index, value) => {
                 const newBehaviors = [...behaviors];
@@ -4111,13 +4134,13 @@
             return (
                 <div className="screen">
                     <div className="day-badge">Lvl 3 - 2</div>
-                    {createHeader ? createHeader('Translating') : (
-                        <div className="header"><h2>Translating</h2></div>
+                    {createHeader ? createHeader('Reframing - Translates') : (
+                        <div className="header"><h2>Reframing - Translates</h2></div>
                     )}
                     <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
                         <p className="text-md" style={{marginBottom: '12px', lineHeight: '1.6'}}>
-                            List three mildly annoying behaviors, then rewrite the script with your partner as the hero making a reasonable, rational choice.
+                            Below are the three behaviors you valued most. Rewrite the script with your partner as the hero making a reasonable, rational choice.
                         </p>
 
                         <div style={{background: '#FFF3E0', border: '2px solid #FF9800', borderRadius: '8px', padding: '12px', marginBottom: '16px', fontSize: '13px'}}>
@@ -4133,7 +4156,7 @@
                         {behaviors.map((behavior, index) => (
                             <div key={index} style={{marginBottom: '20px', background: '#f5f5f0', padding: '12px', borderRadius: '8px'}}>
                                 <div style={{fontSize: '14px', fontWeight: '600', color: '#2E7D32', marginBottom: '8px'}}>
-                                    Behavior {index + 1}
+                                    {behavior.behavior}
                                 </div>
 
                                 <div style={{marginBottom: '10px'}}>
@@ -4178,25 +4201,146 @@
         }
 
         function Level3SafeNoScreen({ goToNext, awardCredits, credits, currentScreen, createHeader }) {
+            const [changes, setChanges] = useState([
+                { change: '', loss: '', gain: '', canDiscuss: null },
+                { change: '', loss: '', gain: '', canDiscuss: null },
+                { change: '', loss: '', gain: '', canDiscuss: null }
+            ]);
+
+            const handleChangeInput = (index, field, value) => {
+                const newChanges = [...changes];
+                newChanges[index][field] = value;
+                setChanges(newChanges);
+            };
+
+            const handleCanDiscuss = (index, value) => {
+                const newChanges = [...changes];
+                newChanges[index].canDiscuss = value;
+                setChanges(newChanges);
+            };
+
+            const allFieldsFilled = changes.every(c =>
+                c.change.trim() && c.loss.trim() && c.gain.trim() && c.canDiscuss !== null
+            );
+
+            const handleContinue = () => {
+                awardCredits('sun', 5);
+                goToNext();
+            };
+
             return (
                 <div className="screen">
                     <div className="day-badge">Lvl 3 - 3</div>
-                    {createHeader ? createHeader('Safe No Practice') : (
-                        <div className="header"><h2>Safe No Practice</h2></div>
+                    {createHeader ? createHeader('Beneath my Resistance') : (
+                        <div className="header"><h2>Beneath my Resistance</h2></div>
                     )}
                     <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
-                        <p className="text-md" style={{marginBottom: '16px'}}>
-                            [Level 3 Screen 3 - To be designed]
+                        <p className="text-md" style={{marginBottom: '12px', lineHeight: '1.6'}}>
+                            List the top three things you think your partner wants/needs you to change. For each, explore what you'd lose and what you'd gain.
                         </p>
-                        <p className="text-md" style={{marginBottom: '16px'}}>
-                            This screen will help practice saying and receiving "no" while maintaining relationship safety.
-                        </p>
+
+                        <div style={{background: '#E3F2FD', border: '2px solid #2196F3', borderRadius: '8px', padding: '12px', marginBottom: '16px', fontSize: '13px'}}>
+                            <a href="gains-from-trade.html" target="_blank" style={{color: '#1976D2', fontWeight: '600', textDecoration: 'none'}}>
+                                📖 Learn about Gains from Trade & Comparative Advantage →
+                            </a>
+                        </div>
+
+                        {changes.map((change, index) => (
+                            <div key={index} style={{marginBottom: '20px', background: '#f5f5f0', padding: '12px', borderRadius: '8px'}}>
+                                <div style={{fontSize: '14px', fontWeight: '600', color: '#2E7D32', marginBottom: '10px'}}>
+                                    Change {index + 1}
+                                </div>
+
+                                <div style={{marginBottom: '8px'}}>
+                                    <label className="text-sm" style={{display: 'block', marginBottom: '4px', color: '#666'}}>
+                                        What they want me to change:
+                                    </label>
+                                    <input
+                                        className="input-field"
+                                        placeholder="e.g., Spend less time on phone"
+                                        value={change.change}
+                                        onChange={(e) => handleChangeInput(index, 'change', e.target.value)}
+                                        style={{fontSize: '14px'}}
+                                    />
+                                </div>
+
+                                <div style={{marginBottom: '8px'}}>
+                                    <label className="text-sm" style={{display: 'block', marginBottom: '4px', color: '#666'}}>
+                                        What I'd lose (cost):
+                                    </label>
+                                    <input
+                                        className="input-field"
+                                        placeholder="e.g., My decompression time, staying connected with friends"
+                                        value={change.loss}
+                                        onChange={(e) => handleChangeInput(index, 'loss', e.target.value)}
+                                        style={{fontSize: '14px'}}
+                                    />
+                                </div>
+
+                                <div style={{marginBottom: '8px'}}>
+                                    <label className="text-sm" style={{display: 'block', marginBottom: '4px', color: '#666'}}>
+                                        What I'd gain (benefit):
+                                    </label>
+                                    <input
+                                        className="input-field"
+                                        placeholder="e.g., More presence with family, less conflict"
+                                        value={change.gain}
+                                        onChange={(e) => handleChangeInput(index, 'gain', e.target.value)}
+                                        style={{fontSize: '14px'}}
+                                    />
+                                </div>
+
+                                <div style={{marginTop: '12px'}}>
+                                    <p className="text-sm" style={{marginBottom: '6px', color: '#666', fontWeight: '500'}}>
+                                        Assuming these assumptions are accurate, can you have a safe conversation weighing the net costs/benefits for the whole?
+                                    </p>
+                                    <div style={{display: 'flex', gap: '8px'}}>
+                                        <button
+                                            onClick={() => handleCanDiscuss(index, true)}
+                                            style={{
+                                                flex: 1,
+                                                padding: '8px',
+                                                border: change.canDiscuss === true ? '2px solid #4CAF50' : '1px solid #ddd',
+                                                borderRadius: '8px',
+                                                background: change.canDiscuss === true ? '#E8F5E9' : 'white',
+                                                color: change.canDiscuss === true ? '#2E7D32' : '#666',
+                                                fontSize: '14px',
+                                                fontWeight: change.canDiscuss === true ? '600' : 'normal',
+                                                cursor: 'pointer'
+                                            }}
+                                        >
+                                            Yes
+                                        </button>
+                                        <button
+                                            onClick={() => handleCanDiscuss(index, false)}
+                                            style={{
+                                                flex: 1,
+                                                padding: '8px',
+                                                border: change.canDiscuss === false ? '2px solid #FF9800' : '1px solid #ddd',
+                                                borderRadius: '8px',
+                                                background: change.canDiscuss === false ? '#FFF3E0' : 'white',
+                                                color: change.canDiscuss === false ? '#F57C00' : '#666',
+                                                fontSize: '14px',
+                                                fontWeight: change.canDiscuss === false ? '600' : 'normal',
+                                                cursor: 'pointer'
+                                            }}
+                                        >
+                                            No
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+
                         <div className="button-container">
-                            <button className="button" onClick={() => { awardCredits('sun', 5); goToNext(); }} style={{width: '100%'}}>
-                                Continue (Placeholder)
+                            <button className="button" onClick={handleContinue} disabled={!allFieldsFilled} style={{width: '100%'}}>
+                                Continue
                             </button>
                         </div>
+                    </div>
+                    <div className="screen-footer">
+                        Understanding your resistance creates space for real conversation.
                     </div>
                 </div>
             );
