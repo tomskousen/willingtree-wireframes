@@ -1255,7 +1255,7 @@
                     case 'level1-good-fruits':
                         return <Day9GuessRevealScreen goToNext={() => setCurrentScreen('2.1.7')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} partnerData={null} setPartnerData={setPartnerData} createHeader={createHeader} />;
                     case 'level1-harvest':
-                        return <HarvestScreen goToNext={() => setCurrentScreen('2.2.1')} credits={credits} setCredits={setCredits} cycleCount={cycleCount} setCycleCount={setCycleCount} pairedMode={false} setPairedMode={setPairedMode} createHeader={createHeader} level={1} canCustomizeWants={canCustomizeWants} setCanCustomizeWants={setCanCustomizeWants} />;
+                        return <Level1CustomizeWantsScreen goToNext={() => setCurrentScreen('2.2.1')} awardCredits={awardCredits} credits={credits} setCredits={setCredits} customizedWants={customizedWants} setCustomizedWants={setCustomizedWants} createHeader={createHeader} currentScreen={currentScreen} />;
 
                     // Step 2: Individual Journey - Level 2 (Deepening)
                     case 'level2-pairing-stress':
@@ -1277,7 +1277,7 @@
                     case 'level3-articulate-wants':
                         return <Level3ArticulateWantsScreen goToNext={() => setCurrentScreen('2.3.2')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} setMyData={setMyData} />;
                     case 'level3-non-attached-communication':
-                        return <Level3NonAttachedScreen goToNext={() => setCurrentScreen('2.3.3')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} myData={myData} />;
+                        return <Level3NonAttachedScreen goToNext={() => setCurrentScreen('2.3.3')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} myData={myData} setMyData={setMyData} customizedWants={customizedWants} />;
                     case 'level3-safe-no-practice':
                         return <Level3SafeNoScreen goToNext={() => setCurrentScreen('2.3.4')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />;
                     case 'level3-want-negotiation':
@@ -2316,6 +2316,16 @@
                     <div className="screen-content">
                         {!showPartnerQuestion && (
                             <>
+                                <div style={{background: '#E8F5E9', border: '2px solid #4CAF50', borderRadius: '8px', padding: '12px', marginBottom: '16px', fontSize: '13px'}}>
+                                    <strong style={{color: '#2E7D32', fontSize: '14px'}}>Gottman's Top 2 Keys to Sustainable Relationships:</strong>
+                                    <ul style={{marginTop: '8px', marginBottom: '8px', paddingLeft: '20px'}}>
+                                        <li style={{marginBottom: '6px'}}><strong>Turn Toward (not away):</strong> Respond positively to your partner's bids for connection, no matter how small.</li>
+                                        <li><strong>5:1 Ratio:</strong> Maintain at least 5 positive interactions for every 1 negative interaction.</li>
+                                    </ul>
+                                    <a href="four-horsemen.html" target="_blank" style={{color: '#2E7D32', fontWeight: '600', textDecoration: 'none'}}>
+                                        📖 Learn about the Four Horsemen →
+                                    </a>
+                                </div>
                                 <p className="text-md" style={{marginBottom: '16px'}}>
                                     How do you perceive yourself in this relationship?
                                 </p>
@@ -2504,7 +2514,7 @@
                     <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
                         <p className="text-md" style={{marginBottom: '16px'}}>
-                            List things you noticed your partner doing:
+                            List things you noticed your partner doing this week:
                         </p>
 
                         <div style={{display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px'}}>
@@ -2860,6 +2870,7 @@
         // Screen 2.6: Day 6 - Fertilize the Tree
         function Day6SmallBranchesScreen({ setScreen, goToNext, awardCredits, credits, currentScreen, pairedMode, partnerData, setMyData, setPartnerData }) {
             const [allocations, setAllocations] = useState({});
+            const [isSpinning, setIsSpinning] = useState(false);
 
             // Use partner's actual list in paired mode, or simulate for solo
             const partnerItems = (pairedMode && partnerData?.pollinateList?.length > 0)
@@ -2891,36 +2902,52 @@
             const canConfirm = totalAllocated === 12;
 
             const handleConfirm = () => {
-                // Save allocations for partner (in paired mode)
-                if (pairedMode && setMyData) {
-                    setMyData(prev => ({
-                        ...prev,
-                        fertilizeAllocations: allocations
-                    }));
+                // Start slot machine spinning animation
+                setIsSpinning(true);
 
-                    // Award partner 1 growth credit (10 sun + 5 water)
-                    if (setPartnerData) {
-                        setPartnerData(prev => ({
+                // Simulate slot machine spinning for 2 seconds
+                setTimeout(() => {
+                    setIsSpinning(false);
+
+                    // Save allocations for partner (in paired mode)
+                    if (pairedMode && setMyData) {
+                        setMyData(prev => ({
                             ...prev,
-                            credits: {
-                                sun: prev.credits.sun + 10,
-                                water: prev.credits.water + 5,
-                                growth: prev.credits.growth + 1
-                            },
                             fertilizeAllocations: allocations
                         }));
-                    }
-                }
 
-                // User also gets 1 growth credit (this is their own work)
-                awardCredits('sun', 10);
-                awardCredits('water', 5);
-                alert('Confirmed! Your partner now knows what matters most to you.');
-                if (goToNext) {
-                    goToNext(7);
-                } else {
-                    setScreen('2.7');
-                }
+                        // Award partner 1 growth credit (10 sun + 5 water)
+                        if (setPartnerData) {
+                            setPartnerData(prev => ({
+                                ...prev,
+                                credits: {
+                                    sun: prev.credits.sun + 10,
+                                    water: prev.credits.water + 5,
+                                    growth: prev.credits.growth + 1
+                                },
+                                fertilizeAllocations: allocations
+                            }));
+                        }
+                    }
+
+                    // User also gets 1 growth credit (this is their own work)
+                    awardCredits('sun', 10);
+                    awardCredits('water', 5);
+
+                    // Show the winning 6 items in an alert
+                    const sortedItems = Object.entries(allocations)
+                        .sort((a, b) => b[1] - a[1])
+                        .slice(0, 6)
+                        .map(([item]) => item);
+
+                    alert('🎰 JACKPOT! The slot machine has selected 6 items that will go to your partner for their Willing selection:\n\n' + sortedItems.map((item, i) => `${i + 1}. ${item}`).join('\n'));
+
+                    if (goToNext) {
+                        goToNext(7);
+                    } else {
+                        setScreen('2.7');
+                    }
+                }, 2000);
             };
 
             // Check if waiting for partner data (in paired mode)
@@ -3020,8 +3047,15 @@
                         </div>
 
                         <div className="button-container">
-                            <button className="button" onClick={handleConfirm} disabled={!canConfirm} style={{width: '100%'}}>
-                                Confirm Allocation
+                            <button className="button" onClick={handleConfirm} disabled={!canConfirm || isSpinning} style={{
+                                width: '100%',
+                                fontSize: '18px',
+                                padding: '16px',
+                                background: (canConfirm && !isSpinning) ? 'linear-gradient(135deg, #4CAF50 0%, #45a049 100%)' : '#ccc',
+                                position: 'relative',
+                                overflow: 'hidden'
+                            }}>
+                                {isSpinning ? '🎰 Spinning... 🎰' : '🎰 Pull the Lever'}
                             </button>
                         </div>
                             </>
@@ -3330,6 +3364,178 @@
                     </div>
                     <div className="screen-footer">
                         Identifying fruits means recognizing efforts. When you correctly guess your partner's focus, it shows you're paying attention. Bonuses reward awareness and strengthen your connection.
+                    </div>
+                </div>
+            );
+        }
+
+        // Screen 2.1.7: Level 1 Customize Wants (BigBranch)
+        function Level1CustomizeWantsScreen({ goToNext, awardCredits, credits, setCredits, customizedWants, setCustomizedWants, createHeader, currentScreen }) {
+            const [selectedItems, setSelectedItems] = React.useState([]);
+            const [customInput, setCustomInput] = React.useState('');
+
+            const totalSun = credits.sun;
+            const costPerCustomization = 5;
+            const maxCustomizations = Math.floor(totalSun / costPerCustomization);
+
+            // Default BigBranch Want list (popular items)
+            const defaultWantList = [
+                'Listen actively without trying to fix',
+                'Show physical affection regularly',
+                'Help with household tasks unprompted',
+                'Plan thoughtful dates or surprises',
+                'Communicate feelings openly',
+                'Be emotionally present',
+                'Support career/personal goals',
+                'Make time for quality conversation',
+                'Show appreciation and gratitude',
+                'Respect need for alone time',
+                'Be reliable and keep commitments',
+                'Share responsibilities fairly'
+            ];
+
+            const handleItemToggle = (item) => {
+                if (selectedItems.includes(item)) {
+                    setSelectedItems(selectedItems.filter(i => i !== item));
+                } else {
+                    setSelectedItems([...selectedItems, item]);
+                }
+            };
+
+            const handleCustomize = () => {
+                if (customInput.trim() && selectedItems.length > 0) {
+                    // Replace selected item with custom input
+                    const itemToReplace = selectedItems[0];
+                    const newList = defaultWantList.map(item =>
+                        item === itemToReplace ? customInput.trim() : item
+                    );
+
+                    setCustomizedWants(newList);
+
+                    // Deduct 5 sun credits
+                    setCredits(prev => ({
+                        ...prev,
+                        sun: prev.sun - costPerCustomization
+                    }));
+
+                    setCustomInput('');
+                    setSelectedItems([]);
+                    alert(`✅ Customization saved! "${itemToReplace}" replaced with "${customInput.trim()}"`);
+                }
+            };
+
+            const handleFinish = () => {
+                goToNext();
+            };
+
+            return (
+                <div className="screen">
+                    <div className="day-badge">Lvl 1 - 7</div>
+                    {createHeader ? createHeader('Customize Your Want List') : (
+                        <div className="header"><h2>Customize Your Want List</h2></div>
+                    )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
+                    <div className="screen-content">
+                        <div style={{
+                            background: '#E8F5E9',
+                            padding: '16px',
+                            borderRadius: '12px',
+                            marginBottom: '20px',
+                            borderLeft: '4px solid #4CAF50'
+                        }}>
+                            <p style={{fontSize: '15px', fontWeight: '600', color: '#2E7D32', marginBottom: '8px'}}>
+                                🎉 You've Unlocked Customization!
+                            </p>
+                            <p style={{fontSize: '14px', lineHeight: '1.6', color: '#555', marginBottom: '0'}}>
+                                You have earned enough credits to upgrade/customize your BigBranch Want list from the popular to the personal. The cost is <strong>5 sun credits per customization</strong>.
+                            </p>
+                        </div>
+
+                        <div style={{
+                            background: '#FFF3E0',
+                            padding: '12px',
+                            borderRadius: '8px',
+                            marginBottom: '16px',
+                            textAlign: 'center'
+                        }}>
+                            <div style={{fontSize: '14px', color: '#666', marginBottom: '4px'}}>
+                                Available Sun Credits: <strong style={{color: '#F57C00', fontSize: '18px'}}>{totalSun}</strong>
+                            </div>
+                            <div style={{fontSize: '12px', color: '#999'}}>
+                                You can make up to {maxCustomizations} customizations
+                            </div>
+                        </div>
+
+                        <p style={{fontSize: '14px', marginBottom: '12px', color: '#666'}}>
+                            <strong>Step 1:</strong> Select an item from the default list you want to replace:
+                        </p>
+
+                        <div style={{maxHeight: '200px', overflowY: 'auto', marginBottom: '16px'}}>
+                            {defaultWantList.map((item, index) => (
+                                <div
+                                    key={index}
+                                    onClick={() => handleItemToggle(item)}
+                                    style={{
+                                        padding: '10px',
+                                        background: selectedItems.includes(item) ? '#E8F5E9' : 'white',
+                                        border: selectedItems.includes(item) ? '2px solid #4CAF50' : '1px solid #e0e0e0',
+                                        borderRadius: '6px',
+                                        marginBottom: '6px',
+                                        cursor: 'pointer',
+                                        fontSize: '13px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '8px'
+                                    }}
+                                >
+                                    <input
+                                        type="radio"
+                                        checked={selectedItems.includes(item)}
+                                        readOnly
+                                        style={{marginRight: '4px'}}
+                                    />
+                                    {item}
+                                </div>
+                            ))}
+                        </div>
+
+                        <p style={{fontSize: '14px', marginBottom: '8px', color: '#666'}}>
+                            <strong>Step 2:</strong> Enter your custom Want:
+                        </p>
+
+                        <textarea
+                            className="input-field"
+                            placeholder="Enter your personalized Want..."
+                            value={customInput}
+                            onChange={(e) => setCustomInput(e.target.value)}
+                            style={{
+                                fontSize: '14px',
+                                minHeight: '60px',
+                                marginBottom: '12px',
+                                resize: 'vertical',
+                                fontFamily: 'inherit'
+                            }}
+                        />
+
+                        <button
+                            className="button"
+                            onClick={handleCustomize}
+                            disabled={!customInput.trim() || selectedItems.length === 0 || totalSun < costPerCustomization}
+                            style={{width: '100%', marginBottom: '12px'}}
+                        >
+                            Replace Selected Item (Cost: 5 ☀️)
+                        </button>
+
+                        <button
+                            className="button button-secondary"
+                            onClick={handleFinish}
+                            style={{width: '100%'}}
+                        >
+                            {customizedWants.length > 0 ? 'Continue with Customized List →' : 'Skip & Continue with Default List →'}
+                        </button>
+                    </div>
+                    <div className="screen-footer">
+                        Customizing your Want list makes it personal. Your partner will see your true desires, not just popular wants.
                     </div>
                 </div>
             );
@@ -3721,7 +3927,7 @@
                         <CreditsDisplay credits={credits} screen={currentScreen} />
                         <div className="screen-content">
                             <p className="text-md" style={{marginBottom: '12px'}}>
-                                Your partner has shown what matters most to them. Select 2 actions you'll focus on this week:
+                                Your partner has chosen what they would Want most. Select 2 actions you'll focus on this week:
                             </p>
 
                             <div style={{display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px'}}>
@@ -3858,14 +4064,15 @@
                                 🎯 TAKING (You do, for you):
                             </label>
                             <div style={{marginBottom: '8px'}}>
-                                <span className="text-sm">I want to hug you because I need </span>
+                                <span className="text-sm">I </span>
                                 <input
                                     className="input-field"
-                                    placeholder="comfort / reassurance"
+                                    placeholder="want / need"
                                     value={taking}
                                     onChange={(e) => setTaking(e.target.value)}
-                                    style={{display: 'inline-block', width: 'auto', minWidth: '200px', marginLeft: '4px'}}
+                                    style={{display: 'inline-block', width: 'auto', minWidth: '150px', marginLeft: '4px', marginRight: '4px'}}
                                 />
+                                <span className="text-sm"> a hug because I need comfort (Want)</span>
                             </div>
                         </div>
 
@@ -3874,14 +4081,15 @@
                                 🎁 SERVING (You do, for them):
                             </label>
                             <div style={{marginBottom: '8px'}}>
-                                <span className="text-sm">I'm willing to give you a massage because you need </span>
+                                <span className="text-sm">I'm </span>
                                 <input
                                     className="input-field"
-                                    placeholder="relaxation / care"
+                                    placeholder="willing / happy"
                                     value={serving}
                                     onChange={(e) => setServing(e.target.value)}
-                                    style={{display: 'inline-block', width: 'auto', minWidth: '200px', marginLeft: '4px'}}
+                                    style={{display: 'inline-block', width: 'auto', minWidth: '150px', marginLeft: '4px', marginRight: '4px'}}
                                 />
+                                <span className="text-sm"> to massage your shoulders, you are so stressed. (Willing)</span>
                             </div>
                         </div>
 
@@ -3890,14 +4098,15 @@
                                 🌊 ACCEPTING (They do, for you):
                             </label>
                             <div style={{marginBottom: '8px'}}>
-                                <span className="text-sm">Will you scratch my back? I need </span>
+                                <span className="text-sm">Please, </span>
                                 <input
                                     className="input-field"
-                                    placeholder="relief / attention"
+                                    placeholder="could / will"
                                     value={accepting}
                                     onChange={(e) => setAccepting(e.target.value)}
-                                    style={{display: 'inline-block', width: 'auto', minWidth: '200px', marginLeft: '4px'}}
+                                    style={{display: 'inline-block', width: 'auto', minWidth: '150px', marginLeft: '4px', marginRight: '4px'}}
                                 />
+                                <span className="text-sm"> you open the window. It's so stuffy. (Want)</span>
                             </div>
                         </div>
 
@@ -3906,15 +4115,14 @@
                                 ✨ ALLOWING (They do, for them):
                             </label>
                             <div style={{marginBottom: '8px'}}>
-                                <span className="text-sm">May I hold your hand? (I want this because I need </span>
                                 <input
                                     className="input-field"
-                                    placeholder="connection / closeness"
+                                    placeholder="May / Can"
                                     value={allowing}
                                     onChange={(e) => setAllowing(e.target.value)}
-                                    style={{display: 'inline-block', width: 'auto', minWidth: '200px', marginLeft: '4px'}}
+                                    style={{display: 'inline-block', width: 'auto', minWidth: '150px', marginRight: '4px'}}
                                 />
-                                <span className="text-sm">)</span>
+                                <span className="text-sm"> I hold your hand, I miss you. (Willing)</span>
                             </div>
                         </div>
 
@@ -4065,22 +4273,6 @@
                                     <div style={{marginBottom: '8px', fontSize: '14px'}}>{item.text}</div>
                                     <div style={{display: 'flex', gap: '8px'}}>
                                         <button
-                                            onClick={() => handleResponse(item.text, 'yes')}
-                                            style={{
-                                                flex: 1,
-                                                padding: '8px',
-                                                background: responses[item.text] === 'yes' ? '#4CAF50' : '#e0e0e0',
-                                                color: responses[item.text] === 'yes' ? 'white' : '#666',
-                                                border: 'none',
-                                                borderRadius: '6px',
-                                                cursor: 'pointer',
-                                                fontSize: '13px',
-                                                fontWeight: '500'
-                                            }}
-                                        >
-                                            Yes
-                                        </button>
-                                        <button
                                             onClick={() => handleResponse(item.text, 'no')}
                                             style={{
                                                 flex: 1,
@@ -4096,6 +4288,22 @@
                                         >
                                             No
                                         </button>
+                                        <button
+                                            onClick={() => handleResponse(item.text, 'yes')}
+                                            style={{
+                                                flex: 1,
+                                                padding: '8px',
+                                                background: responses[item.text] === 'yes' ? '#4CAF50' : '#e0e0e0',
+                                                color: responses[item.text] === 'yes' ? 'white' : '#666',
+                                                border: 'none',
+                                                borderRadius: '6px',
+                                                cursor: 'pointer',
+                                                fontSize: '13px',
+                                                fontWeight: '500'
+                                            }}
+                                        >
+                                            Yes
+                                        </button>
                                     </div>
                                 </div>
                             ))}
@@ -4108,7 +4316,7 @@
                         </div>
                     </div>
                     <div className="screen-footer">
-                        Honest "no" responses protect the relationship. Resentful "yes" responses erode it. Only say yes when you truly mean it.
+                        Honest "no" responses protect the relationship. Resentful "yes" responses erode it. Only say yes when you truly mean it. Note: "Yes" means you're willing to strive for this behavior.
                     </div>
                 </div>
             );
@@ -4313,8 +4521,23 @@
                         </div>
 
                         <div className="button-container">
-                            <button className="button" onClick={handleContinue} disabled={!sharing1 || !whyQuestion1 || !sharing2 || !whyQuestion2} style={{width: '100%'}}>
+                            <button className="button" onClick={handleContinue} style={{width: '100%'}}>
                                 Continue
+                            </button>
+                        </div>
+                        <div style={{textAlign: 'center', marginTop: '12px'}}>
+                            <button
+                                onClick={handleContinue}
+                                style={{
+                                    background: 'transparent',
+                                    border: 'none',
+                                    color: '#666',
+                                    fontSize: '14px',
+                                    cursor: 'pointer',
+                                    textDecoration: 'underline'
+                                }}
+                            >
+                                Skip - None selected
                             </button>
                         </div>
                     </div>
@@ -4591,9 +4814,14 @@
             );
         }
 
-        function Level3NonAttachedScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, myData }) {
-            // Get top 3 behaviors from Level 2 fertilize allocations (highest point values)
+        function Level3NonAttachedScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, myData, setMyData, customizedWants }) {
+            // Get top 3 behaviors from customized Want list
             const getTopBehaviors = () => {
+                // First try customized wants from Level 1
+                if (customizedWants && customizedWants.length >= 3) {
+                    return customizedWants.slice(0, 3).map(text => ({ behavior: text, yourStory: '', theirStory: '' }));
+                }
+                // Then try fertilize allocations
                 if (myData?.fertilizeAllocations && Object.keys(myData.fertilizeAllocations).length > 0) {
                     return Object.entries(myData.fertilizeAllocations)
                         .sort((a, b) => b[1] - a[1]) // Sort by points descending
@@ -4602,9 +4830,9 @@
                 }
                 // Fallback if no data
                 return [
-                    { behavior: 'Behavior 1', yourStory: '', theirStory: '' },
-                    { behavior: 'Behavior 2', yourStory: '', theirStory: '' },
-                    { behavior: 'Behavior 3', yourStory: '', theirStory: '' }
+                    { behavior: 'Listen actively without trying to fix', yourStory: '', theirStory: '' },
+                    { behavior: 'Show physical affection regularly', yourStory: '', theirStory: '' },
+                    { behavior: 'Help with household tasks unprompted', yourStory: '', theirStory: '' }
                 ];
             };
 
@@ -4625,6 +4853,16 @@
             const allFieldsFilled = behaviors.every(b => b.yourStory.trim() && b.theirStory.trim());
 
             const handleContinue = () => {
+                // Save the 3 behaviors as custom1, custom2, custom3
+                if (setMyData) {
+                    setMyData(prev => ({
+                        ...prev,
+                        custom1: behaviors[0]?.behavior || '',
+                        custom2: behaviors[1]?.behavior || '',
+                        custom3: behaviors[2]?.behavior || '',
+                        reframingStories: behaviors
+                    }));
+                }
                 awardCredits('water', 5);
                 goToNext();
             };
@@ -4638,7 +4876,7 @@
                     <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
                         <p className="text-md" style={{marginBottom: '12px', lineHeight: '1.6'}}>
-                            Below are the three behaviors you valued most. Rewrite the script with your partner as the hero making a reasonable, rational choice.
+                            These are behaviors you Wanted. Rewrite the script with your partner as the hero making a reasonable, rational choice.
                         </p>
 
                         <div style={{background: '#FFF3E0', border: '2px solid #FF9800', borderRadius: '8px', padding: '12px', marginBottom: '16px', fontSize: '13px'}}>
@@ -4647,7 +4885,7 @@
                                 <span style={{color: '#666'}}>Your story:</span> "Kitchen's a disaster after dinner. He doesn't care about my need for a clean house."
                             </div>
                             <div>
-                                <span style={{color: '#666'}}>Their story:</span> "He thinks playing outside with the kids is more important than cleaning up immediately."
+                                <span style={{color: '#666'}}>Their story:</span> "He might think playing outside with the kids is more important than cleaning up immediately."
                             </div>
                         </div>
 
@@ -4735,14 +4973,8 @@
                     <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
                         <p className="text-md" style={{marginBottom: '12px', lineHeight: '1.6'}}>
-                            List the top three things you think your partner wants/needs you to change. For each, explore what you'd lose and what you'd gain.
+                            List the top three things you think your partner wants/needs you to change. For each, explore what you'd lose and what you might gain.
                         </p>
-
-                        <div style={{background: '#E3F2FD', border: '2px solid #2196F3', borderRadius: '8px', padding: '12px', marginBottom: '16px', fontSize: '13px'}}>
-                            <a href="gains-from-trade.html" target="_blank" style={{color: '#1976D2', fontWeight: '600', textDecoration: 'none'}}>
-                                📖 Learn about Gains from Trade & Comparative Advantage →
-                            </a>
-                        </div>
 
                         {changes.map((change, index) => (
                             <div key={index} style={{marginBottom: '20px', background: '#f5f5f0', padding: '12px', borderRadius: '8px'}}>
@@ -4752,7 +4984,7 @@
 
                                 <div style={{marginBottom: '8px'}}>
                                     <label className="text-sm" style={{display: 'block', marginBottom: '4px', color: '#666'}}>
-                                        What they want me to change:
+                                        What change they are wanting:
                                     </label>
                                     <input
                                         className="input-field"
@@ -4778,7 +5010,7 @@
 
                                 <div style={{marginBottom: '8px'}}>
                                     <label className="text-sm" style={{display: 'block', marginBottom: '4px', color: '#666'}}>
-                                        What I'd gain (benefit):
+                                        What I MIGHT gain (benefit):
                                     </label>
                                     <input
                                         className="input-field"
@@ -4788,22 +5020,35 @@
                                         style={{fontSize: '14px'}}
                                     />
                                 </div>
+                            </div>
+                        ))}
 
-                                <div style={{marginTop: '12px'}}>
-                                    <p className="text-sm" style={{marginBottom: '6px', color: '#666', fontWeight: '500'}}>
-                                        Assuming these assumptions are accurate, can you have a safe conversation weighing the net costs/benefits for the whole?
+                        <div style={{background: '#E3F2FD', border: '2px solid #2196F3', borderRadius: '8px', padding: '12px', marginBottom: '16px', fontSize: '13px'}}>
+                            <a href="gains-from-trade.html" target="_blank" style={{color: '#1976D2', fontWeight: '600', textDecoration: 'none'}}>
+                                📖 Learn about Gains from Trade & Comparative Advantage →
+                            </a>
+                        </div>
+
+                        <div style={{background: '#FFF3E0', border: '2px solid #FF9800', borderRadius: '8px', padding: '16px', marginBottom: '16px'}}>
+                            <p className="text-sm" style={{marginBottom: '12px', color: '#666', fontWeight: '600'}}>
+                                Finally, assuming accurate perspective above, can we have a safe convo that weighs the net costs/benefits for our little community as a whole?
+                            </p>
+                            {changes.map((change, index) => (
+                                <div key={index} style={{marginBottom: '10px', paddingBottom: '10px', borderBottom: index < 2 ? '1px solid #e0e0e0' : 'none'}}>
+                                    <p className="text-sm" style={{marginBottom: '6px', color: '#666', fontSize: '13px'}}>
+                                        Change {index + 1}:
                                     </p>
                                     <div style={{display: 'flex', gap: '8px'}}>
                                         <button
                                             onClick={() => handleCanDiscuss(index, true)}
                                             style={{
                                                 flex: 1,
-                                                padding: '8px',
+                                                padding: '6px',
                                                 border: change.canDiscuss === true ? '2px solid #4CAF50' : '1px solid #ddd',
                                                 borderRadius: '8px',
                                                 background: change.canDiscuss === true ? '#E8F5E9' : 'white',
                                                 color: change.canDiscuss === true ? '#2E7D32' : '#666',
-                                                fontSize: '14px',
+                                                fontSize: '13px',
                                                 fontWeight: change.canDiscuss === true ? '600' : 'normal',
                                                 cursor: 'pointer'
                                             }}
@@ -4814,12 +5059,12 @@
                                             onClick={() => handleCanDiscuss(index, false)}
                                             style={{
                                                 flex: 1,
-                                                padding: '8px',
-                                                border: change.canDiscuss === false ? '2px solid #FF9800' : '1px solid #ddd',
+                                                padding: '6px',
+                                                border: change.canDiscuss === false ? '2px solid #f44336' : '1px solid #ddd',
                                                 borderRadius: '8px',
-                                                background: change.canDiscuss === false ? '#FFF3E0' : 'white',
-                                                color: change.canDiscuss === false ? '#F57C00' : '#666',
-                                                fontSize: '14px',
+                                                background: change.canDiscuss === false ? '#ffebee' : 'white',
+                                                color: change.canDiscuss === false ? '#c62828' : '#666',
+                                                fontSize: '13px',
                                                 fontWeight: change.canDiscuss === false ? '600' : 'normal',
                                                 cursor: 'pointer'
                                             }}
@@ -4828,8 +5073,8 @@
                                         </button>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
 
                         <div className="button-container">
                             <button className="button" onClick={handleContinue} disabled={!allFieldsFilled} style={{width: '100%'}}>
@@ -5119,6 +5364,7 @@
 
         function Level3ReceivingEffortsScreen({ goToNext, awardCredits, credits, currentScreen, createHeader }) {
             const [selectedReceiving, setSelectedReceiving] = React.useState('');
+            const [otherText, setOtherText] = React.useState('');
 
             const receivingOptions = [
                 {
@@ -5143,7 +5389,7 @@
                 }
             ];
 
-            const canContinue = selectedReceiving !== '';
+            const canContinue = selectedReceiving !== '' && (selectedReceiving !== 'other' || otherText.trim() !== '');
 
             const handleContinue = () => {
                 if (canContinue) {
@@ -5223,6 +5469,26 @@
                                 </div>
                             ))}
                         </div>
+
+                        {selectedReceiving === 'other' && (
+                            <div style={{marginBottom: '20px'}}>
+                                <label className="text-sm" style={{display: 'block', marginBottom: '8px', color: '#666', fontWeight: '500'}}>
+                                    Please describe your approach to receiving:
+                                </label>
+                                <textarea
+                                    className="input-field"
+                                    placeholder="Describe how you prefer to receive your partner's efforts..."
+                                    value={otherText}
+                                    onChange={(e) => setOtherText(e.target.value)}
+                                    style={{
+                                        fontSize: '14px',
+                                        minHeight: '100px',
+                                        resize: 'vertical',
+                                        fontFamily: 'inherit'
+                                    }}
+                                />
+                            </div>
+                        )}
 
                         <div className="button-container">
                             <button
