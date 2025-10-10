@@ -6,25 +6,28 @@
   <line x1="225" y1="65" x2="225" y2="385" stroke="#4CAF50" stroke-width="2"/>
   <line x1="65" y1="225" x2="385" y2="225" stroke="#4CAF50" stroke-width="2"/>
 
-  <!-- Labels positioned outside circle at clock positions -->
+  <!-- DOING - upper left quadrant -->
+  <!-- Main label outside circle at top-left -->
+  <text x="120" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2E7D32">DOING</text>
+  <!-- Subtext inside the upper-left wedge -->
+  <text x="155" y="160" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#666">(You Act)</text>
 
-  <!-- DOING at 10:30 position (upper left quadrant, outside circle) -->
-  <text x="120" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2E7D32">DOING</text>
-  <text x="120" y="118" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#666">(You Act)</text>
+  <!-- WANTING - upper right quadrant -->
+  <!-- Main label outside circle at top-right -->
+  <text x="330" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2E7D32">WANTING</text>
+  <!-- Subtext inside the upper-right wedge -->
+  <text x="295" y="160" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#666">(For You)</text>
 
-  <!-- WANTING at 2:00 position (upper right quadrant, outside circle) -->
-  <text x="340" y="140" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2E7D32">WANTING</text>
-  <text x="340" y="158" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#666">(For You)</text>
+  <!-- BEING DONE FOR - lower right quadrant -->
+  <!-- Main label outside circle at bottom-right (two lines) -->
+  <text x="330" y="405" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2E7D32">BEING DONE</text>
+  <text x="330" y="425" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2E7D32">FOR</text>
+  <!-- Subtext inside the lower-right wedge -->
+  <text x="295" y="290" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#666">(They Act)</text>
 
-  <!-- BEING DONE FOR at 5:00 position (lower right quadrant, outside circle) -->
-  <text x="320" y="340" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2E7D32">BEING DONE FOR</text>
-  <text x="320" y="358" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#666">(They Act)</text>
-
-  <!-- WILLING at 7:30 position (lower left quadrant, outside circle) -->
-  <text x="110" y="340" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2E7D32">WILLING</text>
-  <text x="110" y="358" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#666">(For Them)</text>
-
-  <!-- Center circle -->
-  <circle cx="225" cy="225" r="40" fill="white" stroke="#4CAF50" stroke-width="2"/>
-  <text x="225" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2E7D32" dy=".3em">Consent</text>
+  <!-- WILLING - lower left quadrant -->
+  <!-- Main label outside circle at bottom-left -->
+  <text x="120" y="415" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2E7D32">WILLING</text>
+  <!-- Subtext inside the lower-left wedge -->
+  <text x="155" y="290" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#666">(For Them)</text>
 </svg>
