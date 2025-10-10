@@ -1311,15 +1311,15 @@
                     // Uses ViewToggle to switch between user/partner perspectives
 
                     // Level 1 - Foundation (Paired)
-                    case 'paired-level1-screen1': // 5.1.1 Want/Willing
+                    case 'paired-level1-screen1': // 5.1.1 Bonding Basics
                         startTimeline(); // Start timeline on first paired screen
                         return (
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
                                 {!viewingPartner ? (
-                                    <Level2PairingStressScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} myData={myData} />
+                                    <Day1BondingScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={true} partnerData={partnerData} setMyData={setMyData} setPartnerData={setPartnerData} createHeader={createHeader} userName={formData.name} />
                                 ) : (
-                                    <Level2PairingStressScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} myData={partnerData} />
+                                    <Day1BondingScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} pairedMode={true} partnerData={myData} setMyData={setPartnerData} setPartnerData={setMyData} createHeader={createHeader} userName={partnerData.name} />
                                 )}
                             </div>
                         );
@@ -2453,33 +2453,35 @@
                             </>
                         )}
 
-                        <div style={{background: '#E8F5E9', border: '2px solid #4CAF50', borderRadius: '8px', padding: '16px', marginBottom: '16px', marginTop: '24px', fontSize: '13px'}}>
-                            <strong style={{color: '#2E7D32', fontSize: '14px', display: 'block', marginBottom: '10px'}}>Gottman's Top 2 Keys to Sustainable Relationships:</strong>
-                            <ul style={{marginBottom: '10px', paddingLeft: '20px', lineHeight: '1.6'}}>
-                                <li style={{marginBottom: '6px'}}><strong>Turn Toward:</strong> Respond positively to your partner's bids for connection.</li>
-                                <li><strong>5:1 Ratio:</strong> At least 5 positive-to-negative interactions.</li>
-                            </ul>
-                            <a href="four-horsemen.html" target="_blank" style={{color: '#2E7D32', fontWeight: '600', textDecoration: 'none', fontSize: '13px'}}>
-                                📖 Learn about the Four Horsemen →
-                            </a>
-                        </div>
-
-                        <div style={{background: '#FFF3E0', border: '2px solid #FF9800', borderRadius: '8px', padding: '16px', marginBottom: '20px', fontSize: '13px'}}>
-                            <strong style={{color: '#F57C00', fontSize: '14px', display: 'block', marginBottom: '8px'}}>Getting the Love You Want (Hendrix & Hunt):</strong>
-                            <p style={{marginBottom: '10px', lineHeight: '1.6', color: '#555'}}>
-                                Your partner isn't the problem—they're the messenger showing you where you still need to heal. The conflicts that seem to tear you apart are actually showing you the path to deep connection.
-                            </p>
-                            <a href="getting-the-love-you-want.html" target="_blank" style={{color: '#F57C00', fontWeight: '600', textDecoration: 'none', fontSize: '13px'}}>
-                                📖 Learn about Imago Relationship Therapy →
-                            </a>
-                        </div>
-
                         {showResult && !isWaitingForPartner && (
-                            <div className="button-container">
-                                <button className="button" onClick={handleContinue} style={{width: '100%'}}>
-                                    Continue
-                                </button>
-                            </div>
+                            <>
+                                <div style={{background: '#E8F5E9', border: '2px solid #4CAF50', borderRadius: '8px', padding: '16px', marginBottom: '16px', marginTop: '24px', fontSize: '13px'}}>
+                                    <strong style={{color: '#2E7D32', fontSize: '14px', display: 'block', marginBottom: '10px'}}>Gottman's Top 2 Keys to Sustainable Relationships:</strong>
+                                    <ul style={{marginBottom: '10px', paddingLeft: '20px', lineHeight: '1.6'}}>
+                                        <li style={{marginBottom: '6px'}}><strong>Turn Toward:</strong> Respond positively to your partner's bids for connection.</li>
+                                        <li><strong>5:1 Ratio:</strong> At least 5 positive-to-negative interactions.</li>
+                                    </ul>
+                                    <a href="four-horsemen.html" target="_blank" style={{color: '#2E7D32', fontWeight: '600', textDecoration: 'none', fontSize: '13px'}}>
+                                        📖 Learn about the Four Horsemen →
+                                    </a>
+                                </div>
+
+                                <div style={{background: '#FFF3E0', border: '2px solid #FF9800', borderRadius: '8px', padding: '16px', marginBottom: '20px', fontSize: '13px'}}>
+                                    <strong style={{color: '#F57C00', fontSize: '14px', display: 'block', marginBottom: '8px'}}>Getting the Love You Want (Hendrix & Hunt):</strong>
+                                    <p style={{marginBottom: '10px', lineHeight: '1.6', color: '#555'}}>
+                                        Your partner isn't the problem—they're the messenger showing you where you still need to heal. The conflicts that seem to tear you apart are actually showing you the path to deep connection.
+                                    </p>
+                                    <a href="getting-the-love-you-want.html" target="_blank" style={{color: '#F57C00', fontWeight: '600', textDecoration: 'none', fontSize: '13px'}}>
+                                        📖 Learn about Imago Relationship Therapy →
+                                    </a>
+                                </div>
+
+                                <div className="button-container">
+                                    <button className="button" onClick={handleContinue} style={{width: '100%'}}>
+                                        Continue
+                                    </button>
+                                </div>
+                            </>
                         )}
                     </div>
                     <div className="screen-footer">
