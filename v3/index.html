@@ -4620,6 +4620,7 @@
         // Level 2 Screen 6: Guess the Unwilling
         function Level2GuessUnwillingScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, partnerData, myData }) {
             const [selectedGuesses, setSelectedGuesses] = useState([]);
+            const [noneSelected, setNoneSelected] = useState(false);
             const [submitted, setSubmitted] = useState(false);
 
             // Get the FULL Big Branch list (all 12 items that went through fertilize in 2.1.4)
@@ -4648,10 +4649,18 @@
                 ];
 
             const toggleGuess = (item) => {
+                if (noneSelected) setNoneSelected(false);
                 if (selectedGuesses.includes(item)) {
                     setSelectedGuesses(selectedGuesses.filter(i => i !== item));
                 } else {
                     setSelectedGuesses([...selectedGuesses, item]);
+                }
+            };
+
+            const handleNoneToggle = () => {
+                setNoneSelected(!noneSelected);
+                if (!noneSelected) {
+                    setSelectedGuesses([]);
                 }
             };
 
@@ -4663,14 +4672,22 @@
                         .map(([item]) => item)
                     : [];
 
-                const correctGuesses = selectedGuesses.filter(g => partnerNoResponses.includes(g));
-                const bonusCredits = correctGuesses.length * 10;
-
-                if (bonusCredits > 0) {
-                    awardCredits('growth', bonusCredits);
-                    alert(`Correct! You identified ${correctGuesses.length} item(s) they were unwilling to do. +${bonusCredits} growth bonus!`);
+                if (noneSelected) {
+                    if (partnerNoResponses.length === 0) {
+                        alert('Correct! Your partner was willing for all of them. Amazing attunement!');
+                    } else {
+                        alert('Not quite - your partner had some items they were unwilling to do. Understanding takes time and attention.');
+                    }
                 } else {
-                    alert('Not quite, but good effort. Understanding takes time and attention.');
+                    const correctGuesses = selectedGuesses.filter(g => partnerNoResponses.includes(g));
+                    const bonusCredits = correctGuesses.length * 10;
+
+                    if (bonusCredits > 0) {
+                        awardCredits('growth', bonusCredits);
+                        alert(`Correct! You identified ${correctGuesses.length} item(s) they were unwilling to do. +${bonusCredits} growth bonus!`);
+                    } else {
+                        alert('Not quite, but good effort. Understanding takes time and attention.');
+                    }
                 }
                 setSubmitted(true);
             };
@@ -4717,12 +4734,34 @@
                                     {item.text}
                                 </div>
                             ))}
+
+                            <div
+                                onClick={() => !submitted && handleNoneToggle()}
+                                style={{
+                                    padding: '12px',
+                                    background: noneSelected ? '#E8F5E9' : '#f9f9f9',
+                                    border: noneSelected ? '2px solid #4CAF50' : '2px solid #e0e0e0',
+                                    borderRadius: '8px',
+                                    cursor: submitted ? 'default' : 'pointer',
+                                    fontSize: '14px',
+                                    fontWeight: '600',
+                                    marginTop: '8px'
+                                }}
+                            >
+                                <input
+                                    type="checkbox"
+                                    checked={noneSelected}
+                                    readOnly
+                                    style={{marginRight: '10px'}}
+                                />
+                                NONE - They were willing for all of them
+                            </div>
                         </div>
 
                         {!submitted ? (
                             <div className="button-container">
-                                <button className="button" onClick={handleSubmit} disabled={selectedGuesses.length === 0} style={{width: '100%'}}>
-                                    Submit Guess ({selectedGuesses.length} selected)
+                                <button className="button" onClick={handleSubmit} style={{width: '100%'}}>
+                                    Submit Guess ({noneSelected ? 'NONE' : `${selectedGuesses.length} selected`})
                                 </button>
                             </div>
                         ) : (
