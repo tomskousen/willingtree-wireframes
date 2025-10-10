@@ -4393,59 +4393,56 @@
 
         // Level 2 Screen 4: Personalize Wants
         function Level2PersonalizeWantsScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, setMyData, myData, canCustomizeWants, customizedWants, setCustomizedWants }) {
-            const [selectedWants, setSelectedWants] = useState([]);
-            const [whys, setWhys] = useState({});
+            const [researchQuestions, setResearchQuestions] = useState({});
+            const [selectedForWilling, setSelectedForWilling] = useState([]);
 
-            // Get the items the user said "yes" to in 2.2.3
-            const binaryResponses = myData?.binaryResponses || {};
-            const yesItems = Object.entries(binaryResponses)
-                .filter(([item, response]) => response === 'yes')
-                .map(([item]) => item);
-
-            const wantsList = yesItems.length > 0
-                ? yesItems
-                : [
-                    'More quality time together',
-                    'Better communication about feelings',
-                    'More physical affection',
-                    'Help with household responsibilities',
-                    'Support for my goals and dreams'
+            // Get the 6 items from the weighted lottery (from partner's fertilize allocations)
+            // This simulates what the partner received from the slot machine
+            const getLotteryItems = () => {
+                if (myData?.fertilizeAllocations && Object.keys(myData.fertilizeAllocations).length > 0) {
+                    return Object.entries(myData.fertilizeAllocations)
+                        .sort((a, b) => b[1] - a[1])
+                        .slice(0, 6)
+                        .map(([text]) => text);
+                }
+                return [
+                    'Listen actively without trying to fix',
+                    'Show physical affection regularly',
+                    'Help with household tasks unprompted',
+                    'Communicate feelings openly',
+                    'Show appreciation verbally',
+                    'Be emotionally present'
                 ];
+            };
 
-            const maxSelections = Math.floor(wantsList.length / 2);
+            const lotteryItems = getLotteryItems();
 
-            const toggleWant = (want) => {
-                if (selectedWants.includes(want)) {
-                    setSelectedWants(selectedWants.filter(w => w !== want));
-                    const newWhys = {...whys};
-                    delete newWhys[want];
-                    setWhys(newWhys);
-                } else if (selectedWants.length < maxSelections) {
-                    setSelectedWants([...selectedWants, want]);
+            const handleResearchChange = (item, value) => {
+                setResearchQuestions(prev => ({ ...prev, [item]: value }));
+            };
+
+            const toggleWillingSelection = (item) => {
+                if (selectedForWilling.includes(item)) {
+                    setSelectedForWilling(selectedForWilling.filter(i => i !== item));
+                } else if (selectedForWilling.length < 2) {
+                    setSelectedForWilling([...selectedForWilling, item]);
                 }
             };
 
-            const handleWhyChange = (want, value) => {
-                setWhys(prev => ({ ...prev, [want]: value }));
-            };
+            const researchedCount = Object.keys(researchQuestions).filter(k => researchQuestions[k]?.trim()).length;
+            const canContinue = researchedCount >= 4 && selectedForWilling.length === 2;
 
             const handleContinue = () => {
-                const wantsWithWhys = selectedWants.map(want => ({
-                    text: want,
-                    why: whys[want] || ''
-                }));
                 if (setMyData) {
-                    setMyData(prev => ({ ...prev, personalizedWants: wantsWithWhys }));
-                }
-                // Save to customizedWants if user has unlocked customization
-                if (canCustomizeWants && setCustomizedWants) {
-                    setCustomizedWants(wantsWithWhys);
+                    setMyData(prev => ({
+                        ...prev,
+                        curiousResearch: researchQuestions,
+                        willingCommitments: selectedForWilling
+                    }));
                 }
                 awardCredits('growth', 1);
                 goToNext();
             };
-
-            const allWhysProvided = selectedWants.every(want => whys[want]?.trim());
 
             return (
                 <div className="screen">
@@ -4455,57 +4452,87 @@
                     )}
                     <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
-                        <p className="text-md" style={{marginBottom: '8px'}}>
-                            For the ones you're willing to do, try and articulate WHY each matters to you:
+                        <p className="text-md" style={{marginBottom: '12px'}}>
+                            Your partner's top 6 items from the lottery are shown below. Before choosing which 2 you'll commit to, research at least 4 of them by asking your partner:
                         </p>
                         <p className="text-sm" style={{marginBottom: '16px', color: '#666', fontStyle: 'italic'}}>
-                            For example: You want them to pick up their socks. Dirty socks on the floor means what to you? We are slobs? No self-respect? What is the story your brain tells if the want goes unfulfilled?
+                            "If I did _____ (picked up my socks, for example), what would it mean to you? Why is that, do you think? Help me understand why it matters?"
                         </p>
 
-                        <div style={{display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '16px'}}>
-                            {wantsList.map((want, index) => (
-                                <div key={index}>
-                                    <div
-                                        onClick={() => toggleWant(want)}
-                                        style={{
-                                            padding: '12px',
-                                            background: selectedWants.includes(want) ? '#E8F5E9' : '#f9f9f9',
-                                            border: selectedWants.includes(want) ? '2px solid #4CAF50' : '2px solid #e0e0e0',
-                                            borderRadius: '8px',
-                                            cursor: 'pointer',
+                        <div style={{display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '20px'}}>
+                            {lotteryItems.map((item, index) => (
+                                <div key={index} style={{
+                                    background: '#f5f5f0',
+                                    padding: '12px',
+                                    borderRadius: '8px',
+                                    border: '2px solid #e0e0e0'
+                                }}>
+                                    <div style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        marginBottom: '8px'
+                                    }}>
+                                        <div style={{
+                                            flex: 1,
                                             fontSize: '14px',
-                                            marginBottom: selectedWants.includes(want) ? '8px' : '0'
-                                        }}
-                                    >
-                                        <input
-                                            type="checkbox"
-                                            checked={selectedWants.includes(want)}
-                                            readOnly
-                                            style={{marginRight: '10px'}}
-                                        />
-                                        {want}
+                                            fontWeight: '600',
+                                            color: '#2E7D32'
+                                        }}>
+                                            {index + 1}. {item}
+                                        </div>
+                                        <div
+                                            onClick={() => toggleWillingSelection(item)}
+                                            style={{
+                                                padding: '6px 12px',
+                                                background: selectedForWilling.includes(item) ? '#4CAF50' : '#e0e0e0',
+                                                color: selectedForWilling.includes(item) ? 'white' : '#666',
+                                                borderRadius: '6px',
+                                                cursor: 'pointer',
+                                                fontSize: '12px',
+                                                fontWeight: '600',
+                                                whiteSpace: 'nowrap'
+                                            }}
+                                        >
+                                            {selectedForWilling.includes(item) ? '✓ Willing' : 'Select'}
+                                        </div>
                                     </div>
-                                    {selectedWants.includes(want) && (
-                                        <input
-                                            className="input-field"
-                                            placeholder="Why does this matter to you?"
-                                            value={whys[want] || ''}
-                                            onChange={(e) => handleWhyChange(want, e.target.value)}
-                                            style={{marginBottom: '12px'}}
-                                        />
-                                    )}
+                                    <textarea
+                                        className="input-field"
+                                        placeholder="Ask: If I did this, what would it mean to you? Why does it matter?"
+                                        value={researchQuestions[item] || ''}
+                                        onChange={(e) => handleResearchChange(item, e.target.value)}
+                                        style={{
+                                            fontSize: '13px',
+                                            minHeight: '60px',
+                                            resize: 'vertical',
+                                            fontFamily: 'inherit'
+                                        }}
+                                    />
                                 </div>
                             ))}
                         </div>
 
+                        <div style={{
+                            background: '#E8F5E9',
+                            padding: '12px',
+                            borderRadius: '8px',
+                            marginBottom: '16px',
+                            border: '2px solid #4CAF50',
+                            textAlign: 'center'
+                        }}>
+                            <div style={{fontSize: '14px', color: '#2E7D32'}}>
+                                <strong>Research:</strong> {researchedCount}/4 required | <strong>Willing:</strong> {selectedForWilling.length}/2 selected
+                            </div>
+                        </div>
+
                         <div className="button-container">
-                            <button className="button" onClick={handleContinue} disabled={selectedWants.length === 0 || !allWhysProvided} style={{width: '100%'}}>
-                                Continue ({selectedWants.length}/{maxSelections} selected)
+                            <button className="button" onClick={handleContinue} disabled={!canContinue} style={{width: '100%'}}>
+                                Continue
                             </button>
                         </div>
                     </div>
                     <div className="screen-footer">
-                        The "why" behind your "what" helps your partner understand what you truly need, not just what you want.
+                        Curious research transforms behaviors from chores into meaningful acts of love. Understanding the "why" behind what matters to them changes everything.
                     </div>
                 </div>
             );
