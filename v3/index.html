@@ -2459,7 +2459,29 @@
                                                     {comparisonResult.type === 'different' && '💬 Different Perspectives'}
                                                 </div>
                                                 <div style={{fontSize: '13px', lineHeight: '1.5'}}>
-                                                    {comparisonResult.message}
+                                                    {comparisonResult.type === 'different' && comparisonResult.differences ? (
+                                                        <>
+                                                            Your perspectives differ: You chose{' '}
+                                                            <a
+                                                                href={`bond-types.html?pairing=${comparisonResult.differences.yours.self.toLowerCase()}-${comparisonResult.differences.yours.partner.toLowerCase()}`}
+                                                                target="_blank"
+                                                                style={{color: '#4CAF50', fontWeight: '600', textDecoration: 'underline'}}
+                                                            >
+                                                                {comparisonResult.differences.yours.self}-{comparisonResult.differences.yours.partner}
+                                                            </a>
+                                                            , while your partner chose{' '}
+                                                            <a
+                                                                href={`bond-types.html?pairing=${comparisonResult.differences.theirs.self.toLowerCase()}-${comparisonResult.differences.theirs.partner.toLowerCase()}`}
+                                                                target="_blank"
+                                                                style={{color: '#4CAF50', fontWeight: '600', textDecoration: 'underline'}}
+                                                            >
+                                                                {comparisonResult.differences.theirs.self}-{comparisonResult.differences.theirs.partner}
+                                                            </a>
+                                                            . This is a great opportunity to discuss what each of you is perceiving about your relationship dynamic.
+                                                        </>
+                                                    ) : (
+                                                        comparisonResult.message
+                                                    )}
                                                 </div>
                                                 {comparisonResult.differences && (
                                                     <div style={{marginTop: '12px', fontSize: '12px'}}>
