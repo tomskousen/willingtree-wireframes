@@ -1324,74 +1324,74 @@
                             </div>
                         );
 
-                    case 'paired-level1-screen2': // 5.1.2 Active Appreciation
+                    case 'paired-level1-screen2': // 5.1.2 Preparing Soil
                         return (
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
                                 {!viewingPartner ? (
-                                    <Level2ActiveAppreciationScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />
+                                    <Day2TreeMetaphorScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />
                                 ) : (
-                                    <Level2ActiveAppreciationScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} />
+                                    <Day2TreeMetaphorScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} />
                                 )}
                             </div>
                         );
 
-                    case 'paired-level1-screen3': // 5.1.3 Binary Willing
+                    case 'paired-level1-screen3': // 5.1.3 Budding/Pollinate
                         return (
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
                                 {!viewingPartner ? (
-                                    <Level2BinaryWillingScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} myData={myData} canCustomizeWants={canCustomizeWants} />
+                                    <Level1BuddingPollinateScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={true} setMyData={setMyData} userGender={formData.gender} createHeader={createHeader} />
                                 ) : (
-                                    <Level2BinaryWillingScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} myData={partnerData} canCustomizeWants={canCustomizeWants} />
+                                    <Level1BuddingPollinateScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} pairedMode={true} setMyData={setPartnerData} userGender={partnerData.gender} createHeader={createHeader} />
                                 )}
                             </div>
                         );
 
-                    case 'paired-level1-screen4': // 5.1.4 Personalize Wants
+                    case 'paired-level1-screen4': // 5.1.4 Fertilize
                         return (
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
                                 {!viewingPartner ? (
-                                    <Level2PersonalizeWantsScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} myData={myData} setMyData={setMyData} canCustomizeWants={canCustomizeWants} customizedWants={customizedWants} setCustomizedWants={setCustomizedWants} />
+                                    <Day6SmallBranchesScreen setScreen={setCurrentScreen} goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={true} partnerData={partnerData} setMyData={setMyData} setPartnerData={setPartnerData} />
                                 ) : (
-                                    <Level2PersonalizeWantsScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} myData={partnerData} setMyData={setPartnerData} canCustomizeWants={canCustomizeWants} customizedWants={partnerData.customizedWants} setCustomizedWants={(fn) => setPartnerData(prev => ({...prev, customizedWants: fn}))} />
+                                    <Day6SmallBranchesScreen setScreen={setCurrentScreen} goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} pairedMode={true} partnerData={myData} setMyData={setPartnerData} setPartnerData={setMyData} />
                                 )}
                             </div>
                         );
 
-                    case 'paired-level1-screen5': // 5.1.5 Discover Why
+                    case 'paired-level1-screen5': // 5.1.5 Watering Branch
                         return (
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
                                 {!viewingPartner ? (
-                                    <Level2DiscoverWhyScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />
+                                    <Level1WateringBranchScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={true} setMyData={setMyData} createHeader={createHeader} />
                                 ) : (
-                                    <Level2DiscoverWhyScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} />
+                                    <Level1WateringBranchScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} pairedMode={true} setMyData={setPartnerData} createHeader={createHeader} />
                                 )}
                             </div>
                         );
 
-                    case 'paired-level1-screen6': // 5.1.6 Guess Unwilling
+                    case 'paired-level1-screen6': // 5.1.6 Good Fruits
                         return (
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
                                 {!viewingPartner ? (
-                                    <Level2GuessUnwillingScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} myData={myData} partnerData={partnerData} setPartnerData={setPartnerData} />
+                                    <Day9GuessRevealScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={true} partnerData={partnerData} setPartnerData={setPartnerData} createHeader={createHeader} />
                                 ) : (
-                                    <Level2GuessUnwillingScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} myData={partnerData} partnerData={myData} setPartnerData={setMyData} />
+                                    <Day9GuessRevealScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} pairedMode={true} partnerData={myData} setPartnerData={setMyData} createHeader={createHeader} />
                                 )}
                             </div>
                         );
 
-                    case 'paired-level1-screen7': // 5.1.7 Harvest
+                    case 'paired-level1-screen7': // 5.1.7 Customize Wants
                         return (
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
                                 {!viewingPartner ? (
-                                    <HarvestScreen goToNext={() => setCurrentScreen('5.2.1')} credits={credits} setCredits={setCredits} cycleCount={cycleCount} setCycleCount={setCycleCount} pairedMode={true} setPairedMode={setPairedMode} createHeader={createHeader} canCustomizeWants={canCustomizeWants} setCanCustomizeWants={setCanCustomizeWants} />
+                                    <Level1CustomizeWantsScreen goToNext={() => setCurrentScreen('5.2.1')} awardCredits={awardCredits} credits={credits} setCredits={setCredits} customizedWants={customizedWants} setCustomizedWants={setCustomizedWants} createHeader={createHeader} currentScreen={currentScreen} />
                                 ) : (
-                                    <HarvestScreen goToNext={() => setCurrentScreen('5.2.1')} credits={partnerData.credits} setCredits={(fn) => setPartnerData(prev => ({...prev, credits: fn(prev.credits)}))} cycleCount={cycleCount} setCycleCount={setCycleCount} pairedMode={true} setPairedMode={setPairedMode} createHeader={createHeader} canCustomizeWants={partnerData.canCustomizeWants} setCanCustomizeWants={(val) => setPartnerData(prev => ({...prev, canCustomizeWants: val}))} />
+                                    <Level1CustomizeWantsScreen goToNext={() => setCurrentScreen('5.2.1')} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} setCredits={(fn) => setPartnerData(prev => ({...prev, credits: fn(prev.credits)}))} customizedWants={partnerData.customizedWants || customizedWants} setCustomizedWants={(val) => setPartnerData(prev => ({...prev, customizedWants: val}))} createHeader={createHeader} currentScreen={currentScreen} />
                                 )}
                             </div>
                         );
