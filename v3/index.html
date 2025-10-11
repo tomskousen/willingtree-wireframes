@@ -2228,6 +2228,9 @@
             const [showPartnerQuestion, setShowPartnerQuestion] = useState(false);
             const [showResult, setShowResult] = useState(false);
             const [comparisonResult, setComparisonResult] = useState(null);
+            const [soilCreditsEarned, setSoilCreditsEarned] = useState(0);
+            const [gottmanLinkClicked, setGottmanLinkClicked] = useState(false);
+            const [imagoLinkClicked, setImagoLinkClicked] = useState(false);
 
             const styles = [
                 { icon: 'stone', name: 'Stone', trait: 'Steady' },
@@ -2243,6 +2246,12 @@
 
             const handlePartnerSelection = (style) => {
                 setPartnerStyle(style);
+
+                // Award 1 soil credit for completing selection
+                if (soilCreditsEarned === 0) {
+                    awardCredits('soil', 1);
+                    setSoilCreditsEarned(1);
+                }
 
                 // Save selections for partner to see (in paired mode)
                 if (pairedMode && setMyData) {
@@ -2260,6 +2269,18 @@
                 // In paired mode, check if partner has also completed
                 if (pairedMode && partnerData?.bondSelections) {
                     compareSelections(userStyle, style, partnerData.bondSelections);
+                }
+            };
+
+            const handleLinkClick = (linkType) => {
+                if (linkType === 'gottman' && !gottmanLinkClicked) {
+                    setGottmanLinkClicked(true);
+                    awardCredits('soil', 1);
+                    setSoilCreditsEarned(prev => prev + 1);
+                } else if (linkType === 'imago' && !imagoLinkClicked) {
+                    setImagoLinkClicked(true);
+                    awardCredits('soil', 1);
+                    setSoilCreditsEarned(prev => prev + 1);
                 }
             };
 
@@ -2297,9 +2318,6 @@
             };
 
             const handleContinue = () => {
-                // Award 1 growth credit (10 sun + 5 water equivalent combined)
-                awardCredits('sun', 10);
-                awardCredits('water', 5);
                 // Navigate to next screen (2.1.2 or 5.1.2 based on current series)
                 goToNext('1.2');
             };
@@ -2310,12 +2328,12 @@
             return (
                 <div className="screen">
                     <div className="day-badge">Lvl 1 - 1</div>
-                    {createHeader ? createHeader('Gardening Basics', null, userName) : (
+                    {createHeader ? createHeader('Preparing Good Soil', null, userName) : (
                         <div className="header">
-                            <h2>Gardening Basics</h2>
+                            <h2>Preparing Good Soil</h2>
                         </div>
                     )}
-                    <CreditsDisplay credits={credits} screen={currentScreen} />
+                    <CreditsDisplay credits={credits} screen={currentScreen} earnedThisScreen={soilCreditsEarned} />
                     <div className="screen-content">
                         {!showPartnerQuestion && (
                             <>
@@ -2401,24 +2419,46 @@
                                             partnerName={partnerData?.name}
                                         />
 
-                                        <div style={{background: '#E8F5E9', border: '2px solid #4CAF50', borderRadius: '8px', padding: '16px', marginBottom: '16px', marginTop: '16px', fontSize: '13px'}}>
+                                        <div style={{background: 'linear-gradient(135deg, #E8F5E9 0%, #FFF3E0 100%)', border: '2px solid #4CAF50', borderRadius: '8px', padding: '16px', marginBottom: '16px', marginTop: '16px', fontSize: '13px'}}>
                                             <strong style={{color: '#2E7D32', fontSize: '14px', display: 'block', marginBottom: '10px'}}>Gottman's Top 2 Keys to Sustainable Relationships:</strong>
                                             <ul style={{marginBottom: '10px', paddingLeft: '20px', lineHeight: '1.6'}}>
                                                 <li style={{marginBottom: '6px'}}><strong>Turn Toward:</strong> Respond positively to your partner's bids for connection.</li>
                                                 <li><strong>5:1 Ratio:</strong> At least 5 positive-to-negative interactions.</li>
                                             </ul>
-                                            <a href="four-horsemen.html" target="_blank" style={{color: '#2E7D32', fontWeight: '600', textDecoration: 'none', fontSize: '13px'}}>
-                                                📖 Learn about the Four Horsemen →
+                                            <a
+                                                href="four-horsemen.html"
+                                                target="_blank"
+                                                onClick={() => handleLinkClick('gottman')}
+                                                style={{
+                                                    color: '#2E7D32',
+                                                    fontWeight: '600',
+                                                    textDecoration: 'none',
+                                                    fontSize: '13px',
+                                                    opacity: gottmanLinkClicked ? 0.6 : 1
+                                                }}
+                                            >
+                                                📖 Learn about the Four Horsemen →{gottmanLinkClicked && ' ✓'}
                                             </a>
                                         </div>
 
-                                        <div style={{background: '#FFF3E0', border: '2px solid #FF9800', borderRadius: '8px', padding: '16px', marginBottom: '20px', fontSize: '13px'}}>
+                                        <div style={{background: 'linear-gradient(135deg, #FFF3E0 0%, #E8F5E9 100%)', border: '2px solid #FF9800', borderRadius: '8px', padding: '16px', marginBottom: '20px', fontSize: '13px'}}>
                                             <strong style={{color: '#F57C00', fontSize: '14px', display: 'block', marginBottom: '8px'}}>Getting the Love You Want (Hendrix & Hunt):</strong>
                                             <p style={{marginBottom: '10px', lineHeight: '1.6', color: '#555'}}>
                                                 Your partner isn't the problem—they're the messenger showing you where you still need to heal. The conflicts that seem to tear you apart are actually showing you the path to deep connection.
                                             </p>
-                                            <a href="getting-the-love-you-want.html" target="_blank" style={{color: '#F57C00', fontWeight: '600', textDecoration: 'none', fontSize: '13px'}}>
-                                                📖 Learn about Imago Relationship Therapy →
+                                            <a
+                                                href="getting-the-love-you-want.html"
+                                                target="_blank"
+                                                onClick={() => handleLinkClick('imago')}
+                                                style={{
+                                                    color: '#F57C00',
+                                                    fontWeight: '600',
+                                                    textDecoration: 'none',
+                                                    fontSize: '13px',
+                                                    opacity: imagoLinkClicked ? 0.6 : 1
+                                                }}
+                                            >
+                                                📖 Learn about Imago Relationship Therapy →{imagoLinkClicked && ' ✓'}
                                             </a>
                                         </div>
                                     </>
@@ -2507,24 +2547,46 @@
                                     </button>
                                 </div>
 
-                                <div style={{background: '#E8F5E9', border: '2px solid #4CAF50', borderRadius: '8px', padding: '16px', marginBottom: '16px', fontSize: '13px'}}>
+                                <div style={{background: 'linear-gradient(135deg, #E8F5E9 0%, #FFF3E0 100%)', border: '2px solid #4CAF50', borderRadius: '8px', padding: '16px', marginBottom: '16px', fontSize: '13px'}}>
                                     <strong style={{color: '#2E7D32', fontSize: '14px', display: 'block', marginBottom: '10px'}}>Gottman's Top 2 Keys to Sustainable Relationships:</strong>
                                     <ul style={{marginBottom: '10px', paddingLeft: '20px', lineHeight: '1.6'}}>
                                         <li style={{marginBottom: '6px'}}><strong>Turn Toward:</strong> Respond positively to your partner's bids for connection.</li>
                                         <li><strong>5:1 Ratio:</strong> At least 5 positive-to-negative interactions.</li>
                                     </ul>
-                                    <a href="four-horsemen.html" target="_blank" style={{color: '#2E7D32', fontWeight: '600', textDecoration: 'none', fontSize: '13px'}}>
-                                        📖 Learn about the Four Horsemen →
+                                    <a
+                                        href="four-horsemen.html"
+                                        target="_blank"
+                                        onClick={() => handleLinkClick('gottman')}
+                                        style={{
+                                            color: '#2E7D32',
+                                            fontWeight: '600',
+                                            textDecoration: 'none',
+                                            fontSize: '13px',
+                                            opacity: gottmanLinkClicked ? 0.6 : 1
+                                        }}
+                                    >
+                                        📖 Learn about the Four Horsemen →{gottmanLinkClicked && ' ✓'}
                                     </a>
                                 </div>
 
-                                <div style={{background: '#E8F5E9', border: '2px solid #4CAF50', borderRadius: '8px', padding: '16px', marginBottom: '20px', fontSize: '13px'}}>
-                                    <strong style={{color: '#2E7D32', fontSize: '14px', display: 'block', marginBottom: '8px'}}>Getting the Love You Want (Hendrix & Hunt):</strong>
+                                <div style={{background: 'linear-gradient(135deg, #FFF3E0 0%, #E8F5E9 100%)', border: '2px solid #FF9800', borderRadius: '8px', padding: '16px', marginBottom: '20px', fontSize: '13px'}}>
+                                    <strong style={{color: '#F57C00', fontSize: '14px', display: 'block', marginBottom: '8px'}}>Getting the Love You Want (Hendrix & Hunt):</strong>
                                     <p style={{marginBottom: '10px', lineHeight: '1.6', color: '#555'}}>
                                         Your partner isn't the problem—they're the messenger showing you where you still need to heal. The conflicts that seem to tear you apart are actually showing you the path to deep connection.
                                     </p>
-                                    <a href="getting-the-love-you-want.html" target="_blank" style={{color: '#2E7D32', fontWeight: '600', textDecoration: 'none', fontSize: '13px'}}>
-                                        📖 Learn about Imago Relationship Therapy →
+                                    <a
+                                        href="getting-the-love-you-want.html"
+                                        target="_blank"
+                                        onClick={() => handleLinkClick('imago')}
+                                        style={{
+                                            color: '#F57C00',
+                                            fontWeight: '600',
+                                            textDecoration: 'none',
+                                            fontSize: '13px',
+                                            opacity: imagoLinkClicked ? 0.6 : 1
+                                        }}
+                                    >
+                                        📖 Learn about Imago Relationship Therapy →{imagoLinkClicked && ' ✓'}
                                     </a>
                                 </div>
                             </>
@@ -2537,24 +2599,28 @@
             );
         }
 
-        // Screen 2.2: Day 2 - Preparing Good Soil
+        // Screen 2.1.2: A Little Sunshine
         function Day2TreeMetaphorScreen({ setScreen, goToNext, awardCredits, credits, currentScreen, createHeader }) {
             const [item1, setItem1] = useState('');
             const [item2, setItem2] = useState('');
             const [item3, setItem3] = useState('');
             const [item4, setItem4] = useState('');
             const [item5, setItem5] = useState('');
+            const [sunCreditsEarned, setSunCreditsEarned] = useState(0);
+
+            // Track sun credits as items are filled
+            React.useEffect(() => {
+                const newCount = [item1, item2, item3, item4, item5].filter(i => i).length;
+                if (newCount > sunCreditsEarned) {
+                    const diff = newCount - sunCreditsEarned;
+                    awardCredits('sun', diff);
+                    setSunCreditsEarned(newCount);
+                }
+            }, [item1, item2, item3, item4, item5]);
 
             const handleContinue = () => {
-                // Award 1 sun for each filled text box (up to 5)
-                let sunCredits = 0;
-                if (item1) sunCredits++;
-                if (item2) sunCredits++;
-                if (item3) sunCredits++;
-                if (item4) sunCredits++;
-                if (item5) sunCredits++;
-
-                awardCredits('sun', sunCredits);
+                // Award 1 water credit for choosing to work on Me/Us path
+                awardCredits('water', 1);
                 if (goToNext) {
                     goToNext('1.3');
                 } else if (setScreen) {
@@ -2567,10 +2633,10 @@
             return (
                 <div className="screen">
                     <div className="day-badge">Lvl 1 - 2</div>
-                    {createHeader ? createHeader('Preparing Good Soil') : (
-                        <div className="header"><h2>Preparing Good Soil</h2></div>
+                    {createHeader ? createHeader('A Little Sunshine') : (
+                        <div className="header"><h2>A Little Sunshine</h2></div>
                     )}
-                    <CreditsDisplay credits={credits} screen={currentScreen} />
+                    <CreditsDisplay credits={credits} screen={currentScreen} earnedThisScreen={sunCreditsEarned} />
                     <div className="screen-content">
                         <p className="text-md" style={{marginBottom: '16px'}}>
                             List things you noticed your partner doing this week:
