@@ -834,27 +834,27 @@
         }
 
         // Credits Display Component (shows below header - right justified)
-        function CreditsDisplay({ credits, screen }) {
-            // Determine which credit to show based on screen
-            const getScreenCredit = (screenCode) => {
-                // Growth screens: 2.1, 2.4, 2.6
-                if (['2.1', '2.4', '2.6'].includes(screenCode)) {
-                    return { icon: '🌱', value: credits.growth };
-                }
-                // Sun screens: 2.2, 2.5, 2.9
-                if (['2.2', '2.5', '2.9'].includes(screenCode)) {
-                    return { icon: '☀️', value: credits.sun };
-                }
-                // Water screens: 2.3, 2.7, 2.8
-                if (['2.3', '2.7', '2.8'].includes(screenCode)) {
-                    return { icon: '💧', value: credits.water };
-                }
-                // Default: don't show on non-Day screens
-                return null;
+        function CreditsDisplay({ credits, screen, earnedThisScreen = 0 }) {
+            // Map screens to their credit type and max available
+            const screenCredits = {
+                '1.2': { type: 'water', icon: '💧', max: 1 },
+                '2.1.1': { type: 'soil', icon: '🌱', max: 3 },
+                '2.1.2': { type: 'sun', icon: '☀️', max: 5 },
+                '2.1.3': { type: 'water', icon: '💧', max: 3 }, // 1 for path + 2 for willing
+                '2.1.4': { type: 'sun', icon: '☀️', max: 20 }, // 1 per rating, 20 items
+                '2.1.5': { type: 'water', icon: '💧', max: 1 },
+                '2.1.6': { type: 'water', icon: '💧', max: 1 },
+                '2.1.7': { type: 'water', icon: '💧', max: 1 },
+                // Paired mode screens
+                '5.1.1': { type: 'soil', icon: '🌱', max: 3 },
+                '5.1.2': { type: 'sun', icon: '☀️', max: 5 },
+                '5.1.3': { type: 'water', icon: '💧', max: 3 },
+                '5.1.4': { type: 'sun', icon: '☀️', max: 20 },
+                // Add more as needed
             };
 
-            const credit = getScreenCredit(screen);
-            if (!credit) return null;
+            const screenInfo = screenCredits[screen];
+            if (!screenInfo) return null;
 
             return (
                 <div style={{
@@ -871,8 +871,10 @@
                         fontSize: '18px',
                         fontWeight: '600'
                     }}>
-                        <span>{credit.icon}</span>
-                        <span style={{color: '#333'}}>{credit.value}</span>
+                        <span>{screenInfo.icon}</span>
+                        <span style={{color: '#4CAF50'}}>{earnedThisScreen}</span>
+                        <span style={{color: '#999'}}>/</span>
+                        <span style={{color: '#333'}}>{screenInfo.max}</span>
                     </div>
                 </div>
             );
@@ -962,6 +964,7 @@
             const [credits, setCredits] = useState({
                 sun: 0,
                 water: 0,
+                soil: 0,
                 growth: 0
             });
             const [cycleCount, setCycleCount] = useState(0);
