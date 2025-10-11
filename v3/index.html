@@ -4933,10 +4933,16 @@
 
         // ===== LEVEL 3 PLACEHOLDER SCREENS =====
 
-        function Level3ArticulateWantsScreen({ goToNext, awardCredits, credits, currentScreen, createHeader }) {
+        function Level3ArticulateWantsScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, setMyData }) {
             const [selectedModel, setSelectedModel] = useState('');
 
             const handleContinue = () => {
+                if (setMyData) {
+                    setMyData(prev => ({
+                        ...prev,
+                        relationshipModel: selectedModel
+                    }));
+                }
                 awardCredits('sun', 5);
                 goToNext();
             };
