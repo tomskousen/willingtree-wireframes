@@ -564,6 +564,46 @@
             );
         }
 
+        // Holding Screen Component - shows when partner has nothing to do yet
+        function HoldingScreen({ createHeader }) {
+            return (
+                <div className="screen">
+                    {createHeader ? createHeader('Holding') : (
+                        <div className="header">
+                            <h2>Holding</h2>
+                        </div>
+                    )}
+                    <div className="content" style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        minHeight: '400px',
+                        textAlign: 'center',
+                        padding: '40px 20px',
+                        color: '#666'
+                    }}>
+                        <div style={{
+                            fontSize: '48px',
+                            marginBottom: '20px'
+                        }}>
+                            ⏳
+                        </div>
+                        <h3 style={{ color: '#333', marginBottom: '12px' }}>Nothing to do here yet</h3>
+                        <p style={{ fontSize: '14px', lineHeight: '1.6', maxWidth: '400px' }}>
+                            Your partner is working on their individual journey. There's no action needed from you at this stage.
+                        </p>
+                        <p style={{ fontSize: '13px', marginTop: '20px', color: '#999' }}>
+                            Switch back to your view using the toggle above to continue your work.
+                        </p>
+                    </div>
+                    <div className="footer">
+                        <p>This is a placeholder screen while your partner completes their individual work.</p>
+                    </div>
+                </div>
+            );
+        }
+
         // Waiting for Partner Component
         function WaitingForPartner({ message, partnerName, onContinue }) {
             return (
@@ -1246,51 +1286,240 @@
                     // Step 2: Individual Journey - Level 1 (Foundation)
                     case 'level1-tree-choice':
                         startTimeline(); // Start timeline on first individual screen
-                        return <Day1BondingScreen goToNext={() => setCurrentScreen('2.1.2')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} partnerData={null} setMyData={setMyData} setPartnerData={setPartnerData} createHeader={createHeader} />;
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
+                                {!viewingPartner ? (
+                                    <Day1BondingScreen goToNext={() => setCurrentScreen('2.1.2')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} partnerData={null} setMyData={setMyData} setPartnerData={setPartnerData} createHeader={createHeader} />
+                                ) : (
+                                    <HoldingScreen createHeader={createHeader} />
+                                )}
+                            </div>
+                        );
                     case 'level1-preparing-soil':
-                        return <Day2TreeMetaphorScreen goToNext={() => setCurrentScreen('2.1.3')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />;
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
+                                {!viewingPartner ? (
+                                    <Day2TreeMetaphorScreen goToNext={() => setCurrentScreen('2.1.3')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />
+                                ) : (
+                                    <HoldingScreen createHeader={createHeader} />
+                                )}
+                            </div>
+                        );
                     case 'level1-budding-pollinate':
-                        return <Level1BuddingPollinateScreen goToNext={() => setCurrentScreen('2.1.4')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} setMyData={setMyData} userGender={formData.gender} createHeader={createHeader} />;
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
+                                {!viewingPartner ? (
+                                    <Level1BuddingPollinateScreen goToNext={() => setCurrentScreen('2.1.4')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} setMyData={setMyData} userGender={formData.gender} createHeader={createHeader} />
+                                ) : (
+                                    <HoldingScreen createHeader={createHeader} />
+                                )}
+                            </div>
+                        );
                     case 'level1-fertilize':
-                        return <Day6SmallBranchesScreen setScreen={setCurrentScreen} goToNext={() => setCurrentScreen('2.1.5')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} partnerData={null} setMyData={setMyData} setPartnerData={setPartnerData} createHeader={createHeader} />;
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
+                                {!viewingPartner ? (
+                                    <Day6SmallBranchesScreen setScreen={setCurrentScreen} goToNext={() => setCurrentScreen('2.1.5')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} partnerData={null} setMyData={setMyData} setPartnerData={setPartnerData} createHeader={createHeader} />
+                                ) : (
+                                    <HoldingScreen createHeader={createHeader} />
+                                )}
+                            </div>
+                        );
                     case 'level1-watering-branch':
-                        return <Level1WateringBranchScreen goToNext={() => setCurrentScreen('2.1.6')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} setMyData={setMyData} createHeader={createHeader} />;
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
+                                {!viewingPartner ? (
+                                    <Level1WateringBranchScreen goToNext={() => setCurrentScreen('2.1.6')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} setMyData={setMyData} createHeader={createHeader} />
+                                ) : (
+                                    <HoldingScreen createHeader={createHeader} />
+                                )}
+                            </div>
+                        );
                     case 'level1-good-fruits':
-                        return <Day9GuessRevealScreen goToNext={() => setCurrentScreen('2.1.7')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} partnerData={null} setPartnerData={setPartnerData} createHeader={createHeader} />;
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
+                                {!viewingPartner ? (
+                                    <Day9GuessRevealScreen goToNext={() => setCurrentScreen('2.1.7')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} partnerData={null} setPartnerData={setPartnerData} createHeader={createHeader} />
+                                ) : (
+                                    <HoldingScreen createHeader={createHeader} />
+                                )}
+                            </div>
+                        );
                     case 'level1-harvest':
-                        return <Level1CustomizeWantsScreen goToNext={() => setCurrentScreen('2.2.1')} awardCredits={awardCredits} credits={credits} setCredits={setCredits} customizedWants={customizedWants} setCustomizedWants={setCustomizedWants} createHeader={createHeader} currentScreen={currentScreen} />;
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
+                                {!viewingPartner ? (
+                                    <Level1CustomizeWantsScreen goToNext={() => setCurrentScreen('2.2.1')} awardCredits={awardCredits} credits={credits} setCredits={setCredits} customizedWants={customizedWants} setCustomizedWants={setCustomizedWants} createHeader={createHeader} currentScreen={currentScreen} />
+                                ) : (
+                                    <HoldingScreen createHeader={createHeader} />
+                                )}
+                            </div>
+                        );
 
                     // Step 2: Individual Journey - Level 2 (Deepening)
                     case 'level2-pairing-stress':
-                        return <Level2PairingStressScreen goToNext={() => setCurrentScreen('2.2.2')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} myData={myData} />;
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
+                                {!viewingPartner ? (
+                                    <Level2PairingStressScreen goToNext={() => setCurrentScreen('2.2.2')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} myData={myData} />
+                                ) : (
+                                    <HoldingScreen createHeader={createHeader} />
+                                )}
+                            </div>
+                        );
                     case 'level2-active-appreciation':
-                        return <Level2ActiveAppreciationScreen goToNext={() => setCurrentScreen('2.2.3')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />;
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
+                                {!viewingPartner ? (
+                                    <Level2ActiveAppreciationScreen goToNext={() => setCurrentScreen('2.2.3')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />
+                                ) : (
+                                    <HoldingScreen createHeader={createHeader} />
+                                )}
+                            </div>
+                        );
                     case 'level2-binary-willing':
-                        return <Level2BinaryWillingScreen goToNext={() => setCurrentScreen('2.2.4')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} partnerData={partnerData} setMyData={setMyData} myData={myData} canCustomizeWants={canCustomizeWants} customizedWants={customizedWants} />;
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
+                                {!viewingPartner ? (
+                                    <Level2BinaryWillingScreen goToNext={() => setCurrentScreen('2.2.4')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} partnerData={partnerData} setMyData={setMyData} myData={myData} canCustomizeWants={canCustomizeWants} customizedWants={customizedWants} />
+                                ) : (
+                                    <HoldingScreen createHeader={createHeader} />
+                                )}
+                            </div>
+                        );
                     case 'level2-personalize-wants':
-                        return <Level2PersonalizeWantsScreen goToNext={() => setCurrentScreen('2.2.5')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} setMyData={setMyData} myData={myData} canCustomizeWants={canCustomizeWants} customizedWants={customizedWants} setCustomizedWants={setCustomizedWants} />;
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
+                                {!viewingPartner ? (
+                                    <Level2PersonalizeWantsScreen goToNext={() => setCurrentScreen('2.2.5')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} setMyData={setMyData} myData={myData} canCustomizeWants={canCustomizeWants} customizedWants={customizedWants} setCustomizedWants={setCustomizedWants} />
+                                ) : (
+                                    <HoldingScreen createHeader={createHeader} />
+                                )}
+                            </div>
+                        );
                     case 'level2-discover-why':
-                        return <Level2DiscoverWhyScreen goToNext={() => setCurrentScreen('2.2.6')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} setMyData={setMyData} myData={myData} />;
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
+                                {!viewingPartner ? (
+                                    <Level2DiscoverWhyScreen goToNext={() => setCurrentScreen('2.2.6')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} setMyData={setMyData} myData={myData} />
+                                ) : (
+                                    <HoldingScreen createHeader={createHeader} />
+                                )}
+                            </div>
+                        );
                     case 'level2-guess-unwilling':
-                        return <Level2GuessUnwillingScreen goToNext={() => setCurrentScreen('2.2.7')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} partnerData={partnerData} myData={myData} />;
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
+                                {!viewingPartner ? (
+                                    <Level2GuessUnwillingScreen goToNext={() => setCurrentScreen('2.2.7')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} partnerData={partnerData} myData={myData} />
+                                ) : (
+                                    <HoldingScreen createHeader={createHeader} />
+                                )}
+                            </div>
+                        );
                     case 'level2-harvest':
-                        return <HarvestScreen goToNext={() => setCurrentScreen('2.3.1')} credits={credits} setCredits={setCredits} cycleCount={cycleCount} setCycleCount={setCycleCount} pairedMode={false} setPairedMode={setPairedMode} createHeader={createHeader} level={2} />;
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
+                                {!viewingPartner ? (
+                                    <HarvestScreen goToNext={() => setCurrentScreen('2.3.1')} credits={credits} setCredits={setCredits} cycleCount={cycleCount} setCycleCount={setCycleCount} pairedMode={false} setPairedMode={setPairedMode} createHeader={createHeader} level={2} />
+                                ) : (
+                                    <HoldingScreen createHeader={createHeader} />
+                                )}
+                            </div>
+                        );
 
                     // Step 2: Individual Journey - Level 3 (Mastery)
                     case 'level3-articulate-wants':
-                        return <Level3ArticulateWantsScreen goToNext={() => setCurrentScreen('2.3.2')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} setMyData={setMyData} />;
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
+                                {!viewingPartner ? (
+                                    <Level3ArticulateWantsScreen goToNext={() => setCurrentScreen('2.3.2')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} setMyData={setMyData} />
+                                ) : (
+                                    <HoldingScreen createHeader={createHeader} />
+                                )}
+                            </div>
+                        );
                     case 'level3-non-attached-communication':
-                        return <Level3NonAttachedScreen goToNext={() => setCurrentScreen('2.3.3')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} myData={myData} setMyData={setMyData} customizedWants={customizedWants} />;
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
+                                {!viewingPartner ? (
+                                    <Level3NonAttachedScreen goToNext={() => setCurrentScreen('2.3.3')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} myData={myData} setMyData={setMyData} customizedWants={customizedWants} />
+                                ) : (
+                                    <HoldingScreen createHeader={createHeader} />
+                                )}
+                            </div>
+                        );
                     case 'level3-safe-no-practice':
-                        return <Level3SafeNoScreen goToNext={() => setCurrentScreen('2.3.4')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />;
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
+                                {!viewingPartner ? (
+                                    <Level3SafeNoScreen goToNext={() => setCurrentScreen('2.3.4')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />
+                                ) : (
+                                    <HoldingScreen createHeader={createHeader} />
+                                )}
+                            </div>
+                        );
                     case 'level3-want-negotiation':
-                        return <Level3WantNegotiationScreen goToNext={() => setCurrentScreen('2.3.5')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />;
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
+                                {!viewingPartner ? (
+                                    <Level3WantNegotiationScreen goToNext={() => setCurrentScreen('2.3.5')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />
+                                ) : (
+                                    <HoldingScreen createHeader={createHeader} />
+                                )}
+                            </div>
+                        );
                     case 'level3-positive-confirmation':
-                        return <Level3PositiveConfirmationScreen goToNext={() => setCurrentScreen('2.3.6')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />;
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
+                                {!viewingPartner ? (
+                                    <Level3PositiveConfirmationScreen goToNext={() => setCurrentScreen('2.3.6')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />
+                                ) : (
+                                    <HoldingScreen createHeader={createHeader} />
+                                )}
+                            </div>
+                        );
                     case 'level3-receiving-efforts':
-                        return <Level3ReceivingEffortsScreen goToNext={() => setCurrentScreen('2.3.7')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />;
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
+                                {!viewingPartner ? (
+                                    <Level3ReceivingEffortsScreen goToNext={() => setCurrentScreen('2.3.7')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />
+                                ) : (
+                                    <HoldingScreen createHeader={createHeader} />
+                                )}
+                            </div>
+                        );
                     case 'level3-harvest':
-                        return <Level3HarvestScreen goToNext={() => setCurrentScreen('3.1')} credits={credits} setCredits={setCredits} cycleCount={cycleCount} setCycleCount={setCycleCount} pairedMode={false} setPairedMode={setPairedMode} createHeader={createHeader} formData={formData} />;
+                        return (
+                            <div>
+                                <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
+                                {!viewingPartner ? (
+                                    <Level3HarvestScreen goToNext={() => setCurrentScreen('3.1')} credits={credits} setCredits={setCredits} cycleCount={cycleCount} setCycleCount={setCycleCount} pairedMode={false} setPairedMode={setPairedMode} createHeader={createHeader} formData={formData} />
+                                ) : (
+                                    <HoldingScreen createHeader={createHeader} />
+                                )}
+                            </div>
+                        );
 
                     // Step 3: Daily Activities
                     case 'dashboard':
