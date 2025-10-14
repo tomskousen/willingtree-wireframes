@@ -1542,9 +1542,9 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
                                 {!viewingPartner ? (
-                                    <Level2PersonalizeWantsScreen goToNext={() => setCurrentScreen('2.2.5')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} setMyData={setMyData} myData={myData} canCustomizeWants={canCustomizeWants} customizedWants={customizedWants} setCustomizedWants={setCustomizedWants} />
+                                    <MeditateScreen createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
                                 ) : (
-                                    <HoldingScreen createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Day6SmallBranchesScreen setScreen={setCurrentScreen} goToNext={() => setCurrentScreen('2.2.5')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} partnerData={null} setMyData={setMyData} setPartnerData={setPartnerData} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
                                 )}
                             </div>
                         );
@@ -1553,7 +1553,7 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
                                 {!viewingPartner ? (
-                                    <Level2DiscoverWhyScreen goToNext={() => setCurrentScreen('2.2.6')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} setMyData={setMyData} myData={myData} />
+                                    <Level2PersonalizeWantsScreen goToNext={() => setCurrentScreen('2.2.6')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} setMyData={setMyData} myData={myData} canCustomizeWants={canCustomizeWants} customizedWants={customizedWants} setCustomizedWants={setCustomizedWants} />
                                 ) : (
                                     <HoldingScreen createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
                                 )}
