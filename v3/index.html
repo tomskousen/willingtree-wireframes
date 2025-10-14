@@ -3487,8 +3487,9 @@
                             Points used: {totalAllocated} / 12
                         </div>
 
-                        <div style={{display: 'flex', flexDirection: 'column', gap: '8px'}}>
-                            {partnerItems.map((item, index) => (
+                        <div style={{flex: 1, overflowY: 'auto', paddingBottom: '16px'}}>
+                            <div style={{display: 'flex', flexDirection: 'column', gap: '8px'}}>
+                                {partnerItems.map((item, index) => (
                                 <div key={index} style={{
                                     padding: '8px',
                                     background: '#f9f9f9',
@@ -3540,6 +3541,7 @@
                                     </div>
                                 </div>
                             ))}
+                            </div>
                         </div>
 
                         <div className="button-container">
