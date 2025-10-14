@@ -1,0 +1,16 @@
+{
+  "name": "v3",
+  "version": "1.0.0",
+  "description": "**Problem with V2:** - Used emoji icons (🪨, 🌱, 🚿, 🌳) for metaphors - Emojis render differently across devices/platforms - No control over styling or visual consistency - Doesn't match the hand-sketched wireframe aesthetic",
+  "main": "recorder.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.56.0"
+  }
+}
