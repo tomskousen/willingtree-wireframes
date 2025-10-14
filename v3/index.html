@@ -4278,15 +4278,14 @@
                             )
                         )}
                         <div className="screen-content">
-                            <div style={{flex: 1, overflowY: 'auto', paddingBottom: '16px'}}>
-                                <p className="text-md" style={{marginBottom: '8px'}}>
+                            <p className="text-md" style={{marginBottom: '8px'}}>
                                     Score each item 1-5, where 5 means you're most willing to do this:
-                                </p>
-                                <p className="text-sm" style={{marginBottom: '16px', color: '#666'}}>
+                            </p>
+                            <p className="text-sm" style={{marginBottom: '16px', color: '#666'}}>
                                     <strong>{listTitle}</strong>
-                                </p>
+                            </p>
 
-                                <div style={{display: 'flex', flexDirection: 'column', gap: '12px'}}>
+                            <div style={{display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '16px'}}>
                                     {listToShow.map((item, index) => (
                                         <div key={index} style={{
                                             display: 'flex',
@@ -4329,7 +4328,6 @@
                                 <button className="button" onClick={handleContinueToSend} disabled={!isStepComplete} style={{width: '100%'}}>
                                     Continue to Pollinate
                                 </button>
-                            </div>
                         </div>
                         <div className="screen-footer">
                             Budding means growing what works (scoring 4-5). Pruning means releasing what doesn't (1-2). Your top 12 items will be your "willing list" - actions you're naturally inclined to do.
@@ -5242,8 +5240,7 @@
                             <strong>Bonus:</strong> Earn 10 growth credits for each correct guess!
                         </p>
 
-                        <div style={{flex: 1, overflowY: 'auto', paddingBottom: '16px'}}>
-                            <div style={{display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px'}}>
+                        <div style={{display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px'}}>
                                 {listPartnerSaw.map((item, index) => (
                                 <div
                                     key={index}
@@ -5287,7 +5284,6 @@
                                     style={{marginRight: '10px'}}
                                 />
                                 NONE - They were willing for all of them
-                            </div>
                             </div>
                         </div>
 
