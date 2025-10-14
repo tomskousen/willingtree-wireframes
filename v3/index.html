@@ -1691,7 +1691,7 @@
                                 {!viewingPartner ? (
                                     <Day1BondingScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={true} partnerData={partnerData} setMyData={setMyData} setPartnerData={setPartnerData} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} userName={formData.name} />
                                 ) : (
-                                    <Day1BondingScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} pairedMode={true} partnerData={myData} setMyData={setPartnerData} setPartnerData={setMyData} createHeader={createHeader} userName={partnerData.name} />
+                                    <Day1BondingScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} pairedMode={true} partnerData={myData} setMyData={setPartnerData} setPartnerData={setMyData} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} userName={partnerData.name} />
                                 )}
                             </div>
                         );
