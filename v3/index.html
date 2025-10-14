@@ -5243,8 +5243,9 @@
                             <strong>Bonus:</strong> Earn 10 growth credits for each correct guess!
                         </p>
 
-                        <div style={{display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px'}}>
-                            {listPartnerSaw.map((item, index) => (
+                        <div style={{flex: 1, overflowY: 'auto', paddingBottom: '16px'}}>
+                            <div style={{display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px'}}>
+                                {listPartnerSaw.map((item, index) => (
                                 <div
                                     key={index}
                                     onClick={() => !submitted && toggleGuess(item.text)}
@@ -5287,6 +5288,7 @@
                                     style={{marginRight: '10px'}}
                                 />
                                 NONE - They were willing for all of them
+                            </div>
                             </div>
                         </div>
 
