@@ -1564,9 +1564,9 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
                                 {!viewingPartner ? (
-                                    <Level2GuessUnwillingScreen goToNext={() => setCurrentScreen('2.2.7')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} partnerData={partnerData} myData={myData} />
+                                    <HoldingScreen createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} message="Waiting for partner's guess..." />
                                 ) : (
-                                    <HoldingScreen createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Level2GuessUnwillingScreen goToNext={() => setCurrentScreen('2.2.7')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} partnerData={partnerData} myData={myData} />
                                 )}
                             </div>
                         );
