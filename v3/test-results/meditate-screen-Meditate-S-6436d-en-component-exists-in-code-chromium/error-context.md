@@ -1,0 +1,785 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - heading "WillingTree App - Final Production Wireframes" [level=1] [ref=e3]
+  - paragraph [ref=e4]: Evolve core relationships with the trust/safety that emerges when practicing want/willing/won't
+  - generic [ref=e5]:
+    - heading "🌳 WillingTree Credit System" [level=3] [ref=e6]
+    - paragraph [ref=e7]:
+      - strong [ref=e8]: "☀️ Sun Credits:"
+      - text: Earned by appreciating & recognizing your partner's efforts
+    - paragraph [ref=e9]:
+      - strong [ref=e10]: "💧 Water Credits:"
+      - text: Earned when your partner recognizes what you've done
+    - paragraph [ref=e11]:
+      - strong [ref=e12]: "Big Branch:"
+      - text: Your Wants/Needs List |
+      - strong [ref=e13]: "Small Branches:"
+      - text: Your Willing List
+    - paragraph [ref=e14]:
+      - strong [ref=e15]: "Leaves:"
+      - text: Done/Seen recognitions |
+      - strong [ref=e16]: "Fruits/Flowers:"
+      - text: Rewards bought with credits
+    - paragraph [ref=e17]: ✨ Credits rollover for 4 weeks | Streaks double water credit returns | Demands cost 50 water credits
+  - generic [ref=e18]:
+    - heading "1. Onboarding Flow" [level=2] [ref=e19]
+    - generic [ref=e20]:
+      - generic [ref=e21]:
+        - generic [ref=e22]: 1A
+        - generic [ref=e23]:
+          - generic [ref=e24]: WillingTree
+          - generic [ref=e25]:
+            - generic [ref=e26]:
+              - generic [ref=e27] [cursor=pointer]: ←
+              - generic [ref=e28] [cursor=pointer]: →
+            - generic [ref=e29]:
+              - generic [ref=e30] [cursor=pointer]: 🏠
+              - generic [ref=e31] [cursor=pointer]: 📋
+              - generic [ref=e32] [cursor=pointer]: ⚙️
+        - generic [ref=e34]:
+          - generic [ref=e35]: 🌳
+          - heading "Welcome to WillingTree" [level=2] [ref=e36]
+          - paragraph [ref=e37]: Evolve core relationships with the trust/safety that emerges when practicing
+          - paragraph [ref=e38]: Want • Willing • Won't
+          - button "Sign Up" [ref=e39] [cursor=pointer]
+          - button "Log In" [ref=e40] [cursor=pointer]
+      - generic [ref=e41]:
+        - generic [ref=e42]: 1B
+        - generic [ref=e43]:
+          - generic [ref=e44]: Partner Style
+          - generic [ref=e45]:
+            - generic [ref=e46]:
+              - generic [ref=e47] [cursor=pointer]: ←
+              - generic [ref=e48] [cursor=pointer]: →
+            - generic [ref=e49]:
+              - generic [ref=e50] [cursor=pointer]: 🏠
+              - generic [ref=e51] [cursor=pointer]: 📋
+              - generic [ref=e52] [cursor=pointer]: ⚙️
+        - generic [ref=e53]:
+          - heading "How do you partner?" [level=3] [ref=e54]
+          - paragraph [ref=e55]: What are some wants/needs that would make your life a little better if he/she can?
+          - generic [ref=e56]:
+            - generic [ref=e57] [cursor=pointer]:
+              - generic [ref=e58]: 🪨
+              - generic [ref=e59]: Stone
+              - generic [ref=e60]: Steady
+            - generic [ref=e61] [cursor=pointer]:
+              - generic [ref=e62]: 🌱
+              - generic [ref=e63]: Soil
+              - generic [ref=e64]: Nurturing
+            - generic [ref=e65] [cursor=pointer]:
+              - generic [ref=e66]: 🚿
+              - generic [ref=e67]: Shovel
+              - generic [ref=e68]: Action
+            - generic [ref=e69] [cursor=pointer]:
+              - generic [ref=e70]: 🌳|
+              - generic [ref=e71]: Stakes
+              - generic [ref=e72]: Guiding
+          - generic [ref=e73]:
+            - textbox "Phone Number" [ref=e74]
+            - generic [ref=e75]: OR
+            - button "G Continue with Google" [ref=e76] [cursor=pointer]:
+              - generic [ref=e77]: G
+              - text: Continue with Google
+            - button "🍎 Continue with Apple" [ref=e78] [cursor=pointer]:
+              - generic [ref=e79]: 🍎
+              - text: Continue with Apple
+          - button "Next" [ref=e80] [cursor=pointer]
+        - paragraph [ref=e82]: 🌱 Understanding your partnership style helps create better matches and earns your first 5 sun credits!
+      - generic [ref=e83]:
+        - generic [ref=e84]: 1C
+        - generic [ref=e85]:
+          - generic [ref=e86]: Pair with Partner
+          - generic [ref=e87]:
+            - generic [ref=e88]:
+              - generic [ref=e89] [cursor=pointer]: ←
+              - generic [ref=e90] [cursor=pointer]: →
+            - generic [ref=e91]:
+              - generic [ref=e92] [cursor=pointer]: 🏠
+              - generic [ref=e93] [cursor=pointer]: 📋
+              - generic [ref=e94] [cursor=pointer]: ⚙️
+        - generic [ref=e95]:
+          - heading "Connect Your Trees" [level=3] [ref=e96]
+          - paragraph [ref=e97]: Share this code with your partner to create your WillingTree together
+          - generic [ref=e98]: TREE-4829
+          - paragraph [ref=e99]: "OR enter your partner's code:"
+          - textbox "Enter partner's code" [ref=e100]
+          - textbox "Your name" [ref=e101]
+          - textbox "Your phone number" [ref=e102]
+          - button "Match & Continue" [ref=e103] [cursor=pointer]
+        - generic [ref=e104]:
+          - generic [ref=e105]:
+            - generic [ref=e106]: ☀️ 10
+            - generic [ref=e107]: 💧 10
+          - paragraph [ref=e108]: Starting credits when matched!
+      - generic [ref=e109]:
+        - generic [ref=e110]: 1D
+        - generic [ref=e111]:
+          - generic [ref=e112]: Verify
+          - generic [ref=e113]:
+            - generic [ref=e114]:
+              - generic [ref=e115] [cursor=pointer]: ←
+              - generic [ref=e116] [cursor=pointer]: →
+            - generic [ref=e117]:
+              - generic [ref=e118] [cursor=pointer]: 🏠
+              - generic [ref=e119] [cursor=pointer]: 📋
+              - generic [ref=e120] [cursor=pointer]: ⚙️
+        - generic [ref=e121]:
+          - heading "Enter Verification Code" [level=3] [ref=e122]
+          - paragraph [ref=e123]: We sent a 6-digit code to your phone
+          - generic [ref=e124]:
+            - textbox [ref=e125]
+            - textbox [ref=e126]
+            - textbox [ref=e127]
+            - textbox [ref=e128]
+            - textbox [ref=e129]
+            - textbox [ref=e130]
+          - button "Verify" [ref=e131] [cursor=pointer]
+          - paragraph [ref=e132]: Resend Code
+      - generic [ref=e133]:
+        - generic [ref=e134]: 1E
+        - generic [ref=e135]:
+          - generic [ref=e136]: Profile Setup
+          - generic [ref=e137]:
+            - generic [ref=e138]:
+              - generic [ref=e139] [cursor=pointer]: ←
+              - generic [ref=e140] [cursor=pointer]: →
+            - generic [ref=e141]:
+              - generic [ref=e142] [cursor=pointer]: 🏠
+              - generic [ref=e143] [cursor=pointer]: 📋
+              - generic [ref=e144] [cursor=pointer]: ⚙️
+        - generic [ref=e145]:
+          - heading "Complete Your Profile" [level=3] [ref=e146]
+          - textbox "Display Name" [ref=e147]
+          - spinbutton [ref=e148]
+          - combobox [ref=e149]:
+            - option "Select Gender" [selected]
+            - option "Male"
+            - option "Female"
+            - option "Non-binary"
+            - option "Prefer not to say"
+          - button "Complete Setup" [ref=e150] [cursor=pointer]
+  - generic [ref=e151]:
+    - heading "2. Pairing Flow (Creating WillingTree)" [level=2] [ref=e152]
+    - generic [ref=e153]:
+      - generic [ref=e154]:
+        - generic [ref=e155]: 2A
+        - generic [ref=e156]:
+          - generic [ref=e157]: My WillingTrees
+          - generic [ref=e158]:
+            - generic [ref=e159]:
+              - generic [ref=e160] [cursor=pointer]: ←
+              - generic [ref=e161] [cursor=pointer]: →
+            - generic [ref=e162]:
+              - generic [ref=e163] [cursor=pointer]: 🏠
+              - generic [ref=e164] [cursor=pointer]: 📋
+              - generic [ref=e165] [cursor=pointer]: ⚙️
+        - generic [ref=e166]:
+          - generic [ref=e167]:
+            - generic [ref=e168] [cursor=pointer]: ⋮
+            - generic [ref=e169]: You & Sarah
+            - generic [ref=e170]:
+              - text: Week 3 • ☀️ 42 • 💧 38 •
+              - generic [ref=e171]: 🍃
+              - text: 15 leaves
+          - generic [ref=e172]:
+            - generic [ref=e173] [cursor=pointer]: ⋮
+            - generic [ref=e174]: You & Mike
+            - generic [ref=e175]:
+              - text: Week 1 • ☀️ 15 • 💧 12 •
+              - generic [ref=e176]: 🍃
+              - text: 5 leaves
+          - generic [ref=e177]:
+            - generic [ref=e178]: +
+            - generic [ref=e179]: New pairing to add another WillingTree
+            - generic [ref=e180]: (1 of 3 slots available)
+        - generic [ref=e181]:
+          - generic [ref=e182]: Home
+          - generic [ref=e184]: Trees
+          - generic [ref=e186]: Schedule
+          - generic [ref=e188]: Profile
+      - generic [ref=e190]:
+        - generic [ref=e191]: 2B
+        - generic [ref=e192]:
+          - generic [ref=e193]: Manage WillingTree
+          - generic [ref=e194]:
+            - generic [ref=e195]:
+              - generic [ref=e196] [cursor=pointer]: ←
+              - generic [ref=e197] [cursor=pointer]: →
+            - generic [ref=e198]:
+              - generic [ref=e199] [cursor=pointer]: 🏠
+              - generic [ref=e200] [cursor=pointer]: 📋
+              - generic [ref=e201] [cursor=pointer]: ⚙️
+        - generic [ref=e202]:
+          - heading "You & Sarah" [level=3] [ref=e203]
+          - paragraph [ref=e204]: Active for 3 weeks • 15 leaves grown
+          - button "Pause Tree (Take a Break)" [ref=e205] [cursor=pointer]
+          - button "Graduate Tree (Complete)" [ref=e206] [cursor=pointer]
+          - generic [ref=e207]:
+            - paragraph [ref=e208]: ⚠️ Permanent Actions
+            - paragraph [ref=e209]: Ending a tree frees up a slot for new connections
+            - button "End Tree & Archive" [ref=e210] [cursor=pointer]
+          - paragraph [ref=e212]: 💡 Trees can be paused temporarily, graduated when goals are met, or ended to make room for new growth.
+      - generic [ref=e213]:
+        - generic [ref=e214]: 2C
+        - generic [ref=e215]:
+          - generic [ref=e216]: Pairing Request
+          - generic [ref=e217]:
+            - generic [ref=e218]:
+              - generic [ref=e219] [cursor=pointer]: ←
+              - generic [ref=e220] [cursor=pointer]: →
+            - generic [ref=e221]:
+              - generic [ref=e222] [cursor=pointer]: 🏠
+              - generic [ref=e223] [cursor=pointer]: 📋
+              - generic [ref=e224] [cursor=pointer]: ⚙️
+        - generic [ref=e226]:
+          - heading "John wants to pair with you" [level=3] [ref=e228]
+          - paragraph [ref=e229]: Create a WillingTree together to evolve your relationship
+          - button "Accept & Create WillingTree" [ref=e230] [cursor=pointer]
+          - button "Decline" [ref=e231] [cursor=pointer]
+  - generic [ref=e232]:
+    - heading "3. Daily Warm-up & Weekly Gifts" [level=2] [ref=e233]
+    - generic [ref=e234]:
+      - generic [ref=e235]:
+        - generic [ref=e236]: 3A
+        - generic [ref=e237]:
+          - generic [ref=e238]: Daily Appreciation
+          - generic [ref=e239]:
+            - generic [ref=e240]:
+              - generic [ref=e241] [cursor=pointer]: ←
+              - generic [ref=e242] [cursor=pointer]: →
+            - generic [ref=e243]:
+              - generic [ref=e244] [cursor=pointer]: 🏠
+              - generic [ref=e245] [cursor=pointer]: 📋
+              - generic [ref=e246] [cursor=pointer]: ⚙️
+        - generic [ref=e247]:
+          - heading "What did you notice today?" [level=3] [ref=e248]
+          - paragraph [ref=e249]: Share the best thing you saw Sarah do today
+          - generic [ref=e250]:
+            - generic [ref=e251]: "🌟 Best thing I noticed:"
+            - textbox "I saw you..." [ref=e252]
+          - generic [ref=e253]:
+            - generic [ref=e254]: "✨ Close second:"
+            - textbox "I also noticed when you..." [ref=e255]
+          - generic [ref=e256]:
+            - paragraph [ref=e257]: 🔥 3-day streak!
+            - paragraph [ref=e258]: 2 more days to double water credits earned
+          - button "Submit Observation" [ref=e259] [cursor=pointer]
+        - generic [ref=e260]:
+          - generic [ref=e261]:
+            - generic [ref=e262]: ☀️ +2
+            - paragraph [ref=e263]: You earn sun credits for appreciating
+          - paragraph [ref=e264]: Prompt to be texted daily at 7pm
+      - generic [ref=e265]:
+        - generic [ref=e266]: 3B
+        - generic [ref=e267]:
+          - generic [ref=e268]: Your Weekly Gift 🎁
+          - generic [ref=e269]:
+            - generic [ref=e270]:
+              - generic [ref=e271] [cursor=pointer]: ←
+              - generic [ref=e272] [cursor=pointer]: →
+            - generic [ref=e273]:
+              - generic [ref=e274] [cursor=pointer]: 🏠
+              - generic [ref=e275] [cursor=pointer]: 📋
+              - generic [ref=e276] [cursor=pointer]: ⚙️
+        - generic [ref=e277]:
+          - heading "Sarah saw you..." [level=3] [ref=e278]
+          - paragraph [ref=e279]: All the wonderful things noticed this week
+          - generic [ref=e280]: "\"I saw you wake up early to make breakfast for us\""
+          - generic [ref=e281]: "\"I saw you listen patiently when I was stressed\""
+          - generic [ref=e282]: "\"I saw you clean the kitchen without being asked\""
+          - generic [ref=e283]: "\"I saw you support my work presentation prep\""
+          - generic [ref=e284]: "\"I saw you make time for us despite being busy\""
+          - generic [ref=e285]:
+            - generic [ref=e286]: 🌸
+            - paragraph [ref=e287]: You earned a flower fruit!
+            - paragraph [ref=e288]: 5 observations = 1 flower
+          - button "View Partner's Observations" [ref=e289] [cursor=pointer]
+        - generic [ref=e291]:
+          - generic [ref=e292]: 💧 +10
+          - paragraph [ref=e293]: Water credits for being recognized
+      - generic [ref=e294]:
+        - generic [ref=e295]: 3C
+        - generic [ref=e296]:
+          - generic [ref=e297]: Build Your Big Branch
+          - generic [ref=e298]:
+            - generic [ref=e299]:
+              - generic [ref=e300] [cursor=pointer]: ←
+              - generic [ref=e301] [cursor=pointer]: →
+            - generic [ref=e302]:
+              - generic [ref=e303] [cursor=pointer]: 🏠
+              - generic [ref=e304] [cursor=pointer]: 📋
+              - generic [ref=e305] [cursor=pointer]: ⚙️
+        - generic [ref=e306]:
+          - heading "Popular Wants/Needs" [level=3] [ref=e307]
+          - paragraph [ref=e308]: Start with these common Big Branch items (can change 3/week)
+          - generic [ref=e310]: Morning coffee together
+          - generic [ref=e313]: Help with household chores
+          - generic [ref=e316]: Weekly date nights
+          - generic [ref=e319]: More verbal appreciation
+          - generic [ref=e322]: Quality time without phones
+          - button "Create Big Branch" [ref=e324] [cursor=pointer]
+        - paragraph [ref=e326]: 🔄 Changes cost 3 sun credits each (up to 3 changes per week)
+  - generic [ref=e327]:
+    - heading "4. Growing Branches" [level=2] [ref=e328]
+    - generic [ref=e329]:
+      - generic [ref=e330]:
+        - generic [ref=e331]: 4A
+        - generic [ref=e332]:
+          - generic [ref=e333]: Building the Big Branch
+          - generic [ref=e334]:
+            - generic [ref=e335]:
+              - generic [ref=e336] [cursor=pointer]: ←
+              - generic [ref=e337] [cursor=pointer]: →
+            - generic [ref=e338]:
+              - generic [ref=e339] [cursor=pointer]: 🏠
+              - generic [ref=e340] [cursor=pointer]: 📋
+              - generic [ref=e341] [cursor=pointer]: ⚙️
+        - generic [ref=e342]:
+          - heading "Distribute 18 points across your wants/needs" [level=3] [ref=e343]
+          - paragraph [ref=e344]: Higher points = higher priority for your partner
+          - paragraph [ref=e345]: 18 points total to allocate
+          - generic [ref=e346]:
+            - generic [ref=e347]: More verbal appreciation
+            - spinbutton [ref=e348]: "5"
+          - generic [ref=e349]:
+            - generic [ref=e350]: Help with household chores
+            - spinbutton [ref=e351]: "4"
+          - generic [ref=e352]:
+            - generic [ref=e353]: Weekly date nights
+            - spinbutton [ref=e354]: "3"
+          - generic [ref=e355]:
+            - generic [ref=e356]: Morning coffee together
+            - spinbutton [ref=e357]: "3"
+          - generic [ref=e358]:
+            - generic [ref=e359]: Quality time without phones
+            - spinbutton [ref=e360]: "3"
+          - paragraph [ref=e362]: "Points remaining: 0 of 18"
+          - button "Submit Big Branch with Points" [ref=e363] [cursor=pointer]
+      - generic [ref=e364]:
+        - generic [ref=e365]: 4B
+        - generic [ref=e366]:
+          - generic [ref=e367]: Your Small Branches
+          - generic [ref=e368]:
+            - generic [ref=e369]:
+              - generic [ref=e370] [cursor=pointer]: ←
+              - generic [ref=e371] [cursor=pointer]: →
+            - generic [ref=e372]:
+              - generic [ref=e373] [cursor=pointer]: 🏠
+              - generic [ref=e374] [cursor=pointer]: 📋
+              - generic [ref=e375] [cursor=pointer]: ⚙️
+        - generic [ref=e376]:
+          - heading "Focus your intention on 2 items" [level=3] [ref=e377]
+          - paragraph [ref=e378]: From Sarah's Big Branch, what will you focus on this week?
+          - generic [ref=e379]:
+            - generic [ref=e380]: Morning coffee together
+            - paragraph [ref=e381]: I intend to wake up early and prepare coffee for us
+          - generic [ref=e382]:
+            - generic [ref=e383]: More verbal appreciation
+            - paragraph [ref=e384]: I intend to express gratitude daily
+          - generic [ref=e385]:
+            - paragraph [ref=e386]: "💡 Tip: Choose items you can genuinely commit to"
+            - paragraph [ref=e387]: Your partner will guess which ones you chose
+          - button "Lock in my Small Branches" [ref=e388] [cursor=pointer]
+  - generic [ref=e389]:
+    - heading "5. Guessing Game & Recognition" [level=2] [ref=e390]
+    - generic [ref=e391]:
+      - generic [ref=e392]:
+        - generic [ref=e393]: 5A
+        - generic [ref=e394]:
+          - generic [ref=e395]: Sarah's Big Branch
+          - generic [ref=e396]:
+            - generic [ref=e397]:
+              - generic [ref=e398] [cursor=pointer]: ←
+              - generic [ref=e399] [cursor=pointer]: →
+            - generic [ref=e400]:
+              - generic [ref=e401] [cursor=pointer]: 🏠
+              - generic [ref=e402] [cursor=pointer]: 📋
+              - generic [ref=e403] [cursor=pointer]: ⚙️
+        - generic [ref=e404]:
+          - heading "Form Your Small Branches" [level=3] [ref=e405]
+          - paragraph [ref=e406]: 1 assigned task + select 1 from 6 random items
+          - generic [ref=e407]:
+            - paragraph [ref=e408]: "⭐ BIG WISH: Weekly date nights"
+            - paragraph [ref=e409]: Sarah purchased this as a Big Wish (50 water credits)
+            - paragraph [ref=e410]: Required for 3 weeks
+          - paragraph [ref=e411]: "Choose 1 additional Small Branch from these 6:"
+          - generic [ref=e413]: 1. Plan weekend activities
+          - generic [ref=e416]: 2. Cook dinner together
+          - generic [ref=e419]: 3. Phone-free evenings
+          - generic [ref=e422]: 4. Express feelings more
+          - generic [ref=e425]: 5. Morning workout together
+          - generic [ref=e427]: ... 7 more items from Big Branch ...
+          - button "Continue (Small Branches selected)" [ref=e428] [cursor=pointer]
+      - generic [ref=e429]:
+        - generic [ref=e430]: 5B
+        - generic [ref=e431]:
+          - generic [ref=e432]: Your Small Branches
+          - generic [ref=e433]:
+            - generic [ref=e434]:
+              - generic [ref=e435] [cursor=pointer]: ←
+              - generic [ref=e436] [cursor=pointer]: →
+            - generic [ref=e437]:
+              - generic [ref=e438] [cursor=pointer]: 🏠
+              - generic [ref=e439] [cursor=pointer]: 📋
+              - generic [ref=e440] [cursor=pointer]: ⚙️
+        - generic [ref=e441]:
+          - heading "Your Small Branches This Week" [level=3] [ref=e442]
+          - paragraph [ref=e443]: Your commitment to work on these
+          - generic [ref=e444]:
+            - generic [ref=e445]: "1"
+            - generic [ref=e446]: Phone-free evenings
+            - generic [ref=e447]: ⋮⋮
+          - generic [ref=e448]:
+            - generic [ref=e449]: "2"
+            - generic [ref=e450]: Cook dinner together
+            - generic [ref=e451]: ⋮⋮
+          - generic [ref=e452]:
+            - generic [ref=e453]: "3"
+            - generic [ref=e454]: Morning workout together
+            - generic [ref=e455]: ⋮⋮
+          - button "Lock In My Small Branches" [ref=e456] [cursor=pointer]
+      - generic [ref=e457]:
+        - generic [ref=e458]: 5C
+        - generic [ref=e459]:
+          - generic [ref=e460]: Guessing Game
+          - generic [ref=e461]:
+            - generic [ref=e462]:
+              - generic [ref=e463] [cursor=pointer]: ←
+              - generic [ref=e464] [cursor=pointer]: →
+            - generic [ref=e465]:
+              - generic [ref=e466] [cursor=pointer]: 🏠
+              - generic [ref=e467] [cursor=pointer]: 📋
+              - generic [ref=e468] [cursor=pointer]: ⚙️
+        - generic [ref=e469]:
+          - heading "What Small Branches was Sarah working on?" [level=3] [ref=e470]
+          - paragraph [ref=e471]: Guess from your Big Branch (2 attempts)
+          - generic [ref=e472]:
+            - paragraph [ref=e473]: "⭐ BIG WISH: Weekly date nights"
+            - paragraph [ref=e474]: You purchased this as a Big Wish (50 water credits)
+          - generic [ref=e476]: More verbal appreciation
+          - generic [ref=e479]: Help with household chores
+          - generic [ref=e482]: Morning coffee together
+          - button "Submit Guesses" [ref=e484] [cursor=pointer]
+        - paragraph [ref=e486]: 🎯 Correct guesses earn sun credits for you & water credits for Sarah
+      - generic [ref=e487]:
+        - generic [ref=e488]: 5D
+        - generic [ref=e489]:
+          - generic [ref=e490]: Credits Earned!
+          - generic [ref=e491]:
+            - generic [ref=e492]:
+              - generic [ref=e493] [cursor=pointer]: ←
+              - generic [ref=e494] [cursor=pointer]: →
+            - generic [ref=e495]:
+              - generic [ref=e496] [cursor=pointer]: 🏠
+              - generic [ref=e497] [cursor=pointer]: 📋
+              - generic [ref=e498] [cursor=pointer]: ⚙️
+        - generic [ref=e499]:
+          - heading "This Week's Results" [level=3] [ref=e500]
+          - generic [ref=e501]:
+            - heading "Credits Earned:" [level=4] [ref=e502]
+            - generic [ref=e503]:
+              - generic [ref=e504]:
+                - generic [ref=e505]: ☀️ +15
+                - paragraph [ref=e506]: Your sun credits
+              - generic [ref=e507]:
+                - generic [ref=e508]: 💧 +12
+                - paragraph [ref=e509]: Your water credits
+          - generic [ref=e510]:
+            - heading "Current Balances:" [level=4] [ref=e511]
+            - generic [ref=e512]:
+              - paragraph [ref=e514]: "☀️ Total: 67"
+              - paragraph [ref=e516]: "💧 Total: 85"
+          - button "View All Lists" [ref=e517] [cursor=pointer]
+        - paragraph [ref=e519]: 💰 Credits rollover for up to 4 weeks
+      - generic [ref=e520]:
+        - generic [ref=e521]: 5E
+        - generic [ref=e522]:
+          - generic [ref=e523]: Sunday Visibility Window
+          - generic [ref=e524]:
+            - generic [ref=e525]:
+              - generic [ref=e526] [cursor=pointer]: ←
+              - generic [ref=e527] [cursor=pointer]: →
+            - generic [ref=e528]:
+              - generic [ref=e529] [cursor=pointer]: 🏠
+              - generic [ref=e530] [cursor=pointer]: 📋
+              - generic [ref=e531] [cursor=pointer]: ⚙️
+        - generic [ref=e532]:
+          - heading "All Lists Now Visible" [level=3] [ref=e533]
+          - generic [ref=e534]:
+            - paragraph [ref=e535]: 2:47 PM - 3:47 PM
+            - paragraph [ref=e536]: Sunday visibility window is open!
+          - generic [ref=e537]:
+            - heading "View Lists:" [level=4] [ref=e538]
+            - button "My Big Branch" [ref=e539] [cursor=pointer]
+            - button "My Small Branches (Last Week)" [ref=e540] [cursor=pointer]
+            - button "My Leaves" [ref=e541] [cursor=pointer]
+            - button "Sarah's Big Branch" [ref=e542] [cursor=pointer]
+            - button "Sarah's Small Branches (Last Week)" [ref=e543] [cursor=pointer]
+            - button "Sarah's Leaves" [ref=e544] [cursor=pointer]
+            - button "⭐ Current Big Wishes" [ref=e545] [cursor=pointer]
+        - paragraph [ref=e547]: ⏰ Window closes in 47 minutes
+  - generic [ref=e548]:
+    - heading "6. Growing Leaves (Recognition & Scoring) - PREMIUM" [level=2] [ref=e549]
+    - generic [ref=e550]:
+      - generic [ref=e551]:
+        - generic [ref=e552]: 6A
+        - generic [ref=e553]:
+          - generic [ref=e554]: Big Wishes Exchange PRO
+          - generic [ref=e555]:
+            - generic [ref=e556]:
+              - generic [ref=e557] [cursor=pointer]: ←
+              - generic [ref=e558] [cursor=pointer]: →
+            - generic [ref=e559]:
+              - generic [ref=e560] [cursor=pointer]: 🏠
+              - generic [ref=e561] [cursor=pointer]: 📋
+              - generic [ref=e562] [cursor=pointer]: ⚙️
+        - generic [ref=e563]:
+          - heading "Volunteer 2 Huge Things" [level=3] [ref=e564]
+          - paragraph [ref=e565]: What would your partner LOVE that you're willing to do? (50 credits each)
+          - generic [ref=e566]:
+            - paragraph [ref=e567]: "💝 Your Offer #1:"
+            - textbox "Plan surprise weekend getaway" [ref=e568]
+            - paragraph [ref=e569]: Worth 50 water credits to you if Sarah claims it
+          - generic [ref=e570]:
+            - paragraph [ref=e571]: "💝 Your Offer #2:"
+            - textbox "Take over morning routine with kids for a month" [ref=e572]
+            - paragraph [ref=e573]: Worth 50 water credits to you if Sarah claims it
+          - generic [ref=e574]:
+            - heading "Sarah's Offers to You:" [level=4] [ref=e575]
+            - generic [ref=e576]:
+              - generic [ref=e577]: Weekly spa day - no questions asked
+              - button "Claim" [ref=e578] [cursor=pointer]
+            - generic [ref=e579]:
+              - generic [ref=e580]: Full day gaming marathon once a month
+              - button "Claim" [ref=e581] [cursor=pointer]
+          - button "Submit & Exchange Wishes" [ref=e582] [cursor=pointer]
+        - paragraph [ref=e584]: "💎 Premium Feature: Big Wishes cost 50 credits each"
+      - generic [ref=e585]:
+        - generic [ref=e586]: 6B
+        - generic [ref=e587]:
+          - generic [ref=e588]: This Week's Leaf Growing PRO
+          - generic [ref=e589]:
+            - generic [ref=e590]:
+              - generic [ref=e591] [cursor=pointer]: ←
+              - generic [ref=e592] [cursor=pointer]: →
+            - generic [ref=e593]:
+              - generic [ref=e594] [cursor=pointer]: 🏠
+              - generic [ref=e595] [cursor=pointer]: 📋
+              - generic [ref=e596] [cursor=pointer]: ⚙️
+        - generic [ref=e597]:
+          - heading "Upcoming Sessions" [level=3] [ref=e598]
+          - generic [ref=e599]:
+            - generic [ref=e600]: You & Sarah
+            - generic [ref=e601]: ✓ Saturday 2:00 PM
+            - generic [ref=e602]: Ready to grow leaves 🍃
+          - generic [ref=e603]:
+            - generic [ref=e604]: You & Mike
+            - generic [ref=e605]: ⚠️ Time needed
+            - button "Coordinate Time" [ref=e606] [cursor=pointer]
+          - generic [ref=e607]:
+            - generic [ref=e608]: You & Alex
+            - generic [ref=e609]: ✓ Sunday 6:00 PM
+            - generic [ref=e610]: Ready to grow leaves 🍃
+          - paragraph [ref=e612]: 💡 Regular leaf growing strengthens your WillingTree!
+        - paragraph [ref=e614]: "📊 Premium: Advanced scheduling & insights"
+      - generic [ref=e615]:
+        - generic [ref=e616]: 6C
+        - generic [ref=e617]:
+          - generic [ref=e618]: Growing Leaves PRO
+          - generic [ref=e619]:
+            - generic [ref=e620]:
+              - generic [ref=e621] [cursor=pointer]: ←
+              - generic [ref=e622] [cursor=pointer]: →
+            - generic [ref=e623]:
+              - generic [ref=e624] [cursor=pointer]: 🏠
+              - generic [ref=e625] [cursor=pointer]: 📋
+              - generic [ref=e626] [cursor=pointer]: ⚙️
+        - generic [ref=e627]:
+          - heading "Review Done/Seen Lists First" [level=3] [ref=e628]
+          - generic [ref=e629]:
+            - paragraph [ref=e630]: ⏰ Weekly Visibility Window Open
+            - paragraph [ref=e631]: You have 1 hour to review both Big Branch and Leaves lists
+            - button "View Done/Seen Lists" [ref=e632] [cursor=pointer]
+          - heading "Now recognize Sarah's efforts" [level=3] [ref=e633]
+          - paragraph [ref=e634]: After reviewing lists, make 2 guesses for her 3 efforts
+          - paragraph [ref=e636]: "🍃 Guesses remaining: 2"
+          - generic [ref=e638]: More verbal appreciation
+          - generic [ref=e641]: Help with household chores
+          - generic [ref=e644]: Weekly date nights
+          - generic [ref=e647]: Morning coffee together
+          - generic [ref=e650]: Exercise together
+          - button "Submit First Guess (2 selected)" [ref=e652] [cursor=pointer]
+          - button "+ Add Bonus Recognition" [ref=e653] [cursor=pointer]
+        - paragraph [ref=e655]: "📊 Premium: Detailed recognition tracking"
+      - generic [ref=e656]:
+        - generic [ref=e657]: 6D
+        - generic [ref=e658]:
+          - generic [ref=e659]: Bonus Recognition PRO
+          - generic [ref=e660]:
+            - generic [ref=e661]:
+              - generic [ref=e662] [cursor=pointer]: ←
+              - generic [ref=e663] [cursor=pointer]: →
+            - generic [ref=e664]:
+              - generic [ref=e665] [cursor=pointer]: 🏠
+              - generic [ref=e666] [cursor=pointer]: 📋
+              - generic [ref=e667] [cursor=pointer]: ⚙️
+        - generic [ref=e668]:
+          - heading "Unexpected Acts of Service" [level=3] [ref=e669]
+          - paragraph [ref=e670]: Recognize something wonderful that wasn't on your Big Limb
+          - generic [ref=e671]:
+            - paragraph [ref=e672]: 🌟 Bonus Leaf Recognition
+            - paragraph [ref=e673]: Sarah did something special that wasn't on your list but you loved!
+          - 'textbox "Example: Sarah cleaned the dirty fridge shelf without being asked..." [ref=e674]'
+          - paragraph [ref=e676]: 💜 Bonus recognitions earn 1 point each for your team total!
+          - button "Add Bonus Leaf" [ref=e677] [cursor=pointer]
+          - button "Skip" [ref=e678] [cursor=pointer]
+        - paragraph [ref=e680]: "📊 Premium: Bonus recognition analytics"
+      - generic [ref=e681]:
+        - generic [ref=e682]: 6E
+        - generic [ref=e683]:
+          - generic [ref=e684]: Record Your Session PRO
+          - generic [ref=e685]:
+            - generic [ref=e686]:
+              - generic [ref=e687] [cursor=pointer]: ←
+              - generic [ref=e688] [cursor=pointer]: →
+            - generic [ref=e689]:
+              - generic [ref=e690] [cursor=pointer]: 🏠
+              - generic [ref=e691] [cursor=pointer]: 📋
+              - generic [ref=e692] [cursor=pointer]: ⚙️
+        - generic [ref=e693]:
+          - heading "Document Your Growth" [level=3] [ref=e694]
+          - paragraph [ref=e695]: Record your leaf growing session
+          - generic [ref=e696]: 🎙️
+          - paragraph [ref=e697]: Tap to start recording
+          - generic [ref=e698]:
+            - paragraph [ref=e699]: 🔔 Discussion Prompts Available
+            - paragraph [ref=e700]: Sarah's leaf efforts on your top priority haven't been recognized for 3 weeks.
+            - button "View Safe Discussion Guide" [ref=e701] [cursor=pointer]
+          - paragraph [ref=e703]: Recording helps identify how efforts grow into recognized leaves
+        - paragraph [ref=e705]: "📊 Premium: AI-powered conversation analysis"
+      - generic [ref=e706]:
+        - generic [ref=e707]: 6F
+        - generic [ref=e708]:
+          - generic [ref=e709]: Week 3 Results PRO
+          - generic [ref=e710]:
+            - generic [ref=e711]:
+              - generic [ref=e712] [cursor=pointer]: ←
+              - generic [ref=e713] [cursor=pointer]: →
+            - generic [ref=e714]:
+              - generic [ref=e715] [cursor=pointer]: 🏠
+              - generic [ref=e716] [cursor=pointer]: 📋
+              - generic [ref=e717] [cursor=pointer]: ⚙️
+        - generic [ref=e718]:
+          - heading "You & Sarah" [level=3] [ref=e719]
+          - generic [ref=e720]:
+            - generic [ref=e721]: 🍃🍃🍃🍃🍃
+            - paragraph [ref=e722]: 5 new leaves this week!
+          - generic [ref=e723]:
+            - generic [ref=e724]:
+              - generic [ref=e725]: "45"
+              - generic [ref=e726]: Sun Credits
+            - generic [ref=e727]:
+              - generic [ref=e728]: "52"
+              - generic [ref=e729]: Water Credits
+            - generic [ref=e730]:
+              - generic [ref=e731]: "3"
+              - generic [ref=e732]: Week Streak
+            - generic [ref=e733]:
+              - generic [ref=e734]: "85"
+              - generic [ref=e735]: Total Leaves
+          - generic [ref=e736]:
+            - generic [ref=e737]: 🎯 Top Priority Match!
+            - generic [ref=e738]: Correct guess on Demand item (+5 sun credits, Sarah +5 water credits)
+          - generic [ref=e739]:
+            - generic [ref=e740]: 🌟 Bonus Leaf!
+            - generic [ref=e741]: "You recognized: \"Cleaned fridge shelf\" (+2 sun, partner +2 water)"
+          - button "View Journal Prompts" [ref=e742] [cursor=pointer]
+          - button "Start Next Week" [ref=e743] [cursor=pointer]
+        - paragraph [ref=e745]: "📊 Premium: Weekly insights & progress tracking"
+  - generic [ref=e746]:
+    - heading "7. Tree Growth Dashboard & Community Forest" [level=2] [ref=e747]
+    - generic [ref=e748]:
+      - generic [ref=e749]:
+        - generic [ref=e750]: 7A
+        - generic [ref=e751]: Your WillingTree Forest
+        - generic [ref=e752]:
+          - heading "Your Growth" [level=3] [ref=e753]
+          - generic [ref=e754]:
+            - generic [ref=e755]:
+              - generic [ref=e756]: "3"
+              - generic [ref=e757]: Active Trees
+            - generic [ref=e758]:
+              - generic [ref=e759]: "142"
+              - generic [ref=e760]: Total Leaves
+          - heading "Growth Streaks 🔥" [level=4] [ref=e761]
+          - generic [ref=e763]:
+            - generic [ref=e764]:
+              - generic [ref=e765]: Weekly Leaf Growing
+              - generic [ref=e766]: Consistent sessions
+            - generic [ref=e767]: 5 weeks
+          - generic [ref=e769]:
+            - generic [ref=e770]:
+              - generic [ref=e771]: Big Limb Success
+              - generic [ref=e772]: Top priorities with Sarah
+            - generic [ref=e773]: 3 weeks
+          - generic [ref=e775]:
+            - generic [ref=e776]:
+              - generic [ref=e777]: Leaf Recognition
+              - generic [ref=e778]: Correct leaf guesses
+            - generic [ref=e779]: 2 weeks
+        - generic [ref=e780]:
+          - generic [ref=e781]: Home
+          - generic [ref=e783]: Trees
+          - generic [ref=e785]: Schedule
+          - generic [ref=e787]: Profile
+      - generic [ref=e789]:
+        - generic [ref=e790]: 7B
+        - generic [ref=e792]: Community Forest PRO
+        - generic [ref=e795]:
+          - generic [ref=e796]:
+            - generic [ref=e797]: 🏆🌳
+            - heading "Tree of the Week" [level=3] [ref=e798]
+            - generic [ref=e799]: Alex & Jordan
+            - generic [ref=e800]: 198 leaves • 12 week streak
+          - heading "Tallest Trees in the Forest" [level=4] [ref=e801]
+          - generic [ref=e803]:
+            - generic [ref=e804]:
+              - generic [ref=e805]: 1. Alex & Jordan
+              - generic [ref=e806]: 🍃 198 leaves • 12 weeks
+            - generic [ref=e807]: 🥇
+          - generic [ref=e809]:
+            - generic [ref=e810]:
+              - generic [ref=e811]: 2. Sam & Morgan
+              - generic [ref=e812]: 🍃 175 leaves • 10 weeks
+            - generic [ref=e813]: 🥈
+          - generic [ref=e815]:
+            - generic [ref=e816]:
+              - generic [ref=e817]: 3. Chris & Pat
+              - generic [ref=e818]: 🍃 162 leaves • 8 weeks
+            - generic [ref=e819]: 🥉
+          - paragraph [ref=e821]: "🌱 Your tallest tree (You & Sarah) ranks #12 in the forest!"
+      - generic [ref=e822]:
+        - generic [ref=e823]: 7C
+        - generic [ref=e825]:
+          - generic [ref=e826]: ←
+          - text: Growth Journal
+          - generic [ref=e827]: PRO
+        - generic [ref=e830]:
+          - generic [ref=e831]:
+            - generic [ref=e832]: On Growing Leaves
+            - generic [ref=e833]: How did choosing which leaves to grow from Sarah's Big Branch feel this week?
+          - textbox "Your thoughts..." [ref=e834]
+          - generic [ref=e835]:
+            - generic [ref=e836]: On Leaves Growing
+            - generic [ref=e837]: What leaves (recognitions) surprised you most? Include any bonus leaves!
+          - textbox "Your thoughts..." [ref=e838]
+          - generic [ref=e839]:
+            - generic [ref=e840]: On Tree Health (Won't)
+            - generic [ref=e841]: Are any leaves not growing well? What belongs in your "Won't" category?
+          - textbox "Your thoughts..." [ref=e842]
+          - button "Save Growth Reflections" [ref=e843] [cursor=pointer]
+        - paragraph [ref=e845]: "📊 Premium feature: $1/user/week for insights & coaching"
+```

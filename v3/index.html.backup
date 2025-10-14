@@ -632,54 +632,6 @@
             );
         }
 
-        // Meditate Screen - shows sun while partner works
-        function MeditateScreen({ createHeader, createHeaderWithTrack }) {
-            return (
-                <div className="screen">
-                    {createHeaderWithTrack ? createHeaderWithTrack('Meditate in the Sun', 0) : (
-                        createHeader ? createHeader('Meditate in the Sun') : (
-                            <div className="header">
-                                <h2>Meditate in the Sun</h2>
-                            </div>
-                        )
-                    )}
-                    <div className="content" style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        minHeight: '400px',
-                        textAlign: 'center',
-                        padding: '40px 20px',
-                        background: 'linear-gradient(135deg, #FFF9E6 0%, #FFFEF7 100%)',
-                        position: 'relative'
-                    }}>
-                        <div style={{
-                            position: 'absolute',
-                            top: '20px',
-                            right: '20px',
-                            fontSize: '80px',
-                            opacity: 0.7
-                        }}>
-                            ☀️
-                        </div>
-                        <h3 style={{ color: '#F59E0B', marginBottom: '20px', fontSize: '24px' }}>
-                            Take a moment to breathe
-                        </h3>
-                        <p style={{ fontSize: '16px', lineHeight: '1.8', maxWidth: '500px', color: '#78350F' }}>
-                            Your partner is working on their list. While they do, take this time to center yourself and reflect on your intentions for this relationship.
-                        </p>
-                        <p style={{ fontSize: '14px', marginTop: '30px', color: '#92400E', fontStyle: 'italic' }}>
-                            The sun shines on all who are willing to grow together.
-                        </p>
-                    </div>
-                    <div className="footer" style={{background: '#FEF3C7'}}>
-                        <p>Your partner will notify you when they're ready to continue.</p>
-                    </div>
-                </div>
-            );
-        }
-
         // Waiting for Partner Component
         function WaitingForPartner({ message, partnerName, onContinue }) {
             return (
@@ -1430,9 +1382,9 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
                                 {!viewingPartner ? (
-                                    <Day1BondingScreen goToNext={() => setCurrentScreen('2.1.2')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} partnerData={null} setMyData={setMyData} setPartnerData={setPartnerData} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Day1BondingScreen goToNext={() => setCurrentScreen('2.1.2')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} partnerData={null} setMyData={setMyData} setPartnerData={setPartnerData} createHeader={createHeader} />
                                 ) : (
-                                    <HoldingScreen createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <HoldingScreen createHeader={createHeader} />
                                 )}
                             </div>
                         );
@@ -1441,9 +1393,9 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
                                 {!viewingPartner ? (
-                                    <Day2TreeMetaphorScreen goToNext={() => setCurrentScreen('2.1.3')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Day2TreeMetaphorScreen goToNext={() => setCurrentScreen('2.1.3')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />
                                 ) : (
-                                    <HoldingScreen createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <HoldingScreen createHeader={createHeader} />
                                 )}
                             </div>
                         );
@@ -1452,9 +1404,9 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
                                 {!viewingPartner ? (
-                                    <Level1BuddingPollinateScreen goToNext={() => setCurrentScreen('2.1.4')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} setMyData={setMyData} userGender={formData.gender} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Level1BuddingPollinateScreen goToNext={() => setCurrentScreen('2.1.4')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} setMyData={setMyData} userGender={formData.gender} createHeader={createHeader} />
                                 ) : (
-                                    <HoldingScreen createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <HoldingScreen createHeader={createHeader} />
                                 )}
                             </div>
                         );
@@ -1463,9 +1415,9 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
                                 {!viewingPartner ? (
-                                    <MeditateScreen createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Day6SmallBranchesScreen setScreen={setCurrentScreen} goToNext={() => setCurrentScreen('2.1.5')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} partnerData={null} setMyData={setMyData} setPartnerData={setPartnerData} createHeader={createHeader} />
                                 ) : (
-                                    <Day6SmallBranchesScreen setScreen={setCurrentScreen} goToNext={() => setCurrentScreen('2.1.5')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} partnerData={null} setMyData={setMyData} setPartnerData={setPartnerData} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <HoldingScreen createHeader={createHeader} />
                                 )}
                             </div>
                         );
@@ -1474,9 +1426,9 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
                                 {!viewingPartner ? (
-                                    <Level1WateringBranchScreen goToNext={() => setCurrentScreen('2.1.6')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} setMyData={setMyData} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Level1WateringBranchScreen goToNext={() => setCurrentScreen('2.1.6')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} setMyData={setMyData} createHeader={createHeader} />
                                 ) : (
-                                    <MeditateScreen createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <HoldingScreen createHeader={createHeader} />
                                 )}
                             </div>
                         );
@@ -1485,9 +1437,9 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
                                 {!viewingPartner ? (
-                                    <MeditateScreen createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Day9GuessRevealScreen goToNext={() => setCurrentScreen('2.1.7')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} partnerData={null} setPartnerData={setPartnerData} createHeader={createHeader} />
                                 ) : (
-                                    <Day9GuessRevealScreen goToNext={() => setCurrentScreen('2.1.7')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} partnerData={null} setPartnerData={setPartnerData} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <HoldingScreen createHeader={createHeader} />
                                 )}
                             </div>
                         );
@@ -1498,7 +1450,7 @@
                                 {!viewingPartner ? (
                                     <Level1CustomizeWantsScreen goToNext={() => setCurrentScreen('2.2.1')} awardCredits={awardCredits} credits={credits} setCredits={setCredits} customizedWants={customizedWants} setCustomizedWants={setCustomizedWants} createHeader={createHeader} currentScreen={currentScreen} />
                                 ) : (
-                                    <HoldingScreen createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <HoldingScreen createHeader={createHeader} />
                                 )}
                             </div>
                         );
@@ -1511,7 +1463,7 @@
                                 {!viewingPartner ? (
                                     <Level2PairingStressScreen goToNext={() => setCurrentScreen('2.2.2')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} myData={myData} />
                                 ) : (
-                                    <HoldingScreen createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <HoldingScreen createHeader={createHeader} />
                                 )}
                             </div>
                         );
@@ -1520,9 +1472,9 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
                                 {!viewingPartner ? (
-                                    <Level2ActiveAppreciationScreen goToNext={() => setCurrentScreen('2.2.3')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Level2ActiveAppreciationScreen goToNext={() => setCurrentScreen('2.2.3')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />
                                 ) : (
-                                    <HoldingScreen createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <HoldingScreen createHeader={createHeader} />
                                 )}
                             </div>
                         );
@@ -1533,7 +1485,7 @@
                                 {!viewingPartner ? (
                                     <Level2BinaryWillingScreen goToNext={() => setCurrentScreen('2.2.4')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} partnerData={partnerData} setMyData={setMyData} myData={myData} canCustomizeWants={canCustomizeWants} customizedWants={customizedWants} />
                                 ) : (
-                                    <HoldingScreen createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <HoldingScreen createHeader={createHeader} />
                                 )}
                             </div>
                         );
@@ -1544,7 +1496,7 @@
                                 {!viewingPartner ? (
                                     <Level2PersonalizeWantsScreen goToNext={() => setCurrentScreen('2.2.5')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} setMyData={setMyData} myData={myData} canCustomizeWants={canCustomizeWants} customizedWants={customizedWants} setCustomizedWants={setCustomizedWants} />
                                 ) : (
-                                    <HoldingScreen createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <HoldingScreen createHeader={createHeader} />
                                 )}
                             </div>
                         );
@@ -1555,7 +1507,7 @@
                                 {!viewingPartner ? (
                                     <Level2DiscoverWhyScreen goToNext={() => setCurrentScreen('2.2.6')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} setMyData={setMyData} myData={myData} />
                                 ) : (
-                                    <HoldingScreen createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <HoldingScreen createHeader={createHeader} />
                                 )}
                             </div>
                         );
@@ -1566,7 +1518,7 @@
                                 {!viewingPartner ? (
                                     <Level2GuessUnwillingScreen goToNext={() => setCurrentScreen('2.2.7')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} partnerData={partnerData} myData={myData} />
                                 ) : (
-                                    <HoldingScreen createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <HoldingScreen createHeader={createHeader} />
                                 )}
                             </div>
                         );
@@ -1577,7 +1529,7 @@
                                 {!viewingPartner ? (
                                     <HarvestScreen goToNext={() => setCurrentScreen('2.3.1')} credits={credits} setCredits={setCredits} cycleCount={cycleCount} setCycleCount={setCycleCount} pairedMode={false} setPairedMode={setPairedMode} createHeader={createHeader} level={2} />
                                 ) : (
-                                    <HoldingScreen createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <HoldingScreen createHeader={createHeader} />
                                 )}
                             </div>
                         );
@@ -1590,7 +1542,7 @@
                                 {!viewingPartner ? (
                                     <Level3ArticulateWantsScreen goToNext={() => setCurrentScreen('2.3.2')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} setMyData={setMyData} />
                                 ) : (
-                                    <HoldingScreen createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <HoldingScreen createHeader={createHeader} />
                                 )}
                             </div>
                         );
@@ -1601,7 +1553,7 @@
                                 {!viewingPartner ? (
                                     <Level3NonAttachedScreen goToNext={() => setCurrentScreen('2.3.3')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} myData={myData} setMyData={setMyData} customizedWants={customizedWants} />
                                 ) : (
-                                    <HoldingScreen createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <HoldingScreen createHeader={createHeader} />
                                 )}
                             </div>
                         );
@@ -1610,9 +1562,9 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
                                 {!viewingPartner ? (
-                                    <Level3SafeNoScreen goToNext={() => setCurrentScreen('2.3.4')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Level3SafeNoScreen goToNext={() => setCurrentScreen('2.3.4')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />
                                 ) : (
-                                    <HoldingScreen createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <HoldingScreen createHeader={createHeader} />
                                 )}
                             </div>
                         );
@@ -1621,9 +1573,9 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
                                 {!viewingPartner ? (
-                                    <Level3WantNegotiationScreen goToNext={() => setCurrentScreen('2.3.5')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Level3WantNegotiationScreen goToNext={() => setCurrentScreen('2.3.5')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />
                                 ) : (
-                                    <HoldingScreen createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <HoldingScreen createHeader={createHeader} />
                                 )}
                             </div>
                         );
@@ -1632,9 +1584,9 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
                                 {!viewingPartner ? (
-                                    <Level3PositiveConfirmationScreen goToNext={() => setCurrentScreen('2.3.6')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Level3PositiveConfirmationScreen goToNext={() => setCurrentScreen('2.3.6')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />
                                 ) : (
-                                    <HoldingScreen createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <HoldingScreen createHeader={createHeader} />
                                 )}
                             </div>
                         );
@@ -1643,9 +1595,9 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
                                 {!viewingPartner ? (
-                                    <Level3ReceivingEffortsScreen goToNext={() => setCurrentScreen('2.3.7')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Level3ReceivingEffortsScreen goToNext={() => setCurrentScreen('2.3.7')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />
                                 ) : (
-                                    <HoldingScreen createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <HoldingScreen createHeader={createHeader} />
                                 )}
                             </div>
                         );
@@ -1656,7 +1608,7 @@
                                 {!viewingPartner ? (
                                     <Level3HarvestScreen goToNext={() => setCurrentScreen('3.1')} credits={credits} setCredits={setCredits} cycleCount={cycleCount} setCycleCount={setCycleCount} pairedMode={false} setPairedMode={setPairedMode} createHeader={createHeader} formData={formData} />
                                 ) : (
-                                    <HoldingScreen createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <HoldingScreen createHeader={createHeader} />
                                 )}
                             </div>
                         );
@@ -1689,7 +1641,7 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
                                 {!viewingPartner ? (
-                                    <Day1BondingScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={true} partnerData={partnerData} setMyData={setMyData} setPartnerData={setPartnerData} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} userName={formData.name} />
+                                    <Day1BondingScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={true} partnerData={partnerData} setMyData={setMyData} setPartnerData={setPartnerData} createHeader={createHeader} userName={formData.name} />
                                 ) : (
                                     <Day1BondingScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} pairedMode={true} partnerData={myData} setMyData={setPartnerData} setPartnerData={setMyData} createHeader={createHeader} userName={partnerData.name} />
                                 )}
@@ -1701,9 +1653,9 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
                                 {!viewingPartner ? (
-                                    <Day2TreeMetaphorScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Day2TreeMetaphorScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />
                                 ) : (
-                                    <Day2TreeMetaphorScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Day2TreeMetaphorScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} />
                                 )}
                             </div>
                         );
@@ -1713,9 +1665,9 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
                                 {!viewingPartner ? (
-                                    <Level1BuddingPollinateScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={true} setMyData={setMyData} userGender={formData.gender} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Level1BuddingPollinateScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={true} setMyData={setMyData} userGender={formData.gender} createHeader={createHeader} />
                                 ) : (
-                                    <Level1BuddingPollinateScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} pairedMode={true} setMyData={setPartnerData} userGender={partnerData.gender} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Level1BuddingPollinateScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} pairedMode={true} setMyData={setPartnerData} userGender={partnerData.gender} createHeader={createHeader} />
                                 )}
                             </div>
                         );
@@ -1737,9 +1689,9 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
                                 {!viewingPartner ? (
-                                    <Level1WateringBranchScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={true} setMyData={setMyData} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Level1WateringBranchScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={true} setMyData={setMyData} createHeader={createHeader} />
                                 ) : (
-                                    <Level1WateringBranchScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} pairedMode={true} setMyData={setPartnerData} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Level1WateringBranchScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} pairedMode={true} setMyData={setPartnerData} createHeader={createHeader} />
                                 )}
                             </div>
                         );
@@ -1749,9 +1701,9 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
                                 {!viewingPartner ? (
-                                    <Day9GuessRevealScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={true} partnerData={partnerData} setPartnerData={setPartnerData} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Day9GuessRevealScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={true} partnerData={partnerData} setPartnerData={setPartnerData} createHeader={createHeader} />
                                 ) : (
-                                    <Day9GuessRevealScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} pairedMode={true} partnerData={myData} setPartnerData={setMyData} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Day9GuessRevealScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} pairedMode={true} partnerData={myData} setPartnerData={setMyData} createHeader={createHeader} />
                                 )}
                             </div>
                         );
@@ -1774,7 +1726,7 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
                                 {!viewingPartner ? (
-                                    <Level2PairingStressScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} myData={myData} />
+                                    <Level2PairingStressScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} myData={myData} />
                                 ) : (
                                     <Level2PairingStressScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} myData={partnerData} />
                                 )}
@@ -1786,9 +1738,9 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
                                 {!viewingPartner ? (
-                                    <Level2ActiveAppreciationScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Level2ActiveAppreciationScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />
                                 ) : (
-                                    <Level2ActiveAppreciationScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Level2ActiveAppreciationScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} />
                                 )}
                             </div>
                         );
@@ -1798,7 +1750,7 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
                                 {!viewingPartner ? (
-                                    <Level2BinaryWillingScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} partnerData={partnerData} setMyData={setMyData} myData={myData} canCustomizeWants={canCustomizeWants} customizedWants={customizedWants} />
+                                    <Level2BinaryWillingScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} partnerData={partnerData} setMyData={setMyData} myData={myData} canCustomizeWants={canCustomizeWants} customizedWants={customizedWants} />
                                 ) : (
                                     <Level2BinaryWillingScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} partnerData={myData} setMyData={(data) => setPartnerData(prev => ({...prev, ...data}))} myData={partnerData} canCustomizeWants={partnerData.canCustomizeWants} customizedWants={partnerData.customizedWants} />
                                 )}
@@ -1810,7 +1762,7 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
                                 {!viewingPartner ? (
-                                    <Level2PersonalizeWantsScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} setMyData={setMyData} myData={myData} canCustomizeWants={canCustomizeWants} customizedWants={customizedWants} setCustomizedWants={setCustomizedWants} />
+                                    <Level2PersonalizeWantsScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} setMyData={setMyData} myData={myData} canCustomizeWants={canCustomizeWants} customizedWants={customizedWants} setCustomizedWants={setCustomizedWants} />
                                 ) : (
                                     <Level2PersonalizeWantsScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} setMyData={(data) => setPartnerData(prev => ({...prev, ...data}))} myData={partnerData} canCustomizeWants={partnerData.canCustomizeWants} customizedWants={partnerData.customizedWants} setCustomizedWants={(wants) => setPartnerData(prev => ({...prev, customizedWants: wants}))} />
                                 )}
@@ -1822,7 +1774,7 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
                                 {!viewingPartner ? (
-                                    <Level2DiscoverWhyScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} setMyData={setMyData} myData={myData} />
+                                    <Level2DiscoverWhyScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} setMyData={setMyData} myData={myData} />
                                 ) : (
                                     <Level2DiscoverWhyScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} setMyData={(data) => setPartnerData(prev => ({...prev, ...data}))} myData={partnerData} />
                                 )}
@@ -1834,7 +1786,7 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
                                 {!viewingPartner ? (
-                                    <Level2GuessUnwillingScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} partnerData={partnerData} myData={myData} />
+                                    <Level2GuessUnwillingScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} partnerData={partnerData} myData={myData} />
                                 ) : (
                                     <Level2GuessUnwillingScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} partnerData={myData} myData={partnerData} />
                                 )}
@@ -1846,7 +1798,7 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
                                 {!viewingPartner ? (
-                                    <HarvestScreen goToNext={goToNext} credits={credits} setCredits={setCredits} cycleCount={cycleCount} setCycleCount={setCycleCount} pairedMode={pairedMode} setPairedMode={setPairedMode} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} level={2} />
+                                    <HarvestScreen goToNext={goToNext} credits={credits} setCredits={setCredits} cycleCount={cycleCount} setCycleCount={setCycleCount} pairedMode={pairedMode} setPairedMode={setPairedMode} createHeader={createHeader} level={2} />
                                 ) : (
                                     <HarvestScreen goToNext={goToNext} credits={partnerData.credits} setCredits={(newCredits) => setPartnerData(prev => ({...prev, credits: newCredits}))} cycleCount={cycleCount} setCycleCount={setCycleCount} pairedMode={pairedMode} setPairedMode={setPairedMode} createHeader={createHeader} level={2} />
                                 )}
@@ -1859,7 +1811,7 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
                                 {!viewingPartner ? (
-                                    <Level3ArticulateWantsScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} setMyData={setMyData} />
+                                    <Level3ArticulateWantsScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} setMyData={setMyData} />
                                 ) : (
                                     <Level3ArticulateWantsScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} setMyData={setPartnerData} />
                                 )}
@@ -1871,7 +1823,7 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
                                 {!viewingPartner ? (
-                                    <Level3NonAttachedScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} myData={myData} setMyData={setMyData} customizedWants={customizedWants} />
+                                    <Level3NonAttachedScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} myData={myData} setMyData={setMyData} customizedWants={customizedWants} />
                                 ) : (
                                     <Level3NonAttachedScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} myData={partnerData} setMyData={setPartnerData} customizedWants={partnerData.customizedWants || customizedWants} />
                                 )}
@@ -1883,9 +1835,9 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
                                 {!viewingPartner ? (
-                                    <Level3SafeNoScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Level3SafeNoScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />
                                 ) : (
-                                    <Level3SafeNoScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Level3SafeNoScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} />
                                 )}
                             </div>
                         );
@@ -1895,9 +1847,9 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
                                 {!viewingPartner ? (
-                                    <Level3WantNegotiationScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Level3WantNegotiationScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />
                                 ) : (
-                                    <Level3WantNegotiationScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Level3WantNegotiationScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} />
                                 )}
                             </div>
                         );
@@ -1907,9 +1859,9 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
                                 {!viewingPartner ? (
-                                    <Level3PositiveConfirmationScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Level3PositiveConfirmationScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />
                                 ) : (
-                                    <Level3PositiveConfirmationScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Level3PositiveConfirmationScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} />
                                 )}
                             </div>
                         );
@@ -1919,9 +1871,9 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
                                 {!viewingPartner ? (
-                                    <Level3ReceivingEffortsScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Level3ReceivingEffortsScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} />
                                 ) : (
-                                    <Level3ReceivingEffortsScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Level3ReceivingEffortsScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} />
                                 )}
                             </div>
                         );
@@ -1931,7 +1883,7 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
                                 {!viewingPartner ? (
-                                    <Level3HarvestScreen goToNext={goToNext} credits={credits} setCredits={setCredits} cycleCount={cycleCount} setCycleCount={setCycleCount} pairedMode={pairedMode} setPairedMode={setPairedMode} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} formData={formData} />
+                                    <Level3HarvestScreen goToNext={goToNext} credits={credits} setCredits={setCredits} cycleCount={cycleCount} setCycleCount={setCycleCount} pairedMode={pairedMode} setPairedMode={setPairedMode} createHeader={createHeader} formData={formData} />
                                 ) : (
                                     <Level3HarvestScreen goToNext={goToNext} credits={partnerData.credits} setCredits={(newCredits) => setPartnerData(prev => ({...prev, credits: newCredits}))} cycleCount={cycleCount} setCycleCount={setCycleCount} pairedMode={pairedMode} setPairedMode={setPairedMode} createHeader={createHeader} formData={{name: partnerData.name}} />
                                 )}
@@ -2591,7 +2543,7 @@
         // ====================
 
         // Screen 2.1: Day 1 - Your Tree Choice
-        function Day1BondingScreen({ goToNext, awardCredits, credits, currentScreen, pairedMode, partnerData, setMyData, setPartnerData, createHeader, createHeaderWithTrack, userName }) {
+        function Day1BondingScreen({ goToNext, awardCredits, credits, currentScreen, pairedMode, partnerData, setMyData, setPartnerData, createHeader, userName }) {
             const [userStyle, setUserStyle] = useState(null);
             const [partnerStyle, setPartnerStyle] = useState(null);
             const [showPartnerQuestion, setShowPartnerQuestion] = useState(false);
@@ -2696,13 +2648,13 @@
 
             return (
                 <div className="screen">
-                    {createHeaderWithTrack ? createHeaderWithTrack('Good Soil', soilCreditsEarned) : (
-                        createHeader ? createHeader('Good Soil', null, userName) : (
-                            <div className="header">
-                                <h2>Good Soil</h2>
-                            </div>
-                        )
+                    <div className="day-badge">Lvl 1 - 1</div>
+                    {createHeader ? createHeader('Preparing Good Soil', null, userName) : (
+                        <div className="header">
+                            <h2>Preparing Good Soil</h2>
+                        </div>
                     )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} earnedThisScreen={soilCreditsEarned} />
                     <div className="screen-content">
                         {!showPartnerQuestion && (
                             <>
@@ -2969,7 +2921,7 @@
         }
 
         // Screen 2.1.2: A Little Sunshine
-        function Day2TreeMetaphorScreen({ setScreen, goToNext, awardCredits, credits, currentScreen, createHeader, createHeaderWithTrack }) {
+        function Day2TreeMetaphorScreen({ setScreen, goToNext, awardCredits, credits, currentScreen, createHeader }) {
             const [item1, setItem1] = useState('');
             const [item2, setItem2] = useState('');
             const [item3, setItem3] = useState('');
@@ -3001,11 +2953,11 @@
 
             return (
                 <div className="screen">
-                    {createHeaderWithTrack ? createHeaderWithTrack('A Little Sunshine', sunCreditsEarned) : (
-                        createHeader ? createHeader('A Little Sunshine') : (
-                            <div className="header"><h2>A Little Sunshine</h2></div>
-                        )
+                    <div className="day-badge">Lvl 1 - 2</div>
+                    {createHeader ? createHeader('A Little Sunshine') : (
+                        <div className="header"><h2>A Little Sunshine</h2></div>
                     )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} earnedThisScreen={sunCreditsEarned} />
                     <div className="screen-content">
                         <p className="text-md" style={{marginBottom: '16px'}}>
                             List things you noticed your partner doing this week:
@@ -3362,7 +3314,7 @@
         }
 
         // Screen 2.6: Day 6 - Fertilize the Tree
-        function Day6SmallBranchesScreen({ setScreen, goToNext, awardCredits, credits, currentScreen, pairedMode, partnerData, setMyData, setPartnerData, createHeader, createHeaderWithTrack }) {
+        function Day6SmallBranchesScreen({ setScreen, goToNext, awardCredits, credits, currentScreen, pairedMode, partnerData, setMyData, setPartnerData }) {
             const [allocations, setAllocations] = useState({});
             const [isSpinning, setIsSpinning] = useState(false);
 
@@ -3449,13 +3401,11 @@
 
             return (
                 <div className="screen">
-                    {createHeaderWithTrack ? createHeaderWithTrack('Big Branch', 0) : (
-                        createHeader ? createHeader('Big Branch') : (
-                            <div className="header">
-                                <h2>Big Branch</h2>
-                            </div>
-                        )
-                    )}
+                    <div className="day-badge">Lvl 1 - 6</div>
+                    <div className="header">
+                        <h2>Big Branch</h2>
+                    </div>
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
                         {isWaitingForPartner ? (
                             <>
@@ -3745,7 +3695,7 @@
         }
 
         // Screen 2.9: Day 9 - Identify the Good Fruits
-        function Day9GuessRevealScreen({ setScreen, awardCredits, credits, currentScreen, pairedMode, partnerData, setPartnerData, createHeader, createHeaderWithTrack }) {
+        function Day9GuessRevealScreen({ setScreen, awardCredits, credits, currentScreen, pairedMode, partnerData, setPartnerData }) {
             const [selectedGuesses, setSelectedGuesses] = useState([]);
 
             // In paired mode, use actual partner's focus actions; otherwise simulate
@@ -3812,13 +3762,11 @@
 
             return (
                 <div className="screen">
-                    {createHeaderWithTrack ? createHeaderWithTrack('Identify the Good Fruits', 0) : (
-                        createHeader ? createHeader('Identify the Good Fruits') : (
-                            <div className="header">
-                                <h2>Identify the Good Fruits</h2>
-                            </div>
-                        )
-                    )}
+                    <div className="day-badge">Lvl 1 - 9</div>
+                    <div className="header">
+                        <h2>Identify the Good Fruits</h2>
+                    </div>
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
                         <p className="text-md" style={{marginBottom: '12px'}}>
                             Your partner focused on 2 actions this week. Can you identify what they were working on?
@@ -3868,7 +3816,7 @@
         }
 
         // Screen 2.1.7: Level 1 Customize Wants (BigBranch)
-        function Level1CustomizeWantsScreen({ goToNext, awardCredits, credits, setCredits, customizedWants, setCustomizedWants, createHeader, createHeaderWithTrack, currentScreen }) {
+        function Level1CustomizeWantsScreen({ goToNext, awardCredits, credits, setCredits, customizedWants, setCustomizedWants, createHeader, currentScreen }) {
             const [selectedItems, setSelectedItems] = React.useState([]);
             const [customInput, setCustomInput] = React.useState('');
 
@@ -3928,11 +3876,11 @@
 
             return (
                 <div className="screen">
-                    {createHeaderWithTrack ? createHeaderWithTrack('Customize Your Want List', 0) : (
-                        createHeader ? createHeader('Customize Your Want List') : (
-                            <div className="header"><h2>Customize Your Want List</h2></div>
-                        )
+                    <div className="day-badge">Lvl 1 - 7</div>
+                    {createHeader ? createHeader('Customize Your Want List') : (
+                        <div className="header"><h2>Customize Your Want List</h2></div>
                     )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
                         <div style={{
                             background: '#E8F5E9',
@@ -4040,7 +3988,7 @@
         }
 
         // Screen 2.10: Harvest
-        function HarvestScreen({ setScreen, goToNext, credits, setCredits, cycleCount, setCycleCount, pairedMode, setPairedMode, canCustomizeWants, setCanCustomizeWants, createHeader, createHeaderWithTrack, level }) {
+        function HarvestScreen({ setScreen, goToNext, credits, setCredits, cycleCount, setCycleCount, pairedMode, setPairedMode, canCustomizeWants, setCanCustomizeWants, createHeader, level }) {
             const totalCredits = credits.sun + credits.water + credits.growth;
             const canAffordReferral = totalCredits >= 100;
             const canAffordPaired = totalCredits >= 200;
@@ -4103,13 +4051,10 @@
 
             return (
                 <div className="screen">
-                    {createHeaderWithTrack ? createHeaderWithTrack('🌾 Harvest!', 0) : (
-                        createHeader ? createHeader('🌾 Harvest!') : (
-                            <div className="header">
-                                <h2>🌾 Harvest!</h2>
-                            </div>
-                        )
-                    )}
+                    <div className="day-badge">Lvl 1 - 10</div>
+                    <div className="header">
+                        <h2>🌾 Harvest!</h2>
+                    </div>
                     <div className="screen-content">
                         <div style={{textAlign: 'center', marginBottom: '20px'}}>
                             <div style={{fontSize: '48px', marginBottom: '12px'}}>🌳</div>
@@ -4205,7 +4150,7 @@
         // ===== LEVEL 1 COMBINED SCREENS =====
 
         // Level 1 Screen 3: Budding/Pruning + Pollinate (Combined 2.4 + 2.5)
-        function Level1BuddingPollinateScreen({ goToNext, awardCredits, credits, currentScreen, pairedMode, setMyData, userGender, createHeader, createHeaderWithTrack }) {
+        function Level1BuddingPollinateScreen({ goToNext, awardCredits, credits, currentScreen, pairedMode, setMyData, userGender, createHeader }) {
             const [step, setStep] = useState(1); // 1 = scoring, 2 = send list
             const [scores, setScores] = useState({});
 
@@ -4271,11 +4216,11 @@
             if (step === 1) {
                 return (
                     <div className="screen">
-                        {createHeaderWithTrack ? createHeaderWithTrack('Budding, Pruning', 0) : (
-                            createHeader ? createHeader('Budding, Pruning') : (
-                                <div className="header"><h2>Budding, Pruning</h2></div>
-                            )
+                        <div className="day-badge">Lvl 1 - 3</div>
+                        {createHeader ? createHeader('Budding, Pruning') : (
+                            <div className="header"><h2>Budding, Pruning</h2></div>
                         )}
+                        <CreditsDisplay credits={credits} screen={currentScreen} />
                         <div className="screen-content">
                             <div style={{flex: 1, overflowY: 'auto', paddingBottom: '16px'}}>
                                 <p className="text-md" style={{marginBottom: '8px'}}>
@@ -4345,11 +4290,11 @@
 
             return (
                 <div className="screen">
-                    {createHeaderWithTrack ? createHeaderWithTrack('Pollinate', 0) : (
-                        createHeader ? createHeader('Pollinate') : (
-                            <div className="header"><h2>Pollinate</h2></div>
-                        )
+                    <div className="day-badge">Lvl 1 - 3</div>
+                    {createHeader ? createHeader('Pollinate') : (
+                        <div className="header"><h2>Pollinate</h2></div>
                     )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
                         <p className="text-md" style={{marginBottom: '12px'}}>
                             Your top 12 willing actions are ready to send to your partner:
@@ -4383,7 +4328,7 @@
         }
 
         // Level 1 Screen 5: Watering + Small Branch (Combined 2.7 + 2.8)
-        function Level1WateringBranchScreen({ goToNext, awardCredits, credits, currentScreen, pairedMode, setMyData, createHeader, createHeaderWithTrack }) {
+        function Level1WateringBranchScreen({ goToNext, awardCredits, credits, currentScreen, pairedMode, setMyData, createHeader }) {
             const [step, setStep] = useState(1); // 1 = select 2 actions, 2 = practice commitment
             const [selectedActions, setSelectedActions] = useState([]);
             const [practiceNotes, setPracticeNotes] = useState('');
@@ -4423,11 +4368,11 @@
             if (step === 1) {
                 return (
                     <div className="screen">
-                        {createHeaderWithTrack ? createHeaderWithTrack('Little Branches', 0) : (
-                            createHeader ? createHeader('Little Branches') : (
-                                <div className="header"><h2>Little Branches</h2></div>
-                            )
+                        <div className="day-badge">Lvl 1 - 5</div>
+                        {createHeader ? createHeader('Little Branches') : (
+                            <div className="header"><h2>Little Branches</h2></div>
                         )}
+                        <CreditsDisplay credits={credits} screen={currentScreen} />
                         <div className="screen-content">
                             <p className="text-md" style={{marginBottom: '12px'}}>
                                 Your partner has chosen what they would Want most. Select 2 actions you'll focus on this week:
@@ -4474,11 +4419,11 @@
             // Step 2: Practice commitment
             return (
                 <div className="screen">
-                    {createHeaderWithTrack ? createHeaderWithTrack('Little Branches', 0) : (
-                        createHeader ? createHeader('Little Branches') : (
-                            <div className="header"><h2>Little Branches</h2></div>
-                        )
+                    <div className="day-badge">Lvl 1 - 5</div>
+                    {createHeader ? createHeader('Little Branches') : (
+                        <div className="header"><h2>Little Branches</h2></div>
                     )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
                         <p className="text-md" style={{marginBottom: '12px'}}>
                             This week, practice these 2 actions:
@@ -4527,7 +4472,7 @@
         // ===== LEVEL 2 SCREENS =====
 
         // Level 2 Screen 1: Pairing Under Stress
-        function Level2PairingStressScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, createHeaderWithTrack, myData }) {
+        function Level2PairingStressScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, myData }) {
             const [taking, setTaking] = useState('');
             const [serving, setServing] = useState('');
             const [accepting, setAccepting] = useState('');
@@ -4542,11 +4487,11 @@
 
             return (
                 <div className="screen">
-                    {createHeaderWithTrack ? createHeaderWithTrack('Want/Willing', 0) : (
-                        createHeader ? createHeader('Want/Willing') : (
-                            <div className="header"><h2>Want/Willing</h2></div>
-                        )
+                    <div className="day-badge">Lvl 2 - 1</div>
+                    {createHeader ? createHeader('Want/Willing') : (
+                        <div className="header"><h2>Want/Willing</h2></div>
                     )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
                         <div style={{textAlign: 'center', marginBottom: '20px'}}>
                             <a href="wheel-of-consent.html" target="_blank" style={{color: '#4CAF50', textDecoration: 'none', fontSize: '16px'}}>
@@ -4643,7 +4588,7 @@
         }
 
         // Level 2 Screen 2: Active Appreciation
-        function Level2ActiveAppreciationScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, createHeaderWithTrack }) {
+        function Level2ActiveAppreciationScreen({ goToNext, awardCredits, credits, currentScreen, createHeader }) {
             const [example1, setExample1] = useState('');
             const [example2, setExample2] = useState('');
             const [example3, setExample3] = useState('');
@@ -4656,11 +4601,11 @@
 
             return (
                 <div className="screen">
-                    {createHeaderWithTrack ? createHeaderWithTrack('Active Appreciation', 0) : (
-                        createHeader ? createHeader('Active Appreciation') : (
-                            <div className="header"><h2>Active Appreciation</h2></div>
-                        )
+                    <div className="day-badge">Lvl 2 - 2</div>
+                    {createHeader ? createHeader('Active Appreciation') : (
+                        <div className="header"><h2>Active Appreciation</h2></div>
                     )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
                         <p className="text-md" style={{marginBottom: '16px'}}>
                             Appreciate your partner by USING their efforts, even if imperfect. Example: They make the bed sub-par, but you accept the effort.
@@ -4775,7 +4720,7 @@
         }
 
         // Level 2 Screen 3: Binary Willing List
-        function Level2BinaryWillingScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, createHeaderWithTrack, partnerData, setMyData, myData, canCustomizeWants, customizedWants }) {
+        function Level2BinaryWillingScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, partnerData, setMyData, myData, canCustomizeWants, customizedWants }) {
             const [responses, setResponses] = useState({});
 
             // Use customized wants if available, otherwise use the FULL Big Branch list (all 12 items from Level 1 fertilize)
@@ -4821,11 +4766,11 @@
 
             return (
                 <div className="screen">
-                    {createHeaderWithTrack ? createHeaderWithTrack('Binary Willing List', 0) : (
-                        createHeader ? createHeader('Binary Willing List') : (
-                            <div className="header"><h2>Binary Willing List</h2></div>
-                        )
+                    <div className="day-badge">Lvl 2 - 3</div>
+                    {createHeader ? createHeader('Binary Willing List') : (
+                        <div className="header"><h2>Binary Willing List</h2></div>
                     )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
                         <p className="text-md" style={{marginBottom: '12px'}}>
                             Your partner has upgraded their Big Branch Wants/Needs list so some of these are their personal Wants now. For each item, answer No or Yes:
@@ -4895,7 +4840,7 @@
         }
 
         // Level 2 Screen 4: Personalize Wants
-        function Level2PersonalizeWantsScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, createHeaderWithTrack, setMyData, myData, canCustomizeWants, customizedWants, setCustomizedWants }) {
+        function Level2PersonalizeWantsScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, setMyData, myData, canCustomizeWants, customizedWants, setCustomizedWants }) {
             const [researchQuestions, setResearchQuestions] = useState({});
             const [selectedForWilling, setSelectedForWilling] = useState([]);
 
@@ -4949,11 +4894,11 @@
 
             return (
                 <div className="screen">
-                    {createHeaderWithTrack ? createHeaderWithTrack('Curious Research', 0) : (
-                        createHeader ? createHeader('Curious Research') : (
-                            <div className="header"><h2>Curious Research</h2></div>
-                        )
+                    <div className="day-badge">Lvl 2 - 4</div>
+                    {createHeader ? createHeader('Curious Research') : (
+                        <div className="header"><h2>Curious Research</h2></div>
                     )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
                         <p className="text-md" style={{marginBottom: '12px'}}>
                             Your partner's top 6 items from the lottery are shown below. Before choosing which 2 you'll commit to, research at least 4 of them by asking your partner:
@@ -5042,7 +4987,7 @@
         }
 
         // Level 2 Screen 5: Discover the Why
-        function Level2DiscoverWhyScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, createHeaderWithTrack, setMyData, myData }) {
+        function Level2DiscoverWhyScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, setMyData, myData }) {
             const [sharing1, setSharing1] = useState('');
             const [whyQuestion1, setWhyQuestion1] = useState('');
             const [sharing2, setSharing2] = useState('');
@@ -5067,11 +5012,11 @@
 
             return (
                 <div className="screen">
-                    {createHeaderWithTrack ? createHeaderWithTrack('Share & Ask Why', 0) : (
-                        createHeader ? createHeader('Share & Ask Why') : (
-                            <div className="header"><h2>Share & Ask Why</h2></div>
-                        )
+                    <div className="day-badge">Lvl 2 - 5</div>
+                    {createHeader ? createHeader('Share & Ask Why') : (
+                        <div className="header"><h2>Share & Ask Why</h2></div>
                     )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
                         <p className="text-md" style={{marginBottom: '8px'}}>
                             Share what you will be trying to do for your partner, and ask about the meaning:
@@ -5148,7 +5093,7 @@
         }
 
         // Level 2 Screen 6: Guess the Unwilling
-        function Level2GuessUnwillingScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, createHeaderWithTrack, partnerData, myData }) {
+        function Level2GuessUnwillingScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, partnerData, myData }) {
             const [selectedGuesses, setSelectedGuesses] = useState([]);
             const [noneSelected, setNoneSelected] = useState(false);
             const [submitted, setSubmitted] = useState(false);
@@ -5228,11 +5173,11 @@
 
             return (
                 <div className="screen">
-                    {createHeaderWithTrack ? createHeaderWithTrack('Guess the Unwilling', 0) : (
-                        createHeader ? createHeader('Guess the Unwilling') : (
-                            <div className="header"><h2>Guess the Unwilling</h2></div>
-                        )
+                    <div className="day-badge">Lvl 2 - 6</div>
+                    {createHeader ? createHeader('Guess the Unwilling') : (
+                        <div className="header"><h2>Guess the Unwilling</h2></div>
                     )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
                         <p className="text-md" style={{marginBottom: '8px'}}>
                             Your partner saw this list and responded Yes/No. Which ones do you think they were UNWILLING to do?
@@ -5311,7 +5256,7 @@
 
         // ===== LEVEL 3 PLACEHOLDER SCREENS =====
 
-        function Level3ArticulateWantsScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, createHeaderWithTrack, setMyData }) {
+        function Level3ArticulateWantsScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, setMyData }) {
             const [selectedModel, setSelectedModel] = useState('');
 
             const handleContinue = () => {
@@ -5327,11 +5272,11 @@
 
             return (
                 <div className="screen">
-                    {createHeaderWithTrack ? createHeaderWithTrack('The Story I Want', 0) : (
-                        createHeader ? createHeader('The Story I Want') : (
-                            <div className="header"><h2>The Story I Want</h2></div>
-                        )
+                    <div className="day-badge">Lvl 3 - 1</div>
+                    {createHeader ? createHeader('The Story I Want') : (
+                        <div className="header"><h2>The Story I Want</h2></div>
                     )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
                         <p className="text-md" style={{marginBottom: '16px', lineHeight: '1.6'}}>
                             We protect ourselves from shame by telling stories about who we are, what we deserve, and why things happen the way they do. Unpacking the stories we tell ourselves—and choosing new ones—is essential to creating the intimate partnership we truly want.
@@ -5458,7 +5403,7 @@
             );
         }
 
-        function Level3NonAttachedScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, createHeaderWithTrack, myData, setMyData, customizedWants }) {
+        function Level3NonAttachedScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, myData, setMyData, customizedWants }) {
             // Get top 3 behaviors from customized Want list
             const getTopBehaviors = () => {
                 // First try customized wants from Level 1
@@ -5513,11 +5458,11 @@
 
             return (
                 <div className="screen">
-                    {createHeaderWithTrack ? createHeaderWithTrack('Reframing - Translates', 0) : (
-                        createHeader ? createHeader('Reframing - Translates') : (
-                            <div className="header"><h2>Reframing - Translates</h2></div>
-                        )
+                    <div className="day-badge">Lvl 3 - 2</div>
+                    {createHeader ? createHeader('Reframing - Translates') : (
+                        <div className="header"><h2>Reframing - Translates</h2></div>
                     )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
                         <p className="text-md" style={{marginBottom: '12px', lineHeight: '1.6'}}>
                             These are behaviors you Wanted. Rewrite the script with your partner as the hero making a reasonable, rational choice.
@@ -5580,7 +5525,7 @@
             );
         }
 
-        function Level3SafeNoScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, createHeaderWithTrack }) {
+        function Level3SafeNoScreen({ goToNext, awardCredits, credits, currentScreen, createHeader }) {
             const [changes, setChanges] = useState([
                 { change: '', loss: '', gain: '', canDiscuss: null },
                 { change: '', loss: '', gain: '', canDiscuss: null },
@@ -5610,11 +5555,11 @@
 
             return (
                 <div className="screen">
-                    {createHeaderWithTrack ? createHeaderWithTrack('Beneath my Resistance', 0) : (
-                        createHeader ? createHeader('Beneath my Resistance') : (
-                            <div className="header"><h2>Beneath my Resistance</h2></div>
-                        )
+                    <div className="day-badge">Lvl 3 - 3</div>
+                    {createHeader ? createHeader('Beneath my Resistance') : (
+                        <div className="header"><h2>Beneath my Resistance</h2></div>
                     )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
                         <p className="text-md" style={{marginBottom: '12px', lineHeight: '1.6'}}>
                             List the top three things you think your partner wants/needs you to change. For each, explore what you'd lose and what you might gain.
@@ -5733,7 +5678,7 @@
             );
         }
 
-        function Level3WantNegotiationScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, createHeaderWithTrack }) {
+        function Level3WantNegotiationScreen({ goToNext, awardCredits, credits, currentScreen, createHeader }) {
             const [wants, setWants] = useState(Array(12).fill(''));
             const [signature, setSignature] = useState('');
 
@@ -5753,11 +5698,11 @@
 
             return (
                 <div className="screen">
-                    {createHeaderWithTrack ? createHeaderWithTrack('Unattached Wanting', 0) : (
-                        createHeader ? createHeader('Unattached Wanting') : (
-                            <div className="header"><h2>Unattached Wanting</h2></div>
-                        )
+                    <div className="day-badge">Lvl 3 - 4</div>
+                    {createHeader ? createHeader('Unattached Wanting') : (
+                        <div className="header"><h2>Unattached Wanting</h2></div>
                     )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
                         <p className="text-md" style={{marginBottom: '12px', lineHeight: '1.6'}}>
                             You have earned the opportunity to articulate your Wants (minimum 8, ideally 12). Organize them with most important at the top, least important at the bottom.
@@ -5844,7 +5789,7 @@
             );
         }
 
-        function Level3PositiveConfirmationScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, createHeaderWithTrack }) {
+        function Level3PositiveConfirmationScreen({ goToNext, awardCredits, credits, currentScreen, createHeader }) {
             const [confirmations, setConfirmations] = React.useState([
                 { wantMet: '', action: '', wasEffective: null, feedback: '' },
                 { wantMet: '', action: '', wasEffective: null, feedback: '' }
@@ -5872,11 +5817,11 @@
 
             return (
                 <div className="screen">
-                    {createHeaderWithTrack ? createHeaderWithTrack('Positive Confirmation', 0) : (
-                        createHeader ? createHeader('Positive Confirmation') : (
-                            <div className="header"><h2>Positive Confirmation</h2></div>
-                        )
+                    <div className="day-badge">Lvl 3 - 5</div>
+                    {createHeader ? createHeader('Positive Confirmation') : (
+                        <div className="header"><h2>Positive Confirmation</h2></div>
                     )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
                         <p className="text-md" style={{marginBottom: '20px', lineHeight: '1.6'}}>
                             Your Willing efforts need feedback to be effective. For each action below, confirm whether it met your partner's Want. If not, ask what would need to be different.
@@ -6006,7 +5951,7 @@
             );
         }
 
-        function Level3ReceivingEffortsScreen({ goToNext, awardCredits, credits, currentScreen, createHeader, createHeaderWithTrack }) {
+        function Level3ReceivingEffortsScreen({ goToNext, awardCredits, credits, currentScreen, createHeader }) {
             const [selectedReceiving, setSelectedReceiving] = React.useState('');
             const [otherText, setOtherText] = React.useState('');
 
@@ -6044,11 +5989,11 @@
 
             return (
                 <div className="screen">
-                    {createHeaderWithTrack ? createHeaderWithTrack('Receiving Efforts', 0) : (
-                        createHeader ? createHeader('Receiving Efforts') : (
-                            <div className="header"><h2>Receiving Efforts</h2></div>
-                        )
+                    <div className="day-badge">Lvl 3 - 6</div>
+                    {createHeader ? createHeader('Receiving Efforts') : (
+                        <div className="header"><h2>Receiving Efforts</h2></div>
                     )}
+                    <CreditsDisplay credits={credits} screen={currentScreen} />
                     <div className="screen-content">
                         <div style={{
                             background: '#E8F5E9',
@@ -6153,7 +6098,7 @@
         }
 
         // Level 3 Harvest - Celebration & Graduation
-        function Level3HarvestScreen({ goToNext, credits, setCredits, cycleCount, setCycleCount, pairedMode, setPairedMode, createHeader, createHeaderWithTrack, formData }) {
+        function Level3HarvestScreen({ goToNext, credits, setCredits, cycleCount, setCycleCount, pairedMode, setPairedMode, createHeader, formData }) {
             const [currentStep, setCurrentStep] = React.useState(1); // 1: Highlights, 2: Bridge Reflection, 3: Certificate
             const [highlights, setHighlights] = React.useState({
                 biggestInsight: '',
@@ -6198,11 +6143,11 @@
 
             return (
                 <div className="screen">
-                    {createHeaderWithTrack ? createHeaderWithTrack('🎓 Mastery Complete!', 0) : (
-                        createHeader ? createHeader('🎓 Mastery Complete!') : (
-                            <div className="header"><h2>🎓 Mastery Complete!</h2></div>
-                        )
+                    <div className="day-badge">Lvl 3 - 7</div>
+                    {createHeader ? createHeader('🎓 Mastery Complete!') : (
+                        <div className="header"><h2>🎓 Mastery Complete!</h2></div>
                     )}
+                    <CreditsDisplay credits={credits} screen={currentStep} />
                     <div className="screen-content">
                         {/* Step 1: Highlights & Insights */}
                         {currentStep === 1 && (
