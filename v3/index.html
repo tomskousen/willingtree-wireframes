@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WillingTree Complete Wireframes - V3</title>
-    <!-- Updated: 2025-10-14 15:45 - Scrolling root cause fix + 5.1.4 Big Branch lottery -->
+    <!-- Updated: 2025-10-14 - Scrolling fix + 2.2.4/2.2.5 reorganization -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -1564,9 +1564,9 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name || 'Partner'} />
                                 {!viewingPartner ? (
-                                    <HoldingScreen createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} message="Waiting for partner's guess..." />
-                                ) : (
                                     <Level2GuessUnwillingScreen goToNext={() => setCurrentScreen('2.2.7')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} partnerData={partnerData} myData={myData} />
+                                ) : (
+                                    <HoldingScreen createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
                                 )}
                             </div>
                         );
@@ -1725,9 +1725,9 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
                                 {!viewingPartner ? (
-                                    <Day6SmallBranchesScreen setScreen={setCurrentScreen} goToNext={() => setCurrentScreen('5.1.5')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={true} partnerData={partnerData} setMyData={setMyData} setPartnerData={setPartnerData} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Day6SmallBranchesScreen setScreen={setCurrentScreen} goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={true} partnerData={partnerData} setMyData={setMyData} setPartnerData={setPartnerData} />
                                 ) : (
-                                    <Day6SmallBranchesScreen setScreen={setCurrentScreen} goToNext={() => setCurrentScreen('5.1.5')} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} pairedMode={true} partnerData={myData} setMyData={setPartnerData} setPartnerData={setMyData} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Day6SmallBranchesScreen setScreen={setCurrentScreen} goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} pairedMode={true} partnerData={myData} setMyData={setPartnerData} setPartnerData={setMyData} />
                                 )}
                             </div>
                         );
@@ -3487,7 +3487,8 @@
                             Points used: {totalAllocated} / 12
                         </div>
 
-                        <div style={{display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px'}}>
+                        <div style={{flex: 1, overflowY: 'auto', paddingBottom: '16px'}}>
+                            <div style={{display: 'flex', flexDirection: 'column', gap: '8px'}}>
                                 {partnerItems.map((item, index) => (
                                 <div key={index} style={{
                                     padding: '8px',
@@ -4278,14 +4279,15 @@
                             )
                         )}
                         <div className="screen-content">
-                            <p className="text-md" style={{marginBottom: '8px'}}>
+                            <div style={{flex: 1, overflowY: 'auto', paddingBottom: '16px'}}>
+                                <p className="text-md" style={{marginBottom: '8px'}}>
                                     Score each item 1-5, where 5 means you're most willing to do this:
-                            </p>
-                            <p className="text-sm" style={{marginBottom: '16px', color: '#666'}}>
+                                </p>
+                                <p className="text-sm" style={{marginBottom: '16px', color: '#666'}}>
                                     <strong>{listTitle}</strong>
-                            </p>
+                                </p>
 
-                            <div style={{display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '16px'}}>
+                                <div style={{display: 'flex', flexDirection: 'column', gap: '12px'}}>
                                     {listToShow.map((item, index) => (
                                         <div key={index} style={{
                                             display: 'flex',
@@ -4328,6 +4330,7 @@
                                 <button className="button" onClick={handleContinueToSend} disabled={!isStepComplete} style={{width: '100%'}}>
                                     Continue to Pollinate
                                 </button>
+                            </div>
                         </div>
                         <div className="screen-footer">
                             Budding means growing what works (scoring 4-5). Pruning means releasing what doesn't (1-2). Your top 12 items will be your "willing list" - actions you're naturally inclined to do.
@@ -5241,7 +5244,7 @@
                         </p>
 
                         <div style={{display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px'}}>
-                                {listPartnerSaw.map((item, index) => (
+                            {listPartnerSaw.map((item, index) => (
                                 <div
                                     key={index}
                                     onClick={() => !submitted && toggleGuess(item.text)}
