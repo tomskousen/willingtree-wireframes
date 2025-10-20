@@ -1465,7 +1465,7 @@
                                 {!viewingPartner ? (
                                     <MeditateScreen createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
                                 ) : (
-                                    <Day6SmallBranchesScreen setScreen={setCurrentScreen} goToNext={() => setCurrentScreen('2.1.5')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} partnerData={null} setMyData={setMyData} setPartnerData={setPartnerData} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Day6SmallBranchesScreen setScreen={setCurrentScreen} goToNext={() => setCurrentScreen('2.1.5')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} partnerData={null} myData={myData} setMyData={setMyData} setPartnerData={setPartnerData} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
                                 )}
                             </div>
                         );
@@ -1544,7 +1544,7 @@
                                 {!viewingPartner ? (
                                     <MeditateScreen createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
                                 ) : (
-                                    <Day6SmallBranchesScreen setScreen={setCurrentScreen} goToNext={() => setCurrentScreen('2.2.5')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} partnerData={null} setMyData={setMyData} setPartnerData={setPartnerData} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
+                                    <Day6SmallBranchesScreen setScreen={setCurrentScreen} goToNext={() => setCurrentScreen('2.2.5')} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={false} partnerData={null} myData={myData} setMyData={setMyData} setPartnerData={setPartnerData} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
                                 )}
                             </div>
                         );
@@ -1725,9 +1725,9 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
                                 {!viewingPartner ? (
-                                    <Day6SmallBranchesScreen setScreen={setCurrentScreen} goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={true} partnerData={partnerData} setMyData={setMyData} setPartnerData={setPartnerData} />
+                                    <Day6SmallBranchesScreen setScreen={setCurrentScreen} goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={true} partnerData={partnerData} myData={myData} setMyData={setMyData} setPartnerData={setPartnerData} />
                                 ) : (
-                                    <Day6SmallBranchesScreen setScreen={setCurrentScreen} goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} pairedMode={true} partnerData={myData} setMyData={setPartnerData} setPartnerData={setMyData} />
+                                    <Day6SmallBranchesScreen setScreen={setCurrentScreen} goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} pairedMode={true} partnerData={myData} myData={partnerData} setMyData={setPartnerData} setPartnerData={setMyData} />
                                 )}
                             </div>
                         );
@@ -1810,9 +1810,9 @@
                             <div>
                                 <ViewToggle viewingPartner={viewingPartner} setViewingPartner={setViewingPartner} userName={formData.name} partnerName={partnerData.name} />
                                 {!viewingPartner ? (
-                                    <Level2PersonalizeWantsScreen goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} setMyData={setMyData} myData={myData} canCustomizeWants={canCustomizeWants} customizedWants={customizedWants} setCustomizedWants={setCustomizedWants} />
+                                    <Day6SmallBranchesScreen setScreen={setCurrentScreen} goToNext={goToNext} awardCredits={awardCredits} credits={credits} currentScreen={currentScreen} pairedMode={true} partnerData={partnerData} myData={myData} setMyData={setMyData} setPartnerData={setPartnerData} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
                                 ) : (
-                                    <Level2PersonalizeWantsScreen goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} createHeader={createHeader} setMyData={(data) => setPartnerData(prev => ({...prev, ...data}))} myData={partnerData} canCustomizeWants={partnerData.canCustomizeWants} customizedWants={partnerData.customizedWants} setCustomizedWants={(wants) => setPartnerData(prev => ({...prev, customizedWants: wants}))} />
+                                    <Day6SmallBranchesScreen setScreen={setCurrentScreen} goToNext={goToNext} awardCredits={(type, amt) => setPartnerData(prev => ({...prev, credits: {...prev.credits, [type]: prev.credits[type] + amt}}))} credits={partnerData.credits} currentScreen={currentScreen} pairedMode={true} partnerData={myData} myData={partnerData} setMyData={setPartnerData} setPartnerData={setMyData} createHeader={createHeader} createHeaderWithTrack={createHeaderWithTrack} />
                                 )}
                             </div>
                         );
@@ -3362,13 +3362,14 @@
         }
 
         // Screen 2.6: Day 6 - Fertilize the Tree
-        function Day6SmallBranchesScreen({ setScreen, goToNext, awardCredits, credits, currentScreen, pairedMode, partnerData, setMyData, setPartnerData, createHeader, createHeaderWithTrack }) {
+        function Day6SmallBranchesScreen({ setScreen, goToNext, awardCredits, credits, currentScreen, pairedMode, partnerData, myData, setMyData, setPartnerData, createHeader, createHeaderWithTrack }) {
             const [allocations, setAllocations] = useState({});
             const [isSpinning, setIsSpinning] = useState(false);
 
-            // Use partner's actual list in paired mode, or simulate for solo
-            const partnerItems = (pairedMode && partnerData?.pollinateList?.length > 0)
-                ? partnerData.pollinateList.map(item => item.text)
+            // In paired mode, use user's OWN pollinateList (not partner's)
+            // In solo mode, use simulated list
+            const partnerItems = (pairedMode && myData?.pollinateList?.length > 0)
+                ? myData.pollinateList.map(item => item.text)
                 : [
                     'Express appreciation for efforts',
                     'Show physical affection regularly',
@@ -3444,8 +3445,8 @@
                 }, 2000);
             };
 
-            // Check if waiting for partner data (in paired mode)
-            const isWaitingForPartner = pairedMode && (!partnerData?.pollinateList || partnerData.pollinateList.length === 0);
+            // Check if waiting for own data (in paired mode)
+            const isWaitingForPartner = pairedMode && (!myData?.pollinateList || myData.pollinateList.length === 0);
 
             return (
                 <div className="screen">
@@ -3460,7 +3461,7 @@
                         {isWaitingForPartner ? (
                             <>
                                 <WaitingForPartner
-                                    message="Your partner is working on their Day 5 list. You'll be able to allocate points once they send it."
+                                    message="Complete the previous screen to create your list before allocating points."
                                     partnerName={partnerData?.name}
                                 />
                                 <div className="button-container">
@@ -3472,7 +3473,7 @@
                         ) : (
                             <>
                                 <p className="text-md" style={{marginBottom: '8px'}}>
-                                    Your partner sent their willing actions. You have 12 points to allocate. Assign more points to behaviors that are most valuable to you - points are used both for the lottery that determines half of these shown to your partner and the number of credits your partner can earn if he/she is able to be Willing to do your most Wanted things!
+                                    You have 12 points to allocate across your own wants/needs. Assign more points to behaviors that are most valuable to you - points are used both for the lottery that determines which items are shown to your partner and the number of credits your partner can earn if they're willing to do your most wanted things!
                                 </p>
 
                         <div style={{
